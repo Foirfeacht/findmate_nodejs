@@ -24,6 +24,7 @@
     "node-static": "~0.7.6"
   },
   "scripts" : {
+    "prestart" : "npm install",
     "start" : "node server.js"
   }
 }

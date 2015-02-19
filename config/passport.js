@@ -35,10 +35,10 @@ module.exports = function(passport) {
     // =========================================================================
     passport.use(new FacebookStrategy({
 
-        clientID        : configAuth.facebookAuth.clientID,
-        clientSecret    : configAuth.facebookAuth.clientSecret,
-        callbackURL     : configAuth.facebookAuth.callbackURL,
-        profileFields   : ['displayName', 'link', 'photos', 'username'],
+        clientID          : configAuth.facebookAuth.clientID,
+        clientSecret      : configAuth.facebookAuth.clientSecret,
+        callbackURL       : configAuth.facebookAuth.callbackURL,
+        //profileFields     : ['user_photos'],
         passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
 
     },
@@ -62,8 +62,7 @@ module.exports = function(passport) {
                             user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                             user.facebook.email = (profile.emails[0].value || '').toLowerCase();
                             user.facebook.username = profile.username;
-                            //user.facebook.picture = "https://graph.facebook.com/" + user.facebook.username + "/picture" + "?width=200&height=200" + "&access_token=" + user.facebook.token
-                            user.facebook.picture = profile.photos[0].value;
+                            //user.facebook.picture = profile.user_photos[0].value;
 
                             
                             user.save(function(err) {
@@ -84,8 +83,7 @@ module.exports = function(passport) {
                         newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                         newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
                         newUser.facebook.username = profile.username;
-                        //user.facebook.picture = "https://graph.facebook.com/" + user.facebook.username + "/picture" + "?width=200&height=200" + "&access_token=" + user.facebook.token
-                        newUser.facebook.picture = profile.photos[0].value;
+                        //newUser.facebook.picture = profile.user_photos[0].value;
     
                         newUser.save(function(err) {
                             if (err)
@@ -105,8 +103,7 @@ module.exports = function(passport) {
                 user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                 user.facebook.email = (profile.emails[0].value || '').toLowerCase();
                 user.facebook.username = profile.username;
-                //user.facebook.picture = "https://graph.facebook.com/" + user.facebook.username + "/picture" + "?width=200&height=200" + "&access_token=" + user.facebook.token
-                user.facebook.picture = profile.photos[0].value;
+                //user.facebook.picture = profile.user_photos[0].value;
 
 
                 user.save(function(err) {

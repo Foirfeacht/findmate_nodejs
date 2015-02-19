@@ -31,11 +31,11 @@ module.exports = function(app, passport) {
 	// facebook -------------------------------
 
 		// send to facebook to do the authentication
-		app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email, public_profile, user_friends, displayName, photos, username'] }));
+		app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email, public_profile'] }));
 
 		// handle the callback after facebook has authenticated the user
 		app.get('/auth/facebook/callback',
-			passport.authenticate('facebook', { scope: ['email, public_profile, user_friends, displayName, photos, username']} {
+			passport.authenticate('facebook', { scope: ['email, public_profile, user_photos'],
 				successRedirect : '/profile',
 				failureRedirect : '/'
 			}));
