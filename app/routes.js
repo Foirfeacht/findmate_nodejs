@@ -31,7 +31,7 @@ module.exports = function(app, passport) {
 	// facebook -------------------------------
 
 		// send to facebook to do the authentication
-		app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email, public_profile'] }));
+		app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email, public_profile, user_photos'] }));
 
 		// handle the callback after facebook has authenticated the user
 		app.get('/auth/facebook/callback',
@@ -117,6 +117,44 @@ app.get('/meetings/index', function (req, res) {
         });
 
     });
+
+    //update a meeting
+    app.put('/api/meetings/:id', function (req, res){
+	    return Meeting.findById(req.params.id, function (err, meeting) {
+	        if(!meeting) {
+	            res.statusCode = 404;
+	            return res.send({ error: 'Not found' });
+	        }
+
+	        meeting.title = req.body.title;
+	        meeting.description = req.body.description;
+	        meeting.updated_at = Date.now;
+	        return meeting.save(function (err) {
+	            if (!err) {
+	                log.info("meeting updated");
+	                return res.send({ status: 'OK', meeting:meeting });
+	            } else {
+	                if(err.name == 'ValidationError') {
+	                    res.statusCode = 400;
+	                    res.send({ error: 'Validation error' });
+	                } else {
+	                    res.statusCode = 500;
+	                    res.send({ error: 'Server error' });
+	                }
+	                log.error('Internal error(%d): %s',res.statusCode,err.message);
+	            }
+	        });
+	    });
+	});
+
+
+    //get single meeting
+    app.get('/api/meetings/:id', function(req, res, next) {
+	  Meeting.findById(req.params.id, function(err, show) {
+	    if (err) return next(err);
+	    res.send(meeting);
+	  });
+	});
 
     // delete a meeting
     app.delete('/api/meetings/:meeting_id', function(req, res) {

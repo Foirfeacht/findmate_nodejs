@@ -16,21 +16,39 @@
         <div class="jumbotron text-center">
             <h1>Total events<span class="label label-info">{{ meetings.length }}</span></h1>
         </div>
-
+        <input class="search" type="text" ng-model="query.title" placeholder="Search...">
         <!-- TODO LIST -->
         <div id="meeting-list" class="row">
-            <div class="col-sm-4 col-sm-offset-4">
+            <h2>Active meetings</h2>
+            <div class="col-sm-6 col-sm-offset-6">
 
                 <!-- LOOP OVER THE TODOS IN $scope.todos -->
-                <div class="checkbox" ng-repeat="meeting in meetings">
+                <div class="checkbox" ng-repeat="meeting in meetings" ng-if="meeting.active===true">
                     <label>
-                        <input type="checkbox" ng-click="deleteMeeting(meeting._id)"> {{ meeting.title }}</br> {{ meeting.description }} </br>
+                        <input type="checkbox" ng-click="completeMeeting(meeting._id)"> {{ meeting.title }}</br> {{ meeting.description }} </br> {{ meeting.active }}
                         <button type="submit" class="btn btn-primary btn-lg" ng-click="deleteMeeting(meeting._id)">Delete</button>
                     </label>
                 </div>
 
             </div>
         </div>
+
+        <div id="meeting-list" class="row">
+            <h2>Completed meetings</h2>
+            <div class="col-md-6 col-md-offset-6">
+
+                <!-- LOOP OVER THE TODOS IN $scope.todos -->
+                <div class="checkbox" ng-repeat="meeting in meetings" ng-if="meeting.active===false">
+                    <label>
+                        {{ meeting.title }}</br> 
+                        {{ meeting.description }} </br>
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="deleteMeeting(meeting._id)">Delete</button>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+
 
         <!-- FORM TO CREATE TODOS -->
         <div id="meeting-form" class="row">
