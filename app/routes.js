@@ -23,6 +23,12 @@ module.exports = function(app, passport) {
 		res.redirect('/');
 	});
 
+	// MAP ==============================
+	app.get('/map', function(req, res) {
+		res.render('map.ejs');
+	});
+
+
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
 // =============================================================================
@@ -79,7 +85,7 @@ module.exports = function(app, passport) {
 	});
 
 	//routes for meetings 
-app.get('/meetings/index', function (req, res) {
+app.get('/meetings', function (req, res) {
 		res.render('../views/meetings/index.ejs');
 	})
 

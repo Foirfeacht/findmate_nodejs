@@ -6,4 +6,10 @@ function initialize() {
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"),
             mapOptions);
-      }
+
+        google.maps.event.addListener(map, "click", function (event) {
+	        var latitude = event.latLng.lat();
+	        var longitude = event.latLng.lng();
+	        //return coords
+	    }); //end addListener
+}

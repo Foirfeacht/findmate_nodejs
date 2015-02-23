@@ -1,9 +1,9 @@
 // public/app.js
 //var Meeting    = require('../app/models/meeting'); 
 
-var findMate = angular.module('findMate', []);
+var findMate = angular.module('findMate', ['ui.bootstrap']);
 
-findMate.controller('mainController', ['$scope', '$http', function($scope, $http) {
+findMate.controller('mainController', ['$scope', '$http', 'ui.bootstrap', function($scope, $http) {
   $scope.formData = {};
 
     // when landing on the page, get all todos and show them
@@ -42,7 +42,7 @@ findMate.controller('mainController', ['$scope', '$http', function($scope, $http
     };
 }]);
 
-findMate.controller('mapController', ['$scope', '$http', function($scope, $http) {
+findMate.controller('mapController', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
   $scope.formData = {};
 
     // when landing on the page, get all todos and show them
@@ -95,5 +95,39 @@ findMate.controller('mapController', ['$scope', '$http', function($scope, $http)
                 console.log('Error: ' + data);
             })
     }
+
+    $scope.showModal = function(id){
+        console.log('clicked');
+    }
+
+    //modal
+    $scope.open = function (size) {
+
+        var modalInstance = $modal.open({
+          templateUrl: 'myModalContent.html',
+          controller: 'ModalInstanceCtrl',
+          size: size
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+          $scope.selected = selectedItem;
+        }, function () {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
+      };
+
+   
+   
 }]);
+
+findMate.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
+
+  $scope.ok = function () {
+    $modalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});
 
