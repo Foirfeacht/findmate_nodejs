@@ -96,6 +96,29 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
             })
     }
 
+    //map
+
+    $scope.initialize = function () {
+        var mapOptions = {
+          center: new google.maps.LatLng(-34.397, 150.644),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+
+        google.maps.event.addListener(map, "click", function (event) {
+            $scope.latitude = event.latLng.lat();
+            $scope.longitude = event.latLng.lng();
+            //return coords
+        }); //end addListener
+
+    }
+
+    $scope.$watch('$viewContentLoaded', function() {
+        $scope.initialize();
+    });
+
     $scope.showModal = function(id){
         console.log('clicked');
     }
