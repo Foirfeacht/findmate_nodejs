@@ -11,6 +11,8 @@ var meetingsSchema = new Schema({
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now },
     active: { type: Boolean, default: true },
+    longitude: String,
+    latitude: String
     //visibility: String
 });
 

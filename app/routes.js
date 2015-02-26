@@ -110,6 +110,8 @@ app.get('/meetings', function (req, res) {
         Meeting.create({
             title : req.body.title,
             description: req.body.description
+            //latitude: req.body.latitude,
+            //longitude: req.body.longitude
         }, function(err, meeting) {
             if (err)
                 res.send(err);

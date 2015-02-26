@@ -19,11 +19,9 @@
                 <input type="text" class="form-control input-lg text-center" placeholder="I wanna meet those crazy people" ng-model="formData.title">
                         <input type="text" class="form-control input-lg text-center" placeholder="For..." ng-model="formData.description">
                     </div>
-
-                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createMeeting()">Add</button>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="ok()">OK</button>
+                <button class="btn btn-primary" type="submit" ng-click="createMeeting();cancel()">OK</button>
                 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
             </div>
         </script>
@@ -31,10 +29,23 @@
         
 
     </div><!-- end container -->
+    <div>
+        <div class="checkbox" ng-repeat="meeting in meetings" ng-if="meeting.active===true">
+            <label>
+                <input type="checkbox" ng-click="completeMeeting(meeting._id)"> 
+                    {{ meeting.active }} <br>
+                    {{ meeting.title }}<br> 
+                    {{ meeting.description }} <br> 
+                    {{ meeting.latitude }} <br>
+                    {{ meeting.longitude }}
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="deleteMeeting(meeting._id)">Delete</button>
+            </label>
+        </div>
+    </div>
     <script src="../../bower_components/angular/angular.js"></script>
     <script src="../../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="../../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">
     </script>

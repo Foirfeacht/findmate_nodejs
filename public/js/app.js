@@ -43,7 +43,27 @@ findMate.controller('mainController', ['$scope', '$http', 'ui.bootstrap', functi
 }]);
 
 findMate.controller('mapController', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
-  $scope.formData = {};
+
+     //map
+
+    $scope.initialize = function () {
+        var mapOptions = {
+          center: new google.maps.LatLng(-34.397, 150.644),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+
+        google.maps.event.addListener(map, "click", function (event) {
+            $scope.latitude = event.latLng.lat();
+            $scope.longitude = event.latLng.lng();
+            //return coords
+        }); //end addListener
+
+    }
+      
+    $scope.formData = {};
 
     // when landing on the page, get all todos and show them
     $http.get('/api/meetings')
@@ -57,17 +77,38 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
 
     // when submitting the add form, send the text to the node API
     $scope.createMeeting = function() {
-        $http.post('/api/meetings', $scope.formData)
-            .success(function (data) {
+        $http.post('/api/meetings', $scope.formData, {
+                    latitude: $scope.latitude,
+                    longitude: $scope.longitude
+                })
+                .success(function (data) {
+                    $scope.formData = {}; // clear the form so our user is ready to enter another
+                    $scope.meetings = data;
+                    console.log(data);
+                })
+                .error(function(data) {
+                    console.log('Error: ' + data);
+                })
+    };
+
+  /* $scope.createMeeting = function() {
+        var reqLatitude = $scope.latitude;
+        var reqLongitude = $scope.longitude;
+        $.ajax({
+            type: "POST",
+            data: {latitude : reqLatitude, longitude : reqLongitude, $scope.formData: $scope.formData},
+            url: '/api/meetings',
+            success: function (data) {
                 $scope.formData = {}; // clear the form so our user is ready to enter another
                 $scope.meetings = data;
                 console.log(data);
-            })
-            .error(function(data) {
+            },
+            error: function(data) {
                 console.log('Error: ' + data);
-            });
+            }
+        });
     };
-
+*/
     // delete a todo after checking it
     $scope.deleteMeeting = function(id) {
         $http.delete('/api/meetings/' + id)
@@ -96,24 +137,6 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
             })
     }
 
-    //map
-
-    $scope.initialize = function () {
-        var mapOptions = {
-          center: new google.maps.LatLng(-34.397, 150.644),
-          zoom: 8,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map_canvas"),
-            mapOptions);
-
-        google.maps.event.addListener(map, "click", function (event) {
-            $scope.latitude = event.latLng.lat();
-            $scope.longitude = event.latLng.lng();
-            //return coords
-        }); //end addListener
-
-    }
 
     $scope.$watch('$viewContentLoaded', function() {
         $scope.initialize();
@@ -135,7 +158,7 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
         modalInstance.result.then(function (selectedItem) {
           $scope.selected = selectedItem;
         }, function () {
-          $log.info('Modal dismissed at: ' + new Date());
+          console.log('Modal dismissed at: ' + new Date());
         });
       };
 
