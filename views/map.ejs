@@ -10,26 +10,28 @@
 	<body ng-controller="mapController">
     <div class="container map-container" ng-click="open()">
         <div id="map_canvas"></div>
-
+        
+        <!-- modal -->
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
-                <h3 class="modal-title">I am a modal</h3>
+                <h3 class="modal-title">Create event</h3>
             </div>
             <div class="modal-body">
                 <input type="text" class="form-control input-lg text-center" placeholder="I wanna meet those crazy people" ng-model="formData.title">
-                        <input type="text" class="form-control input-lg text-center" placeholder="For..." ng-model="formData.description">
-                    </div>
+                <input type="text" class="form-control input-lg text-center" placeholder="For..." ng-model="formData.description">
+            </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" type="submit" ng-click="createMeeting();cancel()">OK</button>
+                <button class="btn btn-primary" type="submit" id="createbtn" ng-click="createMeeting();ok()">OK</button>
                 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-            </div>
         </script>
-
-        
+</div>        
 
     </div><!-- end container -->
+        <input type="text" class="form-control input-lg text-center" placeholder="I wanna meet those crazy people" ng-model="formData.title">
+            <input type="text" class="form-control input-lg text-center" placeholder="For..." ng-model="formData.description">
     <div>
+    <button class="btn btn-primary" type="submit" ng-click="createMeeting()">OK</button>
         <div class="checkbox" ng-repeat="meeting in meetings" ng-if="meeting.active===true">
             <label>
                 <input type="checkbox" ng-click="completeMeeting(meeting._id)"> 
@@ -50,6 +52,7 @@
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">
     </script>
 	<script src="../../public/js/app.js"></script>
-    <script src="../../public/js/map.js"></script>
+    <script src="../../public/js/controllers/map.js"></script>
+    <script src="../../public/js/controllers/modalInstance.js"></script>
 </body>
 </html>
