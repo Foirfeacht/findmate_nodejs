@@ -85,9 +85,6 @@ module.exports = function(app, passport) {
 	});
 
 	//routes for meetings 
-app.get('/meetings', function (req, res) {
-		res.render('../views/meetings/index.ejs');
-	})
 
 // get all meetings
     app.get('/api/meetings', function(req, res) {
@@ -109,7 +106,7 @@ app.get('/meetings', function (req, res) {
         // create a meeting, information comes from AJAX request from Angular
         Meeting.create({
             title : req.body.title,
-            description: req.body.description
+            description: req.body.description,
             latitude: req.body.latitude,
             longitude: req.body.longitude
         }, function(err, meeting) {
@@ -137,6 +134,8 @@ app.get('/meetings', function (req, res) {
 	        meeting.title = req.body.title;
 	        meeting.description = req.body.description;
 	        meeting.updated_at = Date.now;
+	        meeting.latitude = req.body.latitude;
+	        meeting.longitude = req.body.longitude;
 	        return meeting.save(function (err) {
 	            if (!err) {
 	                log.info("meeting updated");
@@ -149,7 +148,7 @@ app.get('/meetings', function (req, res) {
 	                    res.statusCode = 500;
 	                    res.send({ error: 'Server error' });
 	                }
-	                log.error('Internal error(%d): %s',res.statusCode,err.message);
+	                console.log('Internal error(%d): %s',res.statusCode,err.message);
 	            }
 	        });
 	    });
