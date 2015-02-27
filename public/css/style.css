@@ -1,7 +1,13 @@
+body {
+	margin: 0;
+	height: 100%;
+	padding-top: 0;
+}
 .map-container {
 	height: 1000px; 
 	height: 100vh;
-	width: 100%;
+	width: 90%;
+	margin: 20px auto;
 }
 
 #map_canvas {
@@ -12,9 +18,80 @@
 	left: 0;
 }
 
+.top-bar {
+	position: fixed;
+	width: 100%;
+	height: 50px;
+	background: #fff;
+	border-bottom: 1px solid grey;
+	z-index: 100;
+	top: -8px;
+
+}
+
+.top-bar_username {
+	text-align: center;
+	width: 30%;
+	margin: 0 auto;
+	font-size: 2em;
+	line-height: 50px;
+}
+
+.top-bar_username a {
+	color: #000;
+}
+
 .modal-btn {
 	position: absolute;
 	z-index: 9999;
 	top: 50%;
 	left: 50%;
+}
+
+.form {
+	width: 50%;
+	margin: 20px auto;
+}
+
+.form input,
+.form select {
+	margin: 10px auto;
+}
+
+.meeting-display {
+	width: 100%;
+	overflow: hidden;
+}
+.meeting {
+	width: 30%;
+	float: left;
+	margin: 20px;
+}
+
+.meeting-title {
+	font-weight: 700;
+}
+
+.datetime-pickers {
+	width: 100%;
+	overflow: hidden;
+}
+
+.timepicker-wrapper,
+.datepicker-wrapper {
+	width: 50%;
+	float: left;
+}
+
+.datepicker-wrapper {
+	margin-top: 35px;
+}
+
+.input-group .form-control {
+	width: 304px;
+}
+
+.input-group-btn>.btn {
+	position: absolute;
+	top: 10px;
 }

@@ -24,8 +24,10 @@ module.exports = function(app, passport) {
 	});
 
 	// MAP ==============================
-	app.get('/map', function(req, res) {
-		res.render('map.ejs');
+	app.get('/map', isLoggedIn, function(req, res) {
+		res.render('map.ejs', {
+			user : req.user
+		});
 	});
 
 
@@ -54,7 +56,7 @@ module.exports = function(app, passport) {
 		// handle the callback after facebook has authorized the user
 		app.get('/connect/facebook/callback',
 			passport.authorize('facebook', {
-				successRedirect : '/profile',
+				successRedirect : '/map',
 				failureRedirect : '/'
 			}));
 
@@ -87,8 +89,8 @@ module.exports = function(app, passport) {
 	//routes for meetings 
 
 // get all meetings
-    app.get('/api/meetings', function(req, res) {
-
+    app.get('/api/meetings', isLoggedIn, function(req, res) {
+    	var user = req.user;
         // use mongoose to get all meetings in the database
         Meeting.find(function(err, meetings) {
 
@@ -97,18 +99,26 @@ module.exports = function(app, passport) {
                 res.send(err)
 
             res.json(meetings); // return all meetings in JSON format
-        });
+        }).populate('_owner', 'ownerName');
     });
 
     // create meeting and send back all meetings after creation
-    app.post('/api/meetings', function(req, res) {
+    app.post('/api/meetings', isLoggedIn, function(req, res) {
+    	var user = req.user;
 
         // create a meeting, information comes from AJAX request from Angular
         Meeting.create({
             title : req.body.title,
             description: req.body.description,
+	        startDate: req.body.startDate,
+	        startTime: req.body.startTime,
+	        endDate: req.body.endDate,
+	        endTime: req.body.endTime,
             latitude: req.body.latitude,
-            longitude: req.body.longitude
+            longitude: req.body.longitude,
+            visibility : req.body.visibility,
+            _owner: req.user._id,
+            ownerName: req.user.facebook.name
         }, function(err, meeting) {
             if (err)
                 res.send(err);
@@ -124,7 +134,7 @@ module.exports = function(app, passport) {
     });
 
     //update a meeting
-    app.put('/api/meetings/:id', function (req, res){
+    app.put('/api/meetings/:id', isLoggedIn, function (req, res){
 	    return Meeting.findById(req.params.id, function (err, meeting) {
 	        if(!meeting) {
 	            res.statusCode = 404;
@@ -133,9 +143,14 @@ module.exports = function(app, passport) {
 
 	        meeting.title = req.body.title;
 	        meeting.description = req.body.description;
+	        meeting.startDate = req.body.startDate;
+	        meeting.startTime = req.body.startTime;
+	        meeting.endDate = req.body.endDate;
+	        meeting.endTime = req.body.endTime;
 	        meeting.updated_at = Date.now;
 	        meeting.latitude = req.body.latitude;
 	        meeting.longitude = req.body.longitude;
+	        meeting.visibility = req.body.visibility;
 	        return meeting.save(function (err) {
 	            if (!err) {
 	                log.info("meeting updated");
@@ -156,7 +171,7 @@ module.exports = function(app, passport) {
 
 
     //get single meeting
-    app.get('/api/meetings/:id', function(req, res, next) {
+    app.get('/api/meetings/:id', isLoggedIn, function(req, res, next) {
 	  Meeting.findById(req.params.id, function(err, show) {
 	    if (err) return next(err);
 	    res.send(meeting);
@@ -164,7 +179,7 @@ module.exports = function(app, passport) {
 	});
 
     // delete a meeting
-    app.delete('/api/meetings/:meeting_id', function(req, res) {
+    app.delete('/api/meetings/:meeting_id', isLoggedIn, function(req, res) {
         Meeting.remove({
             _id : req.params.meeting_id
         }, function(err, meeting) {

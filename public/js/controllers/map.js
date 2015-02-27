@@ -14,6 +14,8 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
 
     $scope.markers = [];
 
+    $scope.formData.marker = '';
+
 
     $scope.initialize = function () {
         var mapOptions = {
@@ -37,6 +39,8 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
     $scope.$watch('$viewContentLoaded', function() {
         $scope.initialize();
     });
+
+    // map methods, need revising
 
     $scope.setAllMap = function(map) {
         map = $scope.map
@@ -94,6 +98,9 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
                             map: $scope.map,
                             title: $scope.formData.title
                         });
+
+                        $scope.markers.push(marker);
+                        console.log($scope.markers);
 
                         var infoContent = '<div id="content">' + $scope.formData.title + '<br>' + $scope.formData.description + '</div>';
 
@@ -177,5 +184,44 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
           console.log('Modal dismissed at: ' + new Date());
         });
       };   
+
+      // datepicker
+    $scope.datepickers = {
+        startDate: false,
+        endDate: false
+    }
+    $scope.today = function() {
+       $scope.startDate = new Date();
+       $scope.endDate = new Date();
+    };
+    $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    $scope.toggleMin();
+    $scope.open = function($event, which) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.datepickers[which]= true;
+      };
+
+    $scope.clearSD = function () {
+       $scope.startDate = null;
+    };
+
+    $scope.clearED = function () {
+       $scope.endDate = null;
+    };
+
+    $scope.format = 'dd-MMMM-yyyy';
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    // time picker
+    $scope.hstep = 1;
+    $scope.mstep = 1;
+    $scope.ismeridian = false;
    
 }]);
