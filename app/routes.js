@@ -44,7 +44,7 @@ module.exports = function(app, passport) {
 		// handle the callback after facebook has authenticated the user
 		app.get('/auth/facebook/callback',
 			passport.authenticate('facebook', { scope: ['email, public_profile, user_photos'],
-				successRedirect : '/profile',
+				successRedirect : '/map',
 				failureRedirect : '/'
 			}));
 

@@ -1,11 +1,39 @@
 <!doctype html>
-<html>
+<html ng-app="findMate">
 <head>
 	<title>Node Authentication</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 </head>
-<body>
+<body ng-controller="profileController">
+<!--<script>
+	window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1556663711272087',
+          xfbml      : true,
+          version    : 'v2.1'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+
+      var getFBData = function () {
+        FB.api('/me', function(response) {
+          fbinfo = new Array();
+          fbinfo[0] = response.id;
+
+          var im = document.getElementById("profile-image").setAttribute("src", "http://graph.facebook.com/" + fbinfo[0] + "/pciture?type=normal");
+        });
+    };
+
+    getFBData();
+}(document, 'script', 'facebook-jssdk'));
+</script>-->
 <div class="container">
 
 	<div class="page-header text-center">
@@ -25,6 +53,7 @@
 				<% if (user.facebook.token) { %>
 					<div><img src="<%= user.facebook.picture %>" alt=""></div>
 					<div><%= user.facebook.picture %></div>
+					<div><img src="" id="profile-image"></div>
 					<p>
 
 						<strong>id</strong>: <%= user.facebook.id %><br>
@@ -46,6 +75,13 @@
 	<div class="row">
 		<a href="/map">Load Map</a>
 	</div>
+
+<script src="../../bower_components/angular/angular.js"></script>
+<script src="../../bower_components/jquery/dist/jquery.js"></script>
+<script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="../../public/js/app.js"></script>
+<script src="../../public/js/controllers/profile.js"></script>
 
 </div>
 </body>
