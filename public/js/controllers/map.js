@@ -18,9 +18,34 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
 
 
     $scope.initialize = function () {
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              $scope.pos = new google.maps.LatLng(position.coords.latitude,
+                                               position.coords.longitude);
+
+              $scope.map.setCenter($scope.pos);
+              console.log('positioned at ' + $scope.pos)
+            }, function() {
+              handleNoGeolocation(true);
+            });
+            } else {
+            // Browser doesn't support Geolocation
+            handleNoGeolocation(false);
+            }
+            }
+
+            function handleNoGeolocation(errorFlag) {
+            if (errorFlag) {
+            consloe.log('Error: The Geolocation service failed.');
+            } else {
+            console.log('Error: Your browser doesn\'t support geolocation.');
+            }
+
+        };
+
         var mapOptions = {
-          center: new google.maps.LatLng(53.902216, 27.561839),
-          zoom: 13,
+          center: $scope.pos || new google.maps.LatLng(53.902216, 27.561839),
+          zoom: 15,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         $scope.map = new google.maps.Map(document.getElementById("map_canvas"),
@@ -28,11 +53,38 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
 
         google.maps.event.addListener($scope.map, "click", function (event) {
             $scope.formData.latitude = event.latLng.lat();
+            $scope.lat = $scope.formData.latitude;
             $scope.formData.longitude = event.latLng.lng();
+            $scope.lng = $scope.formData.longitude;
             console.log($scope.formData.longitude);
+
+            // get address from coords
+            $scope.geocoder = new google.maps.Geocoder();
+
+            $scope.latLng = new google.maps.LatLng($scope.formData.latitude, $scope.formData.longitude);
+
+            $scope.codeLatLng = function() {
+                $scope.geocoder.geocode({'latLng': $scope.latLng, address: 'address', region: ', BY'}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                      if (results[1]) {
+                        $scope.formData.location = results[1].formatted_address;
+                        console.log(results[1].formatted_address);
+                      } else {
+                        console.log('No results found');
+                      }
+                    } else {
+                      console.log('Geocoder failed due to: ' + status);
+                    }
+                });
+            }
+
+            $scope.codeLatLng();
         }); //end addListener
 
-    };
+        
+
+       
+
 
     // load map on WindowLoad
 
@@ -73,8 +125,23 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
                     map: $scope.map
                 });
                 $scope.markers.push(marker);
-                console.log($scope.markers);
+
+                console.log(data[i].location + '\n' + data[i].title + '\n' + data[i].description);
+
+
+                var infoContent = '<div id="content">' + data[i].location + '<br>' + data[i].title + '<br>' + 
+                                    data[i].description + '</div>';
+
+                var infowindow = new google.maps.InfoWindow({
+                  content: infoContent
+                });
+
+                google.maps.event.addListener(marker, 'click', function() {
+                   infowindow.open($scope.map, marker);
+                });
             }
+
+
 
         })
         .error(function (data) {
@@ -91,18 +158,16 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
                         console.log($scope.formData);
 
                         // create marker
-                        var latLng = new google.maps.LatLng($scope.formData.latitude, $scope.formData.longitude);
-                        console.log(latLng)
                         var marker = new google.maps.Marker({
-                            position: latLng,
+                            position: $scope.latLng,
                             map: $scope.map,
                             title: $scope.formData.title
                         });
 
                         $scope.markers.push(marker);
-                        console.log($scope.markers);
 
-                        var infoContent = '<div id="content">' + $scope.formData.title + '<br>' + $scope.formData.description + '</div>';
+                        var infoContent = '<div id="content">' + $scope.formData.location + '<br>' + $scope.formData.title + '<br>' + 
+                                            $scope.formData.description + '</div>';
 
                         var infowindow = new google.maps.InfoWindow({
                           content: infoContent

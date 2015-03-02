@@ -1,14 +1,30 @@
 <!doctype html>
 <html ng-app="findMate"> 
 	<head>
-		<title>Meetings</title>
+		<title>События</title>
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../public/css/dist/slide.and.push.css">
         <link rel="stylesheet" href="../../public/css/style.css">
+        
 	</head>
 	<body>
 	<body ng-controller="mapController">
 
+        <button ng-slide-menu="menu" class="menu-button-slide">Slide menu</button>
+        <button ng-push-menu="menu" class="menu-button-push">Push menu</button>
+
+        <ng-slide-push-menu id="menu" position="right">
+          <h3>Menu</h3>
+          <a href="#">Item 1</a>
+          <a href="#">Item 2</a>
+          <a href="#">Item 3</a>
+          <a href="#">Item 4</a>
+          <a href="#">Item 5</a>
+          <a href="#">Item 6</a>
+        </ng-slide-push-menu>
+
+        
         <div class="top-bar">
             <div class="top-bar_username">
                 <% if (user.facebook.token) { %>
@@ -24,41 +40,42 @@
 
     
         <div class="form">
-            <input type="text" class="form-control input-lg text-center" placeholder="I wanna meet those crazy people" ng-model="formData.title">
-            <input type="text" class="form-control input-lg text-center" placeholder="For..." ng-model="formData.description">
-
-            <div class="datetime-pickers">
-                <div class="timepicker-wrapper">
-                    <timepicker ng-model="formData.startTime" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
+            <input type="text" class="form-control input-lg text-center" placeholder="Название встречи" ng-model="formData.title">
+            <input type="text" class="form-control input-lg text-center" placeholder="Описание" ng-model="formData.description">
+             <div class="datetime-pickers_wrapper">
+                <div class="datetime-pickers">
+                    <div class="timepicker-wrapper">
+                        <timepicker ng-model="formData.startTime" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
+                    </div>
+                    <div class="datepicker-wrapper">
+                        <p class="input-group">
+                          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.startDate" is-open="datepickers.startDate" min-date="minDate" max-date="'2050-06-22'" datepicker-options="dateOptions" close-text="Close" class="meetings-datepicker">
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, 'startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </p>
+                    </div>
                 </div>
-                <div class="datepicker-wrapper">
-                    <p class="input-group">
-                      <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.startDate" is-open="datepickers.startDate" min-date="minDate" max-date="'2050-06-22'" datepicker-options="dateOptions" close-text="Close" class="meetings-datepicker">
-                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open($event, 'startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
-                    </p>
+               
+                <div class="datetime-pickers">
+                    <div class="timepicker-wrapper">
+                        <timepicker ng-model="formData.endTime" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
+                    </div>
+                    <div class="datepicker-wrapper">
+                        <p class="input-group">
+                          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.endDate" is-open="datepickers.endDate" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" close-text="Close" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, 'endDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <div class="datetime-pickers">
-                <div class="timepicker-wrapper">
-                    <timepicker ng-model="formData.endTime" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
-                </div>
-                <div class="datepicker-wrapper">
-                    <p class="input-group">
-                      <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.endDate" is-open="datepickers.endDate" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" close-text="Close" />
-                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open($event, 'endDate')"><i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
-                    </p>
-                </div>
-            </div>
-
-            <label class="control-label">Visibility</label>
+            <label class="control-label">Эту встречу увидят...</label>
             <select class="form-control input-lg" ng-model="formData.visibility">
-                <option value="all">All</option>
-                <option value="friends" default>Friends</option>
+                <option value="all">Все</option>
+                <option value="friends" default>Друзья</option>
             </select>
             <button class="btn btn-primary" type="submit" ng-click="createMeeting()">OK</button>
         </div>
@@ -72,9 +89,9 @@
                 <div>{{ meeting.latitude }}</div>
                 <div>{{ meeting.longitude }}</div>
                 <div>{{ meeting.visibility }}</div>
-                <div>{{ meeting.startDate }}  {{ meeting.startTime }}</div>
-                <div>{{ meeting.endDate }}  {{ meeting.endTime }}</div>
-                <div><button type="submit" class="btn btn-primary btn-lg" ng-click="deleteMeeting(meeting._id)">Delete</button></div>
+                <div>{{ meeting.startDate }}  {{ meeting.startTime | date:'shortTime'}}</div>
+                <div>{{ meeting.endDate }}  {{ meeting.endTime | date:'shortTime' }}</div>
+                <div><button type="submit" class="btn btn-primary btn-lg" ng-click="deleteMeeting(meeting._id)">Удалить</button></div>
             </div>
         </div>
 
@@ -99,6 +116,7 @@
     <script src="../../bower_components/jquery/dist/jquery.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="../../public/js/dist/slide.and.push.js"></script>
     <script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">
     </script>

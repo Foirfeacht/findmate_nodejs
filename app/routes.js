@@ -13,7 +13,9 @@ module.exports = function(app, passport) {
 	// PROFILE SECTION =========================
 	app.get('/profile', isLoggedIn, function(req, res) {
 		res.render('profile.ejs', {
-			user : req.user
+			user : req.user,
+			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
+			friends: req.user.facebook.friends
 		});
 	});
 
@@ -116,6 +118,7 @@ module.exports = function(app, passport) {
 	        endTime: req.body.endTime,
             latitude: req.body.latitude,
             longitude: req.body.longitude,
+            location: req.body.location,
             visibility : req.body.visibility,
             _owner: req.user._id,
             ownerName: req.user.facebook.name
@@ -150,6 +153,7 @@ module.exports = function(app, passport) {
 	        meeting.updated_at = Date.now;
 	        meeting.latitude = req.body.latitude;
 	        meeting.longitude = req.body.longitude;
+	        meeting.location = req.body.location;
 	        meeting.visibility = req.body.visibility;
 	        return meeting.save(function (err) {
 	            if (!err) {

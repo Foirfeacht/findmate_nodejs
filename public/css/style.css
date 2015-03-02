@@ -3,6 +3,19 @@ body {
 	height: 100%;
 	padding-top: 0;
 }
+
+.menu-button-push{
+	position: fixed;
+	top: 40px;
+	left: 40px;
+}
+
+.menu-button-slide {
+	position: fixed;
+	top: 60px;
+	left: 60px;
+}
+
 .map-container {
 	height: 1000px; 
 	height: 100vh;
@@ -73,6 +86,10 @@ body {
 }
 
 .datetime-pickers {
+	width: 100%;
+}
+
+.datetime-pickers_wrapper {
 	width: 100%;
 	overflow: hidden;
 }
