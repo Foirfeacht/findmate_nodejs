@@ -4,18 +4,77 @@ body {
 	padding-top: 0;
 }
 
-.menu-button-push{
+.content {
+	width: 100%;
+	position: relative;
+}
+
+/* menu */
+
+.menu-button{
 	position: fixed;
 	top: 40px;
 	left: 40px;
+	z-index: 1000;
 }
 
-.menu-button-slide {
+.menu {
+	height: 100%;
 	position: fixed;
-	top: 60px;
-	left: 60px;
+	top: 0;
+	left: 0;
+	width: 20%;
+	display: none;
+	z-index: 1000;
+	background: #2c3e50;
+	color: #fff;
+	font-weight: 700;
 }
 
+.menu a {
+	color: #fff;
+	font-weight: 700;
+}
+
+.menu ul {
+	width: 100%;
+}
+
+.menu ul li {
+	width: 100%;
+}
+
+.menu ul li a {
+	display: block;
+	padding: 20px 0;
+	font-size: 2em;
+	width: 100%;
+	text-align: center;
+	line-height: auto;
+}
+
+.profile-block .image-wrapper{
+	border: 1px soldi #fff;
+	border-radius: 50%;
+	width: 300px;
+	height: 300px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.profile-block img {
+	
+}
+
+.profile-block .profile-name {
+	width: 100%;
+	display: block;
+	text-align: center;
+	font-size: 1.5em;
+}
+
+
+/* map */
 .map-container {
 	height: 1000px; 
 	height: 100vh;

@@ -28,7 +28,8 @@ module.exports = function(app, passport) {
 	// MAP ==============================
 	app.get('/map', isLoggedIn, function(req, res) {
 		res.render('map.ejs', {
-			user : req.user
+			user : req.user,
+			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250'
 		});
 	});
 
