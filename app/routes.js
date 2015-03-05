@@ -15,7 +15,7 @@ module.exports = function(app, passport) {
 		res.render('profile.ejs', {
 			user : req.user,
 			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
-			friends: req.user.facebook.friends
+			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
 		});
 	});
 
@@ -29,7 +29,17 @@ module.exports = function(app, passport) {
 	app.get('/map', isLoggedIn, function(req, res) {
 		res.render('map.ejs', {
 			user : req.user,
-			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250'
+			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
+			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+		});
+	});
+
+	// MEETINGS ==============================
+	app.get('/meetings', isLoggedIn, function(req, res) {
+		res.render('meetings.ejs', {
+			user : req.user,
+			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
+			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
 		});
 	});
 
@@ -42,11 +52,11 @@ module.exports = function(app, passport) {
 	// facebook -------------------------------
 
 		// send to facebook to do the authentication
-		app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email, public_profile, user_photos'] }));
+		app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email, public_profile, user_photos, user_friends'] }));
 
 		// handle the callback after facebook has authenticated the user
 		app.get('/auth/facebook/callback',
-			passport.authenticate('facebook', { scope: ['email, public_profile, user_photos'],
+			passport.authenticate('facebook', { scope: ['email, public_profile, user_photos, user_friends'],
 				successRedirect : '/map',
 				failureRedirect : '/'
 			}));
@@ -54,7 +64,7 @@ module.exports = function(app, passport) {
 	// facebook -------------------------------
 
 		// send to facebook to do the authentication
-		app.get('/connect/facebook', passport.authorize('facebook', { scope : 'email, user_photos' }));
+		app.get('/connect/facebook', passport.authorize('facebook', { scope : 'email, user_photos, user_friends' }));
 
 		// handle the callback after facebook has authorized the user
 		app.get('/connect/facebook/callback',
@@ -115,8 +125,6 @@ module.exports = function(app, passport) {
             description: req.body.description,
 	        startDate: req.body.startDate,
 	        startTime: req.body.startTime,
-	        endDate: req.body.endDate,
-	        endTime: req.body.endTime,
             latitude: req.body.latitude,
             longitude: req.body.longitude,
             location: req.body.location,
@@ -149,8 +157,6 @@ module.exports = function(app, passport) {
 	        meeting.description = req.body.description;
 	        meeting.startDate = req.body.startDate;
 	        meeting.startTime = req.body.startTime;
-	        meeting.endDate = req.body.endDate;
-	        meeting.endTime = req.body.endTime;
 	        meeting.updated_at = Date.now;
 	        meeting.latitude = req.body.latitude;
 	        meeting.longitude = req.body.longitude;

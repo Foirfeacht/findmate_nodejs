@@ -21,9 +21,10 @@
                     <% } %>
                 </div>
                 <ul>
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="/logout">Log out</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/meetings">Встречи</a></li>
+                    <li><a href="#">Настройки</a></li>
+                    <li><a href="/logout">Выйти</a></li>
                 </ul>
             </nav>
         </div>
@@ -59,20 +60,6 @@
                         </div>
                     </div>
                    
-                    <div class="datetime-pickers">
-                        <div class="timepicker-wrapper">
-                            <timepicker ng-model="formData.endTime" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
-                        </div>
-                        <div class="datepicker-wrapper">
-                            <p class="input-group">
-                              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.endDate" is-open="datepickers.endDate" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" close-text="Close" />
-                              <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open($event, 'endDate')"><i class="glyphicon glyphicon-calendar"></i></button>
-                              </span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
 
                 <label class="control-label">Эту встречу увидят...</label>
                 <select class="form-control input-lg" ng-model="formData.visibility">
@@ -81,6 +68,7 @@
                 </select>
                 <button class="btn btn-primary" type="submit" ng-click="createMeeting()">OK</button>
             </div>
+            </div><!-- end content -->
             <div class="meetings-display">
             
                 <div class="meeting" ng-repeat="meeting in meetings" ng-if="meeting.active===true">
@@ -92,11 +80,10 @@
                     <div>{{ meeting.longitude }}</div>
                     <div>{{ meeting.visibility }}</div>
                     <div>{{ meeting.startDate }}  {{ meeting.startTime | date:'shortTime'}}</div>
-                    <div>{{ meeting.endDate }}  {{ meeting.endTime | date:'shortTime' }}</div>
                     <div><button type="submit" class="btn btn-primary btn-lg" ng-click="deleteMeeting(meeting._id)">Удалить</button></div>
                 </div>
             </div>
-        </div><!-- end content -->
+        
 
   
 

@@ -7,8 +7,6 @@ var meetingsSchema = new Schema({
     description: String,
     startDate: Date,
     startTime: String,
-    endDate: Date,
-    endTime: String,
     _owner: { type: Schema.Types.ObjectId, ref: 'User' },
     ownerName: { type: String, ref: 'User' },
     created_at: { type: Date, default: Date.now },
