@@ -7,14 +7,20 @@ findMate.controller('singleMeetingController', ['$scope', '$http', function($sco
 
     
     // when landing on the page, get all events and show them
-    $http.get('../api/meetings' + id)
-        .success(function(data) {
-            $scope.meetings = data;
-            console.log(data);
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
+    $scope.renderMeeting = function(id){
+	    $http.get('../api/meetings' + id)
+	        .success(function(data) {
+	            $scope.meetings = data;
+	            console.log(data);
+	        })
+	        .error(function (data) {
+	            console.log('Error: ' + data);
+	        });
+	}
+
+	$scope.$watch('$viewContentLoaded', function() {
+        $scope.renderMeeting();
+    });
 
 
 
