@@ -21,7 +21,7 @@
                     <% } %>
                 </div>
                 <ul>
-                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="#">Profile</a></li>
                     <li><a href="#">Settings</a></li>
                     <li><a href="/logout">Log out</a></li>
                 </ul>
@@ -31,18 +31,25 @@
         <button class="menu-button" id="menu-button">Open menu</button><button class="menu-button" id="menu-button">Open menu</button>
         <div class="content">
                    
-            <h1 class="active-meetings">Созданные события от <%= user.facebook.name %></h1>
-            <div class="meetings-display" ng-if="meeting.ownerName === user.facebook.name">
+            <div class="meetings-display">
             
-                <div class="meeting" ng-repeat="meeting in meetings" ng-if="meeting.active===true">
+                <div class="meeting">
                     <div><input type="checkbox" ng-click="completeMeeting(meeting._id)"> {{ meeting.active }}</div>
-                    <div class="meeting-title"><a href="/meetings/{{meeting._id}}">{{ meeting.title }}</a></div>
+                    <div class="meeting-title">{{ meeting.title }}</div>
                     <div>{{ meeting.description }}</div>
                     <div>{{ meeting.ownerName }}</div>
                     <div>{{ meeting.latitude }}</div>
                     <div>{{ meeting.longitude }}</div>
                     <div>{{ meeting.visibility }}</div>
                     <div>{{ meeting.startDate }}  {{ meeting.startTime | date:'shortTime'}}</div>
+
+                     <div class="meeting-title"><%= meeting.title %></div>
+                    <div><%= meeting.description %></div>
+                    <div><%= meeting.ownerName %></div>
+                    <div><%= meeting.latitude %></div>
+                    <div><%= meeting.longitude %></div>
+                    <div><%= meeting.visibility %></div>
+                    <div><%= meeting.startDate %> </div>
                     <div><button type="submit" class="btn btn-primary btn-lg" ng-click="deleteMeeting(meeting._id)">Удалить</button></div>
                 </div>
             </div>
@@ -70,6 +77,6 @@
     <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 	<script src="../../public/js/app.js"></script>
-    <script src="../../public/js/controllers/meetings.js"></script>
+    <script src="../../public/js/controllers/singleMeeting.js"></script>
 </body>
 </html>

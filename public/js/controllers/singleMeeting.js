@@ -1,13 +1,13 @@
 // map controller
 // public/map.js
 
-findMate.controller('meetingsController', ['$scope', '$http', function($scope, $http) {
+findMate.controller('singleMeetingController', ['$scope', '$http', function($scope, $http) {
 
     //load input data
 
     
     // when landing on the page, get all events and show them
-    $http.get('../api/meetings')
+    $http.get('../api/meetings' + id)
         .success(function(data) {
             $scope.meetings = data;
             console.log(data);
