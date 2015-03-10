@@ -7,8 +7,8 @@ findMate.controller('singleMeetingController', ['$scope', '$http', function($sco
 
     
     // when landing on the page, get all events and show them
-    $scope.renderMeeting = function(id){
-	    $http.get('../api/meetings' + id)
+    //$scope.renderMeeting = function(id){
+	    $http.get('../api/meetings/' + id)
 	        .success(function(data) {
 	            $scope.meetings = data;
 	            console.log(data);
@@ -16,11 +16,11 @@ findMate.controller('singleMeetingController', ['$scope', '$http', function($sco
 	        .error(function (data) {
 	            console.log('Error: ' + data);
 	        });
-	}
+	//}
 
-	$scope.$watch('$viewContentLoaded', function() {
-        $scope.renderMeeting();
-    });
+	//$scope.$watch('$viewContentLoaded', function() {
+    //    $scope.renderMeeting();
+    //});
 
 
 

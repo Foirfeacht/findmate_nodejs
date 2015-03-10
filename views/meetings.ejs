@@ -36,7 +36,8 @@
             
                 <div class="meeting" ng-repeat="meeting in meetings" ng-if="meeting.active===true">
                     <div><input type="checkbox" ng-click="completeMeeting(meeting._id)"> {{ meeting.active }}</div>
-                    <div class="meeting-title"><a href="/meetings/{{meeting._id}}">{{ meeting.title }}</a></div>
+                    <div class="meeting-title"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title }}</a></div>
+                    <div> {{ meeting._id }} </div>
                     <div>{{ meeting.description }}</div>
                     <div>{{ meeting.ownerName }}</div>
                     <div>{{ meeting.latitude }}</div>
@@ -47,6 +48,18 @@
                 </div>
             </div>
             <a href="/map">Создать</a>
+
+
+            <div class="single-meeting">
+                <div><input type="checkbox" ng-click="completeMeeting(meeting._id)"> {{ meeting.active }}</div>
+                <div class="meeting-title">{{ meeting.title }}</div>
+                <div>{{ meeting.description }}</div>
+                <div>{{ meeting.ownerName }}</div>
+                <div>{{ meeting.latitude }}</div>
+                <div>{{ meeting.longitude }}</div>
+                <div>{{ meeting.visibility }}</div>
+                <div>{{ meeting.startDate }}  {{ meeting.startTime | date:'shortTime'}}</div>
+            </div>
   
 
     <!-- modal -->

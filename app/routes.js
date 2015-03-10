@@ -43,6 +43,14 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.get('/meeting', isLoggedIn, function(req, res) {
+		res.render('meeting.ejs', {
+			user : req.user,
+			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
+			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+		});
+	});
+
 
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
@@ -182,24 +190,29 @@ module.exports = function(app, passport) {
 
 
     //get single meeting
-    app.get('/api/meetings/:meeting_id', isLoggedIn, function(req, res) {
-	 // Meeting.findById(req.params.id, function(err, meeting) {
-	 var user = req.user;
-	 Meeting.findOne({ _id: req.params.meeting_id}, function(err, meeting) {
-	  	if(!meeting){
-	  		return res.send({error: 'not found'});
-	  	}
-	    if (err) {
-	    	return res.send(err);
-	    }
-	    res.json(meeting);
-	  }).populate('_owner', 'ownerName');
+    app.get('/api/meetings/:id', isLoggedIn, function(req, res) {
+		Meeting.findById(req.params.id, function(err, meeting) {
+			 res.render('meeting.ejs', {
+			 	user : req.user,
+				picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
+				friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token});
+			 //Meeting.findOne({ id: req.params.id}, function(err, meeting) {
+			  	if(!meeting){
+			  		return res.send({error: 'not found'});
+			  	}
+			    if (err) {
+			    	return res.send(err);
+			    }
+			    //res.redirect('./meeting.ejs');
+			    res.render('meeting.ejs');
+			    //res.json(meeting);
+		}).populate('_owner', 'ownerName');
 	});
 
     // delete a meeting
     app.delete('/api/meetings/:meeting_id', isLoggedIn, function(req, res) {
         Meeting.remove({
-            _id : req.params.meeting_id
+            meeting_id : req.params.meeting_id
         }, function(err, meeting) {
             if (err)
                 res.send(err);

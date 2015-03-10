@@ -17,8 +17,16 @@ findMate.controller('meetingsController', ['$scope', '$http', function($scope, $
         });
 
 
-
-    
+    $scope.singleMeeting = function(id) {
+        $http.get('../api/meetings' + id)
+            .success(function(data) {
+                $scope.meetings = data;
+                console.log(data);
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
+    }    
 
     // delete a todo after checking it
     $scope.deleteMeeting = function(id) {

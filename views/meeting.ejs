@@ -8,7 +8,7 @@
         
 	</head>
 	<body>
-	<body ng-controller="meetingsController">
+	<body ng-controller="singleMeetingController">
         <!--============== navigation ==============-->
         <div class="menu" id="menu">
             <nav>
@@ -37,6 +37,7 @@
                     <div><input type="checkbox" ng-click="completeMeeting(meeting._id)"> {{ meeting.active }}</div>
                     <div class="meeting-title">{{ meeting.title }}</div>
                     <div>{{ meeting.description }}</div>
+                    <div> {{ meeting._id }} </div>
                     <div>{{ meeting.ownerName }}</div>
                     <div>{{ meeting.latitude }}</div>
                     <div>{{ meeting.longitude }}</div>
