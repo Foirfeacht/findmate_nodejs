@@ -1,0 +1,57 @@
+<!doctype html>
+<html ng-app="findMate"> 
+	<head>
+		<title>События</title>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../public/css/style.css">
+        
+	</head>
+	<body ng-controller="mainController">
+        <!--============== navigation ==============-->
+        <div class="menu" id="menu">
+            <nav>
+                <div class="profile-block">
+                    <% if (user.facebook.token) { %>
+                    <div class="image-wrapper">
+                        <img src="<%= picture %>" alt="<%= user.facebook.name %>">
+                    </div>
+                    <a href="#/profile" class="profile-name"><%= user.facebook.name %></a>
+                    <% } %>
+                </div>
+                <ul>
+                    <li><a href="#/profile">Profile</a></li>
+                    <li><a href="#/meetings">Встречи</a></li>
+                    <li><a href="#">Настройки</a></li>
+                    <li><a href="/logout">Выйти</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        
+
+        <!--============== main content ==============-->
+        <div class="menu-button" id="menu-button"><i class="fa fa-bars"></i></div>
+        <div class="content" id="content">
+            <div ng-view></div>
+
+        </div>
+
+
+    <script src="../../bower_components/angular/angular.js"></script>
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../public/js/menu.js"></script>
+    <script src="../../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">
+    </script>
+	<script src="../../public/js/app.js"></script>
+    <script src="../../public/js/controllers/map.js"></script>
+    <script src="../../public/js/controllers/meetings.js"></script>
+    <script src="../../public/js/controllers/main.js"></script>
+
+    <script src="../../public/js/controllers/modalInstance.js"></script>
+</body>
+</html>

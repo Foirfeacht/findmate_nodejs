@@ -1,0 +1,31 @@
+{
+  "name": "findmate",
+  "version": "0.1.0",
+  "homepage": "https://github.com/Foirfeacht/findmate_nodejs",
+  "authors": [
+    "foirfeacht <vitaliy.maltsev@gmail.com>"
+  ],
+  "description": "New way to find get all friends together",
+  "main": "server.js",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "null"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "~0.12.0",
+    "angular-route": "~1.3.14",
+    "bootstrap": "~3.3.2",
+    "jquery": "~2.1.3"
+  }
+}

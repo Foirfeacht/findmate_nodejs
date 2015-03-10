@@ -1,7 +1,7 @@
 // map controller
 // public/map.js
 
-findMate.controller('meetingsController', ['$scope', '$http', function($scope, $http) {
+findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
 
     //load input data
 
@@ -34,15 +34,6 @@ findMate.controller('meetingsController', ['$scope', '$http', function($scope, $
             .success(function (data) {
                 $scope.meetings = data;
                 console.log(data);
-                $scope.deleteMarkers();
-                var l = data.length;
-                    for( var i = 0; i < l; i++) {
-                        var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-                        var marker = new google.maps.Marker({
-                            position: latLng,
-                            map: $scope.map
-                        });
-                }
             })
             .error(function(data) {
                 console.log('Error: ' + data);

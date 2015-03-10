@@ -4,10 +4,17 @@ body {
 	padding-top: 0;
 }
 
+a:hover {
+	text-decoration: none;
+}
+
 .content {
 	width: 100%;
 	position: relative;
+	padding: 20px 100px;
 }
+
+
 
 /* menu */
 
@@ -16,6 +23,10 @@ body {
 	top: 40px;
 	left: 40px;
 	z-index: 1000;
+}
+
+.menu-button i {
+	font-size: 1.5em;
 }
 
 .menu {
@@ -39,6 +50,7 @@ body {
 .menu ul {
 	width: 100%;
 	list-style: none;
+	padding: 0;
 }
 
 .menu ul li {
@@ -55,13 +67,21 @@ body {
 	line-height: auto;
 }
 
+.menu ul li:hover {
+	background: #fff;
+}
+
+.menu ul li:hover a {
+	color: #2c3e50;
+}
+
 .profile-block .image-wrapper{
 	border: 1px soldi #fff;
 	border-radius: 50%;
-	width: 250;
-	height: 250px;
+	width: 200px;
+	height: 200px;
 	overflow: hidden;
-	margin: 0 auto;
+	margin: 40px auto 10px;
 }
 
 .profile-block img {
@@ -73,7 +93,8 @@ body {
 	width: 100%;
 	display: block;
 	text-align: center;
-	font-size: 1.5em;
+	font-size: 1.1em;
+	margin-bottom: 30px;
 }
 
 
@@ -91,29 +112,6 @@ body {
 	position: fixed;
 	top: 0;
 	left: 0;
-}
-
-.top-bar {
-	position: fixed;
-	width: 100%;
-	height: 50px;
-	background: #fff;
-	border-bottom: 1px solid grey;
-	z-index: 100;
-	top: -8px;
-
-}
-
-.top-bar_username {
-	text-align: center;
-	width: 30%;
-	margin: 0 auto;
-	font-size: 2em;
-	line-height: 50px;
-}
-
-.top-bar_username a {
-	color: #000;
 }
 
 .modal-btn {
@@ -153,7 +151,6 @@ body {
 
 .datetime-pickers_wrapper {
 	width: 100%;
-	overflow: hidden;
 }
 
 .timepicker-wrapper,
@@ -167,7 +164,7 @@ body {
 }
 
 .input-group .form-control {
-	width: 304px;
+	width: 100%;
 }
 
 .input-group-btn>.btn {

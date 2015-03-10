@@ -1,0 +1,33 @@
+<div class="page-header text-center">
+	<h1><span class="fa fa-anchor"></span> Профиль</h1>
+	<a href="/logout" class="btn btn-default btn-sm">Выйти</a>
+</div>
+
+<div class="row">
+
+
+	<!-- FACEBOOK INFORMATION -->
+	<div class="col-sm-6">
+		<div class="well">
+			<h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+
+			<!-- check if the user has this token (is the user authenticated with this social account) -->
+			<% if (user.facebook.token) { %>
+				<div><img src="<%= picture %>" alt="<%= user.facebook.name %>"></div>
+				<p>
+					<strong>name</strong>: <%= user.facebook.name %><br>
+				
+				</p>
+
+				<a href="/unlink/facebook" class="btn btn-primary">Отключить</a>
+			<% } else { %>
+				<a href="/connect/facebook" class="btn btn-primary">Подключить Facebook</a>
+			<% } %>
+
+		</div>
+	</div>
+</div><!-- end row -->
+
+<div class="row">
+	<a href="/map">Перейти к событиям</a>
+</div>
