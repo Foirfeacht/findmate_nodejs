@@ -2,10 +2,14 @@
   "name": "findmate",
   "version" : "0.1.0",
   "author" : "Vitaly Maltsev",
+  "license": "MIT",
   "main": "server.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Foirfeacht/findmate_nodejs"
+  },
+  "engines": {
+    "node": "0.12.x"
   },
   "dependencies" : {
     "express" : "~4.0.0", 			
