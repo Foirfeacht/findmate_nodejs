@@ -124,6 +124,10 @@ a:hover {
 	left: 0;
 }
 
+md-dialog {
+	width: 50%;
+}
+
 .modal-btn {
 	position: absolute;
 	z-index: 9999;
@@ -132,7 +136,7 @@ a:hover {
 }
 
 .form {
-	width: 50%;
+	width: 80%;
 	margin: 20px auto;
 }
 

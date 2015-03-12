@@ -243,8 +243,8 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', '$mdSidenav',
     $scope.showDialog = function(ev) {
         console.log('clicked');
         $mdDialog.show({
-          controller: DialogController,
-          templateUrl: './views/partials/dialog.tmpl.html',
+          controller: 'DialogController',
+          templateUrl: './public/partials/dialog.tmpl.ejs',
           targetEvent: ev,
         })
     };

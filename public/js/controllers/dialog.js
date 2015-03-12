@@ -1,4 +1,4 @@
-function DialogController($scope, $mdDialog, $http) {
+findMate.controller('DialogController', ['$scope', '$http', '$mdDialog', function($scope, $http, $mdDialog) {
   $scope.hide = function() {
     $mdDialog.hide();
   };
@@ -8,6 +8,18 @@ function DialogController($scope, $mdDialog, $http) {
   $scope.answer = function(answer) {
     $mdDialog.hide(answer);
   };
+
+  $scope.formData = {};
+
+  $http.get('../api/meetings')
+        .success(function(data) {
+            $scope.meetings = data;
+            console.log(data);
+
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });
 
   $scope.createMeeting = function() {
         //if($scope.latitude && $scope.longitude){
@@ -28,4 +40,4 @@ function DialogController($scope, $mdDialog, $http) {
         //    console.log('no coordinates provided')
         //}
     };
-}
+}]);

@@ -37,8 +37,11 @@
 	                    <md-option value="all">Все</md-option>
 	                    <md-option value="friends" default>Друзья</md-option>
 	                </md-select>
+	        </section>
+	        <section layout="row" layout-align="center center">
 
-	            <md-button md-no-ink class="md-primary" type="submit" ng-click="createMeeting()">Создать</md-button>
+	            <md-button class="md-raised" nh-click="$scope.cancel()">Отмена</md-button>
+	            <md-button class="md-raised md-primary" type="submit" ng-click="createMeeting()">Создать</md-button>
 	        </section>
 	    </div><!-- end form -->
 	</md-content>
