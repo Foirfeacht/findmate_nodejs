@@ -4,12 +4,14 @@
 		<title>События</title>
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../bower_components/angular-material/angular-material.min.css">
+        <link rel="stylesheet" href="../../bower_components/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="../../public/css/style.css">
         
 	</head>
 	<body ng-controller="meetingsController">
-        <!--============== navigation ==============-->
-        <div class="menu" id="menu">
+       <!--=============================== navigation ===============================-->
+        <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
             <nav>
                 <div class="profile-block">
                     <% if (user.facebook.token) { %>
@@ -20,14 +22,34 @@
                     <% } %>
                 </div>
                 <ul>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="/logout">Log out</a></li>
+                    <li>
+                        <a href="/profile">
+                            <i class="mdi mdi-account"></i>Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/meetings">
+                            <i class="mdi mdi-map-marker-radius"></i>Встречи
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="mdi mdi-settings"></i>Настройки
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout">
+                            <i class="mdi mdi-logout"></i>Выйти
+                        </a>
+                    </li>
                 </ul>
             </nav>
-        </div>
-        <!--============== main content ==============-->
-        <div class="menu-button" id="menu-button"><i class="fa fa-bars"></i></div>
+        </md-sidenav>
+
+        
+
+        <!--=============================== main content ===============================-->
+        <md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i class="mdi mdi-menu"></i></md-button>
         <div class="content">
                    
             <h1 class="active-meetings">Созданные события от <%= user.facebook.name %></h1>
@@ -61,8 +83,10 @@
           </div>
     <script src="../../bower_components/angular/angular.js"></script>
     <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../../bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="../../bower_components/angular-material/angular-material.min.js"></script>
     <script src="../../bower_components/angular-route/angular-route.min.js"></script>
-    <script src="../../public/js/menu.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 	<script src="../../public/js/app.js"></script>

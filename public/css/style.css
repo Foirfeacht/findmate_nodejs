@@ -20,13 +20,17 @@ a:hover {
 
 .menu-button{
 	position: fixed;
-	top: 40px;
+	top: 20px;
 	left: 40px;
-	z-index: 1000;
+	z-index: 300;
+}
+
+.menu-button:hover {
+	cursor: pointer;
 }
 
 .menu-button i {
-	font-size: 1.5em;
+	font-size: 2em;
 }
 
 .menu {
@@ -35,15 +39,14 @@ a:hover {
 	top: 0;
 	left: 0;
 	width: 20%;
-	display: none;
+	/*display: none;*/
 	z-index: 1000;
-	background: #2c3e50;
-	color: #fff;
-	font-weight: 700;
-}
+	/*background: #2c3e50;*/
 
-.menu a {
-	color: #fff;
+	background: #fff;
+	border: 1px thin rgba(0, 0, 0, 0.8);
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	color: #2c3e50;
 	font-weight: 700;
 }
 
@@ -62,17 +65,24 @@ a:hover {
 	display: block;
 	padding: 20px 0;
 	font-size: 2em;
-	width: 100%;
-	text-align: center;
+	color: #2c3e50;
+	font-weight: 700;
+	width: 80%;
+	margin-left: 20%; 
+	text-align: left;
 	line-height: auto;
 }
 
+.menu ul li a i {
+	margin-right: 20px;
+}
+
 .menu ul li:hover {
-	background: #fff;
+	background: #2c3e50;
 }
 
 .menu ul li:hover a {
-	color: #2c3e50;
+	color: #fff;
 }
 
 .profile-block .image-wrapper{
@@ -126,9 +136,27 @@ a:hover {
 	margin: 20px auto;
 }
 
+md-input-container {
+	width: 100%;
+}
+
+md-select {
+	width: 60%;
+	margin-bottom: 30px;
+}
+
+md-select span {
+	width: 100%;
+}
+
+md-option {
+	width: 100%;
+}
+
 .form input,
 .form select {
 	margin: 10px auto;
+	width: 100%;
 }
 
 .meeting-display {
@@ -145,19 +173,7 @@ a:hover {
 	font-weight: 700;
 }
 
-.datetime-pickers {
-	width: 100%;
-}
 
-.datetime-pickers_wrapper {
-	width: 100%;
-}
-
-.timepicker-wrapper,
-.datepicker-wrapper {
-	width: 50%;
-	float: left;
-}
 
 .datepicker-wrapper {
 	margin-top: 35px;

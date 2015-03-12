@@ -1,7 +1,7 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
+findMate.controller('mapController', ['$scope', '$http', '$modal', '$mdSidenav', '$mdDialog', function($scope, $http, $modal, $mdSidenav, $mdDialog) {
 
     //load input data
 
@@ -230,9 +230,24 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
             })
     }    
 
+    // side nav
+    $scope.toggleNav = function() {
+       $mdSidenav('nav').toggle();
+    };
+
     $scope.showModal = function(id){
         console.log('clicked');
-    }
+    };
+
+    // md dialog
+    $scope.showDialog = function(ev) {
+        console.log('clicked');
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: './views/partials/dialog.tmpl.html',
+          targetEvent: ev,
+        })
+    };
 
     //modal
     $scope.open = function (size) {
@@ -250,43 +265,5 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', function($sco
         });
       };   
 
-      // datepicker
-    $scope.datepickers = {
-        startDate: false,
-        endDate: false
-    }
-    $scope.today = function() {
-       $scope.startDate = new Date();
-       $scope.endDate = new Date();
-    };
-    $scope.toggleMin = function() {
-        $scope.minDate = $scope.minDate ? null : new Date();
-    };
-    $scope.toggleMin();
-    $scope.open = function($event, which) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope.datepickers[which]= true;
-      };
-
-    $scope.clearSD = function () {
-       $scope.startDate = null;
-    };
-
-    $scope.clearED = function () {
-       $scope.endDate = null;
-    };
-
-    $scope.format = 'dd-MMMM-yyyy';
-    $scope.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 1
-    };
-
-    // time picker
-    $scope.hstep = 1;
-    $scope.mstep = 1;
-    $scope.ismeridian = false;
    
 }]);

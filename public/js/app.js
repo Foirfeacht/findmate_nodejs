@@ -1,4 +1,4 @@
-var findMate = angular.module('findMate', ['ui.bootstrap', 'ngRoute']);
+var findMate = angular.module('findMate', ['ui.bootstrap', 'ngRoute', 'ngMaterial']);
 
 /*findMate.config(function($routeProvider) {
         $routeProvider

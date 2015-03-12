@@ -1,0 +1,45 @@
+<md-dialog>
+	<md-content>
+		<div class="form">
+	        <section layout="column" layout-align="center center">
+
+	                <md-input-container>
+	                    <label>Название встречи</label>
+	                    <input type="text" ng-model="formData.title">
+	                </md-input-container>
+
+	                <md-input-container>
+	                    <label>Описание встречи</label>
+	                    <input type="text" ng-model="formData.description">
+	                </md-input-container>
+
+	        </section>
+
+
+
+	            <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
+
+	                    <md-input-container>
+	                        <label>Время встречи</label>
+	                        <input type="time" ng-model="formData.startTime">
+	                    </md-input-container>
+
+	                    <md-input-container>
+	                        <label>Дата встречи</label>
+	                        <input type="date" ng-model="formData.startDate">
+	                    </md-input-container>
+	                
+	            </section>
+
+	        <section layout="column" layout-align="center center">
+
+	                <md-select ng-model="formData.visibility" placeholder="Эту встречу увидят...">
+	                    <md-option value="all">Все</md-option>
+	                    <md-option value="friends" default>Друзья</md-option>
+	                </md-select>
+
+	            <md-button md-no-ink class="md-primary" type="submit" ng-click="createMeeting()">Создать</md-button>
+	        </section>
+	    </div><!-- end form -->
+	</md-content>
+</md-dialog>

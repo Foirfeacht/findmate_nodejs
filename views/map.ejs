@@ -4,12 +4,14 @@
 		<title>События</title>
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../../public/css/style.css">
-        
+        <link rel="stylesheet" href="../../bower_components/angular-material/angular-material.min.css">
+        <link rel="stylesheet" href="../../bower_components/mdi/css/materialdesignicons.min.css">
+
+        <link rel="stylesheet" href="../../public/css/style.css">        
 	</head>
 	<body ng-controller="mapController">
-        <!-------------------- navigation -------------------->
-        <div class="menu" id="menu">
+        <!--=============================== navigation ===============================-->
+        <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
             <nav>
                 <div class="profile-block">
                     <% if (user.facebook.token) { %>
@@ -20,54 +22,87 @@
                     <% } %>
                 </div>
                 <ul>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/meetings">Встречи</a></li>
-                    <li><a href="#">Настройки</a></li>
-                    <li><a href="/logout">Выйти</a></li>
+                    <li>
+                        <a href="/profile">
+                            <i class="mdi mdi-account"></i>Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/meetings">
+                            <i class="mdi mdi-map-marker-radius"></i>Встречи
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="mdi mdi-settings"></i>Настройки
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout">
+                            <i class="mdi mdi-logout"></i>Выйти
+                        </a>
+                    </li>
                 </ul>
             </nav>
-        </div>
+        </md-sidenav>
 
         
 
-        <!-------------------- main content -------------------->
-        <div class="menu-button" id="menu-button"><i class="fa fa-bars"></i></div>
+        <!--=============================== main content ===============================-->
+        <md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i class="mdi mdi-menu"></i></md-button>
+
         <div class="content">
 
 
             <div class="map-container">
-                <div id="map_canvas"></div>
-            </div>
+                <div id="map_canvas" ng-click="showModal($event)"></div>
+            </div><!-- end map container -->
                    
 
         
             <div class="form">
-                <input type="text" class="form-control input-lg text-center" placeholder="Название встречи" ng-model="formData.title">
-                <input type="text" class="form-control input-lg text-center" placeholder="Описание" ng-model="formData.description">
-                 <div class="datetime-pickers_wrapper">
-                    <div class="datetime-pickers">
-                        <div class="timepicker-wrapper">
-                            <timepicker ng-model="formData.startTime" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
-                        </div>
-                        <div class="datepicker-wrapper">
-                            <p class="input-group">
-                              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.startDate" is-open="datepickers.startDate" min-date="minDate" max-date="'2050-06-22'" datepicker-options="dateOptions" close-text="Close" class="meetings-datepicker">
-                              <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open($event, 'startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
-                              </span>
-                            </p>
-                        </div>
-                    </div>
-                   
+                <section layout="column" layout-align="center center">
+  
+                        <md-input-container>
+                            <label>Название встречи</label>
+                            <input type="text" ng-model="formData.title">
+                        </md-input-container>
 
-                <label class="control-label">Эту встречу увидят...</label>
-                <select class="form-control input-lg" ng-model="formData.visibility">
-                    <option value="all">Все</option>
-                    <option value="friends" default>Друзья</option>
-                </select>
-                <button class="btn btn-primary" type="submit" ng-click="createMeeting()">OK</button>
-            </div>
-            </div><!-- end content -->
+                        <md-input-container>
+                            <label>Описание встречи</label>
+                            <input type="text" ng-model="formData.description">
+                        </md-input-container>
+
+                </section>
+
+
+  
+                    <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
+    
+                            <md-input-container>
+                                <label>Время встречи</label>
+                                <input type="time" ng-model="formData.startTime">
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Дата встречи</label>
+                                <input type="date" ng-model="formData.startDate">
+                            </md-input-container>
+                        
+                    </section>
+
+                <section layout="column" layout-align="center center">
+
+                        <md-select ng-model="formData.visibility" placeholder="Эту встречу увидят...">
+                            <md-option value="all">Все</md-option>
+                            <md-option value="friends" default>Друзья</md-option>
+                        </md-select>
+
+                    <md-button md-no-ink class="md-primary" type="submit" ng-click="createMeeting()">Создать</md-button>
+                </section>
+            </div><!-- end form -->
+
+        </div><!-- end content -->
         
 
   
@@ -89,7 +124,9 @@
         <!-- end modal -->
     <script src="../../bower_components/angular/angular.js"></script>
     <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../../public/js/menu.js"></script>
+    <script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../../bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="../../bower_components/angular-material/angular-material.min.js"></script>
     <script src="../../bower_components/angular-route/angular-route.min.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
