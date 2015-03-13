@@ -145,7 +145,7 @@ module.exports = function(app, passport) {
             latitude: req.body.latitude,
             longitude: req.body.longitude,
             location: req.body.location,
-            visibility : req.body.visibility,
+            visibility : req.body.visibility || 'all',
             _owner: req.user._id,
             ownerName: req.user.facebook.name
         }, function(err, meeting) {

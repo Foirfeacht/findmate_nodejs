@@ -1,7 +1,7 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', '$modal', '$mdSidenav', '$mdDialog', function($scope, $http, $modal, $mdSidenav, $mdDialog) {
+findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSidenav', '$mdDialog', function($scope, $http, mapService, $mdSidenav, $mdDialog) {
 
     //load input data
 
@@ -9,15 +9,16 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', '$mdSidenav',
 
     //map
 
-    $scope.latitude = null;
-    $scope.longitude = null;
+    $scope.map = mapService.map;
 
     $scope.markers = [];
 
     $scope.formData.marker = '';
 
+    //$scope.getCoords = mapService.getCoords
 
-    $scope.initialize = function () {
+
+    /*$scope.initialize = function () {
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
               $scope.pos = new google.maps.LatLng(position.coords.latitude,
@@ -82,19 +83,19 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', '$mdSidenav',
         }); //end addListener
 
         
-
+    */
        
 
 
     // load map on WindowLoad
 
     $scope.$watch('$viewContentLoaded', function() {
-        $scope.initialize();
+        mapService.initialize();
     });
 
     // map methods, need revising
 
-    $scope.setAllMap = function(map) {
+ /*   $scope.setAllMap = function(map) {
         map = $scope.map
         for (var i = 0; i < $scope.markers.length; i++) {
            $scope.markers[i].setMap(map);
@@ -108,7 +109,7 @@ findMate.controller('mapController', ['$scope', '$http', '$modal', '$mdSidenav',
     $scope.deleteMarkers = function(){
         $scope.clearMarkers();
         $scope.markers = [];
-    }
+    }*/
 
     // when landing on the page, get all events and show them
     $http.get('../api/meetings')
