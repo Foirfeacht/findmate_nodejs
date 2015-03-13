@@ -9,16 +9,18 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
 
     //map
 
-    $scope.map = mapService.map;
+    //$scope.map = mapService.map;
 
     $scope.markers = [];
 
     $scope.formData.marker = '';
 
+    $scope.latLng = mapService.latLng;
+
     //$scope.getCoords = mapService.getCoords
 
 
-    /*$scope.initialize = function () {
+    $scope.initialize = function () {
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
               $scope.pos = new google.maps.LatLng(position.coords.latitude,
@@ -53,22 +55,26 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
             mapOptions);
 
         google.maps.event.addListener($scope.map, "click", function (event) {
-            $scope.formData.latitude = event.latLng.lat();
-            $scope.lat = $scope.formData.latitude;
-            $scope.formData.longitude = event.latLng.lng();
-            $scope.lng = $scope.formData.longitude;
-            console.log($scope.formData.longitude);
+            //$scope.formData.latitude = event.latLng.lat();
+            //$scope.lat = $scope.formData.latitude;
+            //$scope.formData.longitude = event.latLng.lng();
+            //$scope.lng = $scope.formData.longitude;
+            //console.log($scope.formData.longitude);
+            $scope.latitude = event.latLng.lat();
+            $scope.longitude = event.latLng.lng();
+            
 
             // get address from coords
             $scope.geocoder = new google.maps.Geocoder();
 
-            $scope.latLng = new google.maps.LatLng($scope.formData.latitude, $scope.formData.longitude);
+            $scope.latLng = new google.maps.LatLng($scope.latitude, $scope.longitude);
+            console.log($scope.latLng);
 
             $scope.codeLatLng = function() {
                 $scope.geocoder.geocode({'latLng': $scope.latLng, address: 'address', region: ', BY'}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                       if (results[1]) {
-                        $scope.formData.location = results[1].formatted_address;
+                        $scope.location = results[1].formatted_address;
                         console.log(results[1].formatted_address);
                       } else {
                         console.log('No results found');
@@ -83,16 +89,24 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
         }); //end addListener
 
         
-    */
+    
        
 
 
     // load map on WindowLoad
 
     $scope.$watch('$viewContentLoaded', function() {
-        mapService.initialize();
+        $scope.initialize();
     });
 
+
+    $scope.$watch('latLng', function() {
+        mapService.getCoords($scope.latLng);
+    });
+
+    $scope.$on('valuesUpdated', function() {
+        $scope.latLng = mapService.latLng;
+    });
     // map methods, need revising
 
  /*   $scope.setAllMap = function(map) {
@@ -236,35 +250,14 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
        $mdSidenav('nav').toggle();
     };
 
-    $scope.showModal = function(id){
-        console.log('clicked');
-    };
 
     // md dialog
     $scope.showDialog = function(ev) {
-        console.log('clicked');
         $mdDialog.show({
           controller: 'DialogController',
           templateUrl: './public/partials/dialog.tmpl.ejs',
-          targetEvent: ev,
+          targetEvent: ev
         })
     };
-
-    //modal
-    $scope.open = function (size) {
-
-        var modalInstance = $modal.open({
-          templateUrl: 'myModalContent.html',
-          controller: 'ModalInstanceCtrl',
-          size: size
-        });
-
-        modalInstance.result.then(function (selectedItem) {
-          $scope.selected = selectedItem;
-        }, function () {
-          console.log('Modal dismissed at: ' + new Date());
-        });
-      };   
-
    
 }]);

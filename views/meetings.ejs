@@ -53,21 +53,22 @@
         <div class="content">
                    
             <h1 class="active-meetings">Созданные события от <%= user.facebook.name %></h1>
-            <div class="meetings-display" ng-if="meeting.ownerName === user.facebook.name">
+            <div class="meetings-display" layout="row" layout-sm="column" ng-if="meeting.ownerName === user.facebook.name">
 
 
             
                 <div class="meeting" ng-repeat="meeting in meetings" ng-if="meeting.active===true">
-                    <div><input type="checkbox" ng-click="completeMeeting(meeting._id)"> {{ meeting.active }}</div>
-                    <div class="meeting-title"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title }}</a></div>
-                    <div> {{ meeting._id }} </div>
-                    <div>{{ meeting.description }}</div>
-                    <div>{{ meeting.ownerName }}</div>
-                    <div>{{ meeting.latitude }}</div>
-                    <div>{{ meeting.longitude }}</div>
-                    <div>{{ meeting.visibility }}</div>
-                    <div>{{ meeting.startDate }}  {{ meeting.startTime | date:'shortTime'}}</div>
-                    <div><button type="submit" class="btn btn-primary btn-lg" ng-click="deleteMeeting(meeting._id)">Удалить</button></div>
+                    <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title }}</a></md-checkbox></div>
+                    <div layout="column"> {{ meeting._id }} </div>
+                    <div layout="column">{{ meeting.description }}</div>
+                    <div layout="column">{{ meeting.ownerName }}</div>
+                    <div layout="column">{{ meeting.latitude }}</div>
+                    <div layout="column">{{ meeting.longitude }}</div>
+                    <div layout="column">{{ meeting.visibility }}</div>
+                    <div layout="column">{{ meeting.startDate }}  {{ meeting.startTime | date:'shortTime'}}</div>
+                    <div layout="column">
+                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)">Удалить</md-button>
+                    </div>
                 </div>
 
                 <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
@@ -76,7 +77,12 @@
 				  Встреч пока нет
 				</div>
             </div>
-            <a href="/map">Создать</a>
+
+            <div layout="column">
+                <md-button class="md-raised md-primary create-button"><a href="/map">Создать</a></md-button>
+                
+            </div>
+            
 
           <div id="single-meeting">
           	<div ng-view></div>

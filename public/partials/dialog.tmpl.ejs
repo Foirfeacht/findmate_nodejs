@@ -38,10 +38,13 @@
 	                    <md-option value="friends" default>Друзья</md-option>
 	                </md-select>
 	        </section>
-	        <section layout="row" layout-align="center center">
-
-	            <md-button class="md-raised" nh-click="$scope.cancel()">Отмена</md-button>
-	            <md-button class="md-raised md-primary" type="submit" ng-click="createMeeting()">Создать</md-button>
+	        <section layout="row" layout-align="center center" class="buttons">
+	        	<div>
+		            <md-button class="md-raised" nh-click="$scope.cancel()">Отмена</md-button>
+	            </div>
+	            <div>
+		            <md-button class="md-raised md-primary" type="submit" ng-click="createMeeting()">Создать</md-button>
+	            </div>
 	        </section>
 	    </div><!-- end form -->
 	</md-content>

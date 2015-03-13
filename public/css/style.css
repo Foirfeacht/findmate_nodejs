@@ -128,6 +128,21 @@ md-dialog {
 	width: 50%;
 }
 
+.datepickers input {
+	width: 80%;
+	margin: 0 auto;
+}
+
+md-dialog .buttons div {
+	width: 50%;
+}
+
+.buttons div button {
+	width: 200px;
+	display: block;
+	margin: 10px auto;
+}
+
 .modal-btn {
 	position: absolute;
 	z-index: 9999;
@@ -169,12 +184,33 @@ md-option {
 }
 .meeting {
 	width: 30%;
-	float: left;
-	margin: 20px;
+	/*float: left;*/
+	margin: 30px 30px;
+	border: 1px thin rgba(0, 0, 0, 0.8);
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	padding: 20px;
+}
+
+.meeting div {
+	padding: 4px 0;
 }
 
 .meeting-title {
 	font-weight: 700;
+}
+
+.meeting .delete-button {
+	width: 200px;
+	margin: 10px auto;
+}
+
+.create-button {
+	width: 200px;
+	margin: 45px auto 10px;
+}
+
+.create-button a {
+	color: #fff;
 }
 
 

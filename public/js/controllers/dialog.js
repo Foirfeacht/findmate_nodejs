@@ -1,31 +1,23 @@
 findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDialog', function($scope, $http, mapService, $mdDialog) {
+
   $scope.hide = function() {
     $mdDialog.hide();
   };
-  $scope.cancel = function() {
-    $mdDialog.cancel();
-  };
-  $scope.answer = function(answer) {
-    $mdDialog.hide(answer);
-  };
+
 
   $scope.formData = {};
 
   // working with service
+  $scope.latLng = mapService.latLng;
 
+  $scope.formData.latitude = $scope.latLng.lat();
+  $scope.formData.longitude = $scope.latLng.lng();
 
-  $scope.formData.latitude = mapService.latitude;
-  $scope.formData.longitude = mapService.longitude;
-
-  console.log(mapService.latitude);
-
-
-  $scope.latLng = new google.maps.LatLng(mapService.latitude, mapService.longitude);
-  console.log($scope.latLng || 'nothing');
+  //geocoder
 
   var geocoder = new google.maps.Geocoder();
 
-            $scope.codeLatLng = function() {
+            function codeLatLng() {
                 geocoder.geocode({'latLng': $scope.latLng, address: 'address', region: ', BY'}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                       if (results[1]) {
@@ -40,7 +32,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
                 });
             }
 
-            $scope.codeLatLng();
+            codeLatLng();
 
 // working with api
 

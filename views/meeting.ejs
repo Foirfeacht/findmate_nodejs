@@ -51,7 +51,7 @@
         <!--=============================== main content ===============================-->
         <md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i class="mdi mdi-menu"></i></md-button>
         <div class="content">
-            <div class="meetings-display">
+            <div class="meetings-display" layout="column" layout-sm="column">
 
                 <div class="meeting">
                     <div><input type="checkbox" ng-click="completeMeeting(meeting._id)"> {{ meeting.active }}</div>
