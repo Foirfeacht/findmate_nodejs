@@ -140,6 +140,7 @@ module.exports = function(app, passport) {
         Meeting.create({
             title : req.body.title,
             description: req.body.description,
+            category: req.body.category,
 	        startDate: req.body.startDate,
 	        startTime: req.body.startTime,
             latitude: req.body.latitude,
@@ -172,6 +173,7 @@ module.exports = function(app, passport) {
 
 	        meeting.title = req.body.title;
 	        meeting.description = req.body.description;
+	        meeting.category = req.body.category;
 	        meeting.startDate = req.body.startDate;
 	        meeting.startTime = req.body.startTime;
 	        meeting.updated_at = Date.now;

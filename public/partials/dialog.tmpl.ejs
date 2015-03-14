@@ -15,6 +15,13 @@
 
 	        </section>
 
+	        <section layout="column" layout-align="center center">
+	        	<md-select ng-model="formData.category" placeholder="Выберите категорию">
+				    <md-option value="Спорт">Спорт</md-option>
+				    <md-option value="Развлечения">Развлечения</md-option>
+				</md-select>
+	        </section>
+
 
 
 	            <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
@@ -26,7 +33,7 @@
 
 	                    <md-input-container>
 	                        <label>Дата встречи</label>
-	                        <input type="date" ng-model="formData.startDate">
+	                        <input type="date" ng-model="formData.startDate" min="Date.now()">
 	                    </md-input-container>
 	                
 	            </section>
@@ -35,7 +42,7 @@
 
 	                <md-select ng-model="formData.visibility" placeholder="Эту встречу увидят...">
 	                    <md-option value="all">Все</md-option>
-	                    <md-option value="friends" default>Друзья</md-option>
+	                    <md-option value="friends" ng-selected="selected" default>Друзья</md-option>
 	                </md-select>
 	        </section>
 	        <section layout="row" layout-align="center center" class="buttons">

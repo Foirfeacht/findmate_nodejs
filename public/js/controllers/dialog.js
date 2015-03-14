@@ -13,6 +13,17 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
   $scope.formData.latitude = $scope.latLng.lat();
   $scope.formData.longitude = $scope.latLng.lng();
 
+  $scope.formData.category = "Спорт";
+  $scope.formData.visibility = "all";
+
+  $scope.formData.startDate = Date.now();
+
+  Date.prototype.timeNow = function () {
+     return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+  }
+
+  $scope.formData.startTime = new Date().timeNow();
+
   //geocoder
 
   var geocoder = new google.maps.Geocoder();

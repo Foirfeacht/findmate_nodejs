@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var meetingsSchema = new Schema({
     title: String,
     description: String,
+    category: String,
     startDate: Date,
     startTime: String,
     _owner: { type: Schema.Types.ObjectId, ref: 'User' },

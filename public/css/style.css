@@ -185,7 +185,7 @@ md-option {
 .meeting {
 	width: 30%;
 	/*float: left;*/
-	margin: 30px 30px;
+	margin: 30px 15px;
 	border: 1px thin rgba(0, 0, 0, 0.8);
 	box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	padding: 20px;
