@@ -57,9 +57,9 @@
 
 
             
-                <div class="meeting col-md-3" ng-repeat="meeting in meetings" ng-if="meeting.active===true">
-                    <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title }}</a></md-checkbox></div>
-                    <div layout="column"> {{ meeting._id }} </div>
+                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings" ng-if="meeting.active===true">
+                    <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
+                    <div layout="column"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title }}</a>  </div>
                     <div layout="column">{{ meeting.description }}</div>
                     <div layout="column">{{ meeting.category }}</div>
                     <div layout="column">{{ meeting.ownerName }}</div>

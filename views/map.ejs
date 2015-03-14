@@ -55,73 +55,11 @@
 
 
             <div class="map-container">
-                <div id="map_canvas" ng-click="$scope.getCoords();showDialog($event, $scope.latitude, $scope.longitude)"></div>
+                <div id="map_canvas" ng-click="$scope.getCoords();showDialog($event)"></div>
             </div><!-- end map container -->
-                   
-
-        
-            <div class="form">
-                <section layout="column" layout-align="center center">
-  
-                        <md-input-container>
-                            <label>Название встречи</label>
-                            <input type="text" ng-model="formData.title">
-                        </md-input-container>
-
-                        <md-input-container>
-                            <label>Описание встречи</label>
-                            <input type="text" ng-model="formData.description">
-                        </md-input-container>
-
-                </section>
-
-
-  
-                    <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
-    
-                            <md-input-container>
-                                <label>Время встречи</label>
-                                <input type="time" ng-model="formData.startTime">
-                            </md-input-container>
-
-                            <md-input-container>
-                                <label>Дата встречи</label>
-                                <input type="date" ng-model="formData.startDate">
-                            </md-input-container>
-                        
-                    </section>
-
-                <section layout="column" layout-align="center center">
-
-                        <md-select ng-model="formData.visibility" placeholder="Эту встречу увидят...">
-                            <md-option value="all">Все</md-option>
-                            <md-option value="friends" default>Друзья</md-option>
-                        </md-select>
-
-                    <md-button md-no-ink class="md-primary" type="submit" ng-click="createMeeting()">Создать</md-button>
-                </section>
-            </div><!-- end form -->
 
         </div><!-- end content -->
         
-
-  
-
-    <!-- modal -->
-        <script type="text/ng-template" id="myModalContent.html">
-            <div class="modal-header">
-                <h3 class="modal-title">Create event</h3>
-            </div>
-            <div class="modal-body">
-                <input type="text" class="form-control input-lg text-center" placeholder="I wanna meet those crazy people" ng-model="formData.title">
-                <input type="text" class="form-control input-lg text-center" placeholder="For..." ng-model="formData.description">
-            </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="submit" id="createbtn" ng-click="createMeeting();ok()">OK</button>
-                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </script>
-        <!-- end modal -->
     <script src="../../bower_components/angular/angular.js"></script>
     <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
