@@ -8,7 +8,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
     
     // when landing on the page, get all events and show them
     //$scope.renderMeeting = function(id){
-	    $http.get('../api/meetings/' + user._id, {
+	    /*$http.get('../api/meetings/' + user._id, {
 	    		//params: { id: user.id }
 	    		//url: 
 	    	})

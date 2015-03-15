@@ -66,7 +66,7 @@
                     <div layout="column">{{ meeting.latitude }}</div>
                     <div layout="column">{{ meeting.longitude }}</div>
                     <div layout="column">{{ meeting.visibility }}</div>
-                    <div layout="column">{{ meeting.startDate }}  {{ meeting.startTime | date:'shortTime'}}</div>
+                    <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
                     <div layout="column">
                         <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)">Удалить</md-button>
                     </div>
@@ -98,5 +98,6 @@
     <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 	<script src="../../public/js/app.js"></script>
     <script src="../../public/js/controllers/meetings.js"></script>
+
 </body>
 </html>

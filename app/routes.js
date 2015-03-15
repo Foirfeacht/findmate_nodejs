@@ -10,6 +10,15 @@ module.exports = function(app, passport) {
 		res.render('index.ejs');
 	});
 
+	/*app.get('/partials/:name', function (req, res) {
+	  var name = req.params.name;
+	  res.render('partials/' + name);
+	});
+
+	app.get('*', function(req, res){
+		res.render('index.ejs')
+	});
+*/
 	// PROFILE SECTION =========================
 	app.get('/profile', isLoggedIn, function(req, res) {
 		res.render('profile.ejs', {
@@ -43,13 +52,14 @@ module.exports = function(app, passport) {
 		});
 	});
 
-	app.get('/meeting', isLoggedIn, function(req, res) {
-		res.render('meeting.ejs', {
+	/*app.get('/meeting/:id', isLoggedIn, function(req, res) {
+		var id = req.params.id
+		res.render('meeting.ejs' + id, {
 			user : req.user,
 			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
 			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
 		});
-	});
+	});*/
 
 	app.get('/main', isLoggedIn, function(req, res) {
 		res.render('main.ejs', {
@@ -212,7 +222,13 @@ module.exports = function(app, passport) {
 			    }
 			    //res.redirect('./meeting.ejs');
 			    //res.render('meeting.ejs');
-			    res.json(meeting);
+			    //res.redirect('meeting/:id');
+			    res.render('meeting.ejs', {
+			    	meeting: meeting,
+					user : req.user,
+					picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
+					friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+				});
 		}).populate('_owner', 'ownerName');
 	});
 

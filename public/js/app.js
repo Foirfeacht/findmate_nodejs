@@ -5,32 +5,32 @@ var findMate = angular.module('findMate', ['ui.bootstrap', 'ngRoute', 'ngMateria
 
             // route for the home page
             .when('/main', {
-                templateUrl : '../../views/main.ejs',
+                templateUrl : './views/map.ejs',
                 controller  : 'mainController'
             })
 
             .when('/map', {
-                templateUrl : 'partials/map.ejs',
+                templateUrl : './views/partials/map.ejs',
                 controller  : 'mapController'
             })
 
             .when('/profile', {
-                templateUrl : 'partials/profile.ejs',
+                templateUrl : './views/profile.ejs',
                 controller  : 'profileController'
             })
 
             .when('meetings', {
-                templateUrl : 'meetings.ejs',
+                templateUrl : './views/meetings.ejs',
                 controller  : 'meetingsController'
             })
 
             .when('api/meetings/:id', {
-                templateUrl : 'meeting.ejs',
+                templateUrl : './views/meeting.ejs',
                 controller  : 'meetingsController'
             })
 
             .otherwise({
 		        redirectTo: '/main'
 		    });
-}); */
-
+}); 
+*/
