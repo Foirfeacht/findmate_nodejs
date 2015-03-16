@@ -1,7 +1,7 @@
 // map controller
 // public/map.js
 
-findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$mdSidenav', function($scope, $http, $routeParams, $mdSidenav) {
+findMate.controller('adminController', ['$scope', '$http', '$routeParams', '$mdSidenav', function($scope, $http, $routeParams, $mdSidenav) {
 
 
     
