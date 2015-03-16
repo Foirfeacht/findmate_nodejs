@@ -76,7 +76,7 @@ module.exports = function(app, passport) {
 		// handle the callback after facebook has authenticated the user
 		app.get('/auth/facebook/callback',
 			passport.authenticate('facebook', { scope: ['email, public_profile, user_photos, user_friends'],
-				successRedirect : '/main',
+				successRedirect : '/map',
 				failureRedirect : '/'
 			}));
 
@@ -88,7 +88,7 @@ module.exports = function(app, passport) {
 		// handle the callback after facebook has authorized the user
 		app.get('/connect/facebook/callback',
 			passport.authorize('facebook', {
-				successRedirect : '/main',
+				successRedirect : '/map',
 				failureRedirect : '/'
 			}));
 
@@ -240,19 +240,20 @@ module.exports = function(app, passport) {
             });
         });
     });
-
+/*
+    app.get('*', isLoggedIn, function(req, res){
+		res.render('index.ejs')
+	});
+*/
 };
 
 /*app.get('/partials/:name', isLoggedIn, function (req, res) {
 	var name = req.params.name;
 	res.render('partials/' + name);
 });
-
-app.get('*', isLoggedIn, function(req, res){
-	res.render('index.ejs')
-});
-
 */
+
+
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated())

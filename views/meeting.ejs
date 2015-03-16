@@ -67,17 +67,17 @@
                     
                     <div><button type="submit" class="btn btn-primary btn-lg" ng-click="deleteMeeting(meeting._id)">Удалить</button></div>-->
 
-                    <div>{{ meeting.title }}</div>
+                    
                     <% if (meeting) { %>
                         <div class="meeting-title"><%= meeting.title %></div>
                         <div><%= meeting.description %></div>
-                        <div> <%= meeting._id %> </div>
+                        <div id="idEl"><%= meeting._id %></div>
                         <div><%= meeting.ownerName %></div>
                         <div><%= meeting.latitude %></div>
                         <div><%= meeting.longitude %></div>
                         <div><%= meeting.visibility %></div>
                         <div><%= meeting.startDate %>  <%= meeting.startTime %></div>
-                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(<%= meeting._id  %>)">Удалить</md-button>
+                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meetingId)"> Удалить</md-button>
                     <% } %>
                 </div>
             </div>
@@ -92,6 +92,7 @@
     <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="../../public/js/app.js"></script>
+    <script src="../../public/js/services/routingService.js"></script>
     <script src="../../public/js/controllers/singleMeeting.js"></script>
 </body>
 </html>

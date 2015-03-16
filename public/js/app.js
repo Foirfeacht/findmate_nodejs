@@ -32,5 +32,6 @@ var findMate = angular.module('findMate', ['ui.bootstrap', 'ngRoute', 'ngMateria
             .otherwise({
 		        redirectTo: '/main'
 		    });
-}); */
+});
 
+*/

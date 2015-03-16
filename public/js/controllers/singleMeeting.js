@@ -1,7 +1,7 @@
 // map controller
 // public/map.js
 
-findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$mdSidenav', function($scope, $http, $routeParams, $mdSidenav) {
+findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$mdSidenav', 'routingService', function($scope, $http, $routeParams, $mdSidenav, routingService) {
 
     //load input data
 	console.log($routeParams);
@@ -35,22 +35,20 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 */
 
     
+    $scope.idParam = routingService.idParam;
+    console.log($scope.idParam);
+
+    var idEl = document.getElementById('idEl');
+    $scope.meetingId = idEl.innerHTML;
+
+    console.log($scope.meetingId);
 
     // delete a todo after checking it
     $scope.deleteMeeting = function(id) {
-        $http.delete('../api/meetings/' + id)
+        $http.delete('../meetings/' + id)
             .success(function (data) {
                 $scope.meetings = data;
                 console.log(data);
-                $scope.deleteMarkers();
-                var l = data.length;
-                    for( var i = 0; i < l; i++) {
-                        var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-                        var marker = new google.maps.Marker({
-                            position: latLng,
-                            map: $scope.map
-                        });
-                }
             })
             .error(function(data) {
                 console.log('Error: ' + data);

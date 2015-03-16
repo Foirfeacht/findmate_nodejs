@@ -59,7 +59,8 @@
             
                 <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings" ng-if="meeting.active===true">
                     <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-                    <div layout="column"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title }}</a>  </div>
+                    <div><md-button class="md-raised md-warn delete-button" ng-click="updateValue(meeting._id)">Удалить</md-button></div>
+                    <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title }}</a>  </div>
                     <div layout="column">{{ meeting.description }}</div>
                     <div layout="column">{{ meeting.category }}</div>
                     <div layout="column">{{ meeting.ownerName }}</div>
@@ -97,6 +98,7 @@
     <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 	<script src="../../public/js/app.js"></script>
+    <script src="../../public/js/services/routingService.js"></script>
     <script src="../../public/js/controllers/meetings.js"></script>
 
 </body>
