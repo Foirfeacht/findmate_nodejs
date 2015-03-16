@@ -44,6 +44,17 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	// ADMIN ==============================
+
+	app.get('/admin', isLoggedIn, function(req, res) {
+		res.render('admin.ejs', {
+			user : req.user,
+			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
+			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+		});
+	});
+
+
 	/*app.get('/meeting/:id', isLoggedIn, function(req, res) {
 		var id = req.params.id
 		res.render('meeting.ejs' + id, {
@@ -224,6 +235,27 @@ module.exports = function(app, passport) {
 		}).populate('_owner', 'ownerName');
 	});
 
+
+	//get single meeting
+ /*   app.get('meeting/:id', isLoggedIn, function(req, res) {
+    	 db.collection('meetings', function(err, collection) {
+			collection.findById(req.params.id, function(err, meeting) {
+				if(!meeting){
+			  		return res.send({error: 'not found'});
+			  	}
+			    if (err) {
+			    	return res.send(err);
+			    }
+				res.render('meeting.ejs', {
+			    	meeting: meeting,
+					user : req.user,
+					picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
+					friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+				});
+			}).populate('_owner', 'ownerName');
+		}); 
+	});
+*/
     // delete a meeting
     app.delete('/api/meetings/:meeting_id', isLoggedIn, function(req, res) {
         Meeting.remove({

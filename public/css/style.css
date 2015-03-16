@@ -182,6 +182,24 @@ md-option {
 	width: 100%;
 	overflow: hidden;
 }
+
+.search {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.search md-input-container .md-placeholder {
+	padding-left: 
+}
+
+
+
+.search md-icon {
+	position: relative;
+	top: 3px;
+	font-size: 1.3em;
+}
+
 .meeting {
 	width: 30%;
 	/*float: left;*/
@@ -227,3 +245,6 @@ md-option {
 	position: absolute;
 	top: 10px;
 }
+
+
+

@@ -53,19 +53,24 @@
         <div class="content">
                    
             <h1 class="active-meetings">Созданные события от <%= user.facebook.name %></h1>
-            <div class="meetings-display row" ng-if="meeting.ownerName === user.facebook.name">
+            <div class="meetings-display row">
+
+                <div class="search col-md-12">
+                    <md-input-container md-no-float>
+                        <label><md-icon class="mdi mdi-magnify search-icon"></md-icon>Найти встречу</label>
+                        
+                        <input ng-model="query" type="text">
+                    </md-input-container>
+                </div>
 
 
             
-                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings" ng-if="meeting.active===true">
+                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query">
                     <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-                    <div><md-button class="md-raised md-warn delete-button" ng-click="updateValue(meeting._id)">Удалить</md-button></div>
-                    <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title }}</a>  </div>
+                    <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title}}</a>  </div>
                     <div layout="column">{{ meeting.description }}</div>
                     <div layout="column">{{ meeting.category }}</div>
                     <div layout="column">{{ meeting.ownerName }}</div>
-                    <div layout="column">{{ meeting.latitude }}</div>
-                    <div layout="column">{{ meeting.longitude }}</div>
                     <div layout="column">{{ meeting.visibility }}</div>
                     <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
                     <div layout="column">

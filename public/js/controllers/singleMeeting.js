@@ -1,10 +1,7 @@
 // map controller
 // public/map.js
 
-findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$mdSidenav', 'routingService', function($scope, $http, $routeParams, $mdSidenav, routingService) {
-
-    //load input data
-	console.log($routeParams);
+findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$mdSidenav', function($scope, $http, $routeParams, $mdSidenav) {
     
     // when landing on the page, get all events and show them
     //$scope.renderMeeting = function(id){
@@ -34,14 +31,13 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 	  }); 
 */
 
-    
-    $scope.idParam = routingService.idParam;
-    console.log($scope.idParam);
+
 
     var idEl = document.getElementById('idEl');
     $scope.meetingId = idEl.innerHTML;
 
     console.log($scope.meetingId);
+
 
     // delete a todo after checking it
     $scope.deleteMeeting = function(id) {
@@ -49,6 +45,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
             .success(function (data) {
                 $scope.meetings = data;
                 console.log(data);
+                $location.url('http://localhost:8080/meetings');
             })
             .error(function(data) {
                 console.log('Error: ' + data);
