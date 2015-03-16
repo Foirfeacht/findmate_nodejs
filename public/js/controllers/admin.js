@@ -16,6 +16,15 @@ findMate.controller('adminController', ['$scope', '$http', '$routeParams', '$mdS
             console.log('Error: ' + data);
         });
 
+    $http.get('../api/users')
+        .success(function(data) {
+            $scope.users = data;
+            console.log(data);
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });
+
 
     $scope.singleMeeting = function(id) {
         $http.get('../api/meetings' + id)
@@ -60,6 +69,24 @@ findMate.controller('adminController', ['$scope', '$http', '$routeParams', '$mdS
             })
     };
 
+    //table
+    /*$scope.tableParams = new ngTableParams({
+        page: 1,            // show first page
+        count: 10,          // count per page
+        sorting: {
+            name: 'asc'     // initial sorting
+        }
+    }, {
+        total: meetings.length, // length of data
+        getData: function($defer, params) {
+            // use build-in angular filter
+            var orderedData = params.sorting() ?
+                                $filter('orderBy')(meetings, params.orderBy()) :
+                                meetings;
+            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+    });
+*/
     // side nav
     $scope.toggleNav = function() {
        $mdSidenav('nav').toggle();

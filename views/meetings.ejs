@@ -63,6 +63,15 @@
                     </md-input-container>
                 </div>
 
+                <div class="category-filters row">
+                    <div class="col-md-6">
+                        <md-select ng-repeat="category in categories" placeholder="Сортировать по категории">
+                            <md-option value="{{category.name}}">{{category.name}}</md-option>
+                        </md-select>
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
+
 
             
                 <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query">

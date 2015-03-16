@@ -1,5 +1,6 @@
 // and event model
 var Meeting    = require('./models/meeting');
+var User 	   = require('./models/user');
 
 module.exports = function(app, passport) {
 
@@ -129,7 +130,10 @@ module.exports = function(app, passport) {
 		});
 	});
 
-	//routes for meetings 
+// =============================================================================
+// ROUTES FOR MEETINGS ==================================================
+// =============================================================================
+
 
 // get all meetings
     app.get('/api/meetings', isLoggedIn, function(req, res) {
@@ -223,9 +227,6 @@ module.exports = function(app, passport) {
 			    if (err) {
 			    	return res.send(err);
 			    }
-			    //res.redirect('./meeting.ejs');
-			    //res.render('meeting.ejs');
-			    //res.redirect('meeting/:id');
 			    res.render('meeting.ejs', {
 			    	meeting: meeting,
 					user : req.user,
@@ -271,6 +272,24 @@ module.exports = function(app, passport) {
                 res.json(meetings);
             });
         });
+    });
+
+// =============================================================================
+// ROUTES FOR USERS ==================================================
+// =============================================================================
+
+    // get all users
+    app.get('/api/users', isLoggedIn, function(req, res) {
+    	var user = req.user;
+        // use mongoose to get all meetings in the database
+        User.find(function(err, users) {
+
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err)
+                res.send(err)
+
+            res.json(users); // return all meetings in JSON format
+        }).populate('meetings');
     });
 /*
     app.get('*', isLoggedIn, function(req, res){

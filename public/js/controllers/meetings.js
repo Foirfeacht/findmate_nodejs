@@ -60,6 +60,16 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
             })
     };
 
+    // category filter
+
+    $scope.categories = [{name: 'Спорт'}, {name: 'Развлечения'}];
+
+    $scope.currentCategory = null
+
+    $scope.setCurrentCategory = function(category){
+        $scope.currentCategory = category;
+    }
+
     // side nav
     $scope.toggleNav = function() {
        $mdSidenav('nav').toggle();

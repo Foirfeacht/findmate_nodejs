@@ -1,0 +1,24 @@
+.user-display {
+	width: 100%;
+	overflow: hidden;
+}
+
+.user-table {
+	width: 95%;
+	margin: 20px auto;
+	border: 1px thin rgba(0, 0, 0, 0.8);
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	text-align: center;
+	padding: 15px 20px;
+}
+
+.user-table tr {
+	padding: 10px 10px;
+}
+
+.user-table thead td {
+   font-weight: 700;
+   line-height: 2em;
+   border: 1px solid #fff;
+}
+
