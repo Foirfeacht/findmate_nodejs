@@ -10,15 +10,7 @@ module.exports = function(app, passport) {
 		res.render('index.ejs');
 	});
 
-	/*app.get('/partials/:name', function (req, res) {
-	  var name = req.params.name;
-	  res.render('partials/' + name);
-	});
-
-	app.get('*', function(req, res){
-		res.render('index.ejs')
-	});
-*/
+	
 	// PROFILE SECTION =========================
 	app.get('/profile', isLoggedIn, function(req, res) {
 		res.render('profile.ejs', {
@@ -84,7 +76,7 @@ module.exports = function(app, passport) {
 		// handle the callback after facebook has authenticated the user
 		app.get('/auth/facebook/callback',
 			passport.authenticate('facebook', { scope: ['email, public_profile, user_photos, user_friends'],
-				successRedirect : '/map',
+				successRedirect : '/main',
 				failureRedirect : '/'
 			}));
 
@@ -96,7 +88,7 @@ module.exports = function(app, passport) {
 		// handle the callback after facebook has authorized the user
 		app.get('/connect/facebook/callback',
 			passport.authorize('facebook', {
-				successRedirect : '/map',
+				successRedirect : '/main',
 				failureRedirect : '/'
 			}));
 
@@ -251,6 +243,16 @@ module.exports = function(app, passport) {
 
 };
 
+/*app.get('/partials/:name', isLoggedIn, function (req, res) {
+	var name = req.params.name;
+	res.render('partials/' + name);
+});
+
+app.get('*', isLoggedIn, function(req, res){
+	res.render('index.ejs')
+});
+
+*/
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated())

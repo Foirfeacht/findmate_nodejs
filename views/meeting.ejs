@@ -66,6 +66,8 @@
 
                     
                     <div><button type="submit" class="btn btn-primary btn-lg" ng-click="deleteMeeting(meeting._id)">Удалить</button></div>-->
+
+                    <div>{{ meeting.title }}</div>
                     <% if (meeting) { %>
                         <div class="meeting-title"><%= meeting.title %></div>
                         <div><%= meeting.description %></div>

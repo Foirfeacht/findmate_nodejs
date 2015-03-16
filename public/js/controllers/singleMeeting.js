@@ -34,7 +34,6 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 	  }); 
 */
 
-
     
 
     // delete a todo after checking it
