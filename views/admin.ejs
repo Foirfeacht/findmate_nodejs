@@ -1,7 +1,7 @@
 <!doctype html>
 <html ng-app="findMate"> 
 	<head>
-		<title>События</title>
+		<title>Пользователи</title>
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../bower_components/angular-material/angular-material.min.css">
@@ -55,18 +55,18 @@
         <div class="content">
                    
             <h1 class="active-meetings">Пользователи</h1>
-            <div class="user-display row">
-				    <table class="user-table">
+            <div class="display row">
+				    <table class="admin-table">
                         <thead>
                             <tr>
                                 <td width="30%">User Id</td>
                                 <td width="20%">User Name</td>
                                 <td width="20%">User Email</td>
-                                <td width="30%">User Meetings</td>
+                                <td width="30%">&nbsp;</td>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="user in users">
+                            <tr ng-repeat="user in users" ng-click="onUserSelect(user)" ng-class="{'active' : selectedUser}">
                                 <td>
                                     {{user._id}}
                                 </td>
@@ -77,9 +77,41 @@
                                     {{user.facebook.email}}
                                 </td>
                                 <td>
-                                    <Ul ng-repeat="meeting in user.meetings">
-                                        <li>{{ meeting.title }}</li>
-                                    </Ul>
+                                    <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteUser(user._id)">Удалить</md-button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+            </div>
+
+            <div class="display row" ng-show="selectedUser">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <td width="15%">Title</td>
+                                <td width="20%">Description</td>
+                                <td width="15%">Owner</td>
+                                <td width="30%">Date and time</td>
+                                <td width="20%">&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="meeting in meetings" ng-if="meeting._owner._id === selectedUser._id">
+                                <td>
+                                    {{meeting.title}}
+                                </td>
+                                <td>
+                                    {{meeting.description}}
+                                </td>
+                                <td>
+                                    {{meeting.ownerName}}
+                                </td>
+                                <td>
+                                     {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}
+                                </td>
+                                <td>
+                                    <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)">Удалить</md-button>
                                 </td>
                             </tr>
                         </tbody>

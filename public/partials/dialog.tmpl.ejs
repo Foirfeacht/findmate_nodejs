@@ -17,7 +17,7 @@
 
 	        <section layout="column" layout-align="center center">
 	        	<md-select ng-model="formData.category" placeholder="Выберите категорию">
-				    <md-option value="Спорт">Спорт</md-option>
+				    <md-option value="Спорт" ng-selected="selected" default>Спорт</md-option>
 				    <md-option value="Развлечения">Развлечения</md-option>
 				</md-select>
 	        </section>
@@ -41,8 +41,8 @@
 	        <section layout="column" layout-align="center center">
 
 	                <md-select ng-model="formData.visibility" placeholder="Эту встречу увидят...">
-	                    <md-option value="all">Все</md-option>
-	                    <md-option value="friends" ng-selected="selected" default>Друзья</md-option>
+	                    <md-option value="all" ng-selected="selected" default>Все</md-option>
+	                    <md-option value="friends">Друзья</md-option>
 	                </md-select>
 	        </section>
 	        <section layout="row" layout-align="center center" class="buttons">

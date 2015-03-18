@@ -35,39 +35,49 @@ findMate.controller('adminController', ['$scope', '$http', '$routeParams', '$mdS
             .error(function (data) {
                 console.log('Error: ' + data);
             });
-    }    
+    }
 
-    // delete a todo after checking it
     $scope.deleteMeeting = function(id) {
         console.log(id);
         $http.delete('../api/meetings/' + id)
             .success(function (data) {
                 $scope.meetings = data;
-                console.log(data);
-                $location.url('http://localhost:8080/meetings');
             })
             .error(function(data) {
                 console.log('Error: ' + data);
             });
     };
 
-    //update meeting
-    $scope.updateMeeting = function (id) {
-        // not implemented yet
-    };
-;
-
-    $scope.completeMeeting = function(id){
-        $http.put('/api/meetings/' + id)
+    $scope.deleteUser = function(id) {
+        console.log(id);
+        $http.delete('../api/users/' + id)
             .success(function (data) {
-                $scope.meetings = data;
-                //$scope.active = false;
+                $scope.users = data;
                 console.log(data);
             })
-            .error(function (data) {
+            .error(function(data) {
                 console.log('Error: ' + data);
-            })
+            });
+    };    
+
+    $scope.selectedUser = null;
+
+    $scope.onUserSelect = function(selectedUser){
+        if(selectedUser){
+            $scope.selectedUser = selectedUser;
+            console.log($scope.selectedUser);
+        } else {
+            $scope.selectedUser = null;
+            console.log($scope.selectedUser);
+        }
+    }
+// not implemented yet
+    $scope.getUserMeetings = function(selectedUser){
+
+      if(condition){ return dataSource1; }
+      return dataSource2;
     };
+
 
     //table
     /*$scope.tableParams = new ngTableParams({
