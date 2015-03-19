@@ -78,6 +78,9 @@ findMate.controller('adminController', ['$scope', '$http', '$routeParams', '$mdS
       return dataSource2;
     };
 
+    // sorting
+    //$scope.predicate
+
 
     //table
     /*$scope.tableParams = new ngTableParams({

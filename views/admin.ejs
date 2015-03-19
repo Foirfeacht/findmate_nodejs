@@ -55,6 +55,22 @@
         <div class="content">
                    
             <h1 class="active-meetings">Пользователи</h1>
+            <div layout="row">
+                <div class="search">
+                    <md-input-container md-no-float>
+                        <label><md-icon class="mdi mdi-magnify search-icon"></md-icon>По имени</label>
+                        
+                        <input ng-model="query.facebook.name" type="text">
+                    </md-input-container>
+                </div>
+                <div class="search">
+                    <md-input-container md-no-float>
+                        <label><md-icon class="mdi mdi-magnify search-icon"></md-icon>По email</label>
+                        
+                        <input ng-model="query.facebook.email" type="text">
+                    </md-input-container>
+                </div>
+            </div>
             <div class="display row">
 				    <table class="admin-table">
                         <thead>
@@ -66,7 +82,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="user in users" ng-click="onUserSelect(user)" ng-class="{'active' : selectedUser}">
+                            <tr ng-repeat="user in users | filter: query" ng-click="onUserSelect(user)" ng-class="{'active' : selectedUser}">
                                 <td>
                                     {{user._id}}
                                 </td>
@@ -85,6 +101,36 @@
                     </table>
             </div>
 
+            <!--<div class="display row">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <td width="30%">User Id</td>
+                                <td width="20%">User Name</td>
+                                <td width="20%">User Email</td>
+                                <td width="30%">&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="user in users">
+                                <td>
+                                    {{user._id}}
+                                </td>
+                                <td>
+                                    {{user.facebook.name}}
+                                </td>
+                                <td>
+                                    {{user.facebook.email}}
+                                </td>
+                                <td>
+                                    <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteUser(user._id)">Удалить</md-button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+            </div>-->
+
             <div class="display row" ng-show="selectedUser">
                     <table class="admin-table">
                         <thead>
@@ -97,7 +143,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="meeting in meetings" ng-if="meeting._owner._id === selectedUser._id">
+                            <tr ng-repeat="meeting in meetings | orderBy: startDate" ng-if="meeting._owner._id === selectedUser._id">
                                 <td>
                                     {{meeting.title}}
                                 </td>

@@ -16,6 +16,15 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
             console.log('Error: ' + data);
         });
 
+    $http.get('../api/users')
+        .success(function(data) {
+            $scope.users = data;
+            console.log(data);
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });
+
 
     $scope.singleMeeting = function(id) {
         $http.get('../api/meetings' + id)
@@ -26,7 +35,7 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
             .error(function (data) {
                 console.log('Error: ' + data);
             });
-    }    
+    };
 
     // delete a todo after checking it
     $scope.deleteMeeting = function(id) {
@@ -64,11 +73,9 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
 
     $scope.categories = [{name: 'Спорт'}, {name: 'Развлечения'}];
 
-    $scope.currentCategory = null
+    $scope.visibilities = [{name: 'Общие'}, {name: 'Друзья'}];
 
-    $scope.setCurrentCategory = function(category){
-        $scope.currentCategory = category;
-    }
+    
 
     // side nav
     $scope.toggleNav = function() {

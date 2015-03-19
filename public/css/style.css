@@ -11,7 +11,7 @@ a:hover {
 .content {
 	width: 100%;
 	position: relative;
-	padding: 20px 100px;
+	padding: 100px 100px;
 }
 
 
@@ -160,7 +160,7 @@ md-input-container {
 }
 
 md-select {
-	width: 60%;
+	width: 90%;
 	margin-bottom: 30px;
 }
 
@@ -188,17 +188,25 @@ md-option {
 	margin: 0 auto;
 }
 
-.search md-input-container .md-placeholder {
-	padding-left: 
-}
-
-
 
 .search md-icon {
 	position: relative;
 	top: 3px;
 	font-size: 1.3em;
 }
+
+.search input {
+	width: 90%;
+}
+
+.select-filters {
+	width: 100%;
+}
+
+.select-filter {
+	width: 50%;
+}
+
 
 .meeting {
 	width: 30%;
