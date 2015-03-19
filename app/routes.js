@@ -289,8 +289,22 @@ module.exports = function(app, passport) {
                 res.send(err)
 
             res.json(users); // return all meetings in JSON format
-        }).populate('meetings');
+        }).populate('meetings._id', 'meetings.title');
     });
+
+    app.get('/currentUser', isLoggedIn, function(req, res) {
+    	var user = req.user;
+        // use mongoose to get all meetings in the database
+        User.findById(req.user.id, function(err, user) {
+
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err)
+                res.send(err)
+
+            res.json(user); // return all meetings in JSON format
+        })
+    });
+
 /*
     app.get('*', isLoggedIn, function(req, res){
 		res.render('index.ejs')
