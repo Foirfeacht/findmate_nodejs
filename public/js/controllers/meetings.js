@@ -11,7 +11,6 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
         .success(function(data) {
             $scope.meetings = data;
             console.log(data);
-            console.log($scope.logged_in_user);
         })
         .error(function (data) {
             console.log('Error: ' + data);

@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="../../public/css/style.css">        
         
 	</head>
-	<body ng-cloak ng-controller="meetingsController" ng-init="logged_in_user = <%- JSON.stringify(user) %>">
+	<body ng-cloak ng-controller="meetingsController" ng-init="logged_in_user=<%= JSON.stringify(user)%>">
        <!--=============================== navigation ===============================-->
         <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
             <nav>
