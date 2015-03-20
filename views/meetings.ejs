@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="../../public/css/style.css">
         
 	</head>
-	<body ng-cloak ng-controller="meetingsController" ng-init="logged_in_user =  user">
+	<body ng-cloak ng-controller="meetingsController" ng-init="logged_in_user = <%= JSON.stringify(user) %>">
        <!--=============================== navigation ===============================-->
         <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
             <nav>
@@ -52,26 +52,9 @@
         <md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i class="mdi mdi-menu"></i></md-button>
         <div class="content">
 
-        <!-- tabs -->
+        <!-- filters -->
 
-        <md-tabs class="md-accent" md-selected="data.selectedIndex">
-            <md-tab id="tab1" aria-controls="tab1-content">
-                Item One
-            </md-tab>
-            <md-tab id="tab2" aria-controls="tab2-content">
-                Item two
-            </md-tab>
-            <md-tab id="tab3" aria-controls="tab3-content">
-                Item Three
-            </md-tab>
-        </md-tabs>
-
-        <!-- end tabs -->
-                   
-            <h1 class="active-meetings">Созданные события от {{logged_in_user.facebook.name}}</h1>
-            <div class="meetings-display row">
-
-            <div layout="row">
+        <div layout="row">
 
                 <div class="search">
                     <md-input-container md-no-float>
@@ -102,39 +85,99 @@
             </div>
 
             <div class="select-filters" layout="row">
-                    <div class="select-filter">
-                        <md-select  placeholder="Сортировать по категории" ng-model="filterMtn.category">
-                            <md-option value=" ">Все</md-option>
-                            <md-option value="{{category.name}}" ng-repeat="category in categories">{{category.name}}</md-option>
-                        </md-select>
-                    </div>
-                    <div class="select-filter">
-                        <md-select  placeholder="Сортировать по видимости" ng-model="filterMtn.visibility">
-                            <md-option value=" ">Все</md-option>
-                            <md-option value="{{visibility.name}}" ng-repeat="visibility in visibilities">{{visibility.name}}</md-option>
-                        </md-select>
-                    </div>
+                <div class="select-filter">
+                    <md-select  placeholder="Сортировать по категории" ng-model="filterMtn.category">
+                        <md-option value=" ">Все</md-option>
+                        <md-option value="{{category.name}}" ng-repeat="category in categories">{{category.name}}</md-option>
+                    </md-select>
                 </div>
-            
-                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" >
-                    <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-                    <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title}}</a>  </div>
-                    <div layout="column">{{ meeting.description }}</div>
-                    <div layout="column">{{ meeting.category }}</div>
-                    <div layout="column">{{ meeting.ownerName }}</div>
-                    <div layout="column">{{ meeting.visibility }}</div>
-                    <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
-                    <div layout="column">
-                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)">Удалить</md-button>
-                    </div>
+                <div class="select-filter">
+                    <md-select  placeholder="Сортировать по видимости" ng-model="filterMtn.visibility">
+                        <md-option value=" ">Все</md-option>
+                        <md-option value="{{visibility.name}}" ng-repeat="visibility in visibilities">{{visibility.name}}</md-option>
+                    </md-select>
                 </div>
-
-                <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
-				  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				  <span class="sr-only"></span>
-				  Встреч пока нет
-				</div>
             </div>
+
+
+        <!-- tabs -->
+
+        <md-tabs class="md-accent" md-selected="data.selectedIndex">
+            <md-tab id="tab1" aria-controls="tab1-content">
+                Item One
+            </md-tab>
+            <md-tab id="tab2" aria-controls="tab2-content">
+                Item two
+            </md-tab>
+            <md-tab id="tab3" aria-controls="tab3-content">
+                Item Three
+            </md-tab>
+        </md-tabs>
+
+        <!-- end tabs -->
+
+        <ng-switch on="data.selectedIndex" class="tabpanel-container">
+
+            <!-- tab one -->
+
+            <div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
+                       
+                <h1 class="active-meetings">Созданные события от {{logged_in_user.facebook.name}}</h1>
+                <div class="meetings-display row">
+
+                
+                
+                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting._owner._id === logged_in_user._id">
+                        <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
+                        <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title}}</a>  </div>
+                        <div layout="column">{{ meeting.description }}</div>
+                        <div layout="column">{{ meeting.category }}</div>
+                        <div layout="column">{{ meeting.ownerName }}</div>
+                        <div layout="column">{{ meeting.visibility }}</div>
+                        <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+                        <div layout="column">
+                            <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)">Удалить</md-button>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
+    				  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    				  <span class="sr-only"></span>
+    				  Встреч пока нет
+    				</div>
+                </div>
+            </div><!-- end tab one -->
+
+            <!-- tab two -->
+
+            <div role="tabpanel" id="tab2-content"  aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
+                <h1 class="active-meetings">Все события</h1>
+                <div class="meetings-display row">
+
+                
+                
+                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate">
+                        <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
+                        <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title}}</a>  </div>
+                        <div layout="column">{{ meeting.description }}</div>
+                        <div layout="column">{{ meeting.category }}</div>
+                        <div layout="column">{{ meeting.ownerName }}</div>
+                        <div layout="column">{{ meeting.visibility }}</div>
+                        <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+                        <div layout="column">
+                            <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)">Удалить</md-button>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                      <span class="sr-only"></span>
+                      Встреч пока нет
+                    </div>
+                </div>
+            </div><!-- end tab two -->
+
+        </ng-switch>
 
             <div layout="column">
                 <md-button class="md-raised md-primary create-button"><a href="/map">Создать</a></md-button>

@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var userSchema = mongoose.Schema({
 
     meetings: [
-    	{ type: Schema.Types.ObjectId, ref: 'Meeting' },
+    	{_meeting : { type: Schema.Types.ObjectId, ref: 'Meeting' }}
     ],
 
     facebook         : {

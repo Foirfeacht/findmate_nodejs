@@ -75,7 +75,18 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
 
     $scope.visibilities = [{name: 'Общие'}, {name: 'Друзья'}];
 
-    
+    //tabs
+    $scope.data = {
+      selectedIndex : 0
+    };
+    $scope.next = function() {
+      $scope.data.selectedIndex = Math.min($scope.data.selectedIndex + 1, 2) ;
+    };
+    $scope.previous = function() {
+      $scope.data.selectedIndex = Math.max($scope.data.selectedIndex - 1, 0);
+    };
+
+
 
     // side nav
     $scope.toggleNav = function() {

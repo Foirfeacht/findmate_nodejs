@@ -165,6 +165,12 @@ module.exports = function(app, passport) {
             location: req.body.location,
             visibility : req.body.visibility || 'all',
             _owner: req.user._id,
+            participants: {
+            	$push: {
+            		_participantId: user._id,
+            		participantName: user.facebook.name
+            	}
+            },
             ownerName: req.user.facebook.name
         }, function(err, meeting) {
             if (err)

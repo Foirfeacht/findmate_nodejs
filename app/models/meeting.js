@@ -13,6 +13,11 @@ var meetingsSchema = new Schema({
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now },
     active: { type: Boolean, default: true },
+    participants: [
+            { _participantId : { type: Schema.Types.ObjectId, ref: 'User' },
+              participantName : { type: String, ref: 'User' }
+             }
+        ],
     longitude: String,
     latitude: String,
     location: String,
