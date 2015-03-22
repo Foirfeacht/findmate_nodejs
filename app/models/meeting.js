@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'); 
+//var User     = require('./user.js');
 
 var Schema = mongoose.Schema; 
 
@@ -10,8 +11,14 @@ var meetingsSchema = new Schema({
     startTime: String,
     _owner: { type: Schema.Types.ObjectId, ref: 'User' },
     ownerName: { type: String, ref: 'User' },
-    created_at: { type: Date, default: Date.now },
-    updated_at: { type: Date, default: Date.now },
+    /*participants: [{
+        _id: { type: Schema.Types.ObjectId, ref: 'User' },
+        name: {type: String, ref: 'User'}
+    }],*/
+    invitedUsers: {type: Array, default: []},
+    participants: {type: Array, default: []},
+    created_at: { type: Date, default: Date.now() },
+    updated_at: { type: Date, default: Date.now() },
     active: { type: Boolean, default: true },
     longitude: String,
     latitude: String,

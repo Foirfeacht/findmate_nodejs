@@ -1,7 +1,8 @@
 // map controller
 // public/map.js
 
-findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$mdSidenav', function($scope, $http, $routeParams, $mdSidenav) {
+findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$mdSidenav', '$filter',
+					 function($scope, $http, $routeParams, $mdSidenav, $filter) {
 
 
     
@@ -39,12 +40,10 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
 
     // delete a todo after checking it
     $scope.deleteMeeting = function(id) {
-        console.log(id);
         $http.delete('../api/meetings/' + id)
             .success(function (data) {
                 $scope.meetings = data;
                 console.log(data);
-                $location.url('http://localhost:8080/meetings');
             })
             .error(function(data) {
                 console.log('Error: ' + data);
@@ -69,12 +68,30 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
             })
     };
 
+    $scope.joinMeeting = function(id){
+
+        $http.put('/join/meetings/' + id)
+            .success(function (data) {
+                $scope.meetings = data;
+                //$scope.active = false;
+                console.log(data);
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            })
+    };
+
     // category filter
 
     $scope.categories = [{name: 'Спорт'}, {name: 'Развлечения'}];
 
     $scope.visibilities = [{name: 'Общие'}, {name: 'Друзья'}];
 
+    // logged in user filter
+   /*	filteredMeetings = $filter(this.meetings, {name: $scope.logged_in_user}, function(actual, expected) {
+			return actual.participants.indexOf(expected) > -1;
+	});
+*/
     
 
     // side nav

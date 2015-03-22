@@ -145,7 +145,7 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
 
 
                 var infoContent = '<div id="content">' + data[i].location + '<br>' + data[i].title + '<br>' + 
-                                    data[i].description + '</div>';
+                                    data[i].description + '<md-button class="md-raised join-button" ng-click="joinMeeting(data[i]._id)">Учавствовать</md-button>' +'</div>';
 
                 var infowindow = new google.maps.InfoWindow({
                   content: infoContent
@@ -162,6 +162,19 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
         .error(function (data) {
             console.log('Error: ' + data);
         });
+
+    $scope.joinMeeting = function(id){
+
+        $http.put('/join/meetings/' + id)
+            .success(function (data) {
+                $scope.meetings = data;
+                //$scope.active = false;
+                console.log(data);
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            })
+    };
 
 
 
@@ -182,7 +195,7 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
                         $scope.markers.push(marker);
 
                         var infoContent = '<div id="content">' + $scope.formData.location + '<br>' + $scope.formData.title + '<br>' + 
-                                            $scope.formData.description + '</div>';
+                                            $scope.formData.description + '<br>' + '</div>';
 
                         var infowindow = new google.maps.InfoWindow({
                           content: infoContent
@@ -230,20 +243,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
     $scope.updateMeeting = function (id) {
         // not implemented yet
     };
-;
-
-    $scope.completeMeeting = function(id){
-        console.log('clicked');
-        $http.put('/api/meetings/' + id)
-            .success(function (data) {
-                $scope.meetings = data;
-                data.active = false;
-                console.log('function active');
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            })
-    } 
 
     // get function to refresh on modal closing
 

@@ -24,6 +24,16 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 
   $scope.formData.startTime = new Date().timeNow();
 
+  invitedUsers = [];
+
+  $scope.formData.invitedUsers = invitedUsers;
+
+
+
+  $scope.inviteUser = function(user){
+  	invitedUsers.push(user);
+  }
+
   //geocoder
 
   var geocoder = new google.maps.Geocoder();
@@ -52,6 +62,15 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
             $scope.meetings = data;
             console.log(data);
 
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });
+
+   $http.get('../api/users')
+        .success(function(data) {
+            $scope.users = data;
+            console.log(data);
         })
         .error(function (data) {
             console.log('Error: ' + data);
