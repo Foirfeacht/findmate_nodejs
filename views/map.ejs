@@ -9,17 +9,15 @@
 
         <link rel="stylesheet" href="../../public/css/style.css">        
 	</head>
-	<body ng-cloak ng-controller="mapController">
+	<body ng-cloak ng-controller="mapController" ng-init="logged_in_user=<%= JSON.stringify(user)%>">
         <!--=============================== navigation ===============================-->
         <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
             <nav>
                 <div class="profile-block">
-                    <% if (user.facebook.token) { %>
                     <div class="image-wrapper">
                         <img src="<%= picture %>" alt="<%= user.facebook.name %>">
                     </div>
-                    <a href="/profile" class="profile-name"><%= user.facebook.name %></a>
-                    <% } %>
+                    <a href="/profile" class="profile-name"> {{logged_in_user.facebook.name}} %></a>
                 </div>
                 <ul>
                     <li>
@@ -58,6 +56,20 @@
                 <div id="map_canvas" ng-click="$scope.getCoords();showDialog($event)"></div>
             </div><!-- end map container -->
 
+            <map zoom="11" 
+              center="[40.74, -74.18]" 
+              disable-default-u-i="true"
+              disable-double-click-zoom="true"
+              draggable="false"
+              draggable-cursor="help"
+              dragging-cursor="move"
+              keyboard-shortcuts="false"
+              max-zoom="12"
+              min-zoom="8"
+              tilt="45"
+              map-type-id="TERRAIN">
+            </map>
+
         </div><!-- end content -->
         
     <script src="../../bower_components/angular/angular.js"></script>
@@ -66,8 +78,9 @@
     <script src="../../bower_components/angular-aria/angular-aria.min.js"></script>
     <script src="../../bower_components/angular-material/angular-material.min.js"></script>
     <script src="../../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../../bower_components/angular-route/angular-route.min.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="../../public/js/ngmap/build/ng-map.min.js"></script>
     <script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">
     </script>
@@ -75,8 +88,5 @@
     <script src="../../public/js/services/mapService.js"></script>
     <script src="../../public/js/controllers/dialog.js"></script>
     <script src="../../public/js/controllers/map.js"></script>
-
-
-    <script src="../../public/js/controllers/modalInstance.js"></script>
 </body>
 </html>

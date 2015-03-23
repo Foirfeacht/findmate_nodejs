@@ -57,6 +57,15 @@ findMate.controller('DialogController', ['$scope', '$http', 'routingService', '$
             console.log('Error: ' + data);
         });
 
+   $http.get('../api/users')
+        .success(function(data) {
+            $scope.users = data;
+            console.log(data);
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });
+
   $scope.createMeeting = function() {
         //if($scope.latitude && $scope.longitude){
             $http.post('../api/meetings', $scope.formData)

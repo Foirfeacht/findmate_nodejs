@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="../../public/css/style.css">
         
     </head>
-    <body ng-controller="singleMeetingController">
+    <body ng-controller="singleMeetingController" ng-init="currentMeeting = <%= JSON.stringify(meeting)%>">
 <!--=============================== navigation ===============================-->
         <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
             <nav>
@@ -54,31 +54,16 @@
             <div class="meetings-display" layout="column" layout-sm="column">
 
                 <div class="meeting">
-                    <!--<div><input type="checkbox" ng-click="completeMeeting(meeting._id)"> {{ meeting.active }}</div>
-                    <div class="meeting-title">{{ meeting.title }}</div>
-                    <div>{{ meeting.description }}</div>
-                    <div> {{ meeting._id }} </div>
-                    <div>{{ meeting.ownerName }}</div>
-                    <div>{{ meeting.latitude }}</div>
-                    <div>{{ meeting.longitude }}</div>
-                    <div>{{ meeting.visibility }}</div>
-                    <div>{{ meeting.startDate }}  {{ meeting.startTime | date:'shortTime'}}</div>
+                    <div class="meeting-title">{{ currentMeeting.title }}</div>
+                    <div>{{ currentMeeting.description }}</div>
+                    <div> {{ currentMeeting._id }} </div>
+                    <div>{{ currentMeeting.ownerName }}</div>
+                    <div>{{ currentMeeting.latitude }}</div>
+                    <div>{{ currentMeeting.longitude }}</div>
+                    <div>{{ currentMeeting.visibility }}</div>
+                    <div>{{ currentMeeting.startDate }}  {{ currentMeeting.startTime | date:'shortTime'}}</div>
 
-                    
-                    <div><button type="submit" class="btn btn-primary btn-lg" ng-click="deleteMeeting(meeting._id)">Удалить</button></div>-->
-
-
-                    <% if (meeting) { %>
-                        <div class="meeting-title"><%= meeting.title %></div>
-                        <div><%= meeting.description %></div>
-                        <div id="idEl"><%= meeting._id %></div>
-                        <div><%= meeting.ownerName %></div>
-                        <div><%= meeting.latitude %></div>
-                        <div><%= meeting.longitude %></div>
-                        <div><%= meeting.visibility %></div>
-                        <div><%= meeting.startDate %>  <%= meeting.startTime %></div>
-                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meetingId)"> Удалить</md-button>
-                    <% } %>
+                    <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(currentMeeting._id)"> Удалить</md-button>
                 </div>
             </div>
         </div>

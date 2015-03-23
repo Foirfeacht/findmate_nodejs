@@ -36,6 +36,14 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.get('/mapbox', isLoggedIn, function(req, res) {
+		res.render('mapBox.ejs', {
+			user : req.user,
+			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
+			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+		});
+	});
+
 	// MEETINGS ==============================
 	app.get('/meetings', isLoggedIn, function(req, res) {
 		res.render('meetings.ejs', {
@@ -165,6 +173,7 @@ module.exports = function(app, passport) {
             location: req.body.location,
             visibility : req.body.visibility || 'all',
             _owner: req.user._id,
+<<<<<<< HEAD
             participants: {
             	$push: {
             		_participantId: user._id,
@@ -172,6 +181,16 @@ module.exports = function(app, passport) {
             	}
             },
             ownerName: req.user.facebook.name
+=======
+            ownerName: req.user.facebook.name,
+            invitedUsers: req.body.invitedUsers
+            /*$push: {
+            	participants: {
+            		_id: req.user._id,
+            		name: req.user.facebook.name
+            	}
+            }*/
+>>>>>>> bf8daed748d45b03b2fce08defc1663551a159f5
         }, function(err, meeting) {
             if (err)
                 res.send(err);
@@ -186,8 +205,38 @@ module.exports = function(app, passport) {
 
     });
 
+	//join a meeting
+	    app.put('/join/meetings/:id', isLoggedIn, function (req, res){
+	    	var user = req.user;
+	        var update = { participants: req.user };
+
+	        Meeting.findByIdAndUpdate(req.params.id, update, { multi: false }, function (err, meeting) {
+		            if (!err) {
+		                console.log("meeting updated");
+		                return res.send({ status: 'OK', meeting:meeting });
+		            } else {
+		                if(err.name == 'ValidationError') {
+		                    res.statusCode = 400;
+		                    res.send({ error: 'Validation error' });
+		                } else {
+		                    res.statusCode = 500;
+		                    res.send({ error: 'Server error' });
+		                }
+		                console.log('Internal error(%d): %s',res.statusCode,err.message);
+		            }
+		     });
+
+	        // get and return all the meetings after you create another
+            Meeting.find(function(err, meetings) {
+                if (err)
+                    res.send(err)
+                res.json(meetings);
+            });
+		    
+		});
+
     //update a meeting
-    app.put('/api/meetings/:id', isLoggedIn, function (req, res){
+/*   app.put('/api/meetings/:id', isLoggedIn, function (req, res){
 	    return Meeting.findById(req.params.id, function (err, meeting) {
 	        if(!meeting) {
 	            res.statusCode = 404;
@@ -204,6 +253,8 @@ module.exports = function(app, passport) {
 	        meeting.longitude = req.body.longitude;
 	        meeting.location = req.body.location;
 	        meeting.visibility = req.body.visibility;
+	        meeting.invitedUsers = req.body.invitedUsers;
+	        meeting.participants = req.body.participants;
 	        return meeting.save(function (err) {
 	            if (!err) {
 	                log.info("meeting updated");
@@ -221,7 +272,47 @@ module.exports = function(app, passport) {
 	        });
 	    });
 	});
+*/
 
+    //update a meeting
+    app.put('/api/meetings/:id', isLoggedIn, function (req, res){
+	    Meeting.findById(req.params.id, function (err, meeting) {
+	        if(!meeting) {
+	            res.statusCode = 404;
+	            return res.send({ error: 'Not found' });
+	        }
+
+	        meeting.title = req.body.title;
+	        meeting.description = req.body.description;
+	        meeting.category = req.body.category;
+	        meeting.startDate = req.body.startDate;
+	        meeting.startTime = req.body.startTime;
+	        meeting.updated_at = Date.now();
+	        meeting.latitude = req.body.latitude;
+	        meeting.longitude = req.body.longitude;
+	        meeting.location = req.body.location;
+	        meeting.visibility = req.body.visibility;
+	        meeting.invitedUsers = req.body.invitedUsers;
+	        meeting.participants = req.body.participants;
+	        return meeting.save(function (err) {
+	            if (!err) {
+	                console.log("meeting updated");
+	                return res.send({ status: 'OK', meeting:meeting });
+	            } else {
+	                if(err.name == 'ValidationError') {
+	                    res.statusCode = 400;
+	                    res.send({ error: 'Validation error' });
+	                } else {
+	                    res.statusCode = 500;
+	                    res.send({ error: 'Server error' });
+	                }
+	                console.log('Internal error(%d): %s',res.statusCode,err.message);
+	            }
+	        });
+	    });
+	});
+
+	
 
     //get single meeting
     app.get('/api/meetings/:id', isLoggedIn, function(req, res) {
@@ -242,27 +333,26 @@ module.exports = function(app, passport) {
 		}).populate('_owner', 'ownerName');
 	});
 
+	var meetingByID = function(req, res, next, id) {
+		Meeting.findById(id).populate('_owner', 'ownerName').exec(function(err, meeting) {
+			if (err) return next(err);
+			if (!meeting) return next(new Error('Failed to load meeting ' + id));
+			req.meeting = meeting;
+			next();
+		}); 
+	};
 
-	//get single meeting
- /*   app.get('meeting/:id', isLoggedIn, function(req, res) {
-    	 db.collection('meetings', function(err, collection) {
-			collection.findById(req.params.id, function(err, meeting) {
-				if(!meeting){
-			  		return res.send({error: 'not found'});
-			  	}
-			    if (err) {
-			    	return res.send(err);
-			    }
-				res.render('meeting.ejs', {
-			    	meeting: meeting,
+	app.param('meetingId', meetingByID);
+
+	app.get('/meetings/:meetingId', isLoggedIn, function(req, res){
+		res.render('meeting.ejs', {
+			    	meeting: req.meeting,
 					user : req.user,
 					picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
 					friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
 				});
-			}).populate('_owner', 'ownerName');
-		}); 
 	});
-*/
+
     // delete a meeting
     app.delete('/api/meetings/:meeting_id', isLoggedIn, function(req, res) {
         Meeting.remove({
@@ -295,8 +385,9 @@ module.exports = function(app, passport) {
                 res.send(err)
 
             res.json(users); // return all meetings in JSON format
-        }).populate('meetings');
+        }).populate('meetings._id', 'meetings.title');
     });
+
 /*
     app.get('*', isLoggedIn, function(req, res){
 		res.render('index.ejs')
