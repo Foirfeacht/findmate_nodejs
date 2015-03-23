@@ -13,6 +13,8 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
   $scope.formData.latitude = $scope.latLng.lat();
   $scope.formData.longitude = $scope.latLng.lng();
 
+  $scope.formData.position = $scope.latLng.lat() + ', ' + $scope.latLng.lng();
+
   $scope.formData.category = "Спорт";
   $scope.formData.visibility = "all";
 
@@ -31,7 +33,15 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 
 
   $scope.inviteUser = function(user){
-  	invitedUsers.push(user);
+    var index = invitedUsers.indexOf(user);
+    console.log(index);
+    if(index < 0){
+    	invitedUsers.push(user);
+    } else {
+      invitedUsers.splice(index, 1);
+    }
+
+    console.log(invitedUsers);
   }
 
   //geocoder
@@ -81,27 +91,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
             $http.post('../api/meetings', $scope.formData)
                     .success(function (data) {
                         console.log($scope.formData);
-
-                        //draw marker
-
-                        var marker = new google.maps.Marker({
-                            position: $scope.latLng,
-                            map: mapService.map,
-                            title: $scope.formData.title
-                        });
-
-                        //$scope.markers.push(marker);
-
-                        var infoContent = '<div id="content">' + $scope.formData.location + '<br>' + $scope.formData.title + '<br>' + 
-                                            $scope.formData.description + '</div>';
-
-                        var infowindow = new google.maps.InfoWindow({
-                          content: infoContent
-                        });
-
-                        google.maps.event.addListener(marker, 'click', function() {
-                           infowindow.open($scope.map, marker);
-                        });
 
                         $scope.formData = {}; // clear the form so our user is ready to enter another
                         $scope.meetings = data;

@@ -27,6 +27,7 @@ var meetingsSchema = new Schema({
         ],
     longitude: String,
     latitude: String,
+    position: String,
     location: String,
     marker: Schema.Types.Mixed,
     visibility: String

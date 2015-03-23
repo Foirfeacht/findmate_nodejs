@@ -9,7 +9,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
 
     //map
 
-    //$scope.map = mapService.map;
 
     $scope.markers = [];
 
@@ -18,48 +17,32 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
     $scope.latLng = mapService.latLng;
 
     //$scope.getCoords = mapService.getCoords
-
-
-    $scope.initialize = function () {
+    //
+    $scope.$on('mapInitialized', function(event, map) {
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
               $scope.pos = new google.maps.LatLng(position.coords.latitude,
                                                position.coords.longitude);
 
-              $scope.map.setCenter($scope.pos);
+              map.setCenter($scope.pos);
               console.log('positioned at ' + $scope.pos)
             }, function() {
               handleNoGeolocation(true);
             });
-            } else {
+        } else {
             // Browser doesn't support Geolocation
-            handleNoGeolocation(false);
-            }
+                handleNoGeolocation(false);
             }
 
             function handleNoGeolocation(errorFlag) {
-            if (errorFlag) {
-            consloe.log('Error: The Geolocation service failed.');
-            } else {
-            console.log('Error: Your browser doesn\'t support geolocation.');
-            }
-
-        };
-
-        var mapOptions = {
-          center: $scope.pos || new google.maps.LatLng(53.902216, 27.561839),
-          zoom: 15,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        $scope.map = new google.maps.Map(document.getElementById("map_canvas"),
-            mapOptions);
+                if (errorFlag) {
+                    consloe.log('Error: The Geolocation service failed.');
+                } else {
+                    console.log('Error: Your browser doesn\'t support geolocation.');
+                }
+            };
 
         google.maps.event.addListener($scope.map, "click", function (event) {
-            //$scope.formData.latitude = event.latLng.lat();
-            //$scope.lat = $scope.formData.latitude;
-            //$scope.formData.longitude = event.latLng.lng();
-            //$scope.lng = $scope.formData.longitude;
-            //console.log($scope.formData.longitude);
             $scope.latitude = event.latLng.lat();
             $scope.longitude = event.latLng.lng();
             
@@ -87,17 +70,12 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
 
             $scope.codeLatLng();
         }); //end addListener
-
-        
-    
-       
-
-
-    // load map on WindowLoad
-
-    $scope.$watch('$viewContentLoaded', function() {
-        $scope.initialize();
     });
+
+
+
+
+*/
 
 
     $scope.$watch('latLng', function() {
@@ -107,54 +85,13 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
     $scope.$on('valuesUpdated', function() {
         $scope.latLng = mapService.latLng;
     });
-    // map methods, need revising
 
- /*   $scope.setAllMap = function(map) {
-        map = $scope.map
-        for (var i = 0; i < $scope.markers.length; i++) {
-           $scope.markers[i].setMap(map);
-        }
-    }
-
-    $scope.clearMarkers = function() {
-      $scope.setAllMap(null);
-    }
-
-    $scope.deleteMarkers = function(){
-        $scope.clearMarkers();
-        $scope.markers = [];
-    }*/
 
     // when landing on the page, get all events and show them
     $http.get('../api/meetings')
         .success(function(data) {
             $scope.meetings = data;
             console.log(data);
-
-            // draw markers from database
-            var l = data.length;
-            for( var i = 0; i < l; i++) {
-                var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-                var marker = new google.maps.Marker({
-                    position: latLng,
-                    map: $scope.map
-                });
-                $scope.markers.push(marker);
-
-                console.log(data[i].location + '\n' + data[i].title + '\n' + data[i].description);
-
-
-                var infoContent = '<div id="content">' + data[i].location + '<br>' + data[i].title + '<br>' + 
-                                    data[i].description + '<md-button class="md-raised join-button" ng-click="joinMeeting(data[i]._id)">Учавствовать</md-button>' +'</div>';
-
-                var infowindow = new google.maps.InfoWindow({
-                  content: infoContent
-                });
-
-                google.maps.event.addListener(marker, 'click', function() {
-                   infowindow.open($scope.map, marker);
-                });
-            }
 
 
 
@@ -184,26 +121,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
             $http.post('../api/meetings', $scope.formData)
                     .success(function (data) {
                         console.log($scope.formData);
-
-                        // create marker
-                        var marker = new google.maps.Marker({
-                            position: $scope.latLng,
-                            map: $scope.map,
-                            title: $scope.formData.title
-                        });
-
-                        $scope.markers.push(marker);
-
-                        var infoContent = '<div id="content">' + $scope.formData.location + '<br>' + $scope.formData.title + '<br>' + 
-                                            $scope.formData.description + '<br>' + '</div>';
-
-                        var infowindow = new google.maps.InfoWindow({
-                          content: infoContent
-                        });
-
-                        google.maps.event.addListener(marker, 'click', function() {
-                           infowindow.open($scope.map, marker);
-                        });
 
                         $scope.formData = {}; // clear the form so our user is ready to enter another
                         $scope.meetings = data;
@@ -252,30 +169,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
                 $scope.meetings = data;
                 console.log(data);
 
-                // draw markers from database
-                var l = data.length;
-                for( var i = 0; i < l; i++) {
-                    var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        map: $scope.map
-                    });
-                    $scope.markers.push(marker);
-
-                    console.log(data[i].location + '\n' + data[i].title + '\n' + data[i].description);
-
-
-                    var infoContent = '<div id="content">' + data[i].location + '<br>' + data[i].title + '<br>' + 
-                                        data[i].description + '</div>';
-
-                    var infowindow = new google.maps.InfoWindow({
-                      content: infoContent
-                    });
-
-                    google.maps.event.addListener(marker, 'click', function() {
-                       infowindow.open($scope.map, marker);
-                    });
-                }
             })
             .error(function (data) {
                 console.log('Error: ' + data);

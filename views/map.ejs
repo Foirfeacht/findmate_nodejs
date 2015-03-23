@@ -52,23 +52,30 @@
         <div class="content">
 
 
-            <div class="map-container">
-                <div id="map_canvas" ng-click="$scope.getCoords();showDialog($event)"></div>
-            </div><!-- end map container -->
+           <div class="map-container" ng-click="clickMarker ? null : getCoords();showDialog($event)">
+                <map zoom="15" 
+                  disable-default-u-i="true"
+                  disable-double-click-zoom="true"
+                  draggable="false"
+                  keyboard-shortcuts="false"
+                  max-zoom="16"
+                  min-zoom="11"
+                  tilt="45"
+                  map-type-id="TERRAIN">
+                      <marker position="{{meeting.position}}" ng-repeat="meeting in meetings" ng-disabled="clickMarker"></marker>
+                      <info-window position="{{meeting.position}}" visible="true" ng-repeat="meeting in meetings">
+                          <div class="info-content"> 
+                             <div>meeting.location</div>
+                             <div>meeting.title </div>
+                             <div>meeting.description</div>      
+                             <div><md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button></div>
+                          </div>
+                      </info-window>
+                </map>
+                <!--<div id="map_canvas" ng-click="$scope.getCoords();showDialog($event)"></div>-->
+            </div>
 
-            <map zoom="11" 
-              center="[40.74, -74.18]" 
-              disable-default-u-i="true"
-              disable-double-click-zoom="true"
-              draggable="false"
-              draggable-cursor="help"
-              dragging-cursor="move"
-              keyboard-shortcuts="false"
-              max-zoom="12"
-              min-zoom="8"
-              tilt="45"
-              map-type-id="TERRAIN">
-            </map>
+            
 
         </div><!-- end content -->
         
@@ -79,8 +86,11 @@
     <script src="../../bower_components/angular-material/angular-material.min.js"></script>
     <script src="../../bower_components/angular-route/angular-route.min.js"></script>
     <script src="../../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../../bower_components/moment/moment.js"></script>
+    <script src="../../bower_components/angular-moment/angular-moment.min.js"></script>
+    <script src="../../bower_components/moment/locale/ru.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="../../public/js/ngmap/build/ng-map.min.js"></script>
+    <script src="../../bower_components/ngmap/build/scripts/ng-map.min.js"></script>
     <script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">
     </script>

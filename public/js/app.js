@@ -1,4 +1,13 @@
-var findMate = angular.module('findMate', ['ui.bootstrap', 'ngRoute', 'ngMaterial', 'ngMap']);
+var findMate = angular.module('findMate', ['ui.bootstrap', 'ngRoute', 'ngMaterial', 'ngMap', 'angularMoment']);
+
+findMate.run(function(amMoment) {
+    amMoment.changeLocale('ru');
+});
+
+findMate.constant('angularMomentConfig', {
+    preprocess: 'unix', // optional
+    timezone: 'Europe/Minsk' // optional
+});
 
 /*findMate.config(function($routeProvider) {
         $routeProvider

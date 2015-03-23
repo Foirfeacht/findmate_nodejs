@@ -87,7 +87,7 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
 
     $scope.visibilities = [{name: 'Общие'}, {name: 'Друзья'}];
 
-<<<<<<< HEAD
+
     //tabs
     $scope.data = {
       selectedIndex : 0
@@ -100,14 +100,13 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
     };
 
 
-=======
+
     // logged in user filter
    /*	filteredMeetings = $filter(this.meetings, {name: $scope.logged_in_user}, function(actual, expected) {
 			return actual.participants.indexOf(expected) > -1;
 	});
 */
-    
->>>>>>> bf8daed748d45b03b2fce08defc1663551a159f5
+
 
     // side nav
     $scope.toggleNav = function() {

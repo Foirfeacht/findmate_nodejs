@@ -7,16 +7,14 @@ var Schema = mongoose.Schema;
 // define the schema for our user model
 var userSchema = mongoose.Schema({
 
-<<<<<<< HEAD
+
     meetings: [
     	{_meeting : { type: Schema.Types.ObjectId, ref: 'Meeting' }}
     ],
-=======
+
     //meetings: [
     //	{ type: Schema.Types.ObjectId, ref: 'Meeting' },
     //],
->>>>>>> bf8daed748d45b03b2fce08defc1663551a159f5
-
     facebook         : {
         id           : String,
         token        : String,

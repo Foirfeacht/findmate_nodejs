@@ -170,18 +170,10 @@ module.exports = function(app, passport) {
 	        startTime: req.body.startTime,
             latitude: req.body.latitude,
             longitude: req.body.longitude,
+            position: req.body.position,
             location: req.body.location,
             visibility : req.body.visibility || 'all',
             _owner: req.user._id,
-<<<<<<< HEAD
-            participants: {
-            	$push: {
-            		_participantId: user._id,
-            		participantName: user.facebook.name
-            	}
-            },
-            ownerName: req.user.facebook.name
-=======
             ownerName: req.user.facebook.name,
             invitedUsers: req.body.invitedUsers
             /*$push: {
@@ -190,7 +182,6 @@ module.exports = function(app, passport) {
             		name: req.user.facebook.name
             	}
             }*/
->>>>>>> bf8daed748d45b03b2fce08defc1663551a159f5
         }, function(err, meeting) {
             if (err)
                 res.send(err);
@@ -208,9 +199,9 @@ module.exports = function(app, passport) {
 	//join a meeting
 	    app.put('/join/meetings/:id', isLoggedIn, function (req, res){
 	    	var user = req.user;
-	        var update = { participants: req.user };
+	        var update = { $push: {participants: req.user} };
 
-	        Meeting.findByIdAndUpdate(req.params.id, update, { multi: false }, function (err, meeting) {
+	        Meeting.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, meeting) {
 		            if (!err) {
 		                console.log("meeting updated");
 		                return res.send({ status: 'OK', meeting:meeting });
