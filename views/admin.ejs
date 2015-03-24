@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="../../public/css/admin.css">
         
 	</head>
-	<body ng-cloak ng-controller="adminController">
+	<body ng-cloak ng-controller="adminController" ng-init="logged_in_user=<%= JSON.stringify(user)%>">
        <!--=============================== navigation ===============================-->
         <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
             <nav>
@@ -82,7 +82,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="user in users | filter: query" ng-click="onUserSelect(user)" ng-class="{'active' : selectedUser}">
+                            <tr ng-repeat="user in users | filter: query" ng-click="onUserSelect(user); getFriends(user)" ng-class="{'active' : selectedUser}">
                                 <td>
                                     {{user._id}}
                                 </td>
@@ -101,35 +101,7 @@
                     </table>
             </div>
 
-            <!--<div class="display row">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <td width="30%">User Id</td>
-                                <td width="20%">User Name</td>
-                                <td width="20%">User Email</td>
-                                <td width="30%">&nbsp;</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="user in users">
-                                <td>
-                                    {{user._id}}
-                                </td>
-                                <td>
-                                    {{user.facebook.name}}
-                                </td>
-                                <td>
-                                    {{user.facebook.email}}
-                                </td>
-                                <td>
-                                    <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteUser(user._id)">Удалить</md-button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        
-                    </table>
-            </div>-->
+
 
             <div class="display row" ng-show="selectedUser">
                     <table class="admin-table">
@@ -165,6 +137,28 @@
                     </table>
             </div>
 
+         <div class="display row" ng-show="selectedUser">
+          <table class="admin-table">
+           <thead>
+           <tr>
+            <td width="50%">Name</td>
+            <td width="50%">id</td>
+           </tr>
+           </thead>
+           <tbody>
+           <tr ng-repeat="friend in friends">
+            <td>
+             {{friend.name}}
+            </td>
+           <td>
+              {{friend.id}}
+           </td>
+           </tr>
+           </tbody>
+
+          </table>
+         </div>
+
             
 
           <div id="single-meeting">
@@ -179,8 +173,11 @@
     <script src="../../bower_components/ng-table/dist/ng-table.min.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-	<script src="../../public/js/app.js"></script>
+	   <script src="../../public/js/app.js"></script>
     <script src="../../public/js/controllers/admin.js"></script>
+    <script src="../../bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+    <script src="../../bower_components/moment/moment.js"></script>
+    <script src="../../bower_components/angular-moment/angular-moment.min.js"></script>
 
 </body>
 </html>

@@ -72,11 +72,22 @@ findMate.controller('adminController', ['$scope', '$http', '$routeParams', '$mdS
         }
     }
 // not implemented yet
-    $scope.getUserMeetings = function(selectedUser){
 
-      if(condition){ return dataSource1; }
-      return dataSource2;
-    };
+    $scope.getFriends = function (user) {
+
+        var friendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
+        $http.get(friendsRequest)
+            .success(function(data) {
+                $scope.friends = data.data;
+                $scope.frList = {};
+                console.log(data.data);
+
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
+    }
+
 
     // sorting
     //$scope.predicate

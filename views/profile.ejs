@@ -72,6 +72,7 @@
 						<strong>name</strong>: <%= user.facebook.name %><br>
 					
 					</p>
+    <p><%= friends %></p>
 
 					<a href="/unlink/facebook" class="btn btn-primary">Отключить</a>
 				<% } else { %>
@@ -96,6 +97,9 @@
 <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="../../public/js/app.js"></script>
 <script src="../../public/js/controllers/profile.js"></script>
+<script src="../../bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+<script src="../../bower_components/moment/moment.js"></script>
+<script src="../../bower_components/angular-moment/angular-moment.min.js"></script>
 
 
 </body>

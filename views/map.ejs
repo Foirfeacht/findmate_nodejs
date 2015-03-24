@@ -15,9 +15,9 @@
             <nav>
                 <div class="profile-block">
                     <div class="image-wrapper">
-                        <img src="<%= picture %>" alt="<%= user.facebook.name %>">
+                        <img src="<%= picture %>" alt="{{logged_in_user.facebook.name}}">
                     </div>
-                    <a href="/profile" class="profile-name"> {{logged_in_user.facebook.name}} %></a>
+                    <a href="/profile" class="profile-name"> {{logged_in_user.facebook.name}} </a>
                 </div>
                 <ul>
                     <li>

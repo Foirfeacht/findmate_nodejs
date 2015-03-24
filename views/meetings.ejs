@@ -96,7 +96,15 @@
 	                    <md-option value="{{visibility.name}}" ng-repeat="visibility in visibilities">{{visibility.name}}</md-option>
 	                </md-select>
 	            </div>
-	        </div>
+
+                <div class="search">
+                    <md-input-container md-no-float>
+                        <label>Дата</label>
+
+                        <input ng-model="filterMtn.startDate" type="date">
+                    </md-input-container>
+                </div>
+        </div>
 
         <!-- tabs -->
 
@@ -112,6 +120,12 @@
             </md-tab>
             <md-tab id="tab4" aria-controls="tab4-content">
                Принятые приглашения
+            </md-tab>
+            <md-tab id="tab5" aria-controls="tab5-content">
+                Прошедшие
+            </md-tab>
+            <md-tab id="tab6" aria-controls="tab6-content" ng-click="getFriends(logged_in_user)">
+                События друзей
             </md-tab>
         </md-tabs>
 
@@ -135,7 +149,7 @@
 	                    <div layout="column">{{ meeting.category }}</div>
 	                    <div layout="column">{{ meeting.ownerName }}</div>
 	                    <div layout="column">{{ meeting.visibility }}</div>
-	                    <div layout="column"><span>{{ meeting.startDate | amDateFormat: 'dddd, MMMM Do YYYY, h:mm:ss a' }}</span>  {{ meeting.startTime | date:'HH:mm'}}</div>
+                        <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}} {{ meeting.startTime | date:'HH:mm'}}</div>
 	                    <div layout="column">{{ meeting.invitedUsers.length }}</div>
 	                    <div layout="column">{{ meeting.participants.length }}</div>
 	                    <div layout="column">
@@ -190,7 +204,7 @@
             <!-- tab three -->
 
             <div role="tabpanel" id="tab3-content"  aria-labelledby="tab3" ng-switch-when="2" md-swipe-left="next()" md-swipe-right="previous()">
-                <h1 class="active-meetings">Приглашени\</h1>
+                <h1 class="active-meetings">Приглашения</h1>
                 <div class="meetings-display row">
 
 	            
@@ -250,6 +264,70 @@
 	            </div>
 	        </div>
 
+            <!-- tab five -->
+
+            <div role="tabpanel" id="tab5-content" aria-labelledby="tab5" ng-switch-when="4" md-swipe-left="next()" md-swipe-right="previous()">
+
+                <h1 class="active-meetings">Прошедшие</h1>
+                <div class="meetings-display row">
+
+
+
+                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.startDate.getDate() === todayDay">
+                        <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
+                        <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title}}</a>  </div>
+                        <div layout="column">{{ meeting.description }}</div>
+                        <div layout="column">{{ meeting.category }}</div>
+                        <div layout="column">{{ meeting.ownerName }}</div>
+                        <div layout="column">{{ meeting.visibility }}</div>
+                        <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+                        <div layout="column">{{ meeting.invitedUsers.length }}</div>
+                        <div layout="column">{{ meeting.participants.length }}</div>
+                        <div layout="column">
+                            <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only"></span>
+                        Встреч пока нет
+                    </div>
+                </div>
+            </div>
+
+            <!-- tab six -->
+
+            <div role="tabpanel" id="tab6-content" aria-labelledby="tab6" ng-switch-when="5" md-swipe-left="next()" md-swipe-right="previous()">
+
+                <h1 class="active-meetings">События друзей</h1>
+                <div class="meetings-display row">
+
+
+
+                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting._owner._id">
+                        <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
+                        <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title}}</a>  </div>
+                        <div layout="column">{{ meeting.description }}</div>
+                        <div layout="column">{{ meeting.category }}</div>
+                        <div layout="column">{{ meeting.ownerName }}</div>
+                        <div layout="column">{{ meeting.visibility }}</div>
+                        <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+                        <div layout="column">{{ meeting.invitedUsers.length }}</div>
+                        <div layout="column">{{ meeting.participants.length }}</div>
+                        <div layout="column">
+                            <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only"></span>
+                        Встреч пока нет
+                    </div>
+                </div>
+            </div>
+
 
         </ng-switch>
 
@@ -277,6 +355,7 @@
     <script src="../../public/js/services/routingService.js"></script>
     <script src="../../public/js/controllers/meetings.js"></script>
     <script src="../../public/js/filters/loggedInUser.js"></script>
+    <script src="../../public/js/filters/dateFilter.js"></script>
 
 </body>
 </html>

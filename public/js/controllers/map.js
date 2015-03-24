@@ -73,11 +73,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
     });
 
 
-
-
-*/
-
-
     $scope.$watch('latLng', function() {
         mapService.getCoords($scope.latLng);
     });
@@ -173,7 +168,9 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
             .error(function (data) {
                 console.log('Error: ' + data);
             });
-    }   
+    }
+
+    $scope.showMine = false;
 
     // side nav
     $scope.toggleNav = function() {

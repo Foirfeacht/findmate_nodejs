@@ -1,8 +1,8 @@
 // map controller
 // public/map.js
 
-findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$mdSidenav', '$filter',
-					 function($scope, $http, $routeParams, $mdSidenav, $filter) {
+findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$mdSidenav', '$filter', 'dateFilter',
+					 function($scope, $http, $routeParams, $mdSidenav, $filter, date) {
 
 
     
@@ -83,9 +83,27 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
 
     // category filter
 
-    $scope.categories = [{name: 'Спорт'}, {name: 'Развлечения'}];
+        var todayDate = new Date();
+        $scope.todayDay = todayDate.getDate();
 
-    $scope.visibilities = [{name: 'Общие'}, {name: 'Друзья'}];
+        $scope.categories = [{name: 'Спорт'}, {name: 'Развлечения'}];
+
+        $scope.visibilities = [{name: 'Общие'}, {name: 'Друзья'}];
+
+
+		$scope.getFriends = function (user) {
+
+			 var friendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
+			 $http.get(friendsRequest)
+				 .success(function(data) {
+					 $scope.friends = data.data;
+					 console.log(data.data);
+				 })
+				 .error(function (data) {
+					 console.log('Error: ' + data);
+				 });
+		 }
+
 
 
     //tabs
