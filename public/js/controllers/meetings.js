@@ -91,9 +91,11 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
         $scope.visibilities = [{name: 'Общие'}, {name: 'Друзья'}];
 
 
-		$scope.getFriends = function (user) {
 
-			 var friendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
+
+		//$scope.getFriends = function (user) {
+
+			 var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
 			 $http.get(friendsRequest)
 				 .success(function(data) {
 					 $scope.friends = data.data;
@@ -102,7 +104,8 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
 				 .error(function (data) {
 					 console.log('Error: ' + data);
 				 });
-		 }
+		 //}
+
 
 
 

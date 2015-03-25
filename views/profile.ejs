@@ -6,20 +6,20 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="../../bower_components/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../public/css/admin.css">
     <link rel="stylesheet" href="../../public/css/style.css">
 
 </head>
-<body ng-controller="profileController">
+<body ng-controller="profileController" ng-init="logged_in_user=<%= JSON.stringify(user)%>">
 <!--=============================== navigation ===============================-->
         <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
             <nav>
                 <div class="profile-block">
-                    <% if (user.facebook.token) { %>
+
                     <div class="image-wrapper">
-                        <img src="<%= picture %>" alt="<%= user.facebook.name %>">
+                        <img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{logged_in_user.facebook.name }}">
                     </div>
-                    <a href="/profile" class="profile-name"><%= user.facebook.name %></a>
-                    <% } %>
+                    <a href="/profile" class="profile-name"> {{logged_in_user.facebook.name}} </a>
                 </div>
                 <ul>
                     <li>
@@ -72,7 +72,6 @@
 						<strong>name</strong>: <%= user.facebook.name %><br>
 					
 					</p>
-    <p><%= friends %></p>
 
 					<a href="/unlink/facebook" class="btn btn-primary">Отключить</a>
 				<% } else { %>
@@ -82,6 +81,34 @@
 			</div>
 		</div>
 	</div><!-- end row -->
+
+    <div layout="column">
+        <div class="display row" ng-show="selectedUser">
+              <table class="admin-table friends">
+               <thead>
+               <tr>
+                <td width="20%"></td>
+                <td width="30%">Name</td>
+                <td width="50%">id</td>
+               </tr>
+               </thead>
+               <tbody>
+               <tr ng-repeat="friend in friends">
+                <td>
+                    <img src="https://graph.facebook.com/{{friend.id}}/picture?height=350&width=250" alt="{{friend.name}}" width="60" height="60">
+                </td>
+                <td>
+                 {{friend.name}}
+                </td>
+               <td>
+                  {{friend.id}}
+               </td>
+               </tr>
+               </tbody>
+
+              </table>
+         </div>
+    </div>
 
 	<div class="row">
 		<a href="/map">Перейти к событиям</a>

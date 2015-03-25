@@ -16,12 +16,11 @@
         <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
             <nav>
                 <div class="profile-block">
-                    <% if (user.facebook.token) { %>
+
                     <div class="image-wrapper">
-                        <img src="<%= picture %>" alt="<%= user.facebook.name %>">
+                        <img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{logged_in_user.facebook.name }}">
                     </div>
-                    <a href="/profile" class="profile-name"><%= user.facebook.name %></a>
-                    <% } %>
+                    <a href="/profile" class="profile-name"> {{logged_in_user.facebook.name}} </a>
                 </div>
                 <ul>
                     <li>
@@ -138,15 +137,19 @@
             </div>
 
          <div class="display row" ng-show="selectedUser">
-          <table class="admin-table">
+          <table class="admin-table friends">
            <thead>
            <tr>
-            <td width="50%">Name</td>
+            <td width="20%"></td>
+            <td width="30%">Name</td>
             <td width="50%">id</td>
            </tr>
            </thead>
            <tbody>
            <tr ng-repeat="friend in friends">
+            <td>
+                <img src="https://graph.facebook.com/{{friend.id}}/picture?height=350&width=250" alt="{{friend.name}}" width="60" height="60">
+            </td>
             <td>
              {{friend.name}}
             </td>

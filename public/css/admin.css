@@ -31,4 +31,9 @@
 	color: #3e6d8e;
 }
 
+.admin-table .friends img {
+	border-radius: 50%;
+	border: 1px thin #000;
+}
+
 

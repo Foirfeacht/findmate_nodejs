@@ -17,10 +17,9 @@
                 <div class="profile-block">
 
                     <div class="image-wrapper">
-                        <img src="<%= picture %>" alt="{{logged_in_user.facebook.name}}">
+                        <img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{logged_in_user.facebook.name }}">
                     </div>
-                    <a href="/profile" class="profile-name">{{logged_in_user.facebook.name}}</a>
-     
+                    <a href="/profile" class="profile-name"> {{logged_in_user.facebook.name}} </a>
                 </div>
                 <ul>
                     <li>
@@ -301,11 +300,11 @@
             <div role="tabpanel" id="tab6-content" aria-labelledby="tab6" ng-switch-when="5" md-swipe-left="next()" md-swipe-right="previous()">
 
                 <h1 class="active-meetings">События друзей</h1>
-                <div class="meetings-display row">
+                <div class="meetings-display row" ng-repeat="friend in friends" ng-if="friends">
 
 
 
-                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting._owner._id">
+                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting._owner._id === friend.id">
                         <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
                         <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title}}</a>  </div>
                         <div layout="column">{{ meeting.description }}</div>
@@ -325,6 +324,11 @@
                         <span class="sr-only"></span>
                         Встреч пока нет
                     </div>
+                </div>
+                <div class="alert alert-danger" role="alert" ng-if="!friends.length">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only"></span>
+                    Ваших друзей в приложении нет
                 </div>
             </div>
 

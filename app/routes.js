@@ -15,9 +15,7 @@ module.exports = function(app, passport) {
 	// PROFILE SECTION =========================
 	app.get('/profile', isLoggedIn, function(req, res) {
 		res.render('profile.ejs', {
-			user : req.user,
-			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
-			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+			user : req.user
 		});
 	});
 
@@ -30,26 +28,20 @@ module.exports = function(app, passport) {
 	// MAP ==============================
 	app.get('/map', isLoggedIn, function(req, res) {
 		res.render('map.ejs', {
-			user : req.user,
-			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
-			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+			user : req.user
 		});
 	});
 
 	app.get('/mapbox', isLoggedIn, function(req, res) {
 		res.render('mapBox.ejs', {
-			user : req.user,
-			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
-			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+			user : req.user
 		});
 	});
 
 	// MEETINGS ==============================
 	app.get('/meetings', isLoggedIn, function(req, res) {
 		res.render('meetings.ejs', {
-			user : req.user,
-			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
-			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+			user : req.user
 		});
 	});
 
@@ -57,9 +49,7 @@ module.exports = function(app, passport) {
 
 	app.get('/admin', isLoggedIn, function(req, res) {
 		res.render('admin.ejs', {
-			user : req.user,
-			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
-			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+			user : req.user
 		});
 	});
 
@@ -75,9 +65,7 @@ module.exports = function(app, passport) {
 
 	app.get('/main', isLoggedIn, function(req, res) {
 		res.render('main.ejs', {
-			user : req.user,
-			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
-			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+			user : req.user
 		});
 	});
 
@@ -338,9 +326,7 @@ module.exports = function(app, passport) {
 	app.get('/meetings/:meetingId', isLoggedIn, function(req, res){
 		res.render('meeting.ejs', {
 			    	meeting: req.meeting,
-					user : req.user,
-					picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
-					friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
+					user : req.user
 				});
 	});
 
