@@ -10,6 +10,7 @@ var meetingsSchema = new Schema({
     startDate: Date,
     startTime: String,
     _owner: { type: Schema.Types.ObjectId, ref: 'User' },
+	//ownerFacebook: {type: }
     ownerName: { type: String, ref: 'User' },
     /*participants: [{
         _id: { type: Schema.Types.ObjectId, ref: 'User' },

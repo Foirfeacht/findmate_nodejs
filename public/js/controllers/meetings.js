@@ -2,7 +2,7 @@
 // public/map.js
 
 findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$mdSidenav', '$filter', 'dateFilter',
-					 function($scope, $http, $routeParams, $mdSidenav, $filter, date) {
+	 function($scope, $http, $routeParams, $mdSidenav, $filter, date) {
 
 
     
@@ -93,18 +93,76 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
 
 
 
-		//$scope.getFriends = function (user) {
+		 $scope.friendsArray = [];
+		 $scope.friendsMeetings = [];
 
-			 var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
+
+
+		//init logged in user
+		$scope.$watch('logged_in_user', function () {
+			 console.log($scope.logged_in_user);
+			$scope.loadFriends();
+
+
+		});
+
+		 /*$scope.init = function(user) {
+			 $scope.logged_in_user = user;
+			 console.log($scope.logged_in_user);
+		 }*/
+
+		 $scope.loadFriends = function(){
+			 var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + $scope.logged_in_user.facebook.token;
 			 $http.get(friendsRequest)
 				 .success(function(data) {
 					 $scope.friends = data.data;
 					 console.log(data.data);
+					 $scope.updateFriendsArray($scope.friends);
+					 $scope.updateFriendsMeetings($scope.meetings, $scope.users);
 				 })
 				 .error(function (data) {
 					 console.log('Error: ' + data);
 				 });
-		 //}
+		 };
+
+		 $scope.updateFriendsArray = function(data){
+			 var friends = data;
+			 var l = friends.length;
+			 for(var key in friends){
+				 if (friends.hasOwnProperty(key)) {
+					 var friend = friends[key];
+					 $scope.friendsArray.push(friend.id);
+
+				 }
+			 }
+		 }
+
+		 $scope.updateFriendsMeetings = function (data, users) {
+			 var meetings = data;
+			 var userList = users;
+			 var lm = meetings.length;
+			 var lu = userList.length;
+			 for(var u =0; u < lu; u++){
+				 var user = users[i];
+				 var facebookId = user.facebook.id;
+				 console.log(facebookId);
+			 };
+			 for(var i = 0; i < lm; i++) {
+				 var meeting = meetings[i];
+				 var id = meeting._owner._id;
+				 console.log(id);
+				 if ($scope.friendsArray.indexOf(id) > -1){
+					 console.log(meeting);
+				 }
+
+			 };
+			 console.log($scope.friendsArray);
+		 }
+
+		 $scope.friendsArray = [];
+		 $scope.friendsMeetings = [];
+
+
 
 
 

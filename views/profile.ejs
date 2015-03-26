@@ -1,7 +1,7 @@
 <!doctype html>
-<html ng-app="findMate">
+<html ng-app="findMate" ng-init="logged_in_user=<%= JSON.stringify(user)%>">
 <head>
-	<title>Профиль <%= user.facebook.name %></title>
+	<title>Профиль {{logged_in_user.facebook.name}}</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../bower_components/angular-material/angular-material.min.css">
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../public/css/style.css">
 
 </head>
-<body ng-controller="profileController" ng-init="logged_in_user=<%= JSON.stringify(user)%>">
+<body ng-controller="profileController">
 <!--=============================== navigation ===============================-->
         <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
             <nav>
@@ -65,11 +65,11 @@
 			<div class="well">
 				<h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
 
-				<!-- check if the user has this token (is the user authenticated with this social account) -->
+
 				<% if (user.facebook.token) { %>
-					<div><img src="<%= picture %>" alt="<%= user.facebook.name %>"></div>
+					<div><img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{logged_in_user.facebook.name}}"></div>
 					<p>
-						<strong>name</strong>: <%= user.facebook.name %><br>
+						<strong>name</strong>: {{logged_in_user.facebook.name}}<br>
 					
 					</p>
 
