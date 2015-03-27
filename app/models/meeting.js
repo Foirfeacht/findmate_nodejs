@@ -10,22 +10,13 @@ var meetingsSchema = new Schema({
     startDate: Date,
     startTime: String,
     _owner: { type: Schema.Types.ObjectId, ref: 'User' },
-	//ownerFacebook: {type: }
+	ownerFacebook: {type: String, ref: 'User'},
+	//ownerVK: {type: String, ref: 'User'},
     ownerName: { type: String, ref: 'User' },
-    /*participants: [{
-        _id: { type: Schema.Types.ObjectId, ref: 'User' },
-        name: {type: String, ref: 'User'}
-    }],*/
     invitedUsers: {type: Array, default: []},
     participants: {type: Array, default: []},
     created_at: { type: Date, default: Date.now() },
     updated_at: { type: Date, default: Date.now() },
-    active: { type: Boolean, default: true },
-    participants: [
-            { _participantId : { type: Schema.Types.ObjectId, ref: 'User' },
-              participantName : { type: String, ref: 'User' }
-             }
-        ],
     longitude: String,
     latitude: String,
     position: String,

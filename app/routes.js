@@ -163,7 +163,8 @@ module.exports = function(app, passport) {
             visibility : req.body.visibility || 'all',
             _owner: req.user._id,
             ownerName: req.user.facebook.name,
-            invitedUsers: req.body.invitedUsers
+            invitedUsers: req.body.invitedUsers,
+			ownerFacebook: req.user.facebook.id
             /*$push: {
             	participants: {
             		_id: req.user._id,

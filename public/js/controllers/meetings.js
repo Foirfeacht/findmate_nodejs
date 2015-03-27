@@ -118,7 +118,7 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
 					 $scope.friends = data.data;
 					 console.log(data.data);
 					 $scope.updateFriendsArray($scope.friends);
-					 $scope.updateFriendsMeetings($scope.meetings, $scope.users);
+					 $scope.updateFriendsMeetings($scope.meetings);
 				 })
 				 .error(function (data) {
 					 console.log('Error: ' + data);
@@ -137,16 +137,8 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
 			 }
 		 }
 
-		 $scope.updateFriendsMeetings = function (data, users) {
+		 $scope.updateFriendsMeetings = function (data) {
 			 var meetings = data;
-			 var userList = users;
-			 var lm = meetings.length;
-			 var lu = userList.length;
-			 for(var u =0; u < lu; u++){
-				 var user = users[i];
-				 var facebookId = user.facebook.id;
-				 console.log(facebookId);
-			 };
 			 for(var i = 0; i < lm; i++) {
 				 var meeting = meetings[i];
 				 var id = meeting._owner._id;
