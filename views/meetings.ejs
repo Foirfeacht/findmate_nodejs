@@ -174,7 +174,7 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" >
 	                    <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-	                    <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title}}</a>  </div>
+	                    <div layout="column"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="column">{{ meeting.description }}</div>
 	                    <div layout="column">{{ meeting.category }}</div>
 	                    <div layout="column">{{ meeting.ownerName }}</div>
@@ -210,7 +210,7 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.invitedUsers.indexOf(logged_in_user) > -1">
 	                    <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-	                    <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title}}</a>  </div>
+	                    <div layout="column"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="column">{{ meeting.description }}</div>
 	                    <div layout="column">{{ meeting.category }}</div>
 	                    <div layout="column">{{ meeting.ownerName }}</div>
@@ -242,7 +242,7 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate">
 	                    <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-	                    <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title}}</a>  </div>
+	                    <div layout="column"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="column">{{ meeting.description }}</div>
 	                    <div layout="column">{{ meeting.category }}</div>
 	                    <div layout="column">{{ meeting.ownerName }}</div>
@@ -272,9 +272,9 @@
 
 
 
-                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.startDate.getDate() === todayDay">
+                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="!meeting.active">
                         <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-                        <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title}}</a>  </div>
+                        <div layout="column"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
                         <div layout="column">{{ meeting.description }}</div>
                         <div layout="column">{{ meeting.category }}</div>
                         <div layout="column">{{ meeting.ownerName }}</div>
@@ -304,9 +304,9 @@
 
 
 
-                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting._owner._id === friend.id">
+                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.ownerFacebook === friend.id">
                         <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-                        <div layout="column"><a href="api/meetings/{{meeting._id}}" ng-click="updateValue(meeting._id)"> {{ meeting.title}}</a>  </div>
+                        <div layout="column"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
                         <div layout="column">{{ meeting.description }}</div>
                         <div layout="column">{{ meeting.category }}</div>
                         <div layout="column">{{ meeting.ownerName }}</div>

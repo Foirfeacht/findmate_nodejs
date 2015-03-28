@@ -11,7 +11,22 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
     $http.get('../api/meetings')
         .success(function(data) {
             $scope.meetings = data;
+            var meetings = $scope.meetings;
             console.log(data);
+            $scope.dates = [];
+            $scope.updateMeetingsByDate($scope.meetings);
+            var dateNow = new Date().toJSON();
+            var meetingsLength = meetings.length;
+			 for(var i = 0; i < meetingsLength; i++) {
+				 var meeting = meetings[i];
+				 var meetingDate = meeting.startDate;
+				 if (meetingDate > dateNow){
+					 meeting.active = true;
+				 } else {
+				 	meeting.active = false;
+				 }
+
+			 };
         })
         .error(function (data) {
             console.log('Error: ' + data);
@@ -116,46 +131,30 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
 			 $http.get(friendsRequest)
 				 .success(function(data) {
 					 $scope.friends = data.data;
-					 console.log(data.data);
-					 $scope.updateFriendsArray($scope.friends);
-					 $scope.updateFriendsMeetings($scope.meetings);
 				 })
 				 .error(function (data) {
 					 console.log('Error: ' + data);
 				 });
 		 };
 
-		 $scope.updateFriendsArray = function(data){
-			 var friends = data;
-			 var l = friends.length;
-			 for(var key in friends){
-				 if (friends.hasOwnProperty(key)) {
-					 var friend = friends[key];
-					 $scope.friendsArray.push(friend.id);
-
-				 }
-			 }
-		 }
-
-		 $scope.updateFriendsMeetings = function (data) {
-			 var meetings = data;
-			 for(var i = 0; i < lm; i++) {
+		 $scope.updateMeetingsByDate = function (meetings) {
+			 var meetings = meetings;
+			 var dateNow = new Date().toJSON();
+			 console.log(dateNow);
+			 var meetingsLength = meetings.length;
+			 for(var i = 0; i < meetingsLength; i++) {
 				 var meeting = meetings[i];
-				 var id = meeting._owner._id;
-				 console.log(id);
-				 if ($scope.friendsArray.indexOf(id) > -1){
-					 console.log(meeting);
+				 var meetingDate = meeting.startDate;
+				 console.log(meetingDate);
+				 if (meetingDate > dateNow){
+					 $scope.dates.push(meeting);
 				 }
 
 			 };
-			 console.log($scope.friendsArray);
-		 }
+			 console.log($scope.dates);
+		 };
 
-		 $scope.friendsArray = [];
-		 $scope.friendsMeetings = [];
-
-
-
+		 
 
 
 

@@ -16,7 +16,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'routingService', '$
   $scope.formData.category = "Спорт";
   $scope.formData.visibility = "all";
 
-  $scope.formData.startDate = Date.now();
+  $scope.formData.startDate = new Date();
 
   Date.prototype.timeNow = function () {
      return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
