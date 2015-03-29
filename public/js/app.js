@@ -1,4 +1,10 @@
-var findMate = angular.module('findMate', ['ui.bootstrap', 'ngRoute', 'ngMaterial', 'ngMap', 'angularMoment']);
+var findMate = angular.module('findMate', ['ui.bootstrap', 
+                                            'ngRoute', 
+                                            'ngMaterial', 
+                                            'ngMap', 
+                                            'angularMoment', 
+                                            'angularjs-dropdown-multiselect'
+                                            ]);
 
 findMate.run(function(amMoment) {
     amMoment.changeLocale('ru');
@@ -7,6 +13,13 @@ findMate.run(function(amMoment) {
 findMate.constant('angularMomentConfig', {
     preprocess: 'unix', // optional
     timezone: 'Europe/Minsk' // optional
+});
+
+findMate	.filter('filterByFriends', function () {
+  return function (item) {
+  		if (item.facebook.name){};
+      return item.toUpperCase();
+  };
 });
 
 /*findMate.config(function($routeProvider) {

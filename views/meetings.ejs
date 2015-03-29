@@ -142,8 +142,8 @@
 	            
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting._owner._id === logged_in_user._id">
-	                    <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-	                    <div layout="column"><a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	             
+	                    <div layout="column" class="meeting-title"><a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="column">{{ meeting.description }}</div>
 	                    <div layout="column">{{ meeting.category }}</div>
 	                    <div layout="column">{{ meeting.ownerName }}</div>
@@ -173,11 +173,11 @@
 	            
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" >
-	                    <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-	                    <div layout="column"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    
+	                    <div layout="column" class="meeting-title"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="column">{{ meeting.description }}</div>
 	                    <div layout="column">{{ meeting.category }}</div>
-	                    <div layout="column">{{ meeting.ownerName }}</div>
+	                    <div layout="column"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="column">{{ meeting.visibility }}</div>
 	                    <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
 	                    <div layout="column">{{ meeting.invitedUsers.length }}</div>
@@ -208,9 +208,9 @@
 
 	            
 	            
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.invitedUsers.indexOf(logged_in_user) > -1">
-	                    <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-	                    <div layout="column"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.invited">
+	                    
+	                    <div layout="column" class="meeting-title"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="column">{{ meeting.description }}</div>
 	                    <div layout="column">{{ meeting.category }}</div>
 	                    <div layout="column">{{ meeting.ownerName }}</div>
@@ -233,7 +233,7 @@
 
             <!-- tab four -->
 
-	        <div role="tabpanel" id="tab4-content" aria-labelledby="tab4" ng-switch-when="3" md-swipe-left="next()" md-swipe-right="previous()">
+	        <div role="tabpanel" id="tab4-content" aria-labelledby="tab4" ng-switch-when="3" md-swipe-left="next()" md-swipe-right="previous()" ng-if="meeting.joined">
                    
 	            <h1 class="active-meetings">Принятые приглашения</h1>
 	            <div class="meetings-display row">
@@ -241,8 +241,8 @@
 	            
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate">
-	                    <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-	                    <div layout="column"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                 
+	                    <div layout="column" class="meeting-title"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="column">{{ meeting.description }}</div>
 	                    <div layout="column">{{ meeting.category }}</div>
 	                    <div layout="column">{{ meeting.ownerName }}</div>
@@ -273,8 +273,8 @@
 
 
                     <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="!meeting.active">
-                        <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-                        <div layout="column"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+                    
+                        <div layout="column" class="meeting-title"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
                         <div layout="column">{{ meeting.description }}</div>
                         <div layout="column">{{ meeting.category }}</div>
                         <div layout="column">{{ meeting.ownerName }}</div>
@@ -305,8 +305,8 @@
 
 
                     <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.ownerFacebook === friend.id">
-                        <div layout="row" class="meeting-title"><md-checkbox ng-click="completeMeeting(meeting._id)">{{ meeting._id }}</md-checkbox></div>
-                        <div layout="column"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+    
+                        <div layout="column" class="meeting-title"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
                         <div layout="column">{{ meeting.description }}</div>
                         <div layout="column">{{ meeting.category }}</div>
                         <div layout="column">{{ meeting.ownerName }}</div>

@@ -34,6 +34,7 @@
     "ng-table": "~0.5.4",
     "moment": "~2.9.0",
     "ngmap": "~1.4.2",
-    "angular-moment": "~0.9.2"
+    "angular-moment": "~0.9.2",
+    "angularjs-dropdown-multiselect": "~1.5.2"
   }
 }

@@ -45,7 +45,11 @@
 	                    <md-option value="Друзья">Друзья</md-option>
 	                </md-select>
 	                <md-select ng-model="formData.invitedUsers" placeholder="Пригласить друзей">
-	                    <md-option value="{{user._id}}" ng-repeat="user in users">{{user.facebook.name}}</md-option>
+	                    <!--<md-option value="{{user._id}}" ng-repeat="user in users">{{user.facebook.name}}</md-option>
+	                    <md-option>
+		                    <md-checkbox ng-repeat="user in users" ng-model="invitedUsers" aria-label="{{user.facebook.name}}" ng-change="inviteUser(user)">{{user.facebook.name}}</md-checkbox>
+	                    </md-option>-->
+	                    <div ng-dropdown-multiselect="" options="users" selected-model="invitedUsers" extra-settings="invitedUsersSettings"></div>
 	                </md-select>
 	        </section>
 

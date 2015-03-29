@@ -15,6 +15,7 @@ var cookieParser   = require('cookie-parser');
 var bodyParser     = require('body-parser');
 var session        = require('express-session');
 var methodOverride = require('method-override');
+var _              = require('lodash');
 //var static 		   = require('node-static');
 
 var configDB = require('./config/database.js');

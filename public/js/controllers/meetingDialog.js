@@ -1,28 +1,45 @@
-findMate.controller('DialogController', ['$scope', '$http', 'routingService', '$mdDialog', function($scope, $http, routingService, $mdDialog) {
+findMate.controller('DialogController', ['$scope', '$http', 'routingService', '$mdDialog', 'moment', 
+	function($scope, 
+			 $http, 
+			 routingService, 
+			 $mdDialog,
+			 moment) {
 
   $scope.hide = function() {
     $mdDialog.hide();
   };
 
 
-  $scope.formData = {};
+  $scope.formData = {
+  	latLng: mapService.latLng,
+  	category: "Спорт",
+  	visibility: "all",
+  	startDate: new Date(),
+  	startTime: new Date().timeNow()
+  };
+
+  $scope.invitedUsers = [];
+  $scope.invitedUsersSettings = {
+    scrollableHeight: '100px',
+    scrollable: true
+  }
 
   // working with service
-  $scope.latLng = mapService.latLng;
+  //$scope.latLng = mapService.latLng;
 
   $scope.formData.latitude = $scope.latLng.lat();
   $scope.formData.longitude = $scope.latLng.lng();
 
-  $scope.formData.category = "Спорт";
-  $scope.formData.visibility = "all";
+  //$scope.formData.category = "Спорт";
+  //$scope.formData.visibility = "all";
 
-  $scope.formData.startDate = new Date();
+  //$scope.formData.startDate = new Date();
 
   Date.prototype.timeNow = function () {
      return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
   }
 
-  $scope.formData.startTime = new Date().timeNow();
+  //$scope.formData.startTime = new Date().timeNow();
 
   //geocoder
 
@@ -71,27 +88,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'routingService', '$
             $http.post('../api/meetings', $scope.formData)
                     .success(function (data) {
                         console.log($scope.formData);
-
-                        //draw marker
-
-                        var marker = new google.maps.Marker({
-                            position: $scope.latLng,
-                            map: mapService.map,
-                            title: $scope.formData.title
-                        });
-
-                        //$scope.markers.push(marker);
-
-                        var infoContent = '<div id="content">' + $scope.formData.location + '<br>' + $scope.formData.title + '<br>' + 
-                                            $scope.formData.description + '</div>';
-
-                        var infowindow = new google.maps.InfoWindow({
-                          content: infoContent
-                        });
-
-                        google.maps.event.addListener(marker, 'click', function() {
-                           infowindow.open($scope.map, marker);
-                        });
 
                         $scope.formData = {}; // clear the form so our user is ready to enter another
                         $scope.meetings = data;

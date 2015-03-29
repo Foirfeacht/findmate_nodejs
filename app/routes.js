@@ -193,7 +193,13 @@ module.exports = function(app, passport) {
 	        Meeting.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, meeting) {
 		            if (!err) {
 		                console.log("meeting updated");
-		                return res.send({ status: 'OK', meeting:meeting });
+		                res.send({ status: 'OK', meeting:meeting });
+		                // get and return all the meetings after you create another
+			            Meeting.find(function(err, meetings) {
+			                if (err)
+			                    res.send(err)
+			                res.json(meetings);
+			            });
 		            } else {
 		                if(err.name == 'ValidationError') {
 		                    res.statusCode = 400;
@@ -206,12 +212,7 @@ module.exports = function(app, passport) {
 		            }
 		     });
 
-	        // get and return all the meetings after you create another
-            Meeting.find(function(err, meetings) {
-                if (err)
-                    res.send(err)
-                res.json(meetings);
-            });
+	        
 		    
 		});
 
@@ -365,6 +366,24 @@ module.exports = function(app, passport) {
             res.json(users); // return all meetings in JSON format
         }).populate('meetings._id', 'meetings.title');
     });
+
+    var userByID = function(req, res, next, id) {
+		User.findById(id, function(err, profile) {
+			if (err) return next(err);
+			if (!profile) return next(new Error('Failed to load user ' + id));
+			req.profile = profile;
+			next();
+		}); 
+	};
+
+	app.param('userId', userByID);
+
+	app.get('/user/:userId', isLoggedIn, function(req, res){
+		res.render('userprofile.ejs', {
+			    	profile: req.profile,
+					user : req.user
+				});
+	});
 
 /*
     app.get('*', isLoggedIn, function(req, res){

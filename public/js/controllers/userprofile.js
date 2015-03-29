@@ -1,8 +1,8 @@
 // map controller
 // public/map.js
 
-findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$mdSidenav', '$filter', 'dateFilter',
-	 function($scope, $http, $routeParams, $mdSidenav, $filter, date) {
+findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSidenav',
+	 function($scope, $http, $routeParams, $mdSidenav) {
 
 
     //init logged in user
@@ -86,18 +86,6 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
                 console.log('Error: ' + data);
             });
     };
-
-      $scope.singleUser = function(id) {
-        $http.get('../api/users' + id)
-            .success(function(data) {
-                $scope.users = data;
-                console.log(data);
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
-    };
-
 
     // delete a meeting
     $scope.deleteMeeting = function(id) {

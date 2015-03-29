@@ -1,7 +1,7 @@
 {
   "name": "findmate",
-  "version" : "0.1.0",
-  "author" : "Vitaly Maltsev",
+  "version": "0.1.0",
+  "author": "Vitaly Maltsev",
   "license": "MIT",
   "main": "server.js",
   "repository": {
@@ -11,24 +11,25 @@
   "engines": {
     "node": "0.12.x"
   },
-  "dependencies" : {
-    "express" : "~4.0.0", 			
-    "ejs" : "~0.8.5", 				
-    "mongoose" : "~3.8.1", 			
-    "passport" : "~0.1.17", 		
-    "passport-local" : "~0.1.6", 	
-    "passport-facebook" : "~1.0.2",
-    "connect-flash" : "~0.1.1", 	
-    "bcrypt-nodejs" : "latest",
-    "morgan": "~1.0.0",
+  "dependencies": {
+    "bcrypt-nodejs": "latest",
     "body-parser": "~1.0.0",
+    "connect-flash": "~0.1.1",
     "cookie-parser": "~1.0.0",
-    "method-override": "~1.0.0",
+    "ejs": "~0.8.5",
+    "express": "~4.0.0",
     "express-session": "~1.0.0",
-    "node-static": "~0.7.6"
+    "lodash": "^3.6.0",
+    "method-override": "~1.0.0",
+    "mongoose": "~3.8.1",
+    "morgan": "~1.0.0",
+    "node-static": "~0.7.6",
+    "passport": "~0.1.17",
+    "passport-facebook": "~1.0.2",
+    "passport-local": "~0.1.6"
   },
-  "scripts" : {
-    "prestart" : "npm install",
-    "start" : "node server.js"
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node server.js"
   }
 }
