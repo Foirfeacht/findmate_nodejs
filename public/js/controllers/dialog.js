@@ -4,6 +4,30 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
     $mdDialog.hide();
   };
 
+	$http.get('../api/meetings')
+		.success(function(data) {
+			$scope.meetings = data;
+			console.log(data);
+
+		})
+		.error(function (data) {
+			console.log('Error: ' + data);
+		});
+
+	$http.get('../api/users')
+		.success(function(data) {
+			$scope.users = data;
+			console.log(data);
+			for (var i =0; i < users.length; i++){
+				var user = $scope.users[i];
+				var username = user.facebook.name;
+				console.log(username);
+			}
+		})
+		.error(function (data) {
+			console.log('Error: ' + data);
+		});
+
 
   $scope.formData = {};
 
@@ -26,9 +50,10 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 
   $scope.formData.startTime = new Date().timeNow();
 
-  invitedUsers = [];
+	//$scope.userlist = $scope.users;
+  $scope.invitedUsers = [];
 
-  $scope.formData.invitedUsers = invitedUsers;
+  $scope.formData.invitedUsers = $scope.invitedUsers;
 
 
 
@@ -80,6 +105,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
    $http.get('../api/users')
         .success(function(data) {
             $scope.users = data;
+		   $scope.userlist = $scope.users;
             console.log(data);
         })
         .error(function (data) {
