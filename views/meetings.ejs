@@ -143,16 +143,28 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting._owner._id === logged_in_user._id">
 	             
-	                    <div layout="column" class="meeting-title"><a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="column">{{ meeting.description }}</div>
-	                    <div layout="column">{{ meeting.category }}</div>
-	                    <div layout="column">{{ meeting.ownerName }}</div>
-	                    <div layout="column">{{ meeting.visibility }}</div>
-                        <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}} {{ meeting.startTime | date:'HH:mm'}}</div>
-	                    <div layout="column">{{ meeting.invitedUsers.length }}</div>
-	                    <div layout="column">{{ meeting.participants.length }}</div>
+	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
+	                    <div layout="row"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+
+	                    <h6>Приглашенные</h6>
+	                    <div layout="row" class="userlist">
+                    		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		</div>
+	                    </div>
+
+	                    <h6>Участники</h6>
+	                    <div layout="row" class="userlist">
+                    		<div ng-repeat="user in meeting.participants | limitTo: 5">
+                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		</div>
+	                    </div>
 	                    <div layout="column">
-	                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)">Удалить</md-button>
+	                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
 	                    </div>
 	                </div>
 
@@ -174,19 +186,33 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" >
 	                    
-	                    <div layout="column" class="meeting-title"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="column">{{ meeting.description }}</div>
-	                    <div layout="column">{{ meeting.category }}</div>
-	                    <div layout="column"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="column">{{ meeting.visibility }}</div>
-	                    <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
-	                    <div layout="column">{{ meeting.invitedUsers.length }}</div>
-	                    <div layout="column">{{ meeting.participants.length }}</div>
-	                    <div layout="column">
+	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
+	                    <div layout="row"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+
+	                    <h6>Приглашенные</h6>
+	                    <div layout="row" class="userlist">
+                    		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		</div>
+	                    </div>
+
+	                    <h6>Участники</h6>
+	                    <div layout="row" class="userlist">
+                    		<div ng-repeat="user in meeting.participants | limitTo: 5">
+                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		</div>
+	                    </div>
+	                    <div layout="row">
 	                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
+
+	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
 	                    </div>
 	                    <div layout="column">
-	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
+	                        
 	                    </div>
 	                </div>
 
@@ -210,14 +236,26 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.invited">
 	                    
-	                    <div layout="column" class="meeting-title"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="column">{{ meeting.description }}</div>
-	                    <div layout="column">{{ meeting.category }}</div>
-	                    <div layout="column">{{ meeting.ownerName }}</div>
-	                    <div layout="column">{{ meeting.visibility }}</div>
-	                    <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
-	        			<div layout="column">{{ meeting.invitedUsers.length }}</div>
-	                    <div layout="column">{{ meeting.participants.length }}</div>
+	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
+	                    <div layout="row"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+
+	                    <h6>Приглашенные</h6>
+	                    <div layout="row" class="userlist">
+                    		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		</div>
+	                    </div>
+
+	                    <h6>Участники</h6>
+	                    <div layout="row" class="userlist">
+                    		<div ng-repeat="user in meeting.participants | limitTo: 5">
+                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		</div>
+	                    </div>
 	                    <div layout="column">
 	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
 	                    </div>
@@ -242,14 +280,26 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate">
 	                 
-	                    <div layout="column" class="meeting-title"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="column">{{ meeting.description }}</div>
-	                    <div layout="column">{{ meeting.category }}</div>
-	                    <div layout="column">{{ meeting.ownerName }}</div>
-	                    <div layout="column">{{ meeting.visibility }}</div>
-	                    <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
-	        			<div layout="column">{{ meeting.invitedUsers.length }}</div>
-	                    <div layout="column">{{ meeting.participants.length }}</div>
+	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
+	                    <div layout="row"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+
+	                    <h6>Приглашенные</h6>
+	                    <div layout="row" class="userlist">
+                    		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		</div>
+	                    </div>
+
+	                    <h6>Участники</h6>
+	                    <div layout="row" class="userlist">
+                    		<div ng-repeat="user in meeting.participants | limitTo: 5">
+                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		</div>
+	                    </div>
 	                    <div layout="column">
 	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
 	                    </div>
@@ -274,17 +324,26 @@
 
                     <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="!meeting.active">
                     
-                        <div layout="column" class="meeting-title"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-                        <div layout="column">{{ meeting.description }}</div>
-                        <div layout="column">{{ meeting.category }}</div>
-                        <div layout="column">{{ meeting.ownerName }}</div>
-                        <div layout="column">{{ meeting.visibility }}</div>
-                        <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
-                        <div layout="column">{{ meeting.invitedUsers.length }}</div>
-                        <div layout="column">{{ meeting.participants.length }}</div>
-                        <div layout="column">
-                            <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
-                        </div>
+                        <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
+	                    <div layout="row"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+
+	                    <h6>Приглашенные</h6>
+	                    <div layout="row" class="userlist">
+                    		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		</div>
+	                    </div>
+
+	                    <h6>Участники</h6>
+	                    <div layout="row" class="userlist">
+                    		<div ng-repeat="user in meeting.participants | limitTo: 5">
+                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		</div>
+	                    </div>
                     </div>
 
                     <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
@@ -306,17 +365,29 @@
 
                     <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.ownerFacebook === friend.id">
     
-                        <div layout="column" class="meeting-title"><a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-                        <div layout="column">{{ meeting.description }}</div>
-                        <div layout="column">{{ meeting.category }}</div>
-                        <div layout="column">{{ meeting.ownerName }}</div>
-                        <div layout="column">{{ meeting.visibility }}</div>
-                        <div layout="column">{{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
-                        <div layout="column">{{ meeting.invitedUsers.length }}</div>
-                        <div layout="column">{{ meeting.participants.length }}</div>
-                        <div layout="column">
-                            <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
-                        </div>
+                        <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
+	                    <div layout="row"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+
+	                    <h6>Приглашенные</h6>
+	                    <div layout="row" class="userlist">
+                    		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		</div>
+	                    </div>
+
+	                    <h6>Участники</h6>
+	                    <div layout="row" class="userlist">
+                    		<div ng-repeat="user in meeting.participants | limitTo: 5">
+                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		</div>
+	                    </div>
+	                    <div layout="column">
+	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
+	                    </div>
                     </div>
 
                     <div class="alert alert-danger" role="alert" ng-if="!meetings.length">

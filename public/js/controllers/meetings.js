@@ -26,6 +26,10 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
 			 for(var i = 0; i < meetingsLength; i++) {
 				 var meeting = meetings[i];
 
+                 //remove duplicates
+                 meeting.invitedUsers = _.uniq(meeting.invitedUsers);
+                 meeting.participants = _.uniq(meeting.participants);
+                 
 				 // date filter
 				 var meetingDate = meeting.startDate;
 				 if (meetingDate > dateNow){

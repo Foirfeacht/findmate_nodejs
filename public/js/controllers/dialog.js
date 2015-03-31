@@ -1,35 +1,34 @@
-findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDialog', function($scope, $http, mapService, $mdDialog) {
+findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDialog', 'moment', 'dialogService',
+                     function($scope, 
+                              $http, 
+                              mapService, 
+                              dialogService,
+                              $mdDialog,
+                              moment) {
 
   $scope.hide = function() {
     $mdDialog.hide();
   };
 
-	$http.get('../api/meetings')
-		.success(function(data) {
-			$scope.meetings = data;
-			console.log(data);
-
-		})
-		.error(function (data) {
-			console.log('Error: ' + data);
-		});
-
-	$http.get('../api/users')
-		.success(function(data) {
-			$scope.users = data;
-			console.log(data);
-			for (var i =0; i < users.length; i++){
-				var user = $scope.users[i];
-				var username = user.facebook.name;
-				console.log(username);
-			}
-		})
-		.error(function (data) {
-			console.log('Error: ' + data);
-		});
+  $scope.users = dialogService.users;
+  console.log(dialogService.users);
 
 
-  $scope.formData = {};
+
+   $scope.formData = {
+    latLng: mapService.latLng,
+    category: "Спорт",
+    visibility: "all",
+    startDate: new Date()
+    //startTime: new Date().timeNow()
+  };
+
+  $scope.invitedUsers = [];
+  $scope.invitedUsersSettings = {
+    scrollableHeight: '100px',
+    scrollable: true,
+    enableSearch: true
+  }
 
   // working with service
   $scope.latLng = mapService.latLng;
@@ -39,19 +38,17 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 
   $scope.formData.position = $scope.latLng.lat() + ', ' + $scope.latLng.lng();
 
-  $scope.formData.category = "Спорт";
-  $scope.formData.visibility = "all";
+  //$scope.formData.category = "Спорт";
+  //$scope.formData.visibility = "all";
 
-  $scope.formData.startDate = Date.now();
+  //$scope.formData.startDate = Date.now();
 
   Date.prototype.timeNow = function () {
      return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
   }
 
-  $scope.formData.startTime = new Date().timeNow();
+  //$scope.formData.startTime = new Date().timeNow();
 
-	//$scope.userlist = $scope.users;
-  $scope.invitedUsers = [];
 
   $scope.formData.invitedUsers = $scope.invitedUsers;
 

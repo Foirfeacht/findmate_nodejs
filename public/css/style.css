@@ -224,6 +224,7 @@ md-option {
 	border: 1px thin rgba(0, 0, 0, 0.8);
 	box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	padding: 20px;
+	min-height: 520px;
 }
 
 .meeting div {
@@ -234,9 +235,22 @@ md-option {
 	font-weight: 700;
 }
 
-.meeting .delete-button {
-	width: 200px;
+.meeting .userlist img {
+	border: 1px thin #fff;
+	border-radius: 50%;
+	margin-right: 8px;
+}
+
+.meeting .delete-button,
+.join-button {
+	width: auto;
+	padding: 10px 15px;
+	display: block;
 	margin: 10px auto;
+}
+
+.delete-button {
+	min-width: 139px;
 }
 
 .create-button {

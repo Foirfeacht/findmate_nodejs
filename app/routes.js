@@ -193,7 +193,7 @@ module.exports = function(app, passport) {
 	        Meeting.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, meeting) {
 		            if (!err) {
 		                console.log("meeting updated");
-		                res.send({ status: 'OK', meeting:meeting });
+		                //res.send({ status: 'OK', meeting:meeting });
 		                // get and return all the meetings after you create another
 			            Meeting.find(function(err, meetings) {
 			                if (err)
