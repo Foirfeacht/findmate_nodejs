@@ -181,11 +181,18 @@ md-option {
 	width: 100%;
 }
 
+.inviteDropdown,
+.inviteDropdown > div {
+	width: 100%;
+}
+
 .form input,
 .form select {
 	margin: 10px auto;
 	width: 100%;
 }
+
+
 
 .meeting-display {
 	width: 100%;

@@ -185,10 +185,37 @@ module.exports = function(app, passport) {
 
     });
 
+    // decline invitation
+
+	app.put('/decline/meetings/:id', isLoggedIn, function (req, res){
+	    	var user = req.user;
+	        var update = { $pull: {invitedUsers: req.user} };
+
+	        Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
+		            if (!err) {
+		                console.log("meeting updated");
+			            Meeting.find(function(err, meetings) {
+			                if (err)
+			                    res.send(err)
+			                res.json(meetings);
+			            });
+		            } else {
+		                if(err.name == 'ValidationError') {
+		                    res.statusCode = 400;
+		                    res.send({ error: 'Validation error' });
+		                } else {
+		                    res.statusCode = 500;
+		                    res.send({ error: 'Server error' });
+		                }
+		                console.log('Internal error(%d): %s',res.statusCode,err.message);
+		            }
+		     });
+		});
+
 	//join a meeting
 	    app.put('/join/meetings/:id', isLoggedIn, function (req, res){
 	    	var user = req.user;
-	        var update = { $addToSet: {participants: req.user} };
+	        var update = { $addToSet: {participants: req.user}, $pull: {invitedUsers: req.user} };
 
 	        Meeting.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, meeting) {
 		            if (!err) {
@@ -367,6 +394,18 @@ module.exports = function(app, passport) {
                     res.send(err)
                 res.json(meetings);
             });
+        });
+    });
+
+    // delete a meeting from single meeting page
+    app.delete('/api/meeting/:meeting_id', isLoggedIn, function(req, res) {
+        Meeting.remove({
+            _id : req.params.meeting_id
+        }, function(err, meeting) {
+            if (err)
+                res.send(err);
+
+            res.redirect('/meetings');
         });
     });
 

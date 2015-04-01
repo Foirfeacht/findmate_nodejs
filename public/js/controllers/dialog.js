@@ -25,6 +25,55 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
       console.log('Error: ' + data);
     });
 
+    $scope.pushFriends = function(){
+      var users = $scope.users;
+      var friends = $scope.friends;
+      var userLength = users.length;
+      var friendsLength = friends.length;
+      for (var i = 0; i<userLength; i++){
+        var user = users[i];
+        var id = user.facebook.id;
+        for (var u = 0; u<friendsLength; u++){
+          var friend = friends[u];
+          if (id === friend.id){
+            $scope.friendUsers.push(user);
+          }
+        }
+      }
+    }
+
+    $scope.loadFriends = function(user){
+       var user = user
+       var friendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
+       $http.get(friendsRequest)
+         .success(function(data) {
+           $scope.friends = data.data;    
+           $scope.pushFriends();
+         })
+         .error(function (data) {
+           console.log('Error: ' + data);
+         });
+     };
+
+     //init logged in user from service
+    $scope.$watch('mapService.user', function () {
+      $scope.loadFriends(mapService.user);
+      
+    });
+
+    $scope.friendUsers = [];
+    $scope.invitedUsers = [];
+    $scope.invitedUsersSettings = {
+        scrollableHeight: '200px',
+        scrollable: true,
+        enableSearch: true,
+        displayProp: 'username',
+        idProp: '_id',
+        externalIdProp: ''
+    };
+    $scope.invitedUsersText = {
+        buttonDefaultText: 'Пригласить друзей'
+    }
   
 
   
@@ -40,18 +89,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
     invitedUsers: []
   };
 
-  $scope.invitedUsers = [];
-  $scope.invitedUsersSettings = {
-    scrollableHeight: '200px',
-    scrollable: true,
-    enableSearch: true,
-    displayProp: 'username',
-    idProp: '_id',
-    externalIdProp: ''
-  };
-  $scope.invitedUsersText = {
-    buttonDefaultText: 'Пригласить друзей'
-  }
+  
 
   // working with service
   $scope.latLng = mapService.latLng;
