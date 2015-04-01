@@ -48,7 +48,7 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
                  var invitedArrayLength = invitedArray.length;
 				 for (var u = 0; u< invitedArrayLength; u++){
                     var invitedUser = invitedArray[u];
-                    if(invitedUser.facebook.id === $scope.logged_in_user.facebook.id){
+                    if(invitedUser._id === $scope.logged_in_user._id){
                         meeting.invited = true;
                     } else {
                         meeting.invited = false;
@@ -61,7 +61,7 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
                  var participantsArrayLength = participantsArray.length;
                  for (var j = 0; j < participantsArrayLength; j++){
                     var joinedUser = participantsArray[j];
-                    if(joinedUser.facebook.id === $scope.logged_in_user.facebook.id){
+                    if(joinedUser._id === $scope.logged_in_user._id){
                         meeting.joined = true;
                     } else {
                         meeting.joined = false;
@@ -147,8 +147,41 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
         $http.put('/join/meetings/' + id)
             .success(function (data) {
                 $scope.meetings = data;
-                //$scope.active = false;
+                var meetings = $scope.meetings;
                 console.log(data);
+                var meetingsLength = meetings.length;
+                 for(var i = 0; i < meetingsLength; i++) {
+                     var meeting = meetings[i];
+                     if (meeting._id === id){
+                        meeting.joined = true;
+                        console.log(meeting);
+                     }
+                     
+                 }
+
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            })
+    };
+
+    $scope.unjoinMeeting = function(id){
+
+        $http.put('/unjoin/meetings/' + id)
+            .success(function (data) {
+                $scope.meetings = data;
+                var meetings = $scope.meetings;
+                console.log(data);
+                var meetingsLength = meetings.length;
+                 for(var i = 0; i < meetingsLength; i++) {
+                     var meeting = meetings[i];
+                     if (meeting._id === id){
+                        meeting.joined = false;
+                        console.log(meeting);
+                     }
+                     
+                 }
+
             })
             .error(function (data) {
                 console.log('Error: ' + data);
