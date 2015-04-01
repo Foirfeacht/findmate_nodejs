@@ -378,7 +378,7 @@ module.exports = function(app, passport) {
 
 	app.param('userId', userByID);
 
-	app.get('/user/:userId', isLoggedIn, function(req, res){
+	app.get('/users/:userId', isLoggedIn, function(req, res){
 		res.render('userprofile.ejs', {
 			    	profile: req.profile,
 					user : req.user

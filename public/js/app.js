@@ -3,8 +3,7 @@ var findMate = angular.module('findMate', ['ui.bootstrap',
                                             'ngMaterial', 
                                             'ngMap', 
                                             'angularMoment', 
-                                            'angularjs-dropdown-multiselect',
-	                                        'isteven-multi-select'
+                                            'angularjs-dropdown-multiselect'
                                             ]);
 
 findMate.run(function(amMoment) {
@@ -16,7 +15,7 @@ findMate.constant('angularMomentConfig', {
     timezone: 'Europe/Minsk' // optional
 });
 
-findMate	.filter('filterByFriends', function () {
+findMate.filter('filterByFriends', function () {
   return function (item) {
   		if (item.facebook.name){};
       return item.toUpperCase();

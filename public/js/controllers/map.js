@@ -1,11 +1,10 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', 'mapService', 'dialogService', '$mdSidenav', '$mdDialog', 
+findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSidenav', '$mdDialog', 
 					function($scope,
 							 $http,
-							 mapService,
-							 dialogService, 
+							 mapService, 
 							 $mdSidenav, 
 							 $mdDialog) {
 
@@ -57,7 +56,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', 'dialogSe
             $scope.geocoder = new google.maps.Geocoder();
 
             $scope.latLng = new google.maps.LatLng($scope.latitude, $scope.longitude);
-            console.log($scope.latLng);
 
             $scope.codeLatLng = function() {
                 $scope.geocoder.geocode({'latLng': $scope.latLng, address: 'address', region: ', BY'}, function(results, status) {
@@ -178,32 +176,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', 'dialogSe
 
     $scope.showMine = false;
 
-    // deal with users service
-   	$http.get('../api/users')
-		.success(function(data) {
-			$scope.users = data;
-			console.log(data);
-      $scope.usernames = [];
-			for (var i =0; i < data.length; i++){
-				var user = data[i];
-				var username = user.facebook.name;
-				console.log(username);
-		        $scope.usernames.push(username);
-			}
-		})
-		.error(function (data) {
-			console.log('Error: ' + data);
-		});
-
-	// pass to service
-	$scope.$watch('users', function() {
-        dialogService.getUsers($scope.users);
-    });
-
-    $scope.$on('usersUpdated', function() {
-        $scope.users = dialogService.users;
-        console.log('updated');
-    });
 
     // side nav
     $scope.toggleNav = function() {

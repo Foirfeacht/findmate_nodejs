@@ -9,7 +9,7 @@
 
         <link rel="stylesheet" href="../../public/css/style.css">        
 	</head>
-	<body ng-cloak ng-controller="userController" ng-init="logged_in_user=<%= JSON.stringify(user)%>">
+	<body ng-cloak ng-controller="userController" ng-init="currentUser = <%= JSON.stringify(profile)%>; logged_in_user=<%= JSON.stringify(user)%>">
         <!--=============================== navigation ===============================-->
         <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
             <nav>
@@ -62,9 +62,9 @@
           <div class="col-sm-6">
             <div class="well">
               <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-                <div><img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{user.facebook.name}}"></div>
+                <div><img src="https://graph.facebook.com/{{currentUser.facebook.id}}/picture?height=350&width=250" alt="{{user.facebook.name}}"></div>
                 <p>
-                  <strong>name</strong>: {{user.facebook.name}}<br>          
+                  <strong>name</strong>: {{currentUser.facebook.name}}<br>          
                 </p>
 
 
@@ -86,6 +86,7 @@
     <script src="../../bower_components/moment/locale/ru.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="../../bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+    <script src="../../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
     <script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">
     </script>

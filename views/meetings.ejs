@@ -143,10 +143,10 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting._owner._id === logged_in_user._id">
 	             
-	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
 	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
-	                    <div layout="row"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
 	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
 
@@ -186,10 +186,10 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" >
 	                    
-	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
 	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
-	                    <div layout="row"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
 	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
 
@@ -236,10 +236,10 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.invited">
 	                    
-	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
 	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
-	                    <div layout="row"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
 	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
 
@@ -271,7 +271,7 @@
 
             <!-- tab four -->
 
-	        <div role="tabpanel" id="tab4-content" aria-labelledby="tab4" ng-switch-when="3" md-swipe-left="next()" md-swipe-right="previous()" ng-if="meeting.joined">
+	        <div role="tabpanel" id="tab4-content" aria-labelledby="tab4" ng-switch-when="3" md-swipe-left="next()" md-swipe-right="previous()" ng-if="meeting.joined === true">
                    
 	            <h1 class="active-meetings">Принятые приглашения</h1>
 	            <div class="meetings-display row">
@@ -280,10 +280,10 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate">
 	                 
-	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
 	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
-	                    <div layout="row"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
 	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
 
@@ -324,10 +324,10 @@
 
                     <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="!meeting.active">
                     
-                        <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+                        <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
 	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
-	                    <div layout="row"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
 	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
 
@@ -365,10 +365,10 @@
 
                     <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.ownerFacebook === friend.id">
     
-                        <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="api/meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+                        <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
 	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
-	                    <div layout="row"><a href="api/users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
 	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
 
@@ -428,7 +428,6 @@
     <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="../../bower_components/lodash/dist/lodash.min.js"></script>
     <script src="../../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
-    <script src="../../public/js/multi-select/isteven-multi-select.js"></script>
 	<script src="../../public/js/app.js"></script>
     <script src="../../public/js/services/routingService.js"></script>
     <script src="../../public/js/controllers/meetings.js"></script>

@@ -19,17 +19,22 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
             console.log(data);
             var dateNow = new Date().toJSON();
 
-            console.log($scope.logged_in_user);
-
             // loop through data
             var meetingsLength = meetings.length;
 			 for(var i = 0; i < meetingsLength; i++) {
 				 var meeting = meetings[i];
 
                  //remove duplicates
-                 meeting.invitedUsers = _.uniq(meeting.invitedUsers);
-                 meeting.participants = _.uniq(meeting.participants);
-                 
+                 meeting.invitedUsers = _.uniq(meeting.invitedUsers,
+                    function(item, key, a){
+                        return item.a;
+                    });
+
+                 meeting.participants = _.uniq(meeting.participants,
+                    function(item, key, a){
+                        return item.a;
+                    });
+
 				 // date filter
 				 var meetingDate = meeting.startDate;
 				 if (meetingDate > dateNow){
@@ -48,6 +53,7 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
                     } else {
                         meeting.invited = false;
                     }
+                    console.log(meeting.invited);
                  }// end invited filter
 
                  // participants filter
@@ -60,6 +66,7 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
                     } else {
                         meeting.joined = false;
                     }
+                    console.log(meeting.joined);
                  }// end participants filter
 
 			 }; // end for loop

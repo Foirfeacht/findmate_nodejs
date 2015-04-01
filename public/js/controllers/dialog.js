@@ -1,4 +1,4 @@
-findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDialog', 'moment', 'dialogService',
+findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDialog', 'moment',
                      function($scope, 
                               $http, 
                               mapService, 
@@ -10,8 +10,24 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
     $mdDialog.hide();
   };
 
-  $scope.users = dialogService.users;
-  console.log(dialogService.users);
+
+  // deal with users service
+  $http.get('../api/users')
+    .success(function(data) {
+      $scope.users = data;
+      console.log(data);
+      for (var i =0; i < data.length; i++){
+        var user = data[i];
+        user.username = user.facebook.name;
+      }
+    })
+    .error(function (data) {
+      console.log('Error: ' + data);
+    });
+
+  
+
+  
 
 
 
@@ -20,14 +36,21 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
     category: "Спорт",
     visibility: "all",
     startDate: new Date(),
-    startTime: new Date()
+    startTime: new Date(),
+    invitedUsers: []
   };
 
   $scope.invitedUsers = [];
   $scope.invitedUsersSettings = {
-    scrollableHeight: '100px',
+    scrollableHeight: '200px',
     scrollable: true,
-    enableSearch: true
+    enableSearch: true,
+    displayProp: 'username',
+    idProp: '_id',
+    externalIdProp: ''
+  };
+  $scope.invitedUsersText = {
+    buttonDefaultText: 'Пригласить друзей'
   }
 
   // working with service
@@ -40,7 +63,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 
   Date.prototype.timeNow = function () {
      return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
-  }
+  };
 
   //$scope.timeNow = Date.now().;
   $scope.formData.invitedUsers = $scope.invitedUsers;
@@ -48,6 +71,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 
 
   $scope.inviteUser = function(user){
+    var invitedUsers = $scope.invitedUsers;
     var index = invitedUsers.indexOf(user);
     console.log(index);
     if(index < 0){
@@ -92,35 +116,20 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
             console.log('Error: ' + data);
         });
 
-   $http.get('../api/users')
-        .success(function(data) {
-            $scope.users = data;
-		   $scope.userlist = $scope.users;
-            console.log(data);
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
+
 
   $scope.createMeeting = function() {
-        //if($scope.latitude && $scope.longitude){
-            $http.post('../api/meetings', $scope.formData)
-                    .success(function (data) {
-                        console.log($scope.formData);
+      $http.post('../api/meetings', $scope.formData)
+              .success(function (data) {
+                  console.log($scope.formData);
 
-                        $scope.formData = {}; // clear the form so our user is ready to enter another
-                        $scope.meetings = data;
-                        console.log(data);
-
-                        
-                        $mdDialog.hide();
-                    })
-                    .error(function(data) {
-                        console.log('Error: ' + data);
-                    })
-        //}
-        //else {
-        //    console.log('no coordinates provided')
-        //}
+                  $scope.formData = {}; // clear the form so our user is ready to enter another
+                  $scope.meetings = data;
+                  console.log(data);                  
+                  $scope.hide();
+              })
+              .error(function(data) {
+                  console.log('Error: ' + data);
+              })
     };
 }]);
