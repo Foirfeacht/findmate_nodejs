@@ -192,7 +192,7 @@ module.exports = function(app, passport) {
 
 	        Meeting.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, meeting) {
 		            if (!err) {
-		                console.log("meeting updated");
+		                console.log("meeting joined");
 			            Meeting.find(function(err, meetings) {
 			                if (err)
 			                    res.send(err)
@@ -218,7 +218,7 @@ module.exports = function(app, passport) {
 
 	        Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 		            if (!err) {
-		                console.log("meeting unkoined");
+		                console.log("meeting unjoined");
 			            Meeting.find(function(err, meetings) {
 			                if (err)
 			                    res.send(err)
