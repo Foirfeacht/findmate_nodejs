@@ -1,3 +1,7 @@
+/* =============================
+   ========== GENERAL ==========
+   ============================= */
+
 body {
 	margin: 0;
 	height: 100%;
@@ -16,7 +20,9 @@ a:hover {
 
 
 
-/* menu */
+/* =============================
+   =========== MENU ============
+   ============================= */
 
 .menu-button{
 	position: fixed;
@@ -108,7 +114,9 @@ a:hover {
 }
 
 
-/* map */
+/* =============================
+   ============ MAP ============
+   ============================= */
 .map-container {
 	height: 1000px; 
 	height: 100vh;
@@ -132,6 +140,10 @@ map {
 	top: 0;
 	left: 0;
 }
+
+/* =============================
+   ========== DIALOG ==========
+   ============================= */
 
 md-dialog {
 	width: 80%;
@@ -181,9 +193,25 @@ md-option {
 	width: 100%;
 }
 
+/******* bOotstrap dropdown *******/
+.visibility > div {
+	width: 50%;
+}
+
 .inviteDropdown,
 .inviteDropdown > div {
 	width: 100%;
+}
+
+.dropdown-toggle {
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #333;
+}
+
+.dropdown-menu {
+	width: 100%;
+	border: none;
 }
 
 .form input,
@@ -192,12 +220,17 @@ md-option {
 	width: 100%;
 }
 
-
+/* =============================
+   ========== MEETING ==========
+   ============================= */
 
 .meeting-display {
 	width: 100%;
 	overflow: hidden;
 }
+
+
+ /********* SEARCH AND FILTERS ********/
 
 .search {
 	width: 80%;

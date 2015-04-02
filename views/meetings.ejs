@@ -164,6 +164,7 @@
                     		</div>
 	                    </div>
 	                    <div layout="column">
+                            <md-button type="submit" class="md-raised md-warn delete-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Редактировать</md-button>
 	                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
 	                    </div>
 	                </div>

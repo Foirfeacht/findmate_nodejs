@@ -38,27 +38,30 @@
 	                
 	            </section>
 
-	        <section layout="row">
-
+	        <section layout="row" class="visibility">
+	        	<div>
 	                <md-select ng-model="formData.visibility" placeholder="Эту встречу увидят...">
 	                    <md-option value="Общие" ng-selected="selected" default>Все</md-option>
 	                    <md-option value="Друзья">Друзья</md-option>
 	                </md-select>
-	                
+	            </div>
+	            <div ng-if="formData.visibility === 'Друзья' ">
+	                <div ng-dropdown-multiselect="" options="friendUsers" selected-model="invitedUsers" extra-settings="invitedUsersSettings" translation-texts="invitedUsersText" class="inviteDropdown"></div>
+	            </div>
                 
 	        </section>
-	        <section layout="row" ng-if="formData.visibility === 'Друзья' ">
-                <div ng-dropdown-multiselect="" options="friendUsers" selected-model="invitedUsers" extra-settings="invitedUsersSettings" translation-texts="invitedUsersText" class="inviteDropdown"></div>
+	        <section layout="row" >
+                
             </section>
           
 
 	       
 	        <section layout="row" layout-align="center center" class="buttons">
 	        	<div>
-		            <md-button class="md-raised" nh-click="$scope.cancel()">Отмена</md-button>
+		            <md-button class="md-raised" ng-click="cancel()">Отмена</md-button>
 	            </div>
 	            <div>
-		            <md-button class="md-raised md-primary" type="submit" ng-click="createMeeting()">Создать</md-button>
+		            <md-button class="md-raised md-primary" ng-click="createMeeting()">Создать</md-button>
 	            </div>
 	        </section>
 	    </div><!-- end form -->

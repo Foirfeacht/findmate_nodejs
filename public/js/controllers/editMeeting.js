@@ -1,10 +1,10 @@
-findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDialog', 'moment',
+findMate.controller('EditMeetingController', ['$scope', '$http', 'mapService', '$mdDialog', 'moment',
                      function($scope, 
                               $http, 
                               mapService, 
                               dialogService,
-                              $mdDialog,
-                              moment) {
+                              $mdDialog
+                              ) {
 
 
   // deal with users service
@@ -51,11 +51,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
          });
      };
 
-     //init logged in user from service
-    $scope.$watch('mapService.user', function () {
-      $scope.loadFriends(mapService.user);
-      
-    });
+     
 
     $scope.friendUsers = [];
     $scope.invitedUsers = [];
