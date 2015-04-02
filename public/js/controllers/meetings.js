@@ -24,7 +24,7 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
 			 for(var i = 0; i < meetingsLength; i++) {
 				 var meeting = meetings[i];
 
-                 //remove duplicates
+                 //remove duplicates, delete this part later
                  meeting.invitedUsers = _.uniq(meeting.invitedUsers,
                     function(item, key, a){
                         return item.a;
@@ -126,14 +126,26 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
     $scope.updateMeeting = function (id) {
         // not implemented yet
     };
-;
 
-    $scope.completeMeeting = function(id){
-        $http.put('/api/meetings/' + id)
+    // decline invitation
+
+    $scope.declineInvitation = function(id){
+
+        $http.put('/decline/meetings/' + id)
             .success(function (data) {
                 $scope.meetings = data;
-                //$scope.active = false;
+                var meetings = $scope.meetings;
                 console.log(data);
+                var meetingsLength = meetings.length;
+                 for(var i = 0; i < meetingsLength; i++) {
+                     var meeting = meetings[i];
+                     if (meeting._id === id){
+                        meeting.invited = false;
+                        console.log(meeting);
+                     }
+                     
+                 }
+
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -154,6 +166,7 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
                      var meeting = meetings[i];
                      if (meeting._id === id){
                         meeting.joined = true;
+                        meeting.invited = false;
                         console.log(meeting);
                      }
                      
@@ -164,6 +177,8 @@ findMate.controller('meetingsController', ['$scope', '$http', '$routeParams', '$
                 console.log('Error: ' + data);
             })
     };
+
+    // unjoin meeting
 
     $scope.unjoinMeeting = function(id){
 

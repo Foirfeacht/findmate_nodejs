@@ -63,20 +63,22 @@
 
                         <h6>Приглашенные</h6>
                         <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                            <div ng-repeat="user in currentMeeting.invitedUsers | limitTo: 5">
                                 <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
                             </div>
                         </div>
 
                         <h6>Участники</h6>
                         <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.participants | limitTo: 5">
+                            <div ng-repeat="user in currentMeeting  .participants | limitTo: 5">
                                 <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
                             </div>
                         </div>
                         <div layout="row">
-                            <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-if="currentMeeting._owner._id !== logged_in_user._id">Учавствовать</md-button>
-                            <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(currentMeeting._id)" ng-if="currentMeeting._owner._id === logged_in_user._id"> Удалить</md-button>
+                            <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(currentMeeting._id)" ng-if="logged_in_user._id === currentMeeting._owner._id">Удалить</md-button>
+
+                            <md-button class="md-raised join-button" ng-click="joinMeeting(currentMeeting._id)" ng-if="!currentMeeting.joined">Учавствовать</md-button>
+                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(currentMeeting._id)" ng-if="currentMeeting.joined">Не учавствовать</md-button>
                         </div>
 
                    

@@ -209,6 +209,7 @@
 	                    <div layout="row">
 	                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
 
+	                        <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-if="meeting.invited">Отклонить приглашение</md-button>
 	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-if="!meeting.joined">Учавствовать</md-button>
                             <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-if="meeting.joined">Не учавствовать</md-button>
 	                    </div>
@@ -233,9 +234,7 @@
                 <h1 class="active-meetings">Приглашения</h1>
                 <div class="meetings-display row">
 
-	            
-	            
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.invited">
+	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.invited === true">
 	                    
 	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
@@ -258,7 +257,9 @@
                     		</div>
 	                    </div>
 	                    <div layout="column">
-	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
+		                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-if="meeting.invited">Отклонить приглашение</md-button>
+	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-if="!meeting.joined">Учавствовать</md-button>
+                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-if="meeting.joined">Не учавствовать</md-button>
 	                    </div>
 	                </div>
 
@@ -272,14 +273,12 @@
 
             <!-- tab four -->
 
-	        <div role="tabpanel" id="tab4-content" aria-labelledby="tab4" ng-switch-when="3" md-swipe-left="next()" md-swipe-right="previous()" ng-if="meeting.joined === true">
+	        <div role="tabpanel" id="tab4-content" aria-labelledby="tab4" ng-switch-when="3" md-swipe-left="next()" md-swipe-right="previous()" >
                    
 	            <h1 class="active-meetings">Принятые приглашения</h1>
-	            <div class="meetings-display row">
-
+	            <div class="meetings-display row">	            
 	            
-	            
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate">
+	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.joined === true">
 	                 
 	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
@@ -302,7 +301,9 @@
                     		</div>
 	                    </div>
 	                    <div layout="column">
-	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
+		                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-if="meeting.invited">Отклонить приглашение</md-button>
+	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-if="!meeting.joined">Учавствовать</md-button>
+                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-if="meeting.joined">Не учавствовать</md-button>
 	                    </div>
 	                </div>
 
@@ -320,8 +321,6 @@
 
                 <h1 class="active-meetings">Прошедшие</h1>
                 <div class="meetings-display row">
-
-
 
                     <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="!meeting.active">
                     
@@ -362,8 +361,6 @@
                 <h1 class="active-meetings">События друзей</h1>
                 <div class="meetings-display row" ng-repeat="friend in friends" ng-if="friends">
 
-
-
                     <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.ownerFacebook === friend.id">
     
                         <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
@@ -387,7 +384,9 @@
                     		</div>
 	                    </div>
 	                    <div layout="column">
-	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
+		                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-if="meeting.invited">Отклонить приглашение</md-button>
+	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-if="!meeting.joined">Учавствовать</md-button>
+                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-if="meeting.joined">Не учавствовать</md-button>
 	                    </div>
                     </div>
 

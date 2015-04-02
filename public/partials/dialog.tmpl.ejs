@@ -47,27 +47,12 @@
 	                
                 
 	        </section>
-	        <section layout="row">
-                <div ng-dropdown-multiselect="" options="users" selected-model="invitedUsers" extra-settings="invitedUsersSettings" translation-texts="invitedUsersText"></div>
+	        <section layout="row" ng-if="formData.visibility === 'Друзья' ">
+                <div ng-dropdown-multiselect="" options="friendUsers" selected-model="invitedUsers" extra-settings="invitedUsersSettings" translation-texts="invitedUsersText" class="inviteDropdown"></div>
             </section>
-           <!--<section layout="row">
-                <div
-                        isteven-multi-select
-                        input-model="users"
-                        output-model="invitedUsers"
-                        button-label="facebook.name"
-                        item-label="facebook.name _id"
-                        tick-property="ticked"
-                        >
-                </div>
-            </section>-->
+          
 
-	        <section layout="row">
-	        	<div ng-repeat="user in users">
-		        	<md-checkbox ng-model="invitedUsers" aria-label="{{user.facebook.name}}" ng-change="inviteUser(user)">{{user.facebook.name}}</md-checkbox>
-	        	</div>
-	                
-	        </section>
+	       
 	        <section layout="row" layout-align="center center" class="buttons">
 	        	<div>
 		            <md-button class="md-raised" nh-click="$scope.cancel()">Отмена</md-button>
