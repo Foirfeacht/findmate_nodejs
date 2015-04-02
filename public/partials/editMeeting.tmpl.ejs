@@ -1,0 +1,69 @@
+<md-dialog>
+	<md-content>
+		<div class="form">
+	        <section layout="column" layout-align="center center">
+
+	                <md-input-container>
+	                    <label>Название встречи</label>
+	                    <input type="text" ng-model="formData.title">
+	                </md-input-container>
+
+	                <md-input-container>
+	                    <label>Описание встречи</label>
+	                    <input type="text" ng-model="formData.description">
+	                </md-input-container>
+
+	        </section>
+
+	        <section layout="column" layout-align="center center">
+	        	<md-select ng-model="formData.category" placeholder="Выберите категорию">
+				    <md-option value="Спорт" ng-selected="selected" default>Спорт</md-option>
+				    <md-option value="Развлечения">Развлечения</md-option>
+				</md-select>
+	        </section>
+
+
+
+	            <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
+
+	                    <md-input-container>
+	                        <label>Время встречи</label>
+	                        <input type="time" ng-model="formData.startTime" min="timeNow()">
+	                    </md-input-container>
+
+	                    <md-input-container>
+	                        <label>Дата встречи</label>
+	                        <input type="date" ng-model="formData.startDate" min="Date.now()">
+	                    </md-input-container>
+	                
+	            </section>
+
+	        <section layout="row" class="visibility">
+	        	<div>
+	                <md-select ng-model="formData.visibility" placeholder="Эту встречу увидят...">
+	                    <md-option value="Общие" ng-selected="selected" default>Все</md-option>
+	                    <md-option value="Друзья">Друзья</md-option>
+	                </md-select>
+	            </div>
+	            <div ng-if="formData.visibility === 'Друзья' ">
+	                <div ng-dropdown-multiselect="" options="friendUsers" selected-model="invitedUsers" extra-settings="invitedUsersSettings" translation-texts="invitedUsersText" class="inviteDropdown"></div>
+	            </div>
+                
+	        </section>
+	        <section layout="row" >
+                
+            </section>
+          
+
+	       
+	        <section layout="row" layout-align="center center" class="buttons">
+	        	<div>
+		            <md-button class="md-raised" ng-click="cancel()">Отмена</md-button>
+	            </div>
+	            <div>
+		            <md-button class="md-raised md-primary" ng-click="saveMeeting()">Создать</md-button>
+	            </div>
+	        </section>
+	    </div><!-- end form -->
+	</md-content>
+</md-dialog>

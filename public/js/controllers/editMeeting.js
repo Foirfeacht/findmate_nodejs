@@ -1,13 +1,85 @@
-findMate.controller('EditMeetingController', ['$scope', '$http', 'mapService', '$mdDialog', 'moment',
+findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', '$mdDialog',
                      function($scope, 
-                              $http, 
-                              mapService, 
-                              dialogService,
-                              $mdDialog
-                              ) {
+                              $http,  
+                              editService,
+                              $mdDialog) {
+
+  // working with api
+
+    $scope.meetingId = editService.meetingId;
+    $scope.logged_in_user = editService.user;
+    console.log($scope.meetingId + ' ' + $scope.logged_in_user);
 
 
-  // deal with users service
+    // init necessary data
+
+    $scope.formData = {}
+  
+  //get single meeting
+  $http.get('../api/meetings/' + $scope.meetingId)
+        .success(function(data) {
+            $scope.meeting = data;
+            console.log(data);
+
+            var meeting = $scope.meeting;
+
+             //remove duplicates, delete this part later
+             meeting.invitedUsers = _.uniq(meeting.invitedUsers,
+                function(item, key, a){
+                    return item.a;
+                });
+
+             meeting.participants = _.uniq(meeting.participants,
+                function(item, key, a){
+                    return item.a;
+                });
+
+             //invited filter
+             var invitedArray = meeting.invitedUsers;
+             var invitedArrayLength = invitedArray.length;
+             for (var u = 0; u< invitedArrayLength; u++){
+                var invitedUser = invitedArray[u];
+                if(invitedUser._id === $scope.logged_in_user._id){
+                    meeting.invited = true;
+                } else {
+                    meeting.invited = false;
+                }
+                console.log(meeting.invited);
+             }// end invited filter
+
+             // participants filter
+             var participantsArray = meeting.participants;
+             var participantsArrayLength = participantsArray.length;
+             for (var j = 0; j < participantsArrayLength; j++){
+                var joinedUser = participantsArray[j];
+                if(joinedUser._id === $scope.logged_in_user._id){
+                    meeting.joined = true;
+                } else {
+                    meeting.joined = false;
+                }
+                console.log(meeting.joined);
+             }// end participants filter
+
+             //init formdata
+
+             $scope.formData = {
+                invitedUsers: meeting.invitedUsers,
+                participants: meeting.participants,
+                title: meeting.title,
+                description: meeting.description,
+                description: meeting.description,
+                startDate: meeting.startDate,
+                startTime: meeting.startTime,
+                updated_at: new Date(),
+                visibility: meeting.visibility
+             }
+
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });
+
+  // deal with users
   $http.get('../api/users')
     .success(function(data) {
       $scope.users = data;
@@ -66,69 +138,11 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'mapService', '
     $scope.invitedUsersText = {
         buttonDefaultText: 'Пригласить друзей'
     };
-  
-
-   $scope.formData = {
-    latLng: mapService.latLng,
-    category: "Спорт",
-    visibility: "all",
-    startDate: new Date(),
-    startTime: new Date(),
-    invitedUsers: []
-  };
 
   
-
-  // working with service
-  $scope.latLng = mapService.latLng;
-
-  $scope.formData.latitude = $scope.latLng.lat();
-  $scope.formData.longitude = $scope.latLng.lng();
-
-  $scope.formData.position = $scope.latLng.lat() + ', ' + $scope.latLng.lng();
-
   Date.prototype.timeNow = function () {
      return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
   };
-
-  //$scope.timeNow = Date.now().;
-  $scope.formData.invitedUsers = $scope.invitedUsers;
-
-
-
-  $scope.inviteUser = function(user){
-    var invitedUsers = $scope.invitedUsers;
-    var index = invitedUsers.indexOf(user);
-    console.log(index);
-    if(index < 0){
-    	invitedUsers.push(user);
-    } else {
-      invitedUsers.splice(index, 1);
-    }
-
-    console.log(invitedUsers);
-  }
-
-  //geocoder
-
-  var geocoder = new google.maps.Geocoder();
-
-            function codeLatLng() {
-                geocoder.geocode({'latLng': $scope.latLng, address: 'address', region: ', BY'}, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                      if (results[1]) {
-                        $scope.formData.location = results[1].formatted_address;
-                        console.log(results[1].formatted_address);
-                      } else {
-                        console.log('No results found');
-                      }
-                    } else {
-                      console.log('Geocoder failed due to: ' + status);
-                    }
-                });
-            };
-
-            codeLatLng();
 
   $scope.hide = function() {
     $mdDialog.hide();
@@ -139,25 +153,14 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'mapService', '
   };
 
 
-// working with api
 
-  $http.get('../api/meetings')
-        .success(function(data) {
-            $scope.meetings = data;
-            console.log(data);
+  
 
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
-
-
-
-  $scope.createMeeting = function() {
-      $http.post('../api/meetings', $scope.formData)
+  $scope.saveMeeting = function() {
+      $scope.formData.invitedUsers = $scope.invitedUsers;
+      $http.put('../api/meetings/' + editService.meetingId, $scope.formData)
               .success(function (data) {
                   console.log($scope.formData);
-
                   $scope.formData = {}; // clear the form so our user is ready to enter another
                   $scope.meetings = data;
                   console.log(data);                  

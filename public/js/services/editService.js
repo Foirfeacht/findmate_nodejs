@@ -1,15 +1,15 @@
  findMate.service('editService', function($rootScope) {
 
- 	var getId, id, user;
+ 	var getId, meetingId, user;
 
-    getId = function(id, user){
-        this.id = id;
+    getId = function(meetingId, user){
+        this.meetingId = meetingId;
         this.user = user;
         $rootScope.$broadcast("valuesUpdated");
     }      
 
  		return {
-		    id: id,
+		    meetingId: meetingId,
 		    user: user,
  			getId: getId
  		}

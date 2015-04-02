@@ -265,102 +265,38 @@ module.exports = function(app, passport) {
 		});
 
     //update a meeting
-/*   app.put('/api/meetings/:id', isLoggedIn, function (req, res){
-	    return Meeting.findById(req.params.id, function (err, meeting) {
-	        if(!meeting) {
-	            res.statusCode = 404;
-	            return res.send({ error: 'Not found' });
-	        }
-
-	        meeting.title = req.body.title;
-	        meeting.description = req.body.description;
-	        meeting.category = req.body.category;
-	        meeting.startDate = req.body.startDate;
-	        meeting.startTime = req.body.startTime;
-	        meeting.updated_at = Date.now;
-	        meeting.latitude = req.body.latitude;
-	        meeting.longitude = req.body.longitude;
-	        meeting.location = req.body.location;
-	        meeting.visibility = req.body.visibility;
-	        meeting.invitedUsers = req.body.invitedUsers;
-	        meeting.participants = req.body.participants;
-	        return meeting.save(function (err) {
-	            if (!err) {
-	                log.info("meeting updated");
-	                return res.send({ status: 'OK', meeting:meeting });
-	            } else {
-	                if(err.name == 'ValidationError') {
-	                    res.statusCode = 400;
-	                    res.send({ error: 'Validation error' });
-	                } else {
-	                    res.statusCode = 500;
-	                    res.send({ error: 'Server error' });
-	                }
-	                console.log('Internal error(%d): %s',res.statusCode,err.message);
-	            }
-	        });
-	    });
-	});
-*/
-
-    //update a meeting
     app.put('/api/meetings/:id', isLoggedIn, function (req, res){
-	    Meeting.findById(req.params.id, function (err, meeting) {
+    	var user = req.user;
+    	var update = {
+    		$set: {
+    		    		title: req.body.title,
+    			        description: req.body.description,
+    			        category: req.body.category,
+    			        startDate: req.body.startDate,
+    			        startTime: req.body.startTime,
+    			        updated_at: Date.now(),
+    			        visibility: req.body.visibility
+    			    },
+    		$push: {
+    			invitedUsers: req.body.invitedUsers
+    		}
+    	}
+	    Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 	        if(!meeting) {
 	            res.statusCode = 404;
 	            return res.send({ error: 'Not found' });
 	        }
+	        console.log("meeting updated");
+			            Meeting.find(function(err, meetings) {
+			                if (err)
+			                    res.send(err)
+			                res.json(meetings);
+			            });
 
-	        meeting.title = req.body.title;
-	        meeting.description = req.body.description;
-	        meeting.category = req.body.category;
-	        meeting.startDate = req.body.startDate;
-	        meeting.startTime = req.body.startTime;
-	        meeting.updated_at = Date.now();
-	        meeting.latitude = req.body.latitude;
-	        meeting.longitude = req.body.longitude;
-	        meeting.location = req.body.location;
-	        meeting.visibility = req.body.visibility;
-	        meeting.invitedUsers = req.body.invitedUsers;
-	        meeting.participants = req.body.participants;
-	        return meeting.save(function (err) {
-	            if (!err) {
-	                console.log("meeting updated");
-	                return res.send({ status: 'OK', meeting:meeting });
-	            } else {
-	                if(err.name == 'ValidationError') {
-	                    res.statusCode = 400;
-	                    res.send({ error: 'Validation error' });
-	                } else {
-	                    res.statusCode = 500;
-	                    res.send({ error: 'Server error' });
-	                }
-	                console.log('Internal error(%d): %s',res.statusCode,err.message);
-	            }
 	        });
-	    });
 	});
 
-	
-
-    //get single meeting
-    app.get('/api/meetings/:id', isLoggedIn, function(req, res) {
-		Meeting.findById(req.params.id, function(err, meeting) {
-			 //Meeting.findOne({ id: req.params.id}, function(err, meeting) {
-			  	if(!meeting){
-			  		return res.send({error: 'not found'});
-			  	}
-			    if (err) {
-			    	return res.send(err);
-			    }
-			    res.render('meeting.ejs', {
-			    	meeting: meeting,
-					user : req.user,
-					picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
-					friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
-				});
-		}).populate('_owner', 'ownerName');
-	});
+	//meeting by id middleware
 
 	var meetingByID = function(req, res, next, id) {
 		Meeting.findById(id).populate('_owner', 'ownerName').exec(function(err, meeting) {
@@ -371,7 +307,15 @@ module.exports = function(app, passport) {
 		}); 
 	};
 
+	// get single meetings
+
 	app.param('meetingId', meetingByID);
+
+	app.get('/api/meetings/:meetingId', isLoggedIn, function(req, res){
+		res.json(req.meeting);
+	});
+
+	//route to single meeting	
 
 	app.get('/meetings/:meetingId', isLoggedIn, function(req, res){
 		res.render('meeting.ejs', {
