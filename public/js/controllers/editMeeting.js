@@ -8,7 +8,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 
     $scope.meetingId = editService.meetingId;
     $scope.logged_in_user = editService.user;
-    console.log($scope.meetingId + ' ' + $scope.logged_in_user);
+    console.log($scope.meetingId);
 
 
     // init necessary data
@@ -68,8 +68,8 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                 title: meeting.title,
                 description: meeting.description,
                 description: meeting.description,
-                startDate: meeting.startDate,
-                startTime: meeting.startTime,
+                startDate: new Date(meeting.startDate),
+                startTime: new Date(meeting.startTime),
                 updated_at: new Date(),
                 visibility: meeting.visibility
              }
@@ -158,7 +158,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 
   $scope.saveMeeting = function() {
       $scope.formData.invitedUsers = $scope.invitedUsers;
-      $http.put('../api/meetings/' + editService.meetingId, $scope.formData)
+      $http.put('../edit/meetings/' + $scope.meetingId, $scope.formData)
               .success(function (data) {
                   console.log($scope.formData);
                   $scope.formData = {}; // clear the form so our user is ready to enter another

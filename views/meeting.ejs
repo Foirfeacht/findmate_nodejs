@@ -75,10 +75,11 @@
                             </div>
                         </div>
                         <div layout="row">
-                            <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(currentMeeting._id)" ng-if="logged_in_user._id === currentMeeting._owner._id">Удалить</md-button>
+                            <md-button class="md-raised md-warn delete-button" ng-click="deleteMeeting(currentMeeting._id)" ng-if="logged_in_user._id === currentMeeting._owner._id">Удалить</md-button>
+                            <md-button type="submit" class="md-raised join-button" ng-click="editMeeting(currentMeeting._id)" ng-if="logged_in_user._id === currentMeeting._owner._id">Редактировать</md-button>
 
-                            <md-button class="md-raised join-button" ng-click="joinMeeting(currentMeeting._id)" ng-if="!currentMeeting.joined">Учавствовать</md-button>
-                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(currentMeeting._id)" ng-if="currentMeeting.joined">Не учавствовать</md-button>
+                            <md-button class="md-raised join-button" ng-click="joinMeeting(currentMeeting._id)" ng-if="!currentMeeting.joined && logged_in_user._id !== currentMeeting._owner._id">Учавствовать</md-button>
+                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(currentMeeting._id)" ng-if="currentMeeting.joined && logged_in_user._id !== currentMeeting._owner._id">Не учавствовать</md-button>
                         </div>
 
                    
@@ -100,6 +101,8 @@
     <script src="../../bower_components/moment/moment.js"></script>
     <script src="../../bower_components/angular-moment/angular-moment.min.js"></script>
     <script src="../../public/js/app.js"></script>
+    <script src="../../public/js/services/editService.js"></script>
     <script src="../../public/js/controllers/singleMeeting.js"></script>
+    <script src="../../public/js/controllers/editMeeting.js"></script>
 </body>
 </html>

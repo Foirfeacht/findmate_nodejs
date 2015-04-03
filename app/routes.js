@@ -264,38 +264,6 @@ module.exports = function(app, passport) {
 		     });
 		});
 
-    //update a meeting
-    app.put('/api/meetings/:id', isLoggedIn, function (req, res){
-    	var user = req.user;
-    	var update = {
-    		$set: {
-    		    		title: req.body.title,
-    			        description: req.body.description,
-    			        category: req.body.category,
-    			        startDate: req.body.startDate,
-    			        startTime: req.body.startTime,
-    			        updated_at: Date.now(),
-    			        visibility: req.body.visibility
-    			    },
-    		$push: {
-    			invitedUsers: req.body.invitedUsers
-    		}
-    	}
-	    Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
-	        if(!meeting) {
-	            res.statusCode = 404;
-	            return res.send({ error: 'Not found' });
-	        }
-	        console.log("meeting updated");
-			            Meeting.find(function(err, meetings) {
-			                if (err)
-			                    res.send(err)
-			                res.json(meetings);
-			            });
-
-	        });
-	});
-
 	//meeting by id middleware
 
 	var meetingByID = function(req, res, next, id) {
@@ -310,6 +278,41 @@ module.exports = function(app, passport) {
 	// get single meetings
 
 	app.param('meetingId', meetingByID);
+
+    //update a meeting
+    app.put('/edit/meetings/:meeting_id', isLoggedIn, function (req, res){
+    	var user = req.user;
+    	var update = {
+    		$set: {
+    		    		title: req.body.title,
+    			        description: req.body.description,
+    			        category: req.body.category,
+    			        startDate: req.body.startDate,
+    			        startTime: req.body.startTime,
+    			        updated_at: Date.now(),
+    			        visibility: req.body.visibility
+    			    },
+    		$push: {
+    			invitedUsers: req.body.invitedUsers
+    		}
+    	};
+	    Meeting.findByIdAndUpdate(req.params.meeting_id, update, function (err, meeting) {
+	        if(!meeting) {
+	            res.statusCode = 404;
+	            return res.send({ error: 'Not found' });
+	        }
+	        console.log("meeting updated");
+			            Meeting.find(function(err, meetings) {
+			                if (err)
+			                    res.send(err)
+			                res.json(meetings);
+			            });
+
+	        });
+	});
+
+	
+    // get single meeting
 
 	app.get('/api/meetings/:meetingId', isLoggedIn, function(req, res){
 		res.json(req.meeting);

@@ -16,7 +16,7 @@ var meetingsSchema = new Schema({
     invitedUsers: {type: Array, default: []},
     participants: {type: Array, default: []},
     created_at: { type: Date, default: Date.now() },
-    updated_at: { type: Date, default: Date.now() },
+    updated_at: { type: Date, default: null },
     longitude: String,
     latitude: String,
     position: String,

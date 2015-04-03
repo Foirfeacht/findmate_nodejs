@@ -1,12 +1,14 @@
 // map controller
 // public/map.js
 
-findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$location', '$mdSidenav', 
+findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$location', '$mdSidenav', '$mdDialog', 'editService',
                     function($scope, 
                              $http,
                              $routeParams, 
                              $location, 
-                             $mdSidenav) {
+                             $mdSidenav,
+                             $mdDialog,
+                             editService) {
     //init logged in user
     $scope.$watch('logged_in_user', function () {
         $scope.loadFriends();
@@ -120,4 +122,100 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
     $scope.toggleNav = function() {
        $mdSidenav('nav').toggle();
     };
+
+    //edit service update
+
+    $scope.$watch('meetingId', function() {
+        editService.getId($scope.meetingId, $scope.logged_in_user);
+    });
+
+    $scope.$on('valuesUpdated', function() {
+        $scope.meetingId = editService.meetingId;
+        $scope.logged_in_user = editService.user;
+    });
+
+    // edit meeting dialog
+    $scope.editMeeting = function(id){
+        $scope.meetingId = id;
+        console.log($scope.meetingId);
+        $scope.showDialog();
+    };
+
+    $scope.showDialog = function(ev){
+        $mdDialog.show({
+          controller: 'EditMeetingController',
+          templateUrl: '../public/partials/editMeeting.tmpl.ejs',
+          targetEvent: ev
+             }).then(function(data) {
+                  $scope.refresh();
+                  console.log('refreshed')
+             }, function() {
+                  $scope.refresh();
+             })     
+    }
+
+    $scope.refresh = function(){
+        $http.get('../api/meetings')
+        .success(function(data) {
+            $scope.meetings = data;
+            var meetings = $scope.meetings;
+            console.log(data);
+            var dateNow = new Date().toJSON();
+
+            // loop through data
+            var meetingsLength = meetings.length;
+             for(var i = 0; i < meetingsLength; i++) {
+                 var meeting = meetings[i];
+
+                 //remove duplicates, delete this part later
+                 meeting.invitedUsers = _.uniq(meeting.invitedUsers,
+                    function(item, key, a){
+                        return item.a;
+                    });
+
+                 meeting.participants = _.uniq(meeting.participants,
+                    function(item, key, a){
+                        return item.a;
+                    });
+
+                 // date filter
+                 var meetingDate = meeting.startDate;
+                 if (meetingDate > dateNow){
+                     meeting.active = true;
+                 } else {
+                    meeting.active = false;
+                 };// end date filter
+
+                 //invited filter
+                 var invitedArray = meeting.invitedUsers;
+                 var invitedArrayLength = invitedArray.length;
+                 for (var u = 0; u< invitedArrayLength; u++){
+                    var invitedUser = invitedArray[u];
+                    if(invitedUser._id === $scope.logged_in_user._id){
+                        meeting.invited = true;
+                    } else {
+                        meeting.invited = false;
+                    }
+                    console.log(meeting.invited);
+                 }// end invited filter
+
+                 // participants filter
+                 var participantsArray = meeting.participants;
+                 var participantsArrayLength = participantsArray.length;
+                 for (var j = 0; j < participantsArrayLength; j++){
+                    var joinedUser = participantsArray[j];
+                    if(joinedUser._id === $scope.logged_in_user._id){
+                        meeting.joined = true;
+                    } else {
+                        meeting.joined = false;
+                    }
+                    console.log(meeting.joined);
+                 }// end participants filter
+
+             }; // end for loop
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });
+    }
 }]);

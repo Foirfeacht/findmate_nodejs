@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: service: NavigatorGeolocation</title>
+    <title>JSDoc: directive: lazy-load</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">service: NavigatorGeolocation</h1>
+    <h1 class="page-title">directive: lazy-load</h1>
 
     
 
@@ -27,7 +27,7 @@
 
 <header>
     <h2>
-    NavigatorGeolocation
+    lazy-load
     </h2>
     
 </header>
@@ -42,7 +42,7 @@
 
     
     
-      <a href="navigator_geolocation.js.html#line1" class="name-link"><h4 class="name" id="NavigatorGeolocation"><span class="type-signature"></span>NavigatorGeolocation<span class="signature">()</span><span class="type-signature"></span></h4></a>
+      <a href="map-lazy-load.js.html#line1" class="name-link"><h4 class="name" id="lazy-load"><span class="type-signature"></span>lazy-load<span class="signature">(lazy-load)</span><span class="type-signature"></span></h4></a>
     
 
     
@@ -51,99 +51,9 @@
 
     
     <div class="description">
-        <p>Provides <a href="https://docs.angularjs.org/api/ng/service/$q">defered/promise API</a> service for navigator.geolocation methods</p>
+        <p>Requires: Delay the initialization of directive until required .js loads
+  Restrict To: Attribute</p>
     </div>
-    
-
-    
-
-    
-
-    
-
-    
-<dl class="details">
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="navigator_geolocation.js.html">services/navigator_geolocation.js</a>, <a href="navigator_geolocation.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        <dl>
-            
-<dt>
-
-    
-    
-      <a href="navigator_geolocation.js.html#line27" class="name-link"><h4 class="name" id="getCurrentPosition"><span class="type-signature">(static) </span>getCurrentPosition<span class="signature">(success, failure)</span><span class="type-signature"> &rarr; {HttpPromise}</span></h4></a>
-    
-
-    
-</dt>
-<dd>
-
     
 
     
@@ -176,13 +86,13 @@
 
         <tr>
             
-                <td class="name"><code>success</code></td>
+                <td class="name"><code>lazy-load</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">String</span>
 
 
             
@@ -192,30 +102,8 @@
 
             
 
-            <td class="description last"><p>success callback function</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>failure</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>failure callback function</p></td>
+            <td class="description last"><p>script source file location
+   example:<br>     'http://maps.googlecom/maps/api/js'</p></td>
         </tr>
 
     
@@ -246,7 +134,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="navigator_geolocation.js.html">services/navigator_geolocation.js</a>, <a href="navigator_geolocation.js.html#line27">line 27</a>
+        <a href="map-lazy-load.js.html">directives/map-lazy-load.js</a>, <a href="map-lazy-load.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -259,7 +147,10 @@
 
 
     
-
+    <h5>Requires:</h5>
+    <ul>
+        <li>module:Attr2Options</li>
+    </ul>
     
 
     
@@ -269,44 +160,46 @@
     
 
     
-    <h5>Returns:</h5>
+
     
-            
-<div class="param-desc">
-    <p>Future object</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">HttpPromise</span>
-
-
-    </dd>
-</dl>
-
-        
 
     
         <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```
- NavigatorGeolocation.getCurrentPosition()
-   .then(function(position) {
-     var lat = position.coords.latitude, lng = position.coords.longitude;
-     .. do something lat and lng
-   });
-```</code></pre>
+    <pre class="prettyprint"><code>Example: 
+
+  &lt;div lazy-load="http://maps.google.com/maps/api/js">
+    &lt;map center="Brampton" zoom="10">
+      &lt;marker position="Brampton">&lt;/marker>
+    &lt;/map>
+  &lt;/div></code></pre>
 
     
 </dd>
 
-        </dl>
+    
+    </div>
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li>module:Attr2Options</li>
+        </ul>
+    
+
+    
+
+     
+
+    
+
+    
+
     
 
     

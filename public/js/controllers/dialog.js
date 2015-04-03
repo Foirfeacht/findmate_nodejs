@@ -98,21 +98,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
   //$scope.timeNow = Date.now().;
   $scope.formData.invitedUsers = $scope.invitedUsers;
 
-
-
-  $scope.inviteUser = function(user){
-    var invitedUsers = $scope.invitedUsers;
-    var index = invitedUsers.indexOf(user);
-    console.log(index);
-    if(index < 0){
-    	invitedUsers.push(user);
-    } else {
-      invitedUsers.splice(index, 1);
-    }
-
-    console.log(invitedUsers);
-  }
-
   //geocoder
 
   var geocoder = new google.maps.Geocoder();
