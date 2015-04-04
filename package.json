@@ -26,7 +26,8 @@
     "node-static": "~0.7.6",
     "passport": "~0.1.17",
     "passport-facebook": "~1.0.2",
-    "passport-local": "~0.1.6"
+    "passport-local": "~0.1.6",
+    "passport-vkontakte": "^0.3.0"
   },
   "scripts": {
     "prestart": "npm install",

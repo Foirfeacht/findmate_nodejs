@@ -11,7 +11,7 @@ var meetingsSchema = new Schema({
     startTime: String,
     _owner: { type: Schema.Types.ObjectId, ref: 'User' },
 	ownerFacebook: {type: String, ref: 'User'},
-	//ownerVK: {type: String, ref: 'User'},
+	ownerVK: {type: String, ref: 'User'},
     ownerName: { type: String, ref: 'User' },
     invitedUsers: {type: Array, default: []},
     participants: {type: Array, default: []},

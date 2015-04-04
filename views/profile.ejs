@@ -82,6 +82,28 @@
 		</div>
 	</div><!-- end row -->
 
+	<!-- VK INFORMATION -->
+		<div class="col-sm-6">
+			<div class="well">
+				<h3 class="text-primary"><span class="fa fa-facebook"></span> Vkontakte</h3>
+
+
+				<% if (user.vkontakte.token) { %>
+					<!--<div><img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{logged_in_user.facebook.name}}"></div>-->
+					<p>
+						<strong>name</strong>: {{logged_in_user.vkontakte.name}}<br>
+					
+					</p>
+
+					<a href="/unlink/vk" class="btn btn-primary">Отключить</a>
+				<% } else { %>
+					<a href="/connect/vk" class="btn btn-primary">Подключить Facebook</a>
+				<% } %>
+
+			</div>
+		</div>
+	</div><!-- end row -->
+
     <div layout="column">
         <div class="display row" ng-show="selectedUser">
               <table class="admin-table friends">

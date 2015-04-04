@@ -1,5 +1,6 @@
 // load all the things we need
 var FacebookStrategy = require('passport-facebook').Strategy;
+var VKontakteStrategy = require('passport-vkontakte').Strategy;
 
 // load up the user model
 var User       = require('../app/models/user');
@@ -61,7 +62,6 @@ module.exports = function(passport) {
                             user.facebook.token = token;
                             user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                             user.facebook.email = (profile.emails[0].value || '').toLowerCase();
-                            user.facebook.friends = profile.friends;
 
                             
                             user.save(function(err) {
@@ -81,7 +81,6 @@ module.exports = function(passport) {
                         newUser.facebook.token = token;
                         newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                         newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
-                        newUser.facebook.friends = profile.friends;
     
                         newUser.save(function(err) {
                             if (err)
@@ -100,7 +99,89 @@ module.exports = function(passport) {
                 user.facebook.token = token;
                 user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                 user.facebook.email = (profile.emails[0].value || '').toLowerCase();
-                user.facebook.friends = profile.friends;
+
+
+                user.save(function(err) {
+                    if (err)
+                        return done(err);
+                        
+                    return done(null, user);
+                });
+
+            }
+        });
+
+    }));
+
+// =========================================================================
+    // VKONTAKTE ================================================================
+    // =========================================================================
+    passport.use(new VKontakteStrategy({
+
+        clientID          : configAuth.vkontakteAuth.clientID,
+        clientSecret      : configAuth.vkontakteAuth.clientSecret,
+        callbackURL       : configAuth.vkontakteAuth.callbackURL,
+        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+
+    },
+    function(req, token, refreshToken, profile, done) {
+
+        // asynchronous
+        process.nextTick(function() {
+
+            // check if the user is already logged in
+            if (!req.user) {
+
+                User.findOne({ 'vkontakte.id' : profile.id }, function(err, user) {
+                    if (err)
+                        return done(err);
+
+                    if (user) {
+
+                        // if there is a user id already but no token (user was linked at one point and then removed)
+                        if (!user.token) {
+                            user.vkontakte.token = access_token;
+                            user.vkontakte.name  = profile.displayName;
+                            user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
+
+                            
+                            user.save(function(err) {
+                                if (err)
+                                    return done(err);
+                                    
+                                return done(null, user);
+                            });
+                        }
+
+                        return done(null, user); // user found, return that user
+                    } else {
+                        // if there is no user, create them
+                        var newUser            = new User();
+
+                        newUser.vkontakte.id    = profile.user_id;
+                        newUser.vkontakte.token = access_token;
+                        newUser.vkontakte.name  = profile.name.givenName + ' ' + profile.name.familyName;
+                        newUser.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
+                        newUser.vkontakte.friends = profile.friends;
+    
+                        newUser.save(function(err) {
+                            if (err)
+                                return done(err);
+                                
+                            return done(null, newUser);
+                        });
+                    }
+                });
+
+            } else {
+                // user already exists and is logged in, we have to link accounts
+                var user            = req.user; // pull the user out of the session
+
+                user.vkontakte.id    = profile.user_id;
+                user.vkontakte.token = access_token;
+                user.vkontakte.name  = profile.name.givenName + ' ' + profile.name.familyName;
+                user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
+                user.vkontakte.friends = profile.friends;
 
 
                 user.save(function(err) {

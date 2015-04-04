@@ -100,6 +100,30 @@ module.exports = function(app, passport) {
 				failureRedirect : '/'
 			}));
 
+		// vk -------------------------------
+
+		// send to vk to do the authentication
+		app.get('/auth/vk', passport.authenticate('vkontakte', { scope : ['notify, friends, photos, email, offline'] }));
+
+		// handle the callback after vk has authenticated the user
+		app.get('/auth/vk/callback',
+			passport.authenticate('vkontakte', { scope: ['notify, friends, photos, email, offline'],
+				successRedirect : '/map',
+				failureRedirect : '/'
+			}));
+
+	// vk connect-------------------------------
+
+		// send to vk to do the authentication
+		app.get('/connect/vk', passport.authorize('vkontakte', { scope: ['notify, friends, photos, email, offline']}));
+
+		// handle the vk after facebook has authorized the user
+		app.get('/connect/vk/callback',
+			passport.authorize('vkontakte', {
+				successRedirect : '/map',
+				failureRedirect : '/'
+			}));
+
 // =============================================================================
 // UNLINK ACCOUNTS =============================================================
 // =============================================================================
@@ -121,6 +145,15 @@ module.exports = function(app, passport) {
 	app.get('/unlink/facebook', isLoggedIn, function(req, res) {
 		var user            = req.user;
 		user.facebook.token = undefined;
+		user.save(function(err) {
+			res.redirect('/profile');
+		});
+	});
+
+	// facebook -------------------------------
+	app.get('/unlink/vk', isLoggedIn, function(req, res) {
+		var user            = req.user;
+		user.vk.token = undefined;
 		user.save(function(err) {
 			res.redirect('/profile');
 		});
@@ -280,7 +313,7 @@ module.exports = function(app, passport) {
 	app.param('meetingId', meetingByID);
 
     //update a meeting
-    app.put('/edit/meetings/:meeting_id', isLoggedIn, function (req, res){
+    app.put('/api/meetings/:id', isLoggedIn, function (req, res){
     	var user = req.user;
     	var update = {
     		$set: {
@@ -296,7 +329,7 @@ module.exports = function(app, passport) {
     			invitedUsers: req.body.invitedUsers
     		}
     	};
-	    Meeting.findByIdAndUpdate(req.params.meeting_id, update, function (err, meeting) {
+	    Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 	        if(!meeting) {
 	            res.statusCode = 404;
 	            return res.send({ error: 'Not found' });
