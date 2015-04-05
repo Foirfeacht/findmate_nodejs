@@ -124,7 +124,7 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
 
     },
-    function(req, token, refreshToken, profile, done) {
+    function(req, token, refreshToken, params, profile, done) {
 
         // asynchronous
         process.nextTick(function() {
@@ -142,9 +142,10 @@ module.exports = function(passport) {
                         if (!user.token) {
                             user.vkontakte.token = token;
                             user.vkontakte.name  = profile.displayName;
-                            user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
+                            //user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
                             //user.vkontakte.email = profile.email.toLowerCase();
                             //user.vkontakte.email = token.email.toLowerCase();
+                            user.vkontakte.email = params.email.toLowerCase();
 
                             
                             user.save(function(err) {
@@ -164,8 +165,9 @@ module.exports = function(passport) {
                         newUser.vkontakte.token = token;
                         newUser.vkontakte.name  = profile.displayName;
                         //newUser.vkontakte.email = token.email.toLowerCase();
-                        newUser.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
+                        //newUser.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
                         //newUser.vkontakte.email = profile.email.toLowerCase();
+                        newUser.vkontakte.email = params.email.toLowerCase();
                         newUser.vkontakte.friends = profile.friends;
     
                         newUser.save(function(err) {
@@ -185,8 +187,9 @@ module.exports = function(passport) {
                 user.vkontakte.token = token;
                 user.vkontakte.name  = profile.displayName;
                 //user.vkontakte.email = token.email.toLowerCase();
-                user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
+                //user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
                 //user.vkontakte.email = profile.email.toLowerCase();
+                user.vkontakte.email = params.email.toLowerCase();
                 user.vkontakte.friends = profile.friends;
 
 
