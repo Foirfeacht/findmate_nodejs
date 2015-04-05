@@ -187,7 +187,7 @@ module.exports = function(passport) {
                 user.vkontakte.token = token;
                 user.vkontakte.name  = profile.displayName;
                 user.vkontakte.email = params.email.toLowerCase();
-                user.vkontakte.image = profile.photo_max_orig;  
+                user.vkontakte.image = profile.photo_200;  
 
 
                 user.save(function(err) {
