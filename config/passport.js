@@ -158,9 +158,9 @@ module.exports = function(passport) {
                         // if there is no user, create them
                         var newUser            = new User();
 
-                        newUser.vkontakte.id    = profile.user_id;
+                        newUser.vkontakte.id    = profile.id;
                         newUser.vkontakte.token = access_token;
-                        newUser.vkontakte.name  = profile.name.givenName + ' ' + profile.name.familyName;
+                        newUser.vkontakte.name  = profile.displayName;
                         newUser.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
                         newUser.vkontakte.friends = profile.friends;
     
@@ -177,9 +177,9 @@ module.exports = function(passport) {
                 // user already exists and is logged in, we have to link accounts
                 var user            = req.user; // pull the user out of the session
 
-                user.vkontakte.id    = profile.user_id;
+                user.vkontakte.id    = profile.id;
                 user.vkontakte.token = access_token;
-                user.vkontakte.name  = profile.name.givenName + ' ' + profile.name.familyName;
+                user.vkontakte.name  = profile.displayName;
                 user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
                 user.vkontakte.friends = profile.friends;
 

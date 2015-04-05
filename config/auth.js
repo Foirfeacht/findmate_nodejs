@@ -13,8 +13,8 @@ module.exports = {
 
 
 		'vkontakteAuth' : {
-			'clientID' 		: '4861186', // your App ID
-			'clientSecret' 	: 'FRpAtbUmK7GPGoZlBh9K', // your App Secret
+			'clientID' 		: '4862983', // your App ID
+			'clientSecret' 	: 'ToCVIhFVKa96FLPgLyJm', // your App Secret
 			'callbackURL' 	: 'https://findmates-demo.herokuapp.com/auth/vk/callback'
 		}
 
