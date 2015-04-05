@@ -140,7 +140,7 @@ module.exports = function(passport) {
 
                         // if there is a user id already but no token (user was linked at one point and then removed)
                         if (!user.token) {
-                            user.vkontakte.token = access_token;
+                            user.vkontakte.token = token;
                             user.vkontakte.name  = profile.displayName;
                             user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
 
@@ -159,7 +159,7 @@ module.exports = function(passport) {
                         var newUser            = new User();
 
                         newUser.vkontakte.id    = profile.id;
-                        newUser.vkontakte.token = access_token;
+                        newUser.vkontakte.token = token;
                         newUser.vkontakte.name  = profile.displayName;
                         newUser.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
                         newUser.vkontakte.friends = profile.friends;
@@ -178,7 +178,7 @@ module.exports = function(passport) {
                 var user            = req.user; // pull the user out of the session
 
                 user.vkontakte.id    = profile.id;
-                user.vkontakte.token = access_token;
+                user.vkontakte.token = token;
                 user.vkontakte.name  = profile.displayName;
                 user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
                 user.vkontakte.friends = profile.friends;
