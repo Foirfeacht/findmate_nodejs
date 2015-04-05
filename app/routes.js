@@ -185,15 +185,10 @@ module.exports = function(app, passport) {
             location: req.body.location,
             visibility : req.body.visibility || 'all',
             _owner: req.user._id,
-            ownerName: req.user.facebook.name,
+            ownerName: req.user.name,
             invitedUsers: req.body.invitedUsers,
-			ownerFacebook: req.user.facebook.id
-            /*$push: {
-            	participants: {
-            		_id: req.user._id,
-            		name: req.user.facebook.name
-            	}
-            }*/
+			ownerFacebook: req.user.facebook.id,
+			ownerVkontakte: req.user.vkontakte.id
         }, function(err, meeting) {
             if (err)
                 res.send(err);

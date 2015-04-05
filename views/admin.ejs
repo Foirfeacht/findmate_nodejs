@@ -18,9 +18,9 @@
                 <div class="profile-block">
 
                     <div class="image-wrapper">
-                        <img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{logged_in_user.facebook.name }}">
+                        <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}">
                     </div>
-                    <a href="/profile" class="profile-name"> {{logged_in_user.facebook.name}} </a>
+                    <a href="/profile" class="profile-name"> {{logged_in_user.name}} </a>
                 </div>
                 <ul>
                     <li>
@@ -74,22 +74,26 @@
 				    <table class="admin-table">
                         <thead>
                             <tr>
+                                <td width="10%"></td>
                                 <td width="30%">User Id</td>
                                 <td width="20%">User Name</td>
                                 <td width="20%">User Email</td>
-                                <td width="30%">&nbsp;</td>
+                                <td width="20%">&nbsp;</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="user in users | filter: query" ng-click="onUserSelect(user); getFriends(user)" ng-class="{'active' : selectedUser}">
+                                <td class="userimg"><img src="{{user.image}}" alt="{{user.name}}"></td>
                                 <td>
                                     {{user._id}}
                                 </td>
                                 <td>
-                                    {{user.facebook.name}}
+                                    <p>{{user.facebook.name || "Not connrected"}}</p>
+                                    <p>{{user.vkontakte.name || "Not connrected"}}</p>
                                 </td>
                                 <td>
-                                    {{user.facebook.email}}
+                                    <p>{{user.facebook.email || "Not connrected"}}</p>
+                                    <p>{{user.vkontakte.email || "Not connrected"}}</p>
                                 </td>
                                 <td>
                                     <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteUser(user._id)">Удалить</md-button>

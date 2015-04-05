@@ -17,9 +17,9 @@
                 <div class="profile-block">
 
                     <div class="image-wrapper">
-                        <img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{logged_in_user.facebook.name }}">
+                        <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}">
                     </div>
-                    <a href="/profile" class="profile-name"> {{logged_in_user.facebook.name}} </a>
+                    <a href="/profile" class="profile-name"> {{logged_in_user.name}} </a>
                 </div>
                 <ul>
                     <li>
@@ -54,7 +54,7 @@
         <div class="content">
 
 
-           <div class="map-container" ng-click="clickMarker ? null : getCoords();showDialog($event)">
+           <div class="map-container" ng-click="getCoords();showDialog($event)">
                 <map zoom="15" 
                   disable-default-u-i="true"
                   disable-double-click-zoom="true"

@@ -17,9 +17,9 @@
                 <div class="profile-block">
 
                     <div class="image-wrapper">
-                        <img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{logged_in_user.facebook.name }}">
+                        <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}">
                     </div>
-                    <a href="/profile" class="profile-name"> {{logged_in_user.facebook.name}} </a>
+                    <a href="/profile" class="profile-name"> {{logged_in_user.name}} </a>
                 </div>
                 <ul>
                     <li>
@@ -136,7 +136,7 @@
 
         	<div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
                    
-	            <h1 class="active-meetings">Созданные события от {{logged_in_user.facebook.name}}</h1>
+	            <h1 class="active-meetings">Созданные события от {{logged_in_user.name}}</h1>
 	            <div class="meetings-display row">
 
 	            

@@ -36,4 +36,11 @@
 	border: 1px thin #000;
 }
 
+.userimg img {
+	border: 1px thin #fff;
+	border-radius: 50%;
+	display: block;
+	margin: 0 auto;
+}
+
 

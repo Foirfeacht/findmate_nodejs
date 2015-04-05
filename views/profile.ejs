@@ -1,7 +1,7 @@
 <!doctype html>
 <html ng-app="findMate" ng-init="logged_in_user=<%= JSON.stringify(user)%>">
 <head>
-	<title>Профиль {{logged_in_user.facebook.name}}</title>
+	<title>Профиль {{logged_in_user.name}}</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../bower_components/angular-material/angular-material.min.css">
@@ -17,9 +17,9 @@
                 <div class="profile-block">
 
                     <div class="image-wrapper">
-                        <img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{logged_in_user.facebook.name }}">
+                        <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}">
                     </div>
-                    <a href="/profile" class="profile-name"> {{logged_in_user.facebook.name}} </a>
+                    <a href="/profile" class="profile-name"> {{logged_in_user.name}} </a>
                 </div>
                 <ul>
                     <li>
@@ -97,7 +97,7 @@
 
 					<a href="/unlink/vk" class="btn btn-primary">Отключить</a>
 				<% } else { %>
-					<a href="/connect/vk" class="btn btn-primary">Подключить Facebook</a>
+					<a href="/connect/vk" class="btn btn-primary">Подключить Вконтакте</a>
 				<% } %>
 
 			</div>
