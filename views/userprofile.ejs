@@ -16,9 +16,9 @@
                 <div class="profile-block">
 
                     <div class="image-wrapper">
-                        <img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{logged_in_user.facebook.name }}">
+                        <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}">
                     </div>
-                    <a href="/profile" class="profile-name"> {{logged_in_user.facebook.name}} </a>
+                    <a href="/profile" class="profile-name"> {{logged_in_user.name}} </a>
                 </div>
                 <ul>
                     <li>
@@ -62,9 +62,21 @@
           <div class="col-sm-6">
             <div class="well">
               <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-                <div><img src="https://graph.facebook.com/{{currentUser.facebook.id}}/picture?height=350&width=250" alt="{{user.facebook.name}}"></div>
+                <div><img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}"></div>
                 <p>
                   <strong>name</strong>: {{currentUser.facebook.name}}<br>          
+                </p>
+
+
+            </div>
+          </div>
+          <!-- FACEBOOK INFORMATION -->
+          <div class="col-sm-6">
+            <div class="well">
+              <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+                <div><img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}"></div>
+                <p>
+                  <strong>name</strong>: {{currentUser.vkontakte.name}}<br>          
                 </p>
 
 
