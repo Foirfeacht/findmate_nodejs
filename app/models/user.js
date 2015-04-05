@@ -11,17 +11,21 @@ var userSchema = mongoose.Schema({
         id           : String,
         token        : String,
         email        : String,
-        name         : String
+        name         : String,
+        image		 : String
     },
 
     vkontakte: {
         id           : String,
         token        : String,
         email        : String,
-        name         : String
+        name         : String,
+        image		 : String
     },
 
-    name: String
+    name:  String,
+    image: String,
+    email: String
 });
 
 // generating a hash
