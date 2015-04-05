@@ -103,11 +103,11 @@ module.exports = function(app, passport) {
 		// vk -------------------------------
 
 		// send to vk to do the authentication
-		app.get('/auth/vk', passport.authenticate('vkontakte', { scope : ['notify, friends, photos, email, offline'] }));
+		app.get('/auth/vk', passport.authenticate('vkontakte', { scope : ['friends, photos, email'] }));
 
 		// handle the callback after vk has authenticated the user
 		app.get('/auth/vk/callback',
-			passport.authenticate('vkontakte', { scope: ['notify, friends, photos, email, offline'],
+			passport.authenticate('vkontakte', { scope: ['friends, photos, email'],
 				successRedirect : '/map',
 				failureRedirect : '/'
 			}));
@@ -115,7 +115,7 @@ module.exports = function(app, passport) {
 	// vk connect-------------------------------
 
 		// send to vk to do the authentication
-		app.get('/connect/vk', passport.authorize('vkontakte', { scope: ['notify, friends, photos, email, offline']}));
+		app.get('/connect/vk', passport.authorize('vkontakte', { scope: ['friends, photos, email']}));
 
 		// handle the vk after facebook has authorized the user
 		app.get('/connect/vk/callback',
