@@ -7,18 +7,21 @@ var Schema = mongoose.Schema;
 // define the schema for our user model
 var userSchema = mongoose.Schema({
 
-    facebook         : {
+    facebook: {
         id           : String,
         token        : String,
         email        : String,
         name         : String
     },
-    vkontakte         : {
+
+    vkontakte: {
         id           : String,
         token        : String,
         email        : String,
         name         : String
-    }
+    },
+
+    name: String
 });
 
 // generating a hash

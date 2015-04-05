@@ -67,7 +67,7 @@
 
 
 				<% if (user.facebook.token) { %>
-					<div><img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{logged_in_user.facebook.name}}"></div>
+					<div><img src="{{logged_in_user.facebook.image}}" alt="{{logged_in_user.facebook.name}}"></div>
 					<p>
 						<strong>name</strong>: {{logged_in_user.facebook.name}}<br>
 					
@@ -89,7 +89,7 @@
 
 
 				<% if (user.vkontakte.token) { %>
-					<!--<div><img src="https://graph.facebook.com/{{logged_in_user.facebook.id}}/picture?height=350&width=250" alt="{{logged_in_user.facebook.name}}"></div>-->
+					<div><img src="{{logged_in_user.vkontakte.image}}"></div>
 					<p>
 						<strong>name</strong>: {{logged_in_user.vkontakte.name}}<br>
 					
