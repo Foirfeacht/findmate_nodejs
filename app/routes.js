@@ -53,16 +53,6 @@ module.exports = function(app, passport) {
 		});
 	});
 
-
-	/*app.get('/meeting/:id', isLoggedIn, function(req, res) {
-		var id = req.params.id
-		res.render('meeting.ejs' + id, {
-			user : req.user,
-			picture: 'https://graph.facebook.com/' + req.user.facebook.id + '/picture?height=350&width=250',
-			friends: 'https://graph.facebook.com/' + req.user.facebook.id + '/friends' + '?access_token=' + req.user.facebook.token
-		});
-	});*/
-
 	app.get('/main', isLoggedIn, function(req, res) {
 		res.render('main.ejs', {
 			user : req.user

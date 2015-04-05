@@ -142,8 +142,8 @@ module.exports = function(passport) {
                         if (!user.token) {
                             user.vkontakte.token = token;
                             user.vkontakte.name  = profile.displayName;
-                            //user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
-                            user.vkontakte.email = profile.email.toLowerCase();
+                            user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
+                            //user.vkontakte.email = profile.email.toLowerCase();
 
                             
                             user.save(function(err) {
@@ -162,8 +162,8 @@ module.exports = function(passport) {
                         newUser.vkontakte.id    = profile.id;
                         newUser.vkontakte.token = token;
                         newUser.vkontakte.name  = profile.displayName;
-                        //newUser.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
-                        newUser.vkontakte.email = profile.email.toLowerCase();
+                        newUser.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
+                        //newUser.vkontakte.email = profile.email.toLowerCase();
                         newUser.vkontakte.friends = profile.friends;
     
                         newUser.save(function(err) {
@@ -182,8 +182,8 @@ module.exports = function(passport) {
                 user.vkontakte.id    = profile.id;
                 user.vkontakte.token = token;
                 user.vkontakte.name  = profile.displayName;
-                //user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
-                user.vkontakte.email = profile.email.toLowerCase();
+                user.vkontakte.email = (profile.emails[0].value || '').toLowerCase();
+                //user.vkontakte.email = profile.email.toLowerCase();
                 user.vkontakte.friends = profile.friends;
 
 
