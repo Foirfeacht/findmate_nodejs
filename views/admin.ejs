@@ -83,7 +83,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="user in users | filter: query" ng-click="onUserSelect(user); getFriends(user)" ng-class="{'active' : selectedUser}">
-                                <td class="userimg"><img src="{{user.image}}" alt="{{user.name}}"></td>
+                                <td class="userimg"><img src="{{user.image}}" alt="{{user.name}}" width="50" height="50"></td>
                                 <td>
                                     {{user._id}}
                                 </td>
