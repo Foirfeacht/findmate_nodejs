@@ -1,8 +1,9 @@
-findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', '$mdDialog',
+findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', '$mdDialog', 'moment',
                      function($scope, 
                               $http,  
                               editService,
-                              $mdDialog) {
+                              $mdDialog,
+                              moment) {
 
   // working with api
 
@@ -68,8 +69,8 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                 title: meeting.title,
                 description: meeting.description,
                 description: meeting.description,
-                startDate: new Date(meeting.startDate),
-                startTime: new Date(meeting.startTime),
+                startDate: moment(meeting.startDate),
+                startTime: moment(meeting.startTime),
                 updated_at: new Date(),
                 visibility: meeting.visibility
              }

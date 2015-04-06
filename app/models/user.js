@@ -12,7 +12,7 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String,
-        image		 : String
+        image        : String
     },
 
     vkontakte: {
@@ -20,12 +20,23 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String,
-        image		 : String
+        image        : String
     },
+
+    firstName: {type: String, trim: true},
+    lastName: {type: String, trim: true},
 
     name:  String,
     image: String,
-    email: String
+    email: String,
+
+    roles: {
+        type: [{
+            type: String,
+            enum: ['user', 'admin']
+        }],
+        default: ['user']
+    },
 });
 
 // generating a hash

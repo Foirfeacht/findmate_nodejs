@@ -5,7 +5,7 @@
 
 	                <md-input-container>
 	                    <label>Название встречи</label>
-	                    <input type="text" ng-model="formData.title">
+	                    <input type="text" ng-model="formData.title" ng-required>
 	                </md-input-container>
 
 	                <md-input-container>
@@ -41,7 +41,7 @@
 	        <section layout="row" class="visibility">
 	        	<div>
 	                <md-select ng-model="formData.visibility" placeholder="Эту встречу увидят...">
-	                    <md-option value="Общие" ng-selected="selected" default>Все</md-option>
+	                    <md-option value="Общие" ng-selected="selected">Все</md-option>
 	                    <md-option value="Друзья">Друзья</md-option>
 	                </md-select>
 	            </div>

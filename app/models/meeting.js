@@ -4,14 +4,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema; 
 
 var meetingsSchema = new Schema({
-    title: String,
-    description: String,
-    category: String,
+    title: {type: String, required: 'Заголовок не может быть пустым'},
+    description: {type: String, default: ''},
+    category: {type: String, default: 'Развлечения'},
     startDate: Date,
-    startTime: String,
+    startTime: Date,
     _owner: { type: Schema.Types.ObjectId, ref: 'User' },
-	ownerFacebook: {type: String, ref: 'User'},
-	ownerVK: {type: String, ref: 'User'},
+    ownerFacebook: {type: String, ref: 'User'},
+    ownerVK: {type: String, ref: 'User'},
     ownerName: { type: String, ref: 'User' },
     invitedUsers: {type: Array, default: []},
     participants: {type: Array, default: []},
@@ -22,7 +22,7 @@ var meetingsSchema = new Schema({
     position: String,
     location: String,
     marker: Schema.Types.Mixed,
-    visibility: String
+    visibility: {type: String, default: 'Общие'}
 });
 
 module.exports = mongoose.model('Meeting', meetingsSchema);

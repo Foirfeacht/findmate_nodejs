@@ -74,11 +74,11 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 
    $scope.formData = {
     latLng: mapService.latLng,
-    category: "Спорт",
-    visibility: "all",
-    startDate: new Date(),
+    category: "Развлечения",
+    visibility: "Общие",
+    startDate:  new Date(),
     startTime: new Date(),
-    invitedUsers: []
+    invitedUsers: [] 
   };
 
   
