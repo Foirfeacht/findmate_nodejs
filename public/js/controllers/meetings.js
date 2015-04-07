@@ -17,19 +17,6 @@ findMate.controller('meetingsController', ['$scope',
 		$scope.loadFriends();
 	});
 
-    
-    // when landing on the page, get all events and show them
-    $http.get('../api/meetings')
-        .success(function(data) {
-            $scope.meetings = data;
-            var meetings = $scope.meetings;
-            console.log(data);
-            $scope.loopMeetings(meetings);
-            
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
 
     $scope.refresh = function(){
         $http.get('../api/meetings')
@@ -43,6 +30,22 @@ findMate.controller('meetingsController', ['$scope',
             console.log('Error: ' + data);
         });
     }
+
+    
+    // when landing on the page, get all events and show them
+    $scope.refresh();
+    /*$http.get('../api/meetings')
+        .success(function(data) {
+            $scope.meetings = data;
+            var meetings = $scope.meetings;
+            console.log(data);
+            $scope.loopMeetings(meetings);
+            
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });*/
+
 
     $scope.loopMeetings = function(meetings){
         var dateNow = new Date().toJSON();
@@ -74,6 +77,7 @@ findMate.controller('meetingsController', ['$scope',
              //format dates
              meeting.startDate = new Date(meeting.startDate);
              meeting.created_at = new Date(meeting.created_at);
+             console.log(meeting.created_at);
              meeting.startTime = new Date(meeting.startTime);
              if (meeting.updated_at !== null){
              	meeting.updated_at = new Date(meeting.updated_at);
