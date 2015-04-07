@@ -24,61 +24,88 @@ findMate.controller('meetingsController', ['$scope',
             $scope.meetings = data;
             var meetings = $scope.meetings;
             console.log(data);
-            var dateNow = new Date().toJSON();
-
-            // loop through data
-            var meetingsLength = meetings.length;
-			 for(var i = 0; i < meetingsLength; i++) {
-				 var meeting = meetings[i];
-
-                 //remove duplicates, delete this part later
-                 meeting.invitedUsers = _.uniq(meeting.invitedUsers,
-                    function(item, key, a){
-                        return item.a;
-                    });
-
-                 meeting.participants = _.uniq(meeting.participants,
-                    function(item, key, a){
-                        return item.a;
-                    });
-
-				 // date filter
-				 var meetingDate = meeting.startDate;
-				 if (meetingDate > dateNow){
-					 meeting.active = true;
-				 } else {
-				 	meeting.active = false;
-				 };// end date filter
-
-				 //invited filter
-				 var invitedArray = meeting.invitedUsers;
-                 var invitedArrayLength = invitedArray.length;
-				 for (var u = 0; u< invitedArrayLength; u++){
-                    var invitedUser = invitedArray[u];
-                    if(invitedUser._id === $scope.logged_in_user._id){
-                        meeting.invited = true;
-                    } else {
-                        meeting.invited = false;
-                    };
-                 };// end invited filter
-
-                 // participants filter
-                 var participantsArray = meeting.participants;
-                 var participantsArrayLength = participantsArray.length;
-                 for (var j = 0; j < participantsArrayLength; j++){
-                    var joinedUser = participantsArray[j];
-                    if(joinedUser._id === $scope.logged_in_user._id){
-                        meeting.joined = true;
-                    } else {
-                        meeting.joined = false;
-                    };
-                 };// end participants filter
-
-			 }; // end for loop
+            $scope.loopMeetings(meetings);
+            
         })
         .error(function (data) {
             console.log('Error: ' + data);
         });
+
+    $scope.refresh = function(){
+        $http.get('../api/meetings')
+        .success(function(data) {
+            $scope.meetings = data;
+            var meetings = $scope.meetings;
+            console.log(data);
+             $scope.loopMeetings(meetings);
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });
+    }
+
+    $scope.loopMeetings = function(meetings){
+        var dateNow = new Date().toJSON();
+
+        // loop through data
+        var meetingsLength = meetings.length;
+         for(var i = 0; i < meetingsLength; i++) {
+             var meeting = meetings[i];
+
+             //remove duplicates, delete this part later
+             meeting.invitedUsers = _.uniq(meeting.invitedUsers,
+                function(item, key, a){
+                    return item.a;
+                });
+
+             meeting.participants = _.uniq(meeting.participants,
+                function(item, key, a){
+                    return item.a;
+                });
+
+             // date filter
+             var meetingDate = meeting.startDate;
+             if (meetingDate > dateNow){
+                 meeting.active = true;
+             } else {
+                meeting.active = false;
+             };// end date filter
+
+             //format dates
+             meeting.startDate = new Date(meeting.startDate);
+             meeting.created_at = new Date(meeting.created_at);
+             meeting.startTime = new Date(meeting.startTime);
+             if (meeting.updated_at !== null){
+             	meeting.updated_at = new Date(meeting.updated_at);
+             }
+              
+
+             //invited filter
+             var invitedArray = meeting.invitedUsers;
+             var invitedArrayLength = invitedArray.length;
+             for (var u = 0; u< invitedArrayLength; u++){
+                var invitedUser = invitedArray[u];
+                if(invitedUser._id === $scope.logged_in_user._id){
+                    meeting.invited = true;
+                } else {
+                    meeting.invited = false;
+                };
+             };// end invited filter
+
+             // participants filter
+             var participantsArray = meeting.participants;
+             var participantsArrayLength = participantsArray.length;
+             for (var j = 0; j < participantsArrayLength; j++){
+                var joinedUser = participantsArray[j];
+                if(joinedUser._id === $scope.logged_in_user._id){
+                    meeting.joined = true;
+                } else {
+                    meeting.joined = false;
+                };
+             };// end participants filter
+
+         }; // end for loop
+    }
 
     //get users
 
@@ -263,68 +290,5 @@ findMate.controller('meetingsController', ['$scope',
              })     
     };
 
-    $scope.refresh = function(){
-        $http.get('../api/meetings')
-        .success(function(data) {
-            $scope.meetings = data;
-            var meetings = $scope.meetings;
-            console.log(data);
-            var dateNow = new Date().toJSON();
-
-            // loop through data
-            var meetingsLength = meetings.length;
-             for(var i = 0; i < meetingsLength; i++) {
-                 var meeting = meetings[i];
-
-                 //remove duplicates, delete this part later
-                 meeting.invitedUsers = _.uniq(meeting.invitedUsers,
-                    function(item, key, a){
-                        return item.a;
-                    });
-
-                 meeting.participants = _.uniq(meeting.participants,
-                    function(item, key, a){
-                        return item.a;
-                    });
-
-                 // date filter
-                 var meetingDate = meeting.startDate;
-                 if (meetingDate > dateNow){
-                     meeting.active = true;
-                 } else {
-                    meeting.active = false;
-                 };// end date filter
-
-                 //invited filter
-                 var invitedArray = meeting.invitedUsers;
-                 var invitedArrayLength = invitedArray.length;
-                 for (var u = 0; u< invitedArrayLength; u++){
-                    var invitedUser = invitedArray[u];
-                    if(invitedUser._id === $scope.logged_in_user._id){
-                        meeting.invited = true;
-                    } else {
-                        meeting.invited = false;
-                    }
-                    console.log(meeting.invited);
-                 }// end invited filter
-
-                 // participants filter
-                 var participantsArray = meeting.participants;
-                 var participantsArrayLength = participantsArray.length;
-                 for (var j = 0; j < participantsArrayLength; j++){
-                    var joinedUser = participantsArray[j];
-                    if(joinedUser._id === $scope.logged_in_user._id){
-                        meeting.joined = true;
-                    } else {
-                        meeting.joined = false;
-                    }
-                    console.log(meeting.joined);
-                 }// end participants filter
-
-             }; // end for loop
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
-    }
+    
 }]);
