@@ -193,6 +193,15 @@ md-option {
 	width: 100%;
 }
 
+.datetime-pickers > div {
+	width: 50%;
+}
+
+.date-header {
+	width: 100%;
+	text-align: center;
+}
+
 /******* bOotstrap dropdown *******/
 .visibility > div {
 	width: 50%;

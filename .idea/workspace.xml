@@ -27,11 +27,37 @@
       <file leaf-file-name="routes.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9054348" vertical-offset="3060" max-vertical-offset="8092">
-              <caret line="229" column="22" selection-start-line="229" selection-start-column="22" selection-end-line="229" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.9054348" vertical-offset="3230" max-vertical-offset="7497">
+              <caret line="239" column="22" selection-start-line="239" selection-start-column="22" selection-end-line="239" selection-end-column="22" />
               <folding>
-                <marker date="1427964235373" expanded="true" signature="106:15175" placeholder="{...}" />
-                <marker date="1427964235373" expanded="true" signature="667:687" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="106:13169" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="667:687" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="1622:2039" placeholder="/*...*/" />
+                <marker date="1428307268692" expanded="true" signature="2116:2163" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="2093:2117" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="3115:3175" placeholder="{&quot;successRedirect&quot;: '/map'...}" />
+                <marker date="1428307268692" expanded="true" signature="3621:3718" placeholder="{&quot;successRedirect&quot;: '/map'...}" />
+                <marker date="1428307268692" expanded="true" signature="4256:4340" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="4262:4285" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="4611:5034" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="4752:4933" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="5142:6428" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="5227:6097" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="5843:6062" placeholder="/*...*/" />
+                <marker date="1428307268692" expanded="true" signature="8646:8974" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="9427:9954" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="9695:9923" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="9700:9713" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="9719:9913" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="9751:9781" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="9787:9871" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="10284:10732" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="10291:10714" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="10310:10315" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="10404:10455" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="10534:10677" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="10792:10875" placeholder="{...}" />
+                <marker date="1428307268692" expanded="true" signature="10832:10851" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -41,7 +67,7 @@
         <entry file="file://$PROJECT_DIR$/views/map.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="1010" max-vertical-offset="1887">
-              <caret line="96" column="4" selection-start-line="94" selection-start-column="4" selection-end-line="95" selection-end-column="9" />
+              <caret line="96" column="4" selection-start-line="96" selection-start-column="4" selection-end-line="96" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -50,7 +76,7 @@
       <file leaf-file-name="dialog.tmpl.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/partials/dialog.tmpl.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
+            <state vertical-scroll-proportion="0.0" vertical-offset="629" max-vertical-offset="1258">
               <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
               <folding />
             </state>
@@ -60,11 +86,16 @@
       <file leaf-file-name="dialog.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/controllers/dialog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1156" max-vertical-offset="3026">
-              <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="2788">
+              <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
-                <marker date="1427964235284" expanded="true" signature="2093:2198" placeholder="{&quot;category&quot;: &quot;Спорт&quot;...}" />
-                <marker date="1427964235284" expanded="true" signature="2232:2358" placeholder="{&quot;scrollableHeight&quot;: '200px'...}" />
+                <marker date="1428396769528" expanded="true" signature="174:4586" placeholder="{...}" />
+                <marker date="1428396769528" expanded="true" signature="244:306" placeholder="{...}" />
+                <marker date="1428396769528" expanded="true" signature="2591:2809" placeholder="{...}" />
+                <marker date="1428396769528" expanded="true" signature="2993:3773" placeholder="{...}" />
+                <marker date="1428396769528" expanded="true" signature="3117:3746" placeholder="{...}" />
+                <marker date="1428396769528" expanded="true" signature="3184:3722" placeholder="{...}" />
+                <marker date="1428396769528" expanded="true" signature="3728:3749" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -93,8 +124,8 @@
       <file leaf-file-name="meeting.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/meeting.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="976" max-vertical-offset="1870">
-              <caret line="98" column="4" selection-start-line="100" selection-start-column="73" selection-end-line="100" selection-end-column="87" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1027" max-vertical-offset="1921">
+              <caret line="101" column="4" selection-start-line="101" selection-start-column="4" selection-end-line="101" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -103,8 +134,8 @@
       <file leaf-file-name="meetings.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/meetings.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6535" max-vertical-offset="7531">
-              <caret line="429" column="3" selection-start-line="429" selection-start-column="3" selection-end-line="429" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="6569" max-vertical-offset="7565">
+              <caret line="431" column="3" selection-start-line="431" selection-start-column="3" selection-end-line="431" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -113,10 +144,14 @@
       <file leaf-file-name="meetings.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/controllers/meetings.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="4199">
-              <caret line="38" column="31" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1037" max-vertical-offset="5695">
+              <caret line="45" column="31" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <marker date="1428054232215" expanded="true" signature="417:10758" placeholder="[...]" />
+                <marker date="1428054232215" expanded="true" signature="558:10757" placeholder="{...}" />
+                <marker date="1428054232215" expanded="true" signature="4343:4597" placeholder="{...}" />
+                <marker date="1428054232215" expanded="true" signature="5952:6221" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -126,7 +161,7 @@
         <entry file="file://$PROJECT_DIR$/app/models/meeting.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="561">
-              <caret line="12" column="17" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="17" />
+              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -149,7 +184,6 @@
         <option value="$PROJECT_DIR$/public/js/controllers/admin.js" />
         <option value="$PROJECT_DIR$/views/profile.ejs" />
         <option value="$PROJECT_DIR$/app/models/meeting.js" />
-        <option value="$PROJECT_DIR$/app/routes.js" />
         <option value="$PROJECT_DIR$/views/map.ejs" />
         <option value="$PROJECT_DIR$/public/js/app.js" />
         <option value="$PROJECT_DIR$/views/index.ejs" />
@@ -159,6 +193,7 @@
         <option value="$PROJECT_DIR$/public/partials/dialog.tmpl.ejs" />
         <option value="$PROJECT_DIR$/public/js/controllers/dialog.js" />
         <option value="$PROJECT_DIR$/public/js/controllers/meetings.js" />
+        <option value="$PROJECT_DIR$/app/routes.js" />
       </list>
     </option>
   </component>
@@ -198,7 +233,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -425,6 +459,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -449,10 +484,14 @@
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
       <method />
     </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -460,10 +499,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -519,20 +554,20 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947975" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18020834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18020834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -570,6 +605,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <marker date="1428054232215" expanded="true" signature="417:10758" placeholder="[...]" />
+            <marker date="1428054232215" expanded="true" signature="558:10757" placeholder="{...}" />
+            <marker date="1428054232215" expanded="true" signature="4343:4597" placeholder="{...}" />
+            <marker date="1428054232215" expanded="true" signature="5952:6221" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -587,8 +626,34 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6749">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1427964235373" expanded="true" signature="106:15175" placeholder="{...}" />
-            <marker date="1427964235373" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="106:13169" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="1622:2039" placeholder="/*...*/" />
+            <marker date="1428307268692" expanded="true" signature="2116:2163" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="2093:2117" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="3115:3175" placeholder="{&quot;successRedirect&quot;: '/map'...}" />
+            <marker date="1428307268692" expanded="true" signature="3621:3718" placeholder="{&quot;successRedirect&quot;: '/map'...}" />
+            <marker date="1428307268692" expanded="true" signature="4256:4340" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="4262:4285" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="4611:5034" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="4752:4933" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="5142:6428" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="5227:6097" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="5843:6062" placeholder="/*...*/" />
+            <marker date="1428307268692" expanded="true" signature="8646:8974" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9427:9954" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9695:9923" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9700:9713" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9719:9913" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9751:9781" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9787:9871" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10284:10732" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10291:10714" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10310:10315" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10404:10455" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10534:10677" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10792:10875" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10832:10851" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -621,6 +686,10 @@
           <caret line="120" column="65" selection-start-line="120" selection-start-column="65" selection-end-line="120" selection-end-column="65" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <marker date="1428054232215" expanded="true" signature="417:10758" placeholder="[...]" />
+            <marker date="1428054232215" expanded="true" signature="558:10757" placeholder="{...}" />
+            <marker date="1428054232215" expanded="true" signature="4343:4597" placeholder="{...}" />
+            <marker date="1428054232215" expanded="true" signature="5952:6221" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -667,8 +736,34 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="6732">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <marker date="1427964235373" expanded="true" signature="106:15175" placeholder="{...}" />
-            <marker date="1427964235373" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="106:13169" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="1622:2039" placeholder="/*...*/" />
+            <marker date="1428307268692" expanded="true" signature="2116:2163" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="2093:2117" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="3115:3175" placeholder="{&quot;successRedirect&quot;: '/map'...}" />
+            <marker date="1428307268692" expanded="true" signature="3621:3718" placeholder="{&quot;successRedirect&quot;: '/map'...}" />
+            <marker date="1428307268692" expanded="true" signature="4256:4340" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="4262:4285" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="4611:5034" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="4752:4933" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="5142:6428" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="5227:6097" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="5843:6062" placeholder="/*...*/" />
+            <marker date="1428307268692" expanded="true" signature="8646:8974" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9427:9954" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9695:9923" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9700:9713" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9719:9913" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9751:9781" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9787:9871" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10284:10732" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10291:10714" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10310:10315" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10404:10455" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10534:10677" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10792:10875" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10832:10851" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -701,6 +796,10 @@
           <caret line="95" column="45" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <marker date="1428054232215" expanded="true" signature="417:10758" placeholder="[...]" />
+            <marker date="1428054232215" expanded="true" signature="558:10757" placeholder="{...}" />
+            <marker date="1428054232215" expanded="true" signature="4343:4597" placeholder="{...}" />
+            <marker date="1428054232215" expanded="true" signature="5952:6221" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -740,8 +839,34 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="6970">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
-            <marker date="1427964235373" expanded="true" signature="106:15175" placeholder="{...}" />
-            <marker date="1427964235373" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="106:13169" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="1622:2039" placeholder="/*...*/" />
+            <marker date="1428307268692" expanded="true" signature="2116:2163" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="2093:2117" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="3115:3175" placeholder="{&quot;successRedirect&quot;: '/map'...}" />
+            <marker date="1428307268692" expanded="true" signature="3621:3718" placeholder="{&quot;successRedirect&quot;: '/map'...}" />
+            <marker date="1428307268692" expanded="true" signature="4256:4340" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="4262:4285" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="4611:5034" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="4752:4933" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="5142:6428" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="5227:6097" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="5843:6062" placeholder="/*...*/" />
+            <marker date="1428307268692" expanded="true" signature="8646:8974" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9427:9954" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9695:9923" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9700:9713" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9719:9913" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9751:9781" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9787:9871" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10284:10732" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10291:10714" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10310:10315" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10404:10455" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10534:10677" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10792:10875" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10832:10851" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -774,6 +899,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <marker date="1428054232215" expanded="true" signature="417:10758" placeholder="[...]" />
+            <marker date="1428054232215" expanded="true" signature="558:10757" placeholder="{...}" />
+            <marker date="1428054232215" expanded="true" signature="4343:4597" placeholder="{...}" />
+            <marker date="1428054232215" expanded="true" signature="5952:6221" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -868,8 +997,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/meeting.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="561">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -907,7 +1036,7 @@
     <entry file="file://$PROJECT_DIR$/views/map.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1010" max-vertical-offset="1887">
-          <caret line="96" column="4" selection-start-line="94" selection-start-column="4" selection-end-line="95" selection-end-column="9" />
+          <caret line="96" column="4" selection-start-line="96" selection-start-column="4" selection-end-line="96" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -922,48 +1051,83 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controllers/dialog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1156" max-vertical-offset="3026">
-          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="2788">
+          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
           <folding>
-            <marker date="1427964235284" expanded="true" signature="2093:2198" placeholder="{&quot;category&quot;: &quot;Спорт&quot;...}" />
-            <marker date="1427964235284" expanded="true" signature="2232:2358" placeholder="{&quot;scrollableHeight&quot;: '200px'...}" />
+            <marker date="1428396769528" expanded="true" signature="174:4586" placeholder="{...}" />
+            <marker date="1428396769528" expanded="true" signature="244:306" placeholder="{...}" />
+            <marker date="1428396769528" expanded="true" signature="2591:2809" placeholder="{...}" />
+            <marker date="1428396769528" expanded="true" signature="2993:3773" placeholder="{...}" />
+            <marker date="1428396769528" expanded="true" signature="3117:3746" placeholder="{...}" />
+            <marker date="1428396769528" expanded="true" signature="3184:3722" placeholder="{...}" />
+            <marker date="1428396769528" expanded="true" signature="3728:3749" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/meetings.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6535" max-vertical-offset="7531">
-          <caret line="429" column="3" selection-start-line="429" selection-start-column="3" selection-end-line="429" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="6569" max-vertical-offset="7565">
+          <caret line="431" column="3" selection-start-line="431" selection-start-column="3" selection-end-line="431" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/meeting.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="976" max-vertical-offset="1870">
-          <caret line="98" column="4" selection-start-line="100" selection-start-column="73" selection-end-line="100" selection-end-column="87" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1027" max-vertical-offset="1921">
+          <caret line="101" column="4" selection-start-line="101" selection-start-column="4" selection-end-line="101" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controllers/meetings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="4199">
-          <caret line="38" column="31" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1037" max-vertical-offset="5695">
+          <caret line="45" column="31" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <marker date="1428054232215" expanded="true" signature="417:10758" placeholder="[...]" />
+            <marker date="1428054232215" expanded="true" signature="558:10757" placeholder="{...}" />
+            <marker date="1428054232215" expanded="true" signature="4343:4597" placeholder="{...}" />
+            <marker date="1428054232215" expanded="true" signature="5952:6221" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9054348" vertical-offset="3060" max-vertical-offset="8092">
-          <caret line="229" column="22" selection-start-line="229" selection-start-column="22" selection-end-line="229" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.9054348" vertical-offset="3230" max-vertical-offset="7497">
+          <caret line="239" column="22" selection-start-line="239" selection-start-column="22" selection-end-line="239" selection-end-column="22" />
           <folding>
-            <marker date="1427964235373" expanded="true" signature="106:15175" placeholder="{...}" />
-            <marker date="1427964235373" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="106:13169" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="1622:2039" placeholder="/*...*/" />
+            <marker date="1428307268692" expanded="true" signature="2116:2163" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="2093:2117" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="3115:3175" placeholder="{&quot;successRedirect&quot;: '/map'...}" />
+            <marker date="1428307268692" expanded="true" signature="3621:3718" placeholder="{&quot;successRedirect&quot;: '/map'...}" />
+            <marker date="1428307268692" expanded="true" signature="4256:4340" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="4262:4285" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="4611:5034" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="4752:4933" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="5142:6428" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="5227:6097" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="5843:6062" placeholder="/*...*/" />
+            <marker date="1428307268692" expanded="true" signature="8646:8974" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9427:9954" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9695:9923" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9700:9713" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9719:9913" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9751:9781" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="9787:9871" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10284:10732" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10291:10714" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10310:10315" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10404:10455" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10534:10677" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10792:10875" placeholder="{...}" />
+            <marker date="1428307268692" expanded="true" signature="10832:10851" placeholder="{...}" />
           </folding>
         </state>
       </provider>
