@@ -143,16 +143,16 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting._owner._id === logged_in_user._id">
 	             
-	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
+	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
 	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
-	                    <!--<div layout="row"><strong>Создано:</strong> <span am-time-ago="meeting.created" am-preprocess="unix"></span></div>
-	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено:</strong> <span am-time-ago="meeting.updated" am-preprocess="unix"></span></div>-->
-	                    <div layout="row"><strong>Создано:</strong> {{meeting.created}}</div>
-	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено:</strong> {{meeting.updated}}</div>
+	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время: </strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <!--<div layout="row"><strong>Создано: </strong> <span am-time-ago="meeting.created" am-preprocess="unix"></span></div>
+	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> <span am-time-ago="meeting.updated" am-preprocess="unix"></span></div>-->
+	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
 
 	                    <h6>Приглашенные</h6>
@@ -192,12 +192,14 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" >
 	                    
-	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
+	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
 	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время: </strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
 	                    <h6>Приглашенные</h6>
 	                    <div layout="row" class="userlist">
@@ -242,12 +244,14 @@
 
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.invited === true">
 	                    
-	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
+	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
 	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время: </strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
 	                    <h6>Приглашенные</h6>
 	                    <div layout="row" class="userlist">
@@ -286,12 +290,14 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.joined === true">
 	                 
-	                    <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
+	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
 	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время: </strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
 	                    <h6>Приглашенные</h6>
 	                    <div layout="row" class="userlist">
@@ -330,12 +336,15 @@
 
                     <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="!meeting.active">
                     
-                        <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
+                        <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
 	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время: </strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
+
 
 	                    <h6>Приглашенные</h6>
 	                    <div layout="row" class="userlist">
@@ -369,12 +378,14 @@
 
                     <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.ownerFacebook === friend.id">
     
-                        <div layout="row" class="meeting-title"><strong>Название:</strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание:</strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория:</strong> {{ meeting.category }}</div>
+                        <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
 	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время: </strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
 	                    <h6>Приглашенные</h6>
 	                    <div layout="row" class="userlist">

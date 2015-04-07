@@ -54,12 +54,14 @@
 
                 <div class="meeting">
 
-                    <div layout="row" class="meeting-title"><strong>Название:</strong> {{ currentMeeting.title}} </div>
-                        <div layout="row"><strong>Описание:</strong> {{ currentMeeting.description }}</div>
-                        <div layout="row"><strong>Категория:</strong> {{ currentMeeting.category }}</div>
-                        <div layout="row"><strong>Организатор:</strong><a href="../users/{{currentMeeting._owner._id}}">{{ currentMeeting.ownerName }}</a></div>
-                        <div layout="row"><strong>Виден:</strong> {{ currentMeeting.visibility }}</div>
-                        <div layout="row"><strong>Дата и время:</strong> {{ currentMeeting.startDate | date: 'yyyy-MM-dd'}}  {{ currentMeeting.startTime | date:'HH:mm'}}</div>
+                    <div layout="row" class="meeting-title"><strong>Название: </strong> {{ currentMeeting.title}} </div>
+                        <div layout="row"><strong>Описание: </strong> {{ currentMeeting.description }}</div>
+                        <div layout="row"><strong>Категория: </strong> {{ currentMeeting.category }}</div>
+                        <div layout="row"><strong>Организатор: </strong><a href="../users/{{currentMeeting._owner._id}}">{{ currentMeeting.ownerName }}</a></div>
+                        <div layout="row"><strong>Виден: </strong> {{ currentMeeting.visibility }}</div>
+                        <div layout="row"><strong>Дата и время: </strong> {{ currentMeeting.startDate | date: 'yyyy-MM-dd'}}  {{ currentMeeting.startTime | date:'HH:mm'}}</div>
+                        <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+                        <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
                         <h6>Приглашенные</h6>
                         <div layout="row" class="userlist">

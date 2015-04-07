@@ -18,6 +18,14 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
         $scope.currentMeetingId = $scope.currentMeeting._id;
         console.log($scope.currentMeetingId);
     });
+
+    $scope.currentMeeting.startDate = new Date($scope.currentMeeting.startDate);
+ $scope.currentMeeting.startTime = new Date($scope.currentMeeting.startTime);
+ if ($scope.currentMeeting.updated_at !== null){
+ 	$scope.currentMeeting.updated_at = new Date($scope.currentMeeting.updated_at);
+ }
+ $scope.currentMeeting.updated = moment($scope.currentMeeting.updated_at).fromNow();
+ $scope.currentMeeting.created = moment($scope.currentMeeting.created_at).fromNow();
     
 
     // join meeting
@@ -172,6 +180,14 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
                  } else {
                     meeting.active = false;
                  };// end date filter
+
+                 meeting.startDate = new Date(meeting.startDate);
+	             meeting.startTime = new Date(meeting.startTime);
+	             if (meeting.updated_at !== null){
+	             	meeting.updated_at = new Date(meeting.updated_at);
+	             }
+	             meeting.updated = moment(meeting.updated_at).fromNow();
+	             meeting.created = moment(meeting.created_at).fromNow();
 
                  //invited filter
                  var invitedArray = meeting.invitedUsers;
