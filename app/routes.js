@@ -299,7 +299,7 @@ module.exports = function(app, passport) {
 	app.param('meetingId', meetingByID);
 
     //update a meeting
-    app.put('../api/meetings/:id', isLoggedIn, function (req, res){
+    app.put('/api/meetings/:id', isLoggedIn, function (req, res){
     	var user = req.user;
     	var id = req.params.id;
     	var update = {
