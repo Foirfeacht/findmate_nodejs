@@ -261,7 +261,7 @@ findMate.controller('meetingsController', ['$scope',
              }, function() {
                   $scope.refresh();
              })     
-    }
+    };
 
     $scope.refresh = function(){
         $http.get('../api/meetings')
