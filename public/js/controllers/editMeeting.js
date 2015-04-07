@@ -158,8 +158,8 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 
   $scope.formData.invitedUsers = $scope.invitedUsers;
 
-  $scope.saveMeeting = function() {
-      $http.put('../edit/meetings', $scope.formData)
+  $scope.saveMeeting = function(id) {
+      $http.put('../api/meetings' + id, $scope.formData)
               .success(function (data) {
                   console.log($scope.formData);
                   $scope.formData = {}; // clear the form so our user is ready to enter another
