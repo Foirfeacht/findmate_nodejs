@@ -195,7 +195,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                   $scope.hide();
               })
               .error(function(data) {
-                  console.log('Error: ' + data);
+                  console.log('Error: ', data);
               })
     };
 }]);
