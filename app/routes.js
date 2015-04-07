@@ -259,7 +259,7 @@ module.exports = function(app, passport) {
 
 		//unjoin a meeting
 	    app.put('/unjoin/meetings/:id', isLoggedIn, function (req, res){
-	    	var user = req.user;
+	    	var user = req.user; 
 	        var update = { $pull: {participants: req.user} };
 
 	        Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
@@ -301,7 +301,7 @@ module.exports = function(app, passport) {
     //update a meeting
     app.put('../api/meetings/:id', isLoggedIn, function (req, res){
     	var user = req.user;
-    	var id = req.body.id;
+    	var id = req.params.id;
     	var update = {
     		$set: {
     		    		title: req.body.title,
