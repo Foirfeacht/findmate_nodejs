@@ -149,7 +149,11 @@
 	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден:</strong> {{ meeting.visibility }}</div>
 	                    <div layout="row"><strong>Дата и время:</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
-	                    <div layout="row"><strong>Создано:</strong> <span am-time-ago="meeting.created_at"></span></div>
+	                    <!--<div layout="row"><strong>Создано:</strong> <span am-time-ago="meeting.created" am-preprocess="unix"></span></div>
+	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено:</strong> <span am-time-ago="meeting.updated" am-preprocess="unix"></span></div>-->
+	                    <div layout="row"><strong>Создано:</strong> {{meeting.created}}</div>
+	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено:</strong> {{meeting.updated}}</div>
+
 
 	                    <h6>Приглашенные</h6>
 	                    <div layout="row" class="userlist">

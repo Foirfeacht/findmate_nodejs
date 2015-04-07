@@ -80,6 +80,8 @@ findMate.controller('meetingsController', ['$scope',
              if (meeting.updated_at !== null){
              	meeting.updated_at = new Date(meeting.updated_at);
              }
+             meeting.updated = moment(meeting.updated_at).fromNow();
+             meeting.created = moment(meeting.created_at).fromNow();
               
 
              //invited filter
