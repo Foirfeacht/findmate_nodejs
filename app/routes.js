@@ -298,8 +298,9 @@ module.exports = function(app, passport) {
 	app.param('meetingId', meetingByID);
 
     //update a meeting
-    app.put('/api/meetings/:id', isLoggedIn, function (req, res){
+    app.put('../api/meetings/:id', isLoggedIn, function (req, res){
     	var user = req.user;
+    	var id = req.body.id;
     	var update = {
     		$set: {
     		    		title: req.body.title,
@@ -314,7 +315,8 @@ module.exports = function(app, passport) {
     			invitedUsers: req.body.invitedUsers
     		}
     	};
-	    Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
+
+			Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 	        if(!meeting) {
 	            res.statusCode = 404;
 	            return res.send({ error: 'Not found' });
@@ -327,6 +329,7 @@ module.exports = function(app, passport) {
 			            });
 
 	        });
+
 	});
 
 	
