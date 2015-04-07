@@ -298,7 +298,7 @@ module.exports = function(app, passport) {
 	app.param('meetingId', meetingByID);
 
     //update a meeting
-    app.post('../edit/meetings', isLoggedIn, function (req, res){
+    app.put('../edit/meetings', isLoggedIn, function (req, res){
     	var user = req.user;
     	var id = req.body.id;
     	var update = {
