@@ -9,7 +9,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 
     $scope.meetingId = editService.meetingId;
     $scope.logged_in_user = editService.user;
-    console.log($scope.meetingId);
+
 
 
     // init necessary data
@@ -69,8 +69,8 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                 title: meeting.title,
                 description: meeting.description,
                 description: meeting.description,
-                startDate: moment(meeting.startDate),
-                startTime: moment(meeting.startTime),
+                startDate: new Date(meeting.startDate),
+                startTime: new Date(meeting.startTime),
                 updated_at: new Date(),
                 visibility: meeting.visibility,
                 id: meeting._id
@@ -153,6 +153,33 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
   $scope.cancel = function() {
     $mdDialog.cancel();
   };
+
+  // date and timepickers
+            //timepicker
+              
+
+              $scope.hstep = 1;
+              $scope.mstep = 15;
+              $scope.ismeridian = true;
+
+              //datepicker
+  
+              $scope.minDate = new Date();
+               $scope.openDatePicker = function($event) {
+                  $event.preventDefault();
+                  $event.stopPropagation();
+
+                  $scope.opened = true;
+                };
+
+          
+
+                $scope.dateOptions = {
+                  formatYear: 'yy',
+                  startingDay: 1
+                };
+
+                $scope.format = 'yyyy/MM/dd';
 
 
 

@@ -179,11 +179,12 @@ module.exports = function(app, passport) {
             category: req.body.category,
 	        startDate: req.body.startDate,
 	        startTime: req.body.startTime,
+	        created_at: new Date();
             latitude: req.body.latitude,
             longitude: req.body.longitude,
             position: req.body.position,
             location: req.body.location,
-            visibility : req.body.visibility || 'all',
+            visibility : req.body.visibility || 'Все',
             _owner: req.user._id,
             ownerName: req.user.name,
             invitedUsers: req.body.invitedUsers,

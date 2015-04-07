@@ -21,22 +21,23 @@
 				    <md-option value="Развлечения">Развлечения</md-option>
 				</md-select>
 	        </section>
-
-
-
-	            <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
-
-	                    <md-input-container>
-	                        <label>Время встречи</label>
-	                        <input type="time" ng-model="formData.startTime" min="timeNow()">
-	                    </md-input-container>
-
-	                    <md-input-container>
-	                        <label>Дата встречи</label>
-	                        <input type="date" ng-model="formData.startDate" min="Date.now()">
-	                    </md-input-container>
-	                
-	            </section>
+	        
+			<div class="date-header">Время и день</div>	
+	      	
+            <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
+               	<div>
+                    <timepicker ng-model="formData.startTime" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                </div>
+	            <div>
+	                <p class="input-group">
+		              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.startDate" is-open="opened" min-date="minDate" max-date="'2040-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+		              <span class="input-group-btn">
+		                <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+		              </span>
+		            </p>
+	            </div>
+                
+            </section>
 
 	        <section layout="row" class="visibility">
 	        	<div>
