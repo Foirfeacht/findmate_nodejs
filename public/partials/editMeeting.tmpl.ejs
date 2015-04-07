@@ -53,6 +53,7 @@
 	        <section layout="row" >
                 
             </section>
+            <input type="hidden" name="_method" value="put">
           
 
 	       
@@ -61,7 +62,7 @@
 		            <md-button class="md-raised" ng-click="cancel()">Отмена</md-button>
 	            </div>
 	            <div>
-		            <md-button class="md-raised md-primary" ng-click="saveMeeting(meetingId)">Сохранить</md-button>
+		            <md-button class="md-raised md-primary" ng-click="saveMeeting(meetingId)" type="submit">Сохранить</md-button>
 	            </div>
 	        </section>
 	    </div><!-- end form -->
