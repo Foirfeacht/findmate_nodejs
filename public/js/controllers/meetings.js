@@ -75,10 +75,10 @@ findMate.controller('meetingsController', ['$scope',
              };// end date filter
 
              //format dates
-             meeting.startDate = new Date(meeting.startDate);
-             meeting.created_at = new Date(meeting.created_at);
+             meeting.startDate = moment(meeting.startDate);
+             meeting.created_at = moment(meeting.created_at);
              console.log(meeting.created_at);
-             meeting.startTime = new Date(meeting.startTime);
+             meeting.startTime = moment(meeting.startTime);
              if (meeting.updated_at !== null){
              	meeting.updated_at = new Date(meeting.updated_at);
              }
