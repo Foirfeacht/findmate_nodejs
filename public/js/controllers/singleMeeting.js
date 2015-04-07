@@ -15,6 +15,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
     });
 
     $scope.$watch('currentMeeting', function () {
+        console.log($scope.currentMeeting);
         $scope.currentMeetingId = $scope.currentMeeting._id;
         console.log($scope.meetingId);
     });
