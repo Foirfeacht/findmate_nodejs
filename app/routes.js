@@ -179,7 +179,7 @@ module.exports = function(app, passport) {
             category: req.body.category,
 	        startDate: req.body.startDate,
 	        startTime: req.body.startTime,
-	        created_at: new Date();
+	        created_at: new Date(),
             latitude: req.body.latitude,
             longitude: req.body.longitude,
             position: req.body.position,
