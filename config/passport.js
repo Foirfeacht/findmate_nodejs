@@ -83,7 +83,7 @@ module.exports = function(passport) {
                         newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
                         newUser.email          = (profile.emails[0].value || '').toLowerCase();
                         newUser.name           = profile.name.givenName + ' ' + profile.name.familyName;
-                        user.image             = 'facebook';
+                        newUser.image             = 'facebook';
 
                         newUser.save(function(err) {
                             if (err)
@@ -167,7 +167,7 @@ module.exports = function(passport) {
                         newUser.vkontakte.email = params.email.toLowerCase();
                         newUser.email           = params.email.toLowerCase();
                         newUser.name            = profile.displayName;
-                        user.image              = 'vkontakte';
+                        newUser.image              = 'vkontakte';
     
                         newUser.save(function(err) {
                             if (err)
