@@ -209,7 +209,7 @@ module.exports = function(app, passport) {
 	app.put('/decline', isLoggedIn, function (req, res){
 	    	var user = req.user;
 	    	var id = req.user._id;
-	        var update = { $pull: {invited: req.meeting} };
+	        var update = { $pull: {invited: req.body.meeting} };
 
 	        User.findByIdAndUpdate(req.params.id, update, function (err, user) {
 		            if (!err) {
@@ -236,7 +236,7 @@ module.exports = function(app, passport) {
 	    app.put('/join', isLoggedIn, function (req, res){
 	    	var user = req.user;
 	    	var id = req.user._id;
-	        var update = { $addToSet: {joined: req.meeting}, $pull: {invited: req.meeting} };
+	        var update = { $addToSet: {joined: req.body.meeting}, $pull: {invited: req.body.meeting} };
 
 	        User.findByIdAndUpdate(id, update, {upsert: true}, function (err, user) {
 		            if (!err) {
@@ -263,7 +263,7 @@ module.exports = function(app, passport) {
 	    app.put('/unjoin', isLoggedIn, function (req, res){
 	    	var user = req.user; 
 	    	var id = req.user._id;
-	        var update = { $pull: {joined: req.meeting} };
+	        var update = { $pull: {joined: req.body.meeting} };
 
 	        User.findByIdAndUpdate(id, update, function (err, user) {
 		            if (!err) {
