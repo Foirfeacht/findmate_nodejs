@@ -310,11 +310,9 @@ module.exports = function(app, passport) {
     			        startDate: req.body.startDate,
     			        startTime: req.body.startTime,
     			        updated_at: Date.now(),
-    			        visibility: req.body.visibility
-    			    },
-    		$push: {
-    			invitedUsers: req.body.invitedUsers
-    		}
+    			        visibility: req.body.visibility,
+				        invitedUsers: req.body.invitedUsers
+    			    }
     	};
 
 			Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
