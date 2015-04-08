@@ -187,7 +187,7 @@ module.exports = function(app, passport) {
             visibility : req.body.visibility || 'Все',
             _owner: req.user._id,
             ownerName: req.user.name,
-            invitedUsers: req.body.invitedUsers,
+            //invitedUsers: req.body.invitedUsers,
 			ownerFacebook: req.user.facebook.id,
 			ownerVkontakte: req.user.vkontakte.id
         }, function(err, meeting) {
@@ -206,13 +206,14 @@ module.exports = function(app, passport) {
 
     // decline invitation
 
-	app.put('/decline/meetings/:id', isLoggedIn, function (req, res){
+	app.put('/decline', isLoggedIn, function (req, res){
 	    	var user = req.user;
-	        var update = { $pull: {invitedUsers: req.user} };
+	    	var id = req.user._id;
+	        var update = { $pull: {meetings.invited: req.meeting} };
 
-	        Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
+	        User.findByIdAndUpdate(req.params.id, update, function (err, user) {
 		            if (!err) {
-		                console.log("meeting updated");
+		                console.log("invitation declined");
 			            Meeting.find(function(err, meetings) {
 			                if (err)
 			                    res.send(err)
@@ -232,11 +233,12 @@ module.exports = function(app, passport) {
 		});
 
 	//join a meeting
-	    app.put('/join/meetings/:id', isLoggedIn, function (req, res){
+	    app.put('/join', isLoggedIn, function (req, res){
 	    	var user = req.user;
-	        var update = { $addToSet: {participants: req.user}, $pull: {invitedUsers: req.user} };
+	    	var id = req.user._id;
+	        var update = { $addToSet: {meetings.joined: req.meeting}, $pull: {meetings.invited: req.meeting} };
 
-	        Meeting.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, meeting) {
+	        User.findByIdAndUpdate(id, update, {upsert: true}, function (err, user) {
 		            if (!err) {
 		                console.log("meeting joined");
 			            Meeting.find(function(err, meetings) {
@@ -258,11 +260,12 @@ module.exports = function(app, passport) {
 		});
 
 		//unjoin a meeting
-	    app.put('/unjoin/meetings/:id', isLoggedIn, function (req, res){
+	    app.put('/unjoin', isLoggedIn, function (req, res){
 	    	var user = req.user; 
-	        var update = { $pull: {participants: req.user} };
+	    	var id = req.user._id;
+	        var update = { $pull: {meetings.joined: req.meeting} };
 
-	        Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
+	        User.findByIdAndUpdate(id, update, function (err, user) {
 		            if (!err) {
 		                console.log("meeting unjoined");
 			            Meeting.find(function(err, meetings) {

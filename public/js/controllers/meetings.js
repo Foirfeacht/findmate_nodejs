@@ -56,15 +56,18 @@ findMate.controller('meetingsController', ['$scope',
              var meeting = meetings[i];
 
              //remove duplicates, delete this part later
-             meeting.invitedUsers = _.uniq(meeting.invitedUsers,
+            /* meeting.invitedUsers = _.uniq(meeting.invitedUsers,
                 function(item, key, a){
                     return item.a;
                 });
 
-             meeting.participants = _.uniq(meeting.participants,
+            */
+
+            /* meeting.participants = _.uniq(meeting.participants,
                 function(item, key, a){
                     return item.a;
                 });
+            */
 
              // date filter
              var meetingDate = meeting.startDate;
@@ -82,7 +85,7 @@ findMate.controller('meetingsController', ['$scope',
              }
              meeting.updated = moment(meeting.updated_at).fromNow();
              meeting.created = moment(meeting.created_at).fromNow();
-
+/*
 
              //invited filter
              var invitedArray = meeting.invitedUsers;
@@ -107,6 +110,7 @@ findMate.controller('meetingsController', ['$scope',
                     meeting.joined = false;
                 };
              };// end participants filter
+             */
 
          }; // end for loop
     }
@@ -146,23 +150,18 @@ findMate.controller('meetingsController', ['$scope',
                 console.log('Error: ' + data);
             });
     };
-
-    //update meeting
-    $scope.updateMeeting = function (id) {
-        // not implemented yet
-    };
-
+    
     // decline invitation
 
-    $scope.declineInvitation = function(id){
+    $scope.declineInvitation = function(meeting){
 
-        $http.put('/decline/meetings/' + id)
+        $http.put('/decline', meeting)
             .success(function (data) {
                 $scope.meetings = data;
                 var meetings = $scope.meetings;
                 console.log(data);
 
-                 $scope.refresh();
+                 //$scope.refresh();
 
             })
             .error(function (data) {
@@ -172,15 +171,15 @@ findMate.controller('meetingsController', ['$scope',
 
     // join meeting
 
-    $scope.joinMeeting = function(id){
+    $scope.joinMeeting = function(meeting){
 
-        $http.put('/join/meetings/' + id)
+        $http.put('/join', meeting)
             .success(function (data) {
                 $scope.meetings = data;
                 var meetings = $scope.meetings;
                 console.log(data);
 
-                $scope.refresh(data);
+               // $scope.refresh(data);
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -189,15 +188,15 @@ findMate.controller('meetingsController', ['$scope',
 
     // unjoin meeting
 
-    $scope.unjoinMeeting = function(id){
+    $scope.unjoinMeeting = function(meeting){
 
-        $http.put('/unjoin/meetings/' + id)
+        $http.put('/unjoin', meeting)
             .success(function (data) {
                 $scope.meetings = data;
                 var meetings = $scope.meetings;
                 console.log(data);
 
-                 $scope.refresh(data);
+                // $scope.refresh(data);
 
             })
             .error(function (data) {

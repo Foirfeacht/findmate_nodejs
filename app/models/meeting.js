@@ -13,8 +13,6 @@ var meetingsSchema = new Schema({
     ownerFacebook: {type: String, ref: 'User'},
     ownerVK: {type: String, ref: 'User'},
     ownerName: { type: String, ref: 'User' },
-    invitedUsers: {type: Array, default: []},
-    participants: {type: Array, default: []},
     created_at: { type: Date, default: Date.now() },
     updated_at: { type: Date, default: null },
     longitude: String,

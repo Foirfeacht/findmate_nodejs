@@ -11,16 +11,14 @@ var userSchema = mongoose.Schema({
         id           : String,
         token        : String,
         email        : String,
-        name         : String,
-        image        : String
+        name         : String
     },
 
     vkontakte: {
         id           : String,
         token        : String,
         email        : String,
-        name         : String,
-        image        : String
+        name         : String
     },
 
     firstName: {type: String, trim: true},
@@ -37,6 +35,18 @@ var userSchema = mongoose.Schema({
         }],
         default: ['user']
     },
+
+    // meetings connections
+    meetings: {
+        invited: {
+            type: Array,
+            default: []
+        },
+        joined: {
+            type: Array,
+            default: []
+        }
+    }
 });
 
 // generating a hash
