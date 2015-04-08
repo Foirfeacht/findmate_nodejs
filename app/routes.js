@@ -236,15 +236,15 @@ module.exports = function(app, passport) {
 	    app.put('/join', isLoggedIn, function (req, res){
 	    	var user = req.user;
 	    	var id = req.user._id;
-	        var update = { $addToSet: {joined: req.body.meeting}, $pull: {invited: req.body.meeting} };
+	        var update = { $addToSet: {joined: req.meeting}, $pull: {invited: req.meeting} };
 
 	        User.findByIdAndUpdate(id, update, {upsert: true}, function (err, user) {
 		            if (!err) {
 		                console.log("meeting joined");
-			            Meeting.find(function(err, meetings) {
+			            User.find(function(err, users) {
 			                if (err)
 			                    res.send(err)
-			                res.json(meetings);
+			                res.json(users);
 			            });
 		            } else {
 		                if(err.name == 'ValidationError') {

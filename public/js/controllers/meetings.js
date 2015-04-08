@@ -150,7 +150,7 @@ findMate.controller('meetingsController', ['$scope',
                 console.log('Error: ' + data);
             });
     };
-    
+
     // decline invitation
 
     $scope.declineInvitation = function(meeting){
@@ -175,8 +175,8 @@ findMate.controller('meetingsController', ['$scope',
 
         $http.put('/join', meeting)
             .success(function (data) {
-                $scope.meetings = data;
-                var meetings = $scope.meetings;
+                $scope.users = data;
+                var users = $scope.users;
                 console.log(data);
 
                // $scope.refresh(data);
