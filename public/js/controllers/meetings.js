@@ -168,7 +168,7 @@ findMate.controller('meetingsController', ['$scope',
                         console.log(meeting);
                      }  
                  };
-                 $scope.refresh();
+                // $scope.refresh();
 
             })
             .error(function (data) {
@@ -187,14 +187,14 @@ findMate.controller('meetingsController', ['$scope',
                 console.log(data);
                 var meetingsLength = meetings.length;
                  for(var i = 0; i < meetingsLength; i++) {
-                     var meeting = meetings[i];
-                     if (meeting._id === id){
-                        meeting.joined = true;
-                        meeting.invited = false;
-                        console.log(meeting);
-                     }                    
-                 }
-                 $scope.refresh();
+					var meeting = meetings[i];
+					if (meeting._id === id){
+						meeting.joined = true;
+						meeting.invited = false;
+						console.log(meeting);
+					}
+				}
+                 //$scope.refresh();
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -218,7 +218,7 @@ findMate.controller('meetingsController', ['$scope',
                         console.log(meeting);
                      }                  
                  };
-                 $scope.refresh();
+                 //$scope.refresh();
 
             })
             .error(function (data) {
