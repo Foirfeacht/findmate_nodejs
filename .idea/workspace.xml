@@ -107,8 +107,8 @@
       <file leaf-file-name="meetings.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/meetings.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.647651" vertical-offset="2158" max-vertical-offset="7922">
-              <caret line="161" column="40" selection-start-line="161" selection-start-column="40" selection-end-line="161" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.62863535" vertical-offset="2158" max-vertical-offset="7922">
+              <caret line="160" column="78" selection-start-line="160" selection-start-column="78" selection-end-line="160" selection-end-column="78" />
               <folding />
             </state>
           </provider>
@@ -955,8 +955,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/meetings.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.647651" vertical-offset="2158" max-vertical-offset="7922">
-          <caret line="161" column="40" selection-start-line="161" selection-start-column="40" selection-end-line="161" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.62863535" vertical-offset="2158" max-vertical-offset="7922">
+          <caret line="160" column="78" selection-start-line="160" selection-start-column="78" selection-end-line="160" selection-end-column="78" />
           <folding />
         </state>
       </provider>
