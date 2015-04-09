@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3a578cdc-ea4c-4e1c-862b-957bb4ee81a0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/meetings.ejs" afterPath="$PROJECT_DIR$/views/meetings.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="findmate.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,7 +30,7 @@
       <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3332" max-vertical-offset="8262">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3689" max-vertical-offset="8262">
               <caret line="188" column="37" selection-start-line="188" selection-start-column="37" selection-end-line="188" selection-end-column="37" />
               <folding>
                 <marker date="1428584276664" expanded="true" signature="106:13708" placeholder="{...}" />
@@ -107,8 +108,8 @@
       <file leaf-file-name="meetings.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/meetings.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.62863535" vertical-offset="2158" max-vertical-offset="7922">
-              <caret line="160" column="60" selection-start-line="160" selection-start-column="60" selection-end-line="160" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.761745" vertical-offset="3076" max-vertical-offset="7956">
+              <caret line="221" column="34" selection-start-line="221" selection-start-column="34" selection-end-line="221" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -924,17 +925,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3332" max-vertical-offset="8262">
-          <caret line="188" column="37" selection-start-line="188" selection-start-column="37" selection-end-line="188" selection-end-column="37" />
-          <folding>
-            <marker date="1428584276664" expanded="true" signature="106:13708" placeholder="{...}" />
-            <marker date="1428584276664" expanded="true" signature="667:687" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controllers/meetings.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.1081085" vertical-offset="714" max-vertical-offset="3961">
@@ -953,10 +943,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3689" max-vertical-offset="8262">
+          <caret line="188" column="37" selection-start-line="188" selection-start-column="37" selection-end-line="188" selection-end-column="37" />
+          <folding>
+            <marker date="1428584276664" expanded="true" signature="106:13708" placeholder="{...}" />
+            <marker date="1428584276664" expanded="true" signature="667:687" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/meetings.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62863535" vertical-offset="2158" max-vertical-offset="7922">
-          <caret line="160" column="60" selection-start-line="160" selection-start-column="60" selection-end-line="160" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.761745" vertical-offset="3076" max-vertical-offset="7956">
+          <caret line="221" column="34" selection-start-line="221" selection-start-column="34" selection-end-line="221" selection-end-column="34" />
           <folding />
         </state>
       </provider>
