@@ -204,6 +204,21 @@ module.exports = function(app, passport) {
 
     });
 
+	//meeting by id middleware
+
+	var meetingByID = function(req, res, next, id) {
+		Meeting.findById(id).populate('_owner', 'ownerName').exec(function(err, meeting) {
+			if (err) return next(err);
+			if (!meeting) return next(new Error('Failed to load meeting ' + id));
+			req.meeting = meeting;
+			next();
+		});
+	};
+
+	// get single meetings
+
+	app.param('meetingId', meetingByID);
+
     // decline invitation
 
 	app.put('/decline', isLoggedIn, function (req, res){
@@ -233,16 +248,16 @@ module.exports = function(app, passport) {
 		});
 
 	//join a meeting
-	    app.put('/join/:id', isLoggedIn, function (req, res){
+	    app.put('/join/:meetingId', isLoggedIn, function (req, res){
 
-			Meeting.findById(req.params.id, function(err, meeting){
+			/*Meeting.findById(req.params.id, function(err, meeting){
 				if (err) return err;
 				if (!meeting) {
 					res.statusCode = 404;
 					return res.send({error: 'Not found'});
 				};
 				req.meeting = meeting;
-			});
+			})*/;
 	        var update = { $addToSet: {joined: req.meeting}, $pull: {invited: req.meeting} };
 
 	        User.findByIdAndUpdate(req.user.id, update, {upsert: true}, function (err, user) {
@@ -293,20 +308,7 @@ module.exports = function(app, passport) {
 		     });
 		});
 
-	//meeting by id middleware
 
-	var meetingByID = function(req, res, next, id) {
-		Meeting.findById(id).populate('_owner', 'ownerName').exec(function(err, meeting) {
-			if (err) return next(err);
-			if (!meeting) return next(new Error('Failed to load meeting ' + id));
-			req.meeting = meeting;
-			next();
-		}); 
-	};
-
-	// get single meetings
-
-	app.param('meetingId', meetingByID);
 
     //update a meeting
     app.put('/api/meetings/:id', isLoggedIn, function (req, res){
