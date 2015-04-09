@@ -65,7 +65,7 @@
 
                         <h6>Приглашенные</h6>
                         <div layout="row" class="userlist">
-                            <div ng-repeat="user in currentMeeting.invitedUsers | limitTo: 5">
+                            <div ng-repeat="users in currentMeeting.invitedUsers | limitTo: 5">
                                 <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
                             </div>
                         </div>

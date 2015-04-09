@@ -78,7 +78,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
     visibility: "Общие",
     startDate:  new Date(),
     startTime: new Date()
-	//invitedUsers: $scope.invitedUsers
+	invitedUsers: $scope.invitedUsers
   };
 
   

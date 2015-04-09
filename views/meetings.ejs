@@ -156,12 +156,8 @@
 
 	                    <h6>Приглашенные</h6>
 	                    <div layout="row" class="userlist">
-                            <div ng-repeat="user in users">
-                                <div ng-repeat="events in user.joined">
-                                    <div ng-if="event._id === $parent.meeting._id">
-                                        <img src="https://graph.facebook.com/{{$parent.user.facebook.id}}/picture?height=50&width=50" alt="{{$parent.user.facebook.name }}">
-                                    </div>
-                                </div>
+                            <div ng-repeat="user in meeting.invitedUsers">
+                                 <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
                             </div>
 	                    </div>
 

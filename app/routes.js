@@ -188,7 +188,8 @@ module.exports = function(app, passport) {
             _owner: req.user._id,
             ownerName: req.user.name,
 			ownerFacebook: req.user.facebook.id,
-			ownerVkontakte: req.user.vkontakte.id
+			ownerVkontakte: req.user.vkontakte.id,
+			invitedUsers: req.body.invitedUsers
         }, function(err, meeting) {
             if (err)
                 res.send(err);
@@ -248,6 +249,7 @@ module.exports = function(app, passport) {
 		});
 	});
 
+
     // decline invitation
 
 	app.put('/decline/:meetingId', isLoggedIn, function (req, res){
@@ -284,10 +286,23 @@ module.exports = function(app, passport) {
 	    app.put('/join/:meetingId', isLoggedIn, function (req, res){
 
 	        var update = { $addToSet: {joined: req.meeting}, $pull: {invited: req.meeting} };
+			var meetingUpdate = { $addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: req.user} };
 
 	        User.findByIdAndUpdate(req.user.id, update, {upsert: true}, function (err, user) {
 		            if (!err) {
 		                console.log("meeting joined");
+						Meeting.findByIdAndUpdate(req.meeting.id, meetingUpdate, {upsert: true}, function (err, meeting) {
+							if(!meeting) {
+								res.statusCode = 404;
+								return res.send({ error: 'Not found' });
+							}
+							console.log("meeting updated");
+							Meeting.find(function(err, meetings) {
+								if (err)
+									res.send(err)
+								res.json(meetings);
+							});
+						});
 			            User.find(function(err, users) {
 			                if (err)
 			                    res.send(err);
@@ -310,6 +325,8 @@ module.exports = function(app, passport) {
 		            }
 		     });
 		});
+
+	// and store user in meetings.joined
 
 		//unjoin a meeting
 	    app.put('/unjoin/:meetingId', isLoggedIn, function (req, res){

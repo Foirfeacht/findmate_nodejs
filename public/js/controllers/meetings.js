@@ -72,13 +72,13 @@ findMate.controller('meetingsController', ['$scope',
              }
              meeting.updated = moment(meeting.updated_at).fromNow();
              meeting.created = moment(meeting.created_at).fromNow();
-
+			 /*
 			 meeting.invitedUsers = [];
 			 meeting.joinedUsers = [];
 			 meeting.userInvited = false;
 			 meeting.userJoined = false;
 
-			 var users = $scope,users;
+			var users = $scope,users;
 			 usersLength = users.length;
 			 for (var i = 0; i < usersLength; i++){
 				 var user = users[i];
@@ -105,7 +105,7 @@ findMate.controller('meetingsController', ['$scope',
 			 }// end for
 
 
-
+*/
 
          }; // end for loop
     }
