@@ -291,18 +291,6 @@ module.exports = function(app, passport) {
 	        User.findByIdAndUpdate(req.user.id, update, {upsert: true}, function (err, user) {
 		            if (!err) {
 		                console.log("meeting joined");
-						Meeting.findByIdAndUpdate(req.meeting.id, meetingUpdate, {upsert: true}, function (err, meeting) {
-							if(!meeting) {
-								res.statusCode = 404;
-								return res.send({ error: 'Not found' });
-							}
-							console.log("meeting updated");
-							Meeting.find(function(err, meetings) {
-								if (err)
-									res.send(err)
-								res.json(meetings);
-							});
-						});
 			            User.find(function(err, users) {
 			                if (err)
 			                    res.send(err);
@@ -327,6 +315,26 @@ module.exports = function(app, passport) {
 		});
 
 	// and store user in meetings.joined
+	app.put('/joinmeeting/:meetingId', isLoggedIn, function (req, res){
+
+		var update = { $addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: req.user} };
+
+
+				Meeting.findByIdAndUpdate(req.meeting.id, update, {upsert: true}, function (err, meeting) {
+					if(!meeting) {
+						res.statusCode = 404;
+						return res.send({ error: 'Not found' });
+					}
+					console.log("meeting updated");
+					Meeting.find(function(err, meetings) {
+						if (err)
+							res.send(err)
+						res.json(meetings);
+					});
+				});
+
+	});
+
 
 		//unjoin a meeting
 	    app.put('/unjoin/:meetingId', isLoggedIn, function (req, res){
