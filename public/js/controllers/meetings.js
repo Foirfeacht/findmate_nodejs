@@ -223,20 +223,20 @@ findMate.controller('meetingsController', ['$scope',
         $scope.todayDay = todayDate.getDate();
 
         //datepicker
-	      $scope.filterMtn.startDate = new Date();
-	       $scope.openDatePicker = function($event) {
-	          $event.preventDefault();
-	          $event.stopPropagation();
+	     // $scope.filterMtn.startDate = new Date();
+       $scope.openDatePicker = function($event) {
+          $event.preventDefault();
+          $event.stopPropagation();
 
-	          $scope.opened = true;
-	        };	  
+          $scope.opened = true;
+        };	  
 
-	        $scope.dateOptions = {
-	          formatYear: 'yy',
-	          startingDay: 1
-	        };
+        $scope.dateOptions = {
+          formatYear: 'yy',
+          startingDay: 1
+        };
 
-	        $scope.format = 'yyyy/MM/dd';
+        $scope.format = 'yyyy/MM/dd';
 
         $scope.categories = [{name: 'Спорт'}, {name: 'Развлечения'}];
 
