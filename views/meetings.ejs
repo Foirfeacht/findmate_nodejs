@@ -156,23 +156,26 @@
 
 	                    <h6>Приглашенные</h6>
 	                    <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.invitedUsers">
+                            <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
                                  <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
                             </div>
 	                    </div>
 
 	                    <h6>Участники</h6>
                         <div layout="row" class="userlist">
-                            <div ng-repeat="user in users">
+                            <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
 
-                                    <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}" ng-if="_.indexOf(user.joined, meeting, 0) !== -1">
+                                    <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
 
                             </div>
                         </div>
-	                    <div layout="column">
-                            <md-button type="submit" class="md-raised md-warn delete-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Редактировать</md-button>
-	                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
+	                    <div layout="row">
+	                        <md-button class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
 	                    </div>
+
+	                    <md-button class="md-fab md-primary delete-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
+	                    	<i class="mdi mdi-pencil"></i>
+	                    </md-button>
 	                </div>
 
 
@@ -220,13 +223,14 @@
 	                    <div layout="row">
 	                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
 
-	                        <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)">Отклонить приглашение</md-button>
-	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
-                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)">Не учавствовать</md-button>
+	                        <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-if="meeting.invited">Отклонить приглашение</md-button>
+	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-if="!meeting.joined">Учавствовать</md-button>
+                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-if="meeting.joined">Не учавствовать</md-button>
 	                    </div>
-	                    <div layout="column">
-	                        
-	                    </div>
+
+	                    <md-button class="md-fab md-primary delete-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
+	                    	<i class="mdi mdi-pencil"></i>
+	                    </md-button>
 	                </div>
 
 	                <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
@@ -269,11 +273,15 @@
                     			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
                     		</div>
 	                    </div>
-	                    <div layout="column">
+	                    <div layout="row">
 		                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-if="meeting.invited">Отклонить приглашение</md-button>
 	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-if="!meeting.joined">Учавствовать</md-button>
                             <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-if="meeting.joined">Не учавствовать</md-button>
 	                    </div>
+
+	                    <md-button class="md-fab md-primary delete-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
+	                    	<i class="mdi mdi-pencil"></i>
+	                    </md-button>
 	                </div>
 
 	                <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
@@ -315,11 +323,15 @@
                     			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
                     		</div>
 	                    </div>
-	                    <div layout="column">
+	                    <div layout="row">
 		                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-if="meeting.invited">Отклонить приглашение</md-button>
 	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-if="!meeting.joined">Учавствовать</md-button>
                             <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-if="meeting.joined">Не учавствовать</md-button>
 	                    </div>
+
+	                    <md-button class="md-fab md-primary delete-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
+	                    	<i class="mdi mdi-pencil"></i>
+	                    </md-button>
 	                </div>
 
 	                <div class="alert alert-danger" role="alert" ng-if="!meetings.length">

@@ -72,45 +72,21 @@ findMate.controller('meetingsController', ['$scope',
              }
              meeting.updated = moment(meeting.updated_at).fromNow();
              meeting.created = moment(meeting.created_at).fromNow();
-			 /*
-			 meeting.invitedUsers = [];
-			 meeting.joinedUsers = [];
-			 meeting.userInvited = false;
-			 meeting.userJoined = false;
 
-			var users = $scope,users;
-			 usersLength = users.length;
-			 for (var i = 0; i < usersLength; i++){
-				 var user = users[i];
-				 var invited = user.invited;
-				 console.log(invited);
-				 if(invited.indexOf(meeting) > -1){
-					 meeting.invitedUsers.push(user);
-					 console.log(meeting.invitedUsers);
-					 if(user === $scope.logged_in_user){
-						 meeting.userInvited = true;
-						 console.log(meeting.userInvited);
-					 }
-				 };
-				 var joined = user.joined;
-				 console.log(joined);
-				 if(joined.indexOf(meeting) > -1){
-					 meeting.joinedUsers.push(user);
-					 console.log(meeting.joinedUsers);
-					 if(user === $scope.logged_in_user){
-						 meeting.userJoined = true;
-						 console.log(meeting.userJoined);
-					 }
-				 }
-			 }// end for
+             var invited = meeting.invitedUsers;
+             var joined = meeting.joinedUsers;
+             meeting.invited = false;
+             meeting.joined = false;
 
+             if (invited.indexOf($scope.logged_in_user) > -1){
+             	meeting.invited = true;
+             } 
 
-*/
-
+             if (joined.indexOf($scope.logged_in_user) > -1){
+             	meeting.joined = true;
+             } 
          }; // end for loop
-    }
-
-
+    };
 
       $scope.singleUser = function(id) {
         $http.get('../api/users' + id)
@@ -129,7 +105,7 @@ findMate.controller('meetingsController', ['$scope',
             .success(function (data) {
                 $scope.meetings = data;
                 console.log(data);
-				$scope.refresh();
+				
             })
             .error(function(data) {
                 console.log('Error: ' + data);
@@ -142,15 +118,22 @@ findMate.controller('meetingsController', ['$scope',
 
         $http.put('/decline/' + id)
             .success(function (data) {
-                $scope.meetings = data;
+                $scope.users = data;
                 console.log(data);
-
-                 //$scope.refresh();
-
             })
             .error(function (data) {
                 console.log('Error: ' + data);
+            });
+
+        $http.put('/declinemeeting/' + id)
+            .success(function (data) {
+                $scope.meetings = data;
+                console.log(data);
+                $scope.loopMeetings(data);
             })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
     };
 
     // join meeting
@@ -161,8 +144,6 @@ findMate.controller('meetingsController', ['$scope',
             .success(function (data) {
                 $scope.users = data;
                 console.log(data);
-
-               // $scope.refresh(data);
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -172,12 +153,11 @@ findMate.controller('meetingsController', ['$scope',
 			.success(function (data) {
 				$scope.meetings = data;
 				console.log(data);
-
-				// $scope.refresh(data);
+				$scope.loopMeetings(data);
 			})
 			.error(function (data) {
 				console.log('Error: ' + data);
-			})
+			});
 
     };
 
@@ -187,16 +167,22 @@ findMate.controller('meetingsController', ['$scope',
 
         $http.put('/unjoin/' + id)
             .success(function (data) {
-                $scope.meetings = data;
-                var meetings = $scope.meetings;
+                $scope.users = data;
                 console.log(data);
-
-                // $scope.refresh(data);
-
             })
             .error(function (data) {
                 console.log('Error: ' + data);
-            })
+            });
+
+        $http.put('/unjoinmeeting/' + id)
+			.success(function (data) {
+				$scope.meetings = data;
+				console.log(data);
+				$scope.loopMeetings(data);
+			})
+			.error(function (data) {
+				console.log('Error: ' + data);
+			})
     };
 
     // category filter
