@@ -215,16 +215,23 @@ module.exports = function(app, passport) {
 		});
 	};
 
-	// get single meetings
-
 	app.param('meetingId', meetingByID);
 
-	// send invite for user
-	app.put('/invite/:id', isLoggedIn, function (req, res){
+	// last meeting middlewre
+
+	var meetingByDate = function(req, res, next) {
 
 		Meeting.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, meeting) {
+			if (err) return next(err);
+			if (!meeting) return next(new Error('No latest meetings'));
 			req.meeting = meeting;
 		});
+	};
+
+	app.param('meetingLatest', meetingByDate);
+
+	// send invite for user
+	app.put('/invite/:meetingLatest', isLoggedIn, function (req, res){
 
 		var update = { $addToSet: {invited: req.meeting} };
 
