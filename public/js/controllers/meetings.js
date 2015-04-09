@@ -14,16 +14,21 @@ findMate.controller('meetingsController', ['$scope',
 	//expose lodash to scope
 	$scope._ = _;
 
-	 //get users
+	//init logged in user
+	$scope.$watch('logged_in_user', function () {
+		$scope.loadFriends();
+	});
 
-	 $http.get('../api/users')
+	//get users
+
+	$http.get('../api/users')
 		 .success(function(data) {
-			 $scope.users = data;
-			 console.log(data);
-		 })
-		 .error(function (data) {
-			 console.log('Error: ' + data);
-		 });
+			$scope.users = data;
+			console.log(data);
+		})
+		.error(function (data) {
+		    console.log('Error: ' + data);
+      	});
 
 	$scope.loadFriends = function(){
 		 var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + $scope.logged_in_user.facebook.token;
@@ -35,12 +40,6 @@ findMate.controller('meetingsController', ['$scope',
 				 console.log('Error: ' + data);
 			 });
 	 };
-
-
-    //init logged in user
-	$scope.$watch('logged_in_user', function () {
-		$scope.loadFriends();
-	});
 
     $scope.refresh = function(){
         $http.get('../api/meetings')
