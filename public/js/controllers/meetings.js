@@ -62,6 +62,9 @@ findMate.controller('meetingsController', ['$scope',
              meeting.updated = moment(meeting.updated_at).fromNow();
              meeting.created = moment(meeting.created_at).fromNow();
 
+
+
+
          }; // end for loop
     }
 
