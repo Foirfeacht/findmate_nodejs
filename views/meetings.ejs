@@ -156,19 +156,19 @@
 
 	                    <h6>Приглашенные</h6>
 	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in users">
-                    		    <div ng-repeat="events in user.invited">
-                    			    <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}" ng-if="event._id === meeting._id">
-                                </div>
-                    		</div>
+                            <div ng-repeat="user in users">
+
+                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}" ng-if="_.indexOf(user.joined, meeting, 0) != -1">
+
+                            </div>
 	                    </div>
 
 	                    <h6>Участники</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in users">
-                                <div ng-repeat="events in user.joined">
-                                    <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}" ng-if="event._id === meeting._id">
-                                </div>
+
+                                    <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}" ng-if="_.indexOf(user.joined, meeting, 0) != -1">
+
                             </div>
                         </div>
 	                    <div layout="column">
