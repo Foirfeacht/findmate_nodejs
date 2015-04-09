@@ -173,7 +173,7 @@ findMate.controller('meetingsController', ['$scope',
 
     $scope.joinMeeting = function(meeting){
 		var mettingName = meeting;
-		concole.log(mettingName)
+		console.log(mettingName);
 
         $http.put('/join', mettingName)
             .success(function (data) {
