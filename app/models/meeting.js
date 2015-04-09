@@ -9,6 +9,7 @@ var meetingsSchema = new Schema({
     category: {type: String, default: 'Развлечения'},
     startDate: Date,
     startTime: Date,
+	invited: {type: Array, default: []},
     _owner: { type: Schema.Types.ObjectId, ref: 'User' },
     ownerFacebook: {type: String, ref: 'User'},
     ownerVK: {type: String, ref: 'User'},

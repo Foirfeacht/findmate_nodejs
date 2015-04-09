@@ -77,8 +77,8 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
     category: "Развлечения",
     visibility: "Общие",
     startDate:  new Date(),
-    startTime: new Date(),
-    invitedUsers: [] 
+    startTime: new Date()
+	//invitedUsers: $scope.invitedUsers
   };
 
   
@@ -95,8 +95,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
      return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
   };
 
-  //$scope.timeNow = Date.now().;
-  $scope.formData.invitedUsers = $scope.invitedUsers;
 
   //geocoder
 
@@ -176,11 +174,35 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 
                   $scope.formData = {}; // clear the form so our user is ready to enter another
                   $scope.meetings = data;
-                  console.log(data);                  
-                  $mdDialog.hide();
+                  console.log(data);
+			      $scope.sendInvites();
+
+			  $mdDialog.hide();
               })
               .error(function(data) {
                   console.log('Error: ' + data);
               })
     };
 }]);
+
+$scope.sendInvites = function(){
+	var invited = $scope.invitedUsers;
+	var invitedLength = invited.length;
+
+	console.log(invited);
+
+	for(var i = 0; i < invitedLength; i++){
+		var user = invited[i];
+		var id = user._id;
+		$http.put('/invite/' + id)
+			.success(function (data) {
+				$scope.users = data;
+				console.log(data);
+
+			})
+			.error(function (data) {
+				console.log('Error: ' + data);
+			})
+	}
+
+}

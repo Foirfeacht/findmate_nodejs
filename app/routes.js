@@ -187,7 +187,7 @@ module.exports = function(app, passport) {
             visibility : req.body.visibility || 'Все',
             _owner: req.user._id,
             ownerName: req.user.name,
-            //invitedUsers: req.body.invitedUsers,
+            //invited: req.body.invitedUsers,
 			ownerFacebook: req.user.facebook.id,
 			ownerVkontakte: req.user.vkontakte.id
         }, function(err, meeting) {
@@ -219,6 +219,36 @@ module.exports = function(app, passport) {
 
 	app.param('meetingId', meetingByID);
 
+	// send invite for user
+	app.put('/invite/:id', isLoggedIn, function (req, res){
+
+		Meeting.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, meeting) {
+			req.meeting = meeting;
+		});
+
+		var update = { $pull: {invited: req.meeting} };
+
+		User.findByIdAndUpdate(req.params.id, update, function (err, user) {
+			if (!err) {
+				console.log("meeting joined");
+				User.find(function(err, users) {
+					if (err)
+						res.send(err);
+					res.json(users);
+				});
+			} else {
+				if(err.name == 'ValidationError') {
+					res.statusCode = 400;
+					res.send({ error: 'Validation error' });
+				} else {
+					res.statusCode = 500;
+					res.send({ error: 'Server error' });
+				}
+				console.log('Internal error(%d): %s',res.statusCode,err.message);
+			}
+		});
+	});
+
     // decline invitation
 
 	app.put('/decline/:meetingId', isLoggedIn, function (req, res){
@@ -249,7 +279,7 @@ module.exports = function(app, passport) {
 				console.log('Internal error(%d): %s',res.statusCode,err.message);
 			}
 		});
-		});
+	});
 
 	//join a meeting
 	    app.put('/join/:meetingId', isLoggedIn, function (req, res){
