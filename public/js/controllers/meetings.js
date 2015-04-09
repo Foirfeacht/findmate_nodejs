@@ -143,7 +143,6 @@ findMate.controller('meetingsController', ['$scope',
         $http.put('/decline/' + id)
             .success(function (data) {
                 $scope.meetings = data;
-                var meetings = $scope.meetings;
                 console.log(data);
 
                  //$scope.refresh();
@@ -161,14 +160,25 @@ findMate.controller('meetingsController', ['$scope',
         $http.put('/join/' + id)
             .success(function (data) {
                 $scope.users = data;
-                var users = $scope.users;
                 console.log(data);
 
                // $scope.refresh(data);
             })
             .error(function (data) {
                 console.log('Error: ' + data);
-            })
+            });
+
+		$http.put('/joinmeeting/' + id)
+			.success(function (data) {
+				$scope.meetings = data;
+				console.log(data);
+
+				// $scope.refresh(data);
+			})
+			.error(function (data) {
+				console.log('Error: ' + data);
+			})
+
     };
 
     // unjoin meeting
