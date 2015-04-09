@@ -172,7 +172,13 @@
                             </div>
                         </div>
 
-	                    <md-button class="md-fab md-primary delete-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
+                        <div layout="row">
+                        	<md-button class="md-fab md-primary delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
+		                    	Удалить
+		                    </md-button>
+                        </div>
+
+	                    <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
 	                    	<i class="mdi mdi-pencil"></i>
 	                    </md-button>
 	                </div>
@@ -220,13 +226,13 @@
                             </div>
 	                    </div>
 	                    <div layout="row">
-
+	                    	<md-button class="md-raised join-button" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
 	                        <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-if="displayDecline(meeting)">Отклонить приглашение</md-button>
 	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-if="displayJoin(meeting)">Учавствовать</md-button>
                             <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-if="displayUnjoin(meeting)">Не учавствовать</md-button>
 	                    </div>
 
-	                    <md-button class="md-fab md-primary delete-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
+	                    <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
 	                    	<i class="mdi mdi-pencil"></i>
 	                    </md-button>
 	                </div>

@@ -110,16 +110,6 @@ findMate.controller('meetingsController', ['$scope',
         }
     };
 
-    $scope.displayUnjoin = function(meeting){
-    	var meeting = meeting;
-    	var joined = meeting.joinedUsers;
-    	if (joined.indexOf($scope.logged_in_user) > -1){
-           	return true;
-        } else {
-        	return false;
-        }
-    };
-
       $scope.singleUser = function(id) {
         $http.get('../api/users' + id)
             .success(function(data) {
