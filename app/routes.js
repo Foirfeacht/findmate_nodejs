@@ -237,7 +237,7 @@ module.exports = function(app, passport) {
 	    	var user = req.user;
 	    	var id = req.user._id;
 			//var meeting
-	        var update = { $addToSet: {joined: req.meeting}, $pull: {invited: req.meeting} };
+	        var update = { $addToSet: {joined: req.body.meeting}, $pull: {invited: req.meeting} };
 
 	        User.findByIdAndUpdate(id, update, {upsert: true}, function (err, user) {
 		            if (!err) {
