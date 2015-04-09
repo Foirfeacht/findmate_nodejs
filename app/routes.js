@@ -187,7 +187,6 @@ module.exports = function(app, passport) {
             visibility : req.body.visibility || 'Все',
             _owner: req.user._id,
             ownerName: req.user.name,
-            //invited: req.body.invitedUsers,
 			ownerFacebook: req.user.facebook.id,
 			ownerVkontakte: req.user.vkontakte.id
         }, function(err, meeting) {
@@ -217,19 +216,6 @@ module.exports = function(app, passport) {
 
 	app.param('meetingId', meetingByID);
 
-	// last meeting middlewre
-
-	var meetingByDate = function(req, res, next) {
-
-		Meeting.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, meeting) {
-			if (err) return next(err);
-			if (!meeting) return next(new Error('No latest meetings'));
-			req.meeting = meeting;
-			next();
-		});
-	};
-
-	app.param('meetingLatest', meetingByDate);
 
 	// send invite for user
 	app.put('/invite/:id', isLoggedIn, function (req, res){
@@ -260,11 +246,6 @@ module.exports = function(app, passport) {
 				}
 			});
 		});
-
-
-
-
-
 	});
 
     // decline invitation
@@ -375,8 +356,7 @@ module.exports = function(app, passport) {
     			        startDate: req.body.startDate,
     			        startTime: req.body.startTime,
     			        updated_at: Date.now(),
-    			        visibility: req.body.visibility,
-				        invitedUsers: req.body.invitedUsers
+    			        visibility: req.body.visibility
     			    }
     	};
 
@@ -391,9 +371,7 @@ module.exports = function(app, passport) {
 			                    res.send(err)
 			                res.json(meetings);
 			            });
-
 	        });
-
 	});
 
 	

@@ -143,31 +143,34 @@
 	            
 	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting._owner._id === logged_in_user._id">
 	             
-	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
-	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: </strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
-	                    <!--<div layout="row"><strong>Создано: </strong> <span am-time-ago="meeting.created" am-preprocess="unix"></span></div>
-	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> <span am-time-ago="meeting.updated" am-preprocess="unix"></span></div>-->
-	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
-	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
+	                    <div layout="row" class="meeting-title"><strong>Название:&nbsp; </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+	                    <div layout="row"><strong>Описание:&nbsp; </strong> {{ meeting.description }}</div>
+	                    <div layout="row"><strong>Категория:&nbsp; </strong> {{ meeting.category }}</div>
+	                    <div layout="row"><strong>Создатель:&nbsp; </strong><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+	                    <div layout="row"><strong>Виден: &nbsp;</strong> {{ meeting.visibility }}</div>
+	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+
+	                    <div layout="row"><strong>Создано: &nbsp;</strong> {{meeting.created}}</div>
+	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: &nbsp;</strong> {{meeting.updated}}</div>
 
 
 	                    <h6>Приглашенные</h6>
 	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    		<div ng-repeat="user in users">
+                    		    <div ng-repeat="events in user.invited">
+                    			    <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}" ng-if="event._id === meeting._id">
+                                </div>
                     		</div>
 	                    </div>
 
 	                    <h6>Участники</h6>
-	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in meeting.participants | limitTo: 5">
-                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
-                    		</div>
-	                    </div>
+                        <div layout="row" class="userlist">
+                            <div ng-repeat="user in users">
+                                <div ng-repeat="events in user.oined">
+                                    <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}" ng-if="event._id === meeting._id">
+                                </div>
+                            </div>
+                        </div>
 	                    <div layout="column">
                             <md-button type="submit" class="md-raised md-warn delete-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Редактировать</md-button>
 	                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
@@ -242,7 +245,7 @@
                 <h1 class="active-meetings">Приглашения</h1>
                 <div class="meetings-display row">
 
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.invited === true">
+	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in logged_in_user.invited | filter: query | filter: filterMtn | orderBy: startDate">
 	                    
 	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
@@ -288,7 +291,7 @@
 	            <h1 class="active-meetings">Принятые приглашения</h1>
 	            <div class="meetings-display row">	            
 	            
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.joined === true">
+	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in logged_in_user.joined | filter: query | filter: filterMtn | orderBy: startDate">
 	                 
 	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
