@@ -225,13 +225,15 @@ module.exports = function(app, passport) {
 			if (err) return next(err);
 			if (!meeting) return next(new Error('No latest meetings'));
 			req.meeting = meeting;
+			next();
 		});
 	};
 
 	app.param('meetingLatest', meetingByDate);
 
 	// send invite for user
-	app.put('/invite/:meetingLatest', isLoggedIn, function (req, res){
+	app.put('/invite/:meetingLatest/:id', isLoggedIn, function (req, res){
+		
 
 		var update = { $addToSet: {invited: req.meeting} };
 
