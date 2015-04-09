@@ -217,9 +217,9 @@
 	                    <div layout="row">
 	                        <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
 
-	                        <md-button class="md-raised join-button" ng-click="declineInvitation(meeting)">Отклонить приглашение</md-button>
-	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting)">Учавствовать</md-button>
-                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting)">Не учавствовать</md-button>
+	                        <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)">Отклонить приглашение</md-button>
+	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button>
+                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)">Не учавствовать</md-button>
 	                    </div>
 	                    <div layout="column">
 	                        

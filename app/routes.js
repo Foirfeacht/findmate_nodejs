@@ -233,18 +233,25 @@ module.exports = function(app, passport) {
 		});
 
 	//join a meeting
-	    app.put('/join', isLoggedIn, function (req, res){
-	    	var user = req.user;
+	    app.put('/join/:id', isLoggedIn, function (req, res){
 	    	var id = req.user._id;
-			//var meeting
-	        var update = { $addToSet: {joined: req.body.meeting}, $pull: {invited: req.meeting} };
+
+			Meeting.findById(req.params.id, function(err, meeting){
+				if (err) return err;
+				if (!meeting) {
+					res.statusCode = 404;
+					return res.send({error: 'Not found'});
+				};
+				req.meeting = meeting;
+			});
+	        var update = { $addToSet: {joined: req.meeting}, $pull: {invited: req.meeting} };
 
 	        User.findByIdAndUpdate(id, update, {upsert: true}, function (err, user) {
 		            if (!err) {
 		                console.log("meeting joined");
 			            User.find(function(err, users) {
 			                if (err)
-			                    res.send(err)
+			                    res.send(err);
 			                res.json(users);
 			            });
 		            } else {
