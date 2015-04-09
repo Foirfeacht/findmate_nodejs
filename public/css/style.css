@@ -292,7 +292,8 @@ md-option {
 	margin-right: 8px;
 }
 
-.meeting .join-button {
+.meeting .join-button,
+.delete-button {
 	width: auto;
 	padding: 10px 15px;
 	display: block;
@@ -307,7 +308,7 @@ md-option {
 	width: 36px;
 }
 
-.delete-button i {
+.edit-button i {
 	font-size: 1.2em;
 }
 
