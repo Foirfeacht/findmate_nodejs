@@ -14,6 +14,17 @@ findMate.controller('meetingsController', ['$scope',
 	//expose lodash to scope
 	$scope._ = _;
 
+		 //get users
+
+		 $http.get('../api/users')
+			 .success(function(data) {
+				 $scope.users = data;
+				 console.log(data);
+			 })
+			 .error(function (data) {
+				 console.log('Error: ' + data);
+			 });
+
 
     //init logged in user
 	$scope.$watch('logged_in_user', function () {
@@ -62,22 +73,44 @@ findMate.controller('meetingsController', ['$scope',
              meeting.updated = moment(meeting.updated_at).fromNow();
              meeting.created = moment(meeting.created_at).fromNow();
 
+			 meeting.invitedUsers = [];
+			 meeting.joinedUsers = [];
+			 meeting.userInvited = false;
+			 meeting.userJoined = false;
+
+			 var users = $scope,users;
+			 usersLength = users.length;
+			 for (var i = 0; i < usersLength; i++){
+				 var user = users[i];
+				 var invited = user.invited;
+				 console.log(invited);
+				 if(invited.indexOf(meeting) > -1){
+					 meeting.invitedUsers.push(user);
+					 console.log(meeting.invitedUsers);
+					 if(user === $scope.logged_in_user){
+						 meeting.userInvited = true;
+						 console.log(meeting.userInvited);
+					 }
+				 };
+				 var joined = user.joined;
+				 console.log(joined);
+				 if(joined.indexOf(meeting) > -1){
+					 meeting.joinedUsers.push(user);
+					 console.log(meeting.joinedUsers);
+					 if(user === $scope.logged_in_user){
+						 meeting.userJoined = true;
+						 console.log(meeting.userJoined);
+					 }
+				 }
+			 }// end for
+
 
 
 
          }; // end for loop
     }
 
-    //get users
 
-    $http.get('../api/users')
-        .success(function(data) {
-            $scope.users = data;
-            console.log(data);
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
 
       $scope.singleUser = function(id) {
         $http.get('../api/users' + id)
