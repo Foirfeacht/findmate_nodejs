@@ -166,7 +166,7 @@
 	                    <h6>Участники</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in users">
-                                <div ng-repeat="events in user.oined">
+                                <div ng-repeat="events in user.joined">
                                     <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}" ng-if="event._id === meeting._id">
                                 </div>
                             </div>
