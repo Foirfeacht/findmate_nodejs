@@ -153,9 +153,9 @@ findMate.controller('meetingsController', ['$scope',
 
     // decline invitation
 
-    $scope.declineInvitation = function(meeting){
+    $scope.declineInvitation = function(id){
 
-        $http.put('/decline', meeting)
+        $http.put('/decline/' + id)
             .success(function (data) {
                 $scope.meetings = data;
                 var meetings = $scope.meetings;
@@ -188,9 +188,9 @@ findMate.controller('meetingsController', ['$scope',
 
     // unjoin meeting
 
-    $scope.unjoinMeeting = function(meeting){
+    $scope.unjoinMeeting = function(id){
 
-        $http.put('/unjoin', meeting)
+        $http.put('/unjoin/' + id)
             .success(function (data) {
                 $scope.meetings = data;
                 var meetings = $scope.meetings;

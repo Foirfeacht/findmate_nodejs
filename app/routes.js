@@ -221,43 +221,39 @@ module.exports = function(app, passport) {
 
     // decline invitation
 
-	app.put('/decline', isLoggedIn, function (req, res){
-	    	var user = req.user;
-	    	var id = req.user._id;
+	app.put('/decline/:meetingId', isLoggedIn, function (req, res){
+
 	        var update = { $pull: {invited: req.body.meeting} };
 
-	        User.findByIdAndUpdate(req.params.id, update, function (err, user) {
-		            if (!err) {
-		                console.log("invitation declined");
-			            Meeting.find(function(err, meetings) {
-			                if (err)
-			                    res.send(err)
-			                res.json(meetings);
-			            });
-		            } else {
-		                if(err.name == 'ValidationError') {
-		                    res.statusCode = 400;
-		                    res.send({ error: 'Validation error' });
-		                } else {
-		                    res.statusCode = 500;
-		                    res.send({ error: 'Server error' });
-		                }
-		                console.log('Internal error(%d): %s',res.statusCode,err.message);
-		            }
-		     });
+		User.findByIdAndUpdate(req.user.id, update, function (err, user) {
+			if (!err) {
+				console.log("meeting joined");
+				User.find(function(err, users) {
+					if (err)
+						res.send(err);
+					res.json(users);
+				});
+				Meeting.find(function(err, meetings){
+					if (err)
+						res.send(err);
+					res.json(meetings);
+				});
+			} else {
+				if(err.name == 'ValidationError') {
+					res.statusCode = 400;
+					res.send({ error: 'Validation error' });
+				} else {
+					res.statusCode = 500;
+					res.send({ error: 'Server error' });
+				}
+				console.log('Internal error(%d): %s',res.statusCode,err.message);
+			}
+		});
 		});
 
 	//join a meeting
 	    app.put('/join/:meetingId', isLoggedIn, function (req, res){
 
-			/*Meeting.findById(req.params.id, function(err, meeting){
-				if (err) return err;
-				if (!meeting) {
-					res.statusCode = 404;
-					return res.send({error: 'Not found'});
-				};
-				req.meeting = meeting;
-			})*/;
 	        var update = { $addToSet: {joined: req.meeting}, $pull: {invited: req.meeting} };
 
 	        User.findByIdAndUpdate(req.user.id, update, {upsert: true}, function (err, user) {
@@ -268,6 +264,11 @@ module.exports = function(app, passport) {
 			                    res.send(err);
 			                res.json(users);
 			            });
+						Meeting.find(function(err, meetings){
+							if (err)
+								res.send(err);
+							res.json(meetings);
+						});
 		            } else {
 		                if(err.name == 'ValidationError') {
 		                    res.statusCode = 400;
@@ -282,30 +283,34 @@ module.exports = function(app, passport) {
 		});
 
 		//unjoin a meeting
-	    app.put('/unjoin', isLoggedIn, function (req, res){
-	    	var user = req.user; 
-	    	var id = req.user._id;
+	    app.put('/unjoin/:meetingId', isLoggedIn, function (req, res){
+
 	        var update = { $pull: {joined: req.body.meeting} };
 
-	        User.findByIdAndUpdate(id, update, function (err, user) {
-		            if (!err) {
-		                console.log("meeting unjoined");
-			            Meeting.find(function(err, meetings) {
-			                if (err)
-			                    res.send(err)
-			                res.json(meetings);
-			            });
-		            } else {
-		                if(err.name == 'ValidationError') {
-		                    res.statusCode = 400;
-		                    res.send({ error: 'Validation error' });
-		                } else {
-		                    res.statusCode = 500;
-		                    res.send({ error: 'Server error' });
-		                }
-		                console.log('Internal error(%d): %s',res.statusCode,err.message);
-		            }
-		     });
+			User.findByIdAndUpdate(req.user.id, update, function (err, user) {
+				if (!err) {
+					console.log("meeting joined");
+					User.find(function(err, users) {
+						if (err)
+							res.send(err);
+						res.json(users);
+					});
+					Meeting.find(function(err, meetings){
+						if (err)
+							res.send(err);
+						res.json(meetings);
+					});
+				} else {
+					if(err.name == 'ValidationError') {
+						res.statusCode = 400;
+						res.send({ error: 'Validation error' });
+					} else {
+						res.statusCode = 500;
+						res.send({ error: 'Server error' });
+					}
+					console.log('Internal error(%d): %s',res.statusCode,err.message);
+				}
+			});
 		});
 
 
