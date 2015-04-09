@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a578cdc-ea4c-4e1c-862b-957bb4ee81a0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/dialog.js" afterPath="$PROJECT_DIR$/public/js/controllers/dialog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes.js" afterPath="$PROJECT_DIR$/app/routes.js" />
     </list>
     <ignored path="findmate.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,11 +29,11 @@
       <file leaf-file-name="routes.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.53586954" vertical-offset="3536" max-vertical-offset="8330">
-              <caret line="237" column="19" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.425" vertical-offset="3485" max-vertical-offset="8330">
+              <caret line="228" column="32" selection-start-line="228" selection-start-column="32" selection-end-line="228" selection-end-column="32" />
               <folding>
-                <marker date="1428581552662" expanded="true" signature="106:13713" placeholder="{...}" />
-                <marker date="1428581552662" expanded="true" signature="667:687" placeholder="{...}" />
+                <marker date="1428582357893" expanded="true" signature="106:13717" placeholder="{...}" />
+                <marker date="1428582357893" expanded="true" signature="667:687" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -74,8 +74,8 @@
       <file leaf-file-name="dialog.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/controllers/dialog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-28.965517" vertical-offset="2628" max-vertical-offset="3621">
-              <caret line="204" column="1" selection-start-line="204" selection-start-column="1" selection-end-line="204" selection-end-column="1" />
+            <state vertical-scroll-proportion="-13.724138" vertical-offset="2628" max-vertical-offset="3621">
+              <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
               <folding>
                 <marker date="1428582055152" expanded="true" signature="174:5685" placeholder="{...}" />
                 <marker date="1428582055152" expanded="true" signature="244:306" placeholder="{...}" />
@@ -159,8 +159,8 @@
         <option value="$PROJECT_DIR$/views/meetings.ejs" />
         <option value="$PROJECT_DIR$/public/js/controllers/meetings.js" />
         <option value="$PROJECT_DIR$/app/models/meeting.js" />
-        <option value="$PROJECT_DIR$/app/routes.js" />
         <option value="$PROJECT_DIR$/public/js/controllers/dialog.js" />
+        <option value="$PROJECT_DIR$/app/routes.js" />
       </list>
     </option>
   </component>
@@ -589,8 +589,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6749">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1428581552662" expanded="true" signature="106:13713" placeholder="{...}" />
-            <marker date="1428581552662" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428582357893" expanded="true" signature="106:13717" placeholder="{...}" />
+            <marker date="1428582357893" expanded="true" signature="667:687" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -669,8 +669,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="6732">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <marker date="1428581552662" expanded="true" signature="106:13713" placeholder="{...}" />
-            <marker date="1428581552662" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428582357893" expanded="true" signature="106:13717" placeholder="{...}" />
+            <marker date="1428582357893" expanded="true" signature="667:687" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -742,8 +742,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="6970">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
-            <marker date="1428581552662" expanded="true" signature="106:13713" placeholder="{...}" />
-            <marker date="1428581552662" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428582357893" expanded="true" signature="106:13717" placeholder="{...}" />
+            <marker date="1428582357893" expanded="true" signature="667:687" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -950,8 +950,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controllers/dialog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-28.965517" vertical-offset="2628" max-vertical-offset="3621">
-          <caret line="204" column="1" selection-start-line="204" selection-start-column="1" selection-end-line="204" selection-end-column="1" />
+        <state vertical-scroll-proportion="-13.724138" vertical-offset="2628" max-vertical-offset="3621">
+          <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
           <folding>
             <marker date="1428582055152" expanded="true" signature="174:5685" placeholder="{...}" />
             <marker date="1428582055152" expanded="true" signature="244:306" placeholder="{...}" />
@@ -961,11 +961,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53586954" vertical-offset="3536" max-vertical-offset="8330">
-          <caret line="237" column="19" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.425" vertical-offset="3485" max-vertical-offset="8330">
+          <caret line="228" column="32" selection-start-line="228" selection-start-column="32" selection-end-line="228" selection-end-column="32" />
           <folding>
-            <marker date="1428581552662" expanded="true" signature="106:13713" placeholder="{...}" />
-            <marker date="1428581552662" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428582357893" expanded="true" signature="106:13717" placeholder="{...}" />
+            <marker date="1428582357893" expanded="true" signature="667:687" placeholder="{...}" />
           </folding>
         </state>
       </provider>

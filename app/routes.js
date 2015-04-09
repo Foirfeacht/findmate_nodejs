@@ -226,7 +226,7 @@ module.exports = function(app, passport) {
 			req.meeting = meeting;
 		});
 
-		var update = { $pull: {invited: req.meeting} };
+		var update = { $addToSet: {invited: req.meeting} };
 
 		User.findByIdAndUpdate(req.params.id, update, function (err, user) {
 			if (!err) {
