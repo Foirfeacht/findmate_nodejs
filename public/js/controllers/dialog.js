@@ -183,26 +183,25 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
                   console.log('Error: ' + data);
               })
     };
+
+   $scope.sendInvites = function(){
+		 var invited = $scope.invitedUsers;
+		 var invitedLength = invited.length;
+		 console.log(invited);
+
+		 for(var i = 0; i < invitedLength; i++){
+			 var user = invited[i];
+			 var id = user._id;
+			 $http.put('/invite/' + id)
+				 .success(function (data) {
+						 $scope.users = data;
+						 console.log(data);
+
+				 })
+				 .error(function (data) {
+					 console.log('Error: ' + data);
+				 })
+		 }
+  }
 }]);
 
-$scope.sendInvites = function(){
-	var invited = $scope.invitedUsers;
-	var invitedLength = invited.length;
-
-	console.log(invited);
-
-	for(var i = 0; i < invitedLength; i++){
-		var user = invited[i];
-		var id = user._id;
-		$http.put('/invite/' + id)
-			.success(function (data) {
-				$scope.users = data;
-				console.log(data);
-
-			})
-			.error(function (data) {
-				console.log('Error: ' + data);
-			})
-	}
-
-}
