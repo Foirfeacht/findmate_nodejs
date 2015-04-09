@@ -286,7 +286,6 @@ module.exports = function(app, passport) {
 	    app.put('/join/:meetingId', isLoggedIn, function (req, res){
 
 	        var update = { $addToSet: {joined: req.meeting}, $pull: {invited: req.meeting} };
-			var meetingUpdate = { $addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: req.user} };
 
 	        User.findByIdAndUpdate(req.user.id, update, {upsert: true}, function (err, user) {
 		            if (!err) {
@@ -296,11 +295,6 @@ module.exports = function(app, passport) {
 			                    res.send(err);
 			                res.json(users);
 			            });
-						Meeting.find(function(err, meetings){
-							if (err)
-								res.send(err);
-							res.json(meetings);
-						});
 		            } else {
 		                if(err.name == 'ValidationError') {
 		                    res.statusCode = 400;
