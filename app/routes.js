@@ -234,7 +234,6 @@ module.exports = function(app, passport) {
 
 	//join a meeting
 	    app.put('/join/:id', isLoggedIn, function (req, res){
-	    	var id = req.user._id;
 
 			Meeting.findById(req.params.id, function(err, meeting){
 				if (err) return err;
@@ -246,7 +245,7 @@ module.exports = function(app, passport) {
 			});
 	        var update = { $addToSet: {joined: req.meeting}, $pull: {invited: req.meeting} };
 
-	        User.findByIdAndUpdate(id, update, {upsert: true}, function (err, user) {
+	        User.findByIdAndUpdate(req.user.id, update, {upsert: true}, function (err, user) {
 		            if (!err) {
 		                console.log("meeting joined");
 			            User.find(function(err, users) {
