@@ -108,7 +108,7 @@
         <entry file="file://$PROJECT_DIR$/views/meetings.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.62863535" vertical-offset="2158" max-vertical-offset="7922">
-              <caret line="160" column="78" selection-start-line="160" selection-start-column="78" selection-end-line="160" selection-end-column="78" />
+              <caret line="160" column="40" selection-start-line="160" selection-start-column="40" selection-end-line="160" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -956,7 +956,7 @@
     <entry file="file://$PROJECT_DIR$/views/meetings.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.62863535" vertical-offset="2158" max-vertical-offset="7922">
-          <caret line="160" column="78" selection-start-line="160" selection-start-column="78" selection-end-line="160" selection-end-column="78" />
+          <caret line="160" column="40" selection-start-line="160" selection-start-column="40" selection-end-line="160" selection-end-column="40" />
           <folding />
         </state>
       </provider>

@@ -158,7 +158,7 @@
 	                    <div layout="row" class="userlist">
                             <div ng-repeat="user in users">
                                 <div ng-repeat="events in user.joined">
-                                    <div ng-if="event._id === $parent.$parent.meeting._id">
+                                    <div>
                                         <img src="https://graph.facebook.com/{{$parent.user.facebook.id}}/picture?height=50&width=50" alt="{{$parent.user.facebook.name }}">
                                     </div>
                                 </div>
