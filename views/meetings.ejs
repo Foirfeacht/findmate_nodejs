@@ -158,7 +158,7 @@
 	                    <div layout="row" class="userlist">
                             <div ng-repeat="user in users">
 
-                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}" ng-if="_.indexOf(user.joined, meeting, 0) != -1">
+                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}" ng-if="user.joined.indexOf(meeting) != -1">
 
                             </div>
 	                    </div>

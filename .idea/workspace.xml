@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a578cdc-ea4c-4e1c-862b-957bb4ee81a0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/meetings.js" afterPath="$PROJECT_DIR$/public/js/controllers/meetings.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/meetings.ejs" afterPath="$PROJECT_DIR$/views/meetings.ejs" />
     </list>
     <ignored path="findmate.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="meetings.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="meetings.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/controllers/meetings.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25028312" vertical-offset="0" max-vertical-offset="3910">
-              <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+            <state vertical-scroll-proportion="-11.027027" vertical-offset="0" max-vertical-offset="3910">
+              <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -104,11 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="meetings.ejs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="meetings.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/meetings.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.692308" vertical-offset="2260" max-vertical-offset="7888">
-              <caret line="160" column="146" selection-start-line="160" selection-start-column="146" selection-end-line="160" selection-end-column="146" />
+            <state vertical-scroll-proportion="0.5145414" vertical-offset="2260" max-vertical-offset="7888">
+              <caret line="160" column="184" selection-start-line="160" selection-start-column="184" selection-end-line="160" selection-end-column="184" />
               <folding />
             </state>
           </provider>
@@ -149,8 +149,8 @@
         <option value="$PROJECT_DIR$/app/models/meeting.js" />
         <option value="$PROJECT_DIR$/public/js/controllers/dialog.js" />
         <option value="$PROJECT_DIR$/app/routes.js" />
-        <option value="$PROJECT_DIR$/views/meetings.ejs" />
         <option value="$PROJECT_DIR$/public/js/controllers/meetings.js" />
+        <option value="$PROJECT_DIR$/views/meetings.ejs" />
       </list>
     </option>
   </component>
@@ -935,14 +935,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/meetings.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.692308" vertical-offset="2260" max-vertical-offset="7888">
-          <caret line="160" column="146" selection-start-line="160" selection-start-column="146" selection-end-line="160" selection-end-column="146" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/meeting.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-41.846153" vertical-offset="663" max-vertical-offset="1955">
@@ -953,11 +945,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controllers/meetings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25028312" vertical-offset="0" max-vertical-offset="3910">
-          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+        <state vertical-scroll-proportion="-11.027027" vertical-offset="0" max-vertical-offset="3910">
+          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/meetings.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5145414" vertical-offset="2260" max-vertical-offset="7888">
+          <caret line="160" column="184" selection-start-line="160" selection-start-column="184" selection-end-line="160" selection-end-column="184" />
+          <folding />
         </state>
       </provider>
     </entry>
