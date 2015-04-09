@@ -11,6 +11,9 @@ findMate.controller('meetingsController', ['$scope',
                                             '$mdDialog',
 	 function($scope, $http, $routeParams, $mdSidenav, $filter, date, editService, $mdDialog) {
 
+	//expose lodash to scope
+	$scope._ = _;
+
 
     //init logged in user
 	$scope.$watch('logged_in_user', function () {
