@@ -303,10 +303,12 @@ md-option {
 	position: absolute;
 	right: 30px;
 	top: 20px;
+	height: 36px;
+	width: 36px;
 }
 
 .delete-button i {
-	font-size: 1.5em;
+	font-size: 1.2em;
 }
 
 .create-button {

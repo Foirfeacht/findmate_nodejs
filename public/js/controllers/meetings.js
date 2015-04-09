@@ -103,7 +103,7 @@ findMate.controller('meetingsController', ['$scope',
     $scope.displayJoin = function(meeting){
     	var meeting = meeting;
     	var joined = meeting.joinedUsers;
-    	if (joined.indexOf($scope.logged_in_user) = -1){
+    	if (joined.indexOf($scope.logged_in_user) === -1){
            	return true;
         } else {
         	return false;
@@ -221,6 +221,22 @@ findMate.controller('meetingsController', ['$scope',
 
         var todayDate = new Date();
         $scope.todayDay = todayDate.getDate();
+
+        //datepicker
+	      $scope.filterMtn.startDate = new Date();
+	       $scope.openDatePicker = function($event) {
+	          $event.preventDefault();
+	          $event.stopPropagation();
+
+	          $scope.opened = true;
+	        };	  
+
+	        $scope.dateOptions = {
+	          formatYear: 'yy',
+	          startingDay: 1
+	        };
+
+	        $scope.format = 'yyyy/MM/dd';
 
         $scope.categories = [{name: 'Спорт'}, {name: 'Развлечения'}];
 

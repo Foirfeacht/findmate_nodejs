@@ -97,11 +97,13 @@
 	            </div>
 
                 <div class="search">
-                    <md-input-container md-no-float>
-                        <label>Дата</label>
-
-                        <input ng-model="filterMtn.startDate" type="date">
-                    </md-input-container>
+                	<label>Дата</label>
+                    <p class="input-group">
+		              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="filterMtn.startDate" is-open="opened" max-date="'2040-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+		              <span class="input-group-btn">
+		                <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+		              </span>
+		            </p>
                 </div>
         </div>
 
