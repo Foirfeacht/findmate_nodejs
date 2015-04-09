@@ -14,16 +14,27 @@ findMate.controller('meetingsController', ['$scope',
 	//expose lodash to scope
 	$scope._ = _;
 
-		 //get users
+	 //get users
 
-		 $http.get('../api/users')
+	 $http.get('../api/users')
+		 .success(function(data) {
+			 $scope.users = data;
+			 console.log(data);
+		 })
+		 .error(function (data) {
+			 console.log('Error: ' + data);
+		 });
+
+	$scope.loadFriends = function(){
+		 var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + $scope.logged_in_user.facebook.token;
+		 $http.get(friendsRequest)
 			 .success(function(data) {
-				 $scope.users = data;
-				 console.log(data);
+				 $scope.friends = data.data;
 			 })
 			 .error(function (data) {
 				 console.log('Error: ' + data);
 			 });
+	 };
 
 
     //init logged in user
@@ -231,18 +242,6 @@ findMate.controller('meetingsController', ['$scope',
         $scope.categories = [{name: 'Спорт'}, {name: 'Развлечения'}];
 
         $scope.visibilities = [{name: 'Общие'}, {name: 'Друзья'}];
-
-
-		 $scope.loadFriends = function(){
-			 var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + $scope.logged_in_user.facebook.token;
-			 $http.get(friendsRequest)
-				 .success(function(data) {
-					 $scope.friends = data.data;
-				 })
-				 .error(function (data) {
-					 console.log('Error: ' + data);
-				 });
-		 };
 		 
     //tabs
     $scope.data = {
