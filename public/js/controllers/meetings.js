@@ -72,7 +72,7 @@ findMate.controller('meetingsController', ['$scope',
              }
              meeting.updated = moment(meeting.updated_at).fromNow();
              meeting.created = moment(meeting.created_at).fromNow();
-
+/*
              var invited = meeting.invitedUsers;
              var joined = meeting.joinedUsers;
              meeting.invited = false;
@@ -84,8 +84,40 @@ findMate.controller('meetingsController', ['$scope',
 
              if (joined.indexOf($scope.logged_in_user) > -1){
              	meeting.joined = true;
-             } 
+             } */
          }; // end for loop
+    };
+
+    // check buttons state
+
+    $scope.displayDecline = function(meeting){
+    	var meeting = meeting;
+    	var invited = meeting.invitedUsers;
+    	if (invited.indexOf($scope.logged_in_user) > -1){
+           	return true;
+        } else {
+        	return false;
+        }
+    };
+
+    $scope.displayJoin = function(meeting){
+    	var meeting = meeting;
+    	var joined = meeting.joinedUsers;
+    	if (joined.indexOf($scope.logged_in_user) = -1){
+           	return true;
+        } else {
+        	return false;
+        }
+    };
+
+    $scope.displayUnjoin = function(meeting){
+    	var meeting = meeting;
+    	var joined = meeting.joinedUsers;
+    	if (joined.indexOf($scope.logged_in_user) > -1){
+           	return true;
+        } else {
+        	return false;
+        }
     };
 
       $scope.singleUser = function(id) {
