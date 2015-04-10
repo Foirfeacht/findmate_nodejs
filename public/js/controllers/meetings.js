@@ -58,6 +58,7 @@ findMate.controller('meetingsController', ['$scope',
     $scope.refresh();
 
     $scope.loopMeetings = function(meetings){
+		var meetings = meetings;
         var dateNow = new Date().toJSON();
 
         // loop through data
@@ -84,13 +85,12 @@ findMate.controller('meetingsController', ['$scope',
              meeting.created = moment(meeting.created_at).fromNow();
 
 
-
 			meeting.invitedUsers = _.uniq(meeting.invitedUsers,
 				  function(item, key, a){
 				  return item.a;
 				  });
 
-			 meeting.joined = _.uniq(meeting.joined,
+			 meeting.joinedUsers = _.uniq(meeting.joinedUsers,
 			      function(item, key, a){
 				  return item.a;
 			  });
