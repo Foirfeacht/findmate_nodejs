@@ -23,6 +23,44 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
          }
          $scope.currentMeeting.updated = moment($scope.currentMeeting.updated_at).fromNow();
          $scope.currentMeeting.created = moment($scope.currentMeeting.created_at).fromNow();
+         var dateNow = new Date().toJSON();           
+
+                 //remove duplicates, delete this part later
+                 $scope.currentMeeting.invitedUsers = _.uniq($scope.currentMeeting.invitedUsers,
+                    function(item, key, a){
+                        return item.a;
+                    });
+
+                 $scope.currentMeeting.joinedUsers = _.uniq($scope.currentMeeting.joinedUsers,
+                    function(item, key, a){
+                        return item.a;
+                    });
+
+                 //invited filter
+                 var invitedArray = $scope.currentMeeting.invitedUsers;
+                 var invitedArrayLength = invitedArray.length;
+                 for (var u = 0; u< invitedArrayLength; u++){
+                    var invitedUser = invitedArray[u];
+                    if(invitedUser._id === $scope.logged_in_user._id){
+                        $scope.currentMeeting.invited = true;
+                    } else {
+                        $scope.currentMeeting.invited = false;
+                    }
+                    console.log($scope.currentMeeting.invited);
+                 }// end invited filter
+
+                 // participants filter
+                 var joinedArray = $scope.currentMeeting.joinedUsers;
+                 var joinedArrayLength = joinedArray.length;
+                 for (var j = 0; j < joinedArrayLength; j++){
+                    var joinedUser = joinedArray[j];
+                    if(joinedUser._id === $scope.logged_in_user._id){
+                        $scope.currentMeeting.joined = true;
+                    } else {
+                        $scope.currentMeeting.joined = false;
+                    }
+                    console.log($scope.currentMeeting.joined);
+                 }// end participants filter
     });
 
     
