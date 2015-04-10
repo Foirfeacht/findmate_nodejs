@@ -120,8 +120,10 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
   codeLatLng();
 
   $scope.hide = function() {
-    $mdDialog.hide();
+    $mdDialog.hide;
   };
+
+  $scope.hideDialog = $mdDialog.hide;
 
   $scope.cancel = function() {
     $mdDialog.cancel();
