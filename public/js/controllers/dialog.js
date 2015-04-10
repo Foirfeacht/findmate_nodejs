@@ -152,8 +152,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
               })
               .error(function(data) {
                   console.log('Error: ' + data);
-              }).then(function(){
-                $scope.hide();
               })
     };
 
