@@ -21,6 +21,23 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
       console.log('Error: ' + data);
     });
 
+	 $scope.loadFriends = function(user) {
+		 var user = user
+		 var friendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
+		 $http.get(friendsRequest)
+			 .success(function (data) {
+				 $scope.friends = data.data;
+				 $scope.pushFriends();
+			 })
+			 .error(function (data) {
+				 console.log('Error: ' + data);
+			 });
+	 };
+	 //init logged in user from service
+	 $scope.$watch('mapService.user', function () {
+		 $scope.loadFriends(mapService.user);
+	 });
+
     $scope.pushFriends = function(){
       var users = $scope.users;
       var friends = $scope.friends;
@@ -38,24 +55,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
       }
     }
 
-    $scope.loadFriends = function(user){
-       var user = user
-       var friendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
-       $http.get(friendsRequest)
-         .success(function(data) {
-           $scope.friends = data.data;    
-           $scope.pushFriends();
-         })
-         .error(function (data) {
-           console.log('Error: ' + data);
-         });
-     };
 
-     //init logged in user from service
-    $scope.$watch('mapService.user', function () {
-      $scope.loadFriends(mapService.user);
-      
-    });
 
     $scope.friendUsers = [];
     $scope.invitedUsers = [];
@@ -175,7 +175,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
                   $scope.formData = {}; // clear the form so our user is ready to enter another
                   $scope.meetings = data;
                   console.log(data);
-			     // $scope.sendInvites();
 
 			  $mdDialog.hide();
               })
@@ -184,24 +183,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
               })
     };
 
-   $scope.sendInvites = function(){
-		 var invited = $scope.invitedUsers;
-		 var invitedLength = invited.length;
-		 console.log(invited);
 
-		 for(var i = 0; i < invitedLength; i++){
-			 var user = invited[i];
-			 var id = user._id;
-			 $http.put('/invite/' + id)
-				 .success(function (data) {
-						 $scope.users = data;
-						 console.log(data);
-
-				 })
-				 .error(function (data) {
-					 console.log('Error: ' + data);
-				 })
-		 }
-  }
 }]);
 
