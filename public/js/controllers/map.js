@@ -189,6 +189,7 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
         $mdDialog.show({
           controller: 'DialogController',
           templateUrl: './public/partials/dialog.tmpl.ejs',
+          scope: $scope.$new(),
           targetEvent: ev
              }).then(function(data) {
                   $scope.refresh();
