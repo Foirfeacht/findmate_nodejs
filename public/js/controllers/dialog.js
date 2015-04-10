@@ -15,19 +15,20 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
       for (var i =0; i < data.length; i++){
         var user = data[i];
         user.username = user.facebook.name;
-      }
+      };
+	  $scope.loadFriends($scope.users);
     })
     .error(function (data) {
       console.log('Error: ' + data);
     });
 
-	 $scope.loadFriends = function(user) {
-		 var user = user
+	 $scope.loadFriends = function(users) {
+		 var user = $scope.logged_in_user;
 		 var friendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
 		 $http.get(friendsRequest)
 			 .success(function (data) {
 				 $scope.friends = data.data;
-				 var users = $scope.users;
+				 var users = users;
 				 var friends = $scope.friends;
 				 var userLength = users.length;
 				 var friendsLength = friends.length;
@@ -100,22 +101,22 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 
   var geocoder = new google.maps.Geocoder();
 
-            function codeLatLng() {
-                geocoder.geocode({'latLng': $scope.latLng, address: 'address', region: ', BY'}, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
+  function codeLatLng() {
+        geocoder.geocode({'latLng': $scope.latLng, address: 'address', region: ', BY'}, function(results, status) {
+                 if (status == google.maps.GeocoderStatus.OK) {
                       if (results[1]) {
                         $scope.formData.location = results[1].formatted_address;
                         console.log(results[1].formatted_address);
                       } else {
                         console.log('No results found');
                       }
-                    } else {
-                      console.log('Geocoder failed due to: ' + status);
-                    }
-                });
-            };
+                } else {
+                     console.log('Geocoder failed due to: ' + status);
+				}
+         });
+   };
 
-            codeLatLng();
+  codeLatLng();
 
   $scope.hide = function() {
     $mdDialog.hide();
