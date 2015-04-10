@@ -141,6 +141,7 @@ findMate.controller('meetingsController', ['$scope',
             .success(function (data) {
                 $scope.meetings = data;
                 console.log(data);
+				$scope.loopMeetings($scope.meetings)
 				
             })
             .error(function(data) {
