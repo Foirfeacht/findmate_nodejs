@@ -171,7 +171,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
       $http.post('../api/meetings', $scope.formData)
               .success(function (data) {
                   console.log($scope.formData);
-
                   $scope.formData = {}; // clear the form so our user is ready to enter another
                   $scope.meetings = data;
                   console.log(data);

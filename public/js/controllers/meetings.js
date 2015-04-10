@@ -104,6 +104,7 @@ findMate.controller('meetingsController', ['$scope',
  					} else {
  						meeting.invited = false;
  					};
+				console.log(meeting);
  			};// end invited filter
 
  			// joined filter
@@ -116,6 +117,7 @@ findMate.controller('meetingsController', ['$scope',
  					} else {
  						meeting.joined = false;
  					};
+					console.log(meeting);
  				};// end joined filter
          }; // end for loop
     };
