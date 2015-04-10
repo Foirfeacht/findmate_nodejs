@@ -72,7 +72,7 @@
 
                         <h6>Участники</h6>
                         <div layout="row" class="userlist">
-                            <div ng-repeat="user in currentMeeting .participants | limitTo: 5">
+                            <div ng-repeat="user in currentMeeting .joinedUsers | limitTo: 5">
                                 <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
                             </div>
                         </div>
