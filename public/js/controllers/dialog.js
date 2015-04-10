@@ -27,7 +27,20 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 		 $http.get(friendsRequest)
 			 .success(function (data) {
 				 $scope.friends = data.data;
-				 $scope.pushFriends();
+				 var users = $scope.users;
+				 var friends = $scope.friends;
+				 var userLength = users.length;
+				 var friendsLength = friends.length;
+				 for (var i = 0; i<userLength; i++){
+					 var user = users[i];
+					 var id = user.facebook.id;
+					 for (var u = 0; u<friendsLength; u++){
+						 var friend = friends[u];
+						 if (id === friend.id){
+							 $scope.friendUsers.push(user);
+						 }
+					 }
+				 }
 			 })
 			 .error(function (data) {
 				 console.log('Error: ' + data);
@@ -39,20 +52,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 	 });
 
     $scope.pushFriends = function(){
-      var users = $scope.users;
-      var friends = $scope.friends;
-      var userLength = users.length;
-      var friendsLength = friends.length;
-      for (var i = 0; i<userLength; i++){
-        var user = users[i];
-        var id = user.facebook.id;
-        for (var u = 0; u<friendsLength; u++){
-          var friend = friends[u];
-          if (id === friend.id){
-            $scope.friendUsers.push(user);
-          }
-        }
-      }
+
     }
 
 
@@ -125,33 +125,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
     $mdDialog.cancel();
   };
 
-  // date and timepickers
-            //timepicker
-              $scope.formData.startTime = new Date();
-
-              $scope.hstep = 1;
-              $scope.mstep = 15;
-              $scope.ismeridian = true;
-
-              //datepicker
-              $scope.formData.startTime = new Date();
-              $scope.minDate = new Date();
-               $scope.openDatePicker = function($event) {
-                  $event.preventDefault();
-                  $event.stopPropagation();
-
-                  $scope.opened = true;
-                };
-
-          
-
-                $scope.dateOptions = {
-                  formatYear: 'yy',
-                  startingDay: 1
-                };
-
-                $scope.format = 'yyyy/MM/dd';
-
 
 // working with api
 
@@ -181,6 +154,32 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
                   console.log('Error: ' + data);
               })
     };
+
+						 //timepicker
+						 $scope.formData.startTime = new Date();
+
+						 $scope.hstep = 1;
+						 $scope.mstep = 15;
+						 $scope.ismeridian = true;
+
+						 //datepicker
+						 $scope.formData.startTime = new Date();
+						 $scope.minDate = new Date();
+						 $scope.openDatePicker = function($event) {
+							 $event.preventDefault();
+							 $event.stopPropagation();
+
+							 $scope.opened = true;
+						 };
+
+
+
+						 $scope.dateOptions = {
+							 formatYear: 'yy',
+							 startingDay: 1
+						 };
+
+						 $scope.format = 'yyyy/MM/dd';
 
 
 }]);

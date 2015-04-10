@@ -189,7 +189,7 @@ module.exports = function(app, passport) {
             ownerName: req.user.name,
 			ownerFacebook: req.user.facebook.id,
 			ownerVkontakte: req.user.vkontakte.id
-			//invitedUsers: req.body.invitedUsers
+			invitedUsers: req.body.invitedUsers
         }, function(err, meeting) {
             if (err)
                 res.send(err);
