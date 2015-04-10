@@ -156,19 +156,17 @@
 	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: &nbsp;</strong> {{meeting.updated}}</div>
 
 
-	                    <h6>Приглашенные</h6>
-	                    <div layout="row" class="userlist">
+                        <h6>Приглашенные</h6>
+                        <div layout="row" class="userlist">
                             <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                                 <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
                             </div>
-	                    </div>
+                        </div>
 
-	                    <h6>Участники</h6>
+                        <h6>Участники</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-
-                                    <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
-
+                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
                             </div>
                         </div>
 
@@ -210,19 +208,19 @@
 	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
 	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
-	                    <h6>Приглашенные</h6>
-	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
-                    		</div>
-	                    </div>
-
-	                    <h6>Участники</h6>
-	                    <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                                    <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                        <h6>Приглашенные</h6>
+                        <div layout="row" class="userlist">
+                            <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
                             </div>
-	                    </div>
+                        </div>
+
+                        <h6>Участники</h6>
+                        <div layout="row" class="userlist">
+                            <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
+                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                            </div>
+                        </div>
 	                    <div layout="row">
 	                    	<md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
 	                        <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-if="meeting.invited">Отклонить приглашение</md-button>
@@ -262,19 +260,19 @@
 	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
 	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
-	                    <h6>Приглашенные</h6>
-	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
-                    		</div>
-	                    </div>
+                        <h6>Приглашенные</h6>
+                        <div layout="row" class="userlist">
+                            <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                            </div>
+                        </div>
 
-	                    <h6>Участники</h6>
-	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in meeting.participants | limitTo: 5">
-                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
-                    		</div>
-	                    </div>
+                        <h6>Участники</h6>
+                        <div layout="row" class="userlist">
+                            <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
+                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                            </div>
+                        </div>
 	                    <div layout="row">
 		                    <md-button class="md-raised join-button" ng-click="meeting.invited" ng-if="meeting.invited">Отклонить приглашение</md-button>
 	                        <md-button class="md-raised join-button" ng-click="!meeting.joined" ng-if="!meeting.joined">Учавствовать</md-button>
@@ -310,19 +308,19 @@
 	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
 	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
-	                    <h6>Приглашенные</h6>
-	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
-                    		</div>
-	                    </div>
+                        <h6>Приглашенные</h6>
+                        <div layout="row" class="userlist">
+                            <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                            </div>
+                        </div>
 
-	                    <h6>Участники</h6>
-	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in meeting.participants | limitTo: 5">
-                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
-                    		</div>
-	                    </div>
+                        <h6>Участники</h6>
+                        <div layout="row" class="userlist">
+                            <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
+                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                            </div>
+                        </div>
 	                    <div layout="row">
 		                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-if="meeting.invited">Отклонить приглашение</md-button>
 	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-if="!meeting.joined">Учавствовать</md-button>
@@ -358,19 +356,19 @@
 	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
 
-	                    <h6>Приглашенные</h6>
-	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
-                    		</div>
-	                    </div>
+                        <h6>Приглашенные</h6>
+                        <div layout="row" class="userlist">
+                            <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                            </div>
+                        </div>
 
-	                    <h6>Участники</h6>
-	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in meeting.participants | limitTo: 5">
-                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
-                    		</div>
-	                    </div>
+                        <h6>Участники</h6>
+                        <div layout="row" class="userlist">
+                            <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
+                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
