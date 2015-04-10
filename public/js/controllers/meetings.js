@@ -185,7 +185,6 @@ findMate.controller('meetingsController', ['$scope',
 
     $scope.unjoinMeeting = function(id){
 
-
         $http.put('/unjoin/meetings/' + id)
 			.success(function (data) {
 				$scope.meetings = data;

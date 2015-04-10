@@ -276,12 +276,11 @@ module.exports = function(app, passport) {
 
 
 		// and delete user from meetings.joined
-	app.put('/unjoinmeeting/:meetingId', isLoggedIn, function (req, res){
+	app.put('/unjoinmeeting/:id', isLoggedIn, function (req, res){
 
 		var update = { $pull: {joinedUsers: req.user}};
 
-
-				Meeting.findByIdAndUpdate(req.meeting.id, update, function (err, meeting) {
+				Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 					if(!meeting) {
 						res.statusCode = 404;
 						return res.send({ error: 'Not found' });
