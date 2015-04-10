@@ -22,6 +22,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
       console.log('Error: ' + data);
     });
 
+
 	 $scope.loadFriends = function(users) {
 		 var user = $scope.logged_in_user;
 		 var friendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
@@ -148,11 +149,11 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
                   $scope.formData = {}; // clear the form so our user is ready to enter another
                   $scope.meetings = data;
                   console.log(data);
-
-			  $scope.hide();
               })
               .error(function(data) {
                   console.log('Error: ' + data);
+              }).then(function(){
+                $scope.hide();
               })
     };
 

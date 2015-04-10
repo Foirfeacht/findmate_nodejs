@@ -8,7 +8,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
                              $location, 
                              $mdSidenav,
                              $mdDialog,
-                             editService) {
+                             editService){
     //init logged in user
     $scope.$watch('logged_in_user', function () {
         $scope.loadFriends();
@@ -16,16 +16,16 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 
     $scope.$watch('currentMeeting', function () {
         $scope.currentMeetingId = $scope.currentMeeting._id;
-        console.log($scope.currentMeetingId);
+        $scope.currentMeeting.startDate = new Date($scope.currentMeeting.startDate);
+         $scope.currentMeeting.startTime = new Date($scope.currentMeeting.startTime);
+         if ($scope.currentMeeting.updated_at !== null){
+            $scope.currentMeeting.updated_at = new Date($scope.currentMeeting.updated_at);
+         }
+         $scope.currentMeeting.updated = moment($scope.currentMeeting.updated_at).fromNow();
+         $scope.currentMeeting.created = moment($scope.currentMeeting.created_at).fromNow();
     });
 
-    $scope.currentMeeting.startDate = new Date($scope.currentMeeting.startDate);
- $scope.currentMeeting.startTime = new Date($scope.currentMeeting.startTime);
- if ($scope.currentMeeting.updated_at !== null){
- 	$scope.currentMeeting.updated_at = new Date($scope.currentMeeting.updated_at);
- }
- $scope.currentMeeting.updated = moment($scope.currentMeeting.updated_at).fromNow();
- $scope.currentMeeting.created = moment($scope.currentMeeting.created_at).fromNow();
+    
     
 
     // join meeting
