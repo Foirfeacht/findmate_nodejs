@@ -168,7 +168,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
                         return item.a;
                     });
 
-                 meeting.participants = _.uniq(meeting.participants,
+                 meeting.joinedUsers = _.uniq(meeting.joinedUsers,
                     function(item, key, a){
                         return item.a;
                     });
@@ -203,10 +203,10 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
                  }// end invited filter
 
                  // participants filter
-                 var participantsArray = meeting.participants;
-                 var participantsArrayLength = participantsArray.length;
-                 for (var j = 0; j < participantsArrayLength; j++){
-                    var joinedUser = participantsArray[j];
+                 var joinedArray = meeting.joinedUsers;
+                 var joinedArrayLength = joinedArray.length;
+                 for (var j = 0; j < joinedArrayLength; j++){
+                    var joinedUser = joinedArray[j];
                     if(joinedUser._id === $scope.logged_in_user._id){
                         meeting.joined = true;
                     } else {
