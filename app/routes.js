@@ -276,7 +276,7 @@ module.exports = function(app, passport) {
 
 
 		// and delete user from meetings.joined
-	app.put('/unjoinmeeting/:id', isLoggedIn, function (req, res){
+	app.put('/join/meetings/:id', isLoggedIn, function (req, res){
 
 		var update = { $pull: {joinedUsers: req.user}};
 
