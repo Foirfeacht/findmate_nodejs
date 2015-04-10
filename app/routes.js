@@ -216,72 +216,16 @@ module.exports = function(app, passport) {
 	};
 
 	app.param('meetingId', meetingByID);
-
-
-	// send invite for user
-	app.put('/invite/:id', isLoggedIn, function (req, res){
-
-		Meeting.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, meeting) {
-			if (err) return next(err);
-			if (!meeting) return next(new Error('No latest meetings'));
-			req.meeting = meeting;
-			var update = { $addToSet: {invited: req.meeting} };
-
-			User.findByIdAndUpdate(req.params.id, update, function (err, user) {
-				if (!err) {
-					console.log("meeting joined");
-					User.find(function(err, users) {
-						if (err)
-							res.send(err);
-						res.json(users);
-					});
-				} else {
-					if(err.name == 'ValidationError') {
-						res.statusCode = 400;
-						res.send({ error: 'Validation error' });
-					} else {
-						res.statusCode = 500;
-						res.send({ error: 'Server error' });
-					}
-					console.log('Internal error(%d): %s',res.statusCode,err.message);
-				}
-			});
-		});
-	});
-
+	
 
     // decline invitation
 
-	app.put('/decline/:meetingId', isLoggedIn, function (req, res){
 
-	        var update = { $pull: {invited: req.meeting} };
-
-		User.findByIdAndUpdate(req.user.id, update, function (err, user) {
-			if (!err) {
-				console.log("meeting joined");
-				User.find(function(err, users) {
-					if (err)
-						res.send(err);
-					res.json(users);
-				});
-			} else {
-				if(err.name == 'ValidationError') {
-					res.statusCode = 400;
-					res.send({ error: 'Validation error' });
-				} else {
-					res.statusCode = 500;
-					res.send({ error: 'Server error' });
-				}
-				console.log('Internal error(%d): %s',res.statusCode,err.message);
-			}
-		});
-	});
-
-	app.put('/declinemeeting/:meetingId', isLoggedIn, function (req, res){
+	app.put('/declinemeeting/:id', isLoggedIn, function (req, res){
 
 	        var update = { $pull: {invitedUsers: req.user} };
 
-		Meeting.findByIdAndUpdate(req.meeting.id, update, function (err, user) {
+		Meeting.findByIdAndUpdate(req.params.id, update, function (err, user) {
 			if (!err) {
 				console.log("meeting joined");
 				Meeting.find(function(err, meetings) {
@@ -302,39 +246,14 @@ module.exports = function(app, passport) {
 		});
 	});
 
-	//join a meeting
-	    app.put('/join/:meetingId', isLoggedIn, function (req, res){
-
-	        var update = { $addToSet: {joined: req.meeting}, $pull: {invited: req.meeting} };
-
-	        User.findByIdAndUpdate(req.user.id, update, {upsert: true}, function (err, user) {
-		            if (!err) {
-		                console.log("meeting joined");
-			            User.find(function(err, users) {
-			                if (err)
-			                    res.send(err);
-			                res.json(users);
-			            });
-		            } else {
-		                if(err.name == 'ValidationError') {
-		                    res.statusCode = 400;
-		                    res.send({ error: 'Validation error' });
-		                } else {
-		                    res.statusCode = 500;
-		                    res.send({ error: 'Server error' });
-		                }
-		                console.log('Internal error(%d): %s',res.statusCode,err.message);
-		            }
-		     });
-		});
 
 	// and store user in meetings.joined
-	app.put('/joinmeeting/:meetingId', isLoggedIn, function (req, res){
+	app.put('/joinmeeting/:id', isLoggedIn, function (req, res){
 
 		var update = { $addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: req.user} };
 
 
-				Meeting.findByIdAndUpdate(req.meeting.id, update, {upsert: true}, function (err, meeting) {
+				Meeting.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, meeting) {
 					if(!meeting) {
 						res.statusCode = 404;
 						return res.send({ error: 'Not found' });
@@ -350,36 +269,6 @@ module.exports = function(app, passport) {
 	});
 
 
-		//unjoin a meeting
-	    app.put('/unjoin/:meetingId', isLoggedIn, function (req, res){
-
-	        var update = { $pull: {joined: req.body.meeting} };
-
-			User.findByIdAndUpdate(req.user.id, update, function (err, user) {
-				if (!err) {
-					console.log("meeting joined");
-					User.find(function(err, users) {
-						if (err)
-							res.send(err);
-						res.json(users);
-					});
-					Meeting.find(function(err, meetings){
-						if (err)
-							res.send(err);
-						res.json(meetings);
-					});
-				} else {
-					if(err.name == 'ValidationError') {
-						res.statusCode = 400;
-						res.send({ error: 'Validation error' });
-					} else {
-						res.statusCode = 500;
-						res.send({ error: 'Server error' });
-					}
-					console.log('Internal error(%d): %s',res.statusCode,err.message);
-				}
-			});
-		});
 
 		// and delete user from meetings.joined
 	app.put('/unjoinmeeting/:meetingId', isLoggedIn, function (req, res){
@@ -407,7 +296,6 @@ module.exports = function(app, passport) {
     //update a meeting
     app.put('/api/meetings/:id', isLoggedIn, function (req, res){
     	var user = req.user;
-    	var id = req.params.id;
     	var update = {
     		$set: {
     		    		title: req.body.title,

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a578cdc-ea4c-4e1c-862b-957bb4ee81a0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/meetings.js" afterPath="$PROJECT_DIR$/public/js/controllers/meetings.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes.js" afterPath="$PROJECT_DIR$/app/routes.js" />
     </list>
     <ignored path="findmate.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,14 +26,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="routes.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6475" max-vertical-offset="9282">
-              <caret line="357" column="38" selection-start-line="357" selection-start-column="38" selection-end-line="357" selection-end-column="38" />
+            <state vertical-scroll-proportion="-1.0141305" vertical-offset="4639" max-vertical-offset="7378">
+              <caret line="218" column="4" selection-start-line="218" selection-start-column="4" selection-end-line="218" selection-end-column="4" />
               <folding>
-                <marker date="1428655195055" expanded="true" signature="106:15263" placeholder="{...}" />
-                <marker date="1428655195055" expanded="true" signature="667:687" placeholder="{...}" />
+                <marker date="1428672783926" expanded="true" signature="106:11913" placeholder="{...}" />
+                <marker date="1428672783926" expanded="true" signature="667:687" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -92,10 +92,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="meetings.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="meetings.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/controllers/meetings.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.13363533" vertical-offset="3044" max-vertical-offset="4726">
+            <state vertical-scroll-proportion="-19.72973" vertical-offset="2432" max-vertical-offset="4726">
               <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -155,13 +155,13 @@
         <option value="$PROJECT_DIR$/views/index.ejs" />
         <option value="$PROJECT_DIR$/views/admin.ejs" />
         <option value="$PROJECT_DIR$/public/partials/dialog.tmpl.ejs" />
-        <option value="$PROJECT_DIR$/app/routes.js" />
         <option value="$PROJECT_DIR$/app/models/meeting.js" />
         <option value="$PROJECT_DIR$/app/models/user.js" />
         <option value="$PROJECT_DIR$/public/js/controllers/dialog.js" />
         <option value="$PROJECT_DIR$/views/meeting.ejs" />
         <option value="$PROJECT_DIR$/views/meetings.ejs" />
         <option value="$PROJECT_DIR$/public/js/controllers/meetings.js" />
+        <option value="$PROJECT_DIR$/app/routes.js" />
       </list>
     </option>
   </component>
@@ -596,8 +596,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6749">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1428655195055" expanded="true" signature="106:15263" placeholder="{...}" />
-            <marker date="1428655195055" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428672783926" expanded="true" signature="106:11913" placeholder="{...}" />
+            <marker date="1428672783926" expanded="true" signature="667:687" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -676,8 +676,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="6732">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <marker date="1428655195055" expanded="true" signature="106:15263" placeholder="{...}" />
-            <marker date="1428655195055" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428672783926" expanded="true" signature="106:11913" placeholder="{...}" />
+            <marker date="1428672783926" expanded="true" signature="667:687" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -749,8 +749,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="6970">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
-            <marker date="1428655195055" expanded="true" signature="106:15263" placeholder="{...}" />
-            <marker date="1428655195055" expanded="true" signature="667:687" placeholder="{...}" />
+            <marker date="1428672783926" expanded="true" signature="106:11913" placeholder="{...}" />
+            <marker date="1428672783926" expanded="true" signature="667:687" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -957,17 +957,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6475" max-vertical-offset="9282">
-          <caret line="357" column="38" selection-start-line="357" selection-start-column="38" selection-end-line="357" selection-end-column="38" />
-          <folding>
-            <marker date="1428655195055" expanded="true" signature="106:15263" placeholder="{...}" />
-            <marker date="1428655195055" expanded="true" signature="667:687" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/meetings.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-153.6923" vertical-offset="3654" max-vertical-offset="7973">
@@ -978,10 +967,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controllers/meetings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13363533" vertical-offset="3044" max-vertical-offset="4726">
+        <state vertical-scroll-proportion="-19.72973" vertical-offset="2432" max-vertical-offset="4726">
           <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.0141305" vertical-offset="4639" max-vertical-offset="7378">
+          <caret line="218" column="4" selection-start-line="218" selection-start-column="4" selection-end-line="218" selection-end-column="4" />
+          <folding>
+            <marker date="1428672783926" expanded="true" signature="106:11913" placeholder="{...}" />
+            <marker date="1428672783926" expanded="true" signature="667:687" placeholder="{...}" />
           </folding>
         </state>
       </provider>
