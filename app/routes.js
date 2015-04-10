@@ -216,21 +216,21 @@ module.exports = function(app, passport) {
 	};
 
 	app.param('meetingId', meetingByID);
-	
+
 
     // decline invitation
 
 
-	app.put('/declinemeeting/:id', isLoggedIn, function (req, res){
+	app.put('/decline/meetings/:id', isLoggedIn, function (req, res){
 
-	        var update = { $pull: {invitedUsers: req.user} };
+	     var update = { $pull: {invitedUsers: req.user} };
 
-		Meeting.findByIdAndUpdate(req.params.id, update, function (err, user) {
+		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 			if (!err) {
-				console.log("meeting joined");
+				console.log("meeting updated");
 				Meeting.find(function(err, meetings) {
 					if (err)
-						res.send(err);
+						res.send(err)
 					res.json(meetings);
 				});
 			} else {
@@ -247,25 +247,30 @@ module.exports = function(app, passport) {
 	});
 
 
-	// and store user in meetings.joined
-	app.put('/joinmeeting/:id', isLoggedIn, function (req, res){
+	// store user in meetings.joined
+	app.put('/join/meetings/:id', isLoggedIn, function (req, res){
+		var user = req.user;
+		var update = { $addToSet: {participants: req.user}, $pull: {invitedUsers: req.user} };
 
-		var update = { $addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: req.user} };
-
-
-				Meeting.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, meeting) {
-					if(!meeting) {
-						res.statusCode = 404;
-						return res.send({ error: 'Not found' });
-					}
-					console.log("meeting updated");
-					Meeting.find(function(err, meetings) {
-						if (err)
-							res.send(err)
-						res.json(meetings);
-					});
+		Meeting.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, meeting) {
+			if (!err) {
+				console.log("meeting joined");
+				Meeting.find(function(err, meetings) {
+					if (err)
+						res.send(err)
+					res.json(meetings);
 				});
-
+			} else {
+				if(err.name == 'ValidationError') {
+					res.statusCode = 400;
+					res.send({ error: 'Validation error' });
+				} else {
+					res.statusCode = 500;
+					res.send({ error: 'Server error' });
+				}
+				console.log('Internal error(%d): %s',res.statusCode,err.message);
+			}
+		});
 	});
 
 
