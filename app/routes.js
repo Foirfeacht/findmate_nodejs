@@ -188,7 +188,7 @@ module.exports = function(app, passport) {
             _owner: req.user._id,
             ownerName: req.user.name,
 			ownerFacebook: req.user.facebook.id,
-			ownerVkontakte: req.user.vkontakte.id
+			ownerVkontakte: req.user.vkontakte.id,
 			invitedUsers: req.body.invitedUsers
         }, function(err, meeting) {
             if (err)
