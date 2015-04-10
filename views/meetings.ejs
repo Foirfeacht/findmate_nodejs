@@ -212,17 +212,19 @@
 
 	                    <h6>Приглашенные</h6>
 	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                    		<div ng-repeat="user in users">
+                                <div ng-if="showInvited(user, $parent.meeting)">
                     			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                                </div>
                     		</div>
 	                    </div>
 
 	                    <h6>Участники</h6>
 	                    <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.joinedUsers">
-
-                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
-
+                            <div ng-repeat="user in users">
+                                <div ng-if="showJoined(user, $parent.meeting)">
+                                    <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                                </div>
                             </div>
 	                    </div>
 	                    <div layout="row">

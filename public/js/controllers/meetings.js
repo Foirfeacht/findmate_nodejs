@@ -102,8 +102,8 @@ findMate.controller('meetingsController', ['$scope',
 
     $scope.displayDecline = function(meeting){
     	var meeting = meeting;
-    	var invited = meeting.invitedUsers;
-    	if (invited.indexOf($scope.logged_in_user) > -1){
+    	var invited = $scope.logged_in_user.invited;
+    	if (invited.indexOf(meeting) > -1){
            	return true;
         } else {
         	return false;
@@ -112,13 +112,35 @@ findMate.controller('meetingsController', ['$scope',
 
     $scope.displayJoin = function(meeting){
     	var meeting = meeting;
-    	var joined = meeting.joinedUsers;
-    	if (joined.indexOf($scope.logged_in_user) === -1){
+    	var joined = $scope.logged_in_user.joined;
+    	if (joined.indexOf(meeting) === -1){
            	return true;
         } else {
         	return false;
         }
     };
+
+	 $scope.showInvited = function(user, meeting){
+		 var meeting = meeting;
+		 var user = user;
+		 var invited = user.invited;
+		 if (invited.indexOf(meeting) > -1){
+			 return true;
+		 } else {
+			 return false;
+		 }
+	 };
+
+	 $scope.showJoined = function(user, meeting){
+		 var meeting = meeting;
+		 var user = user;
+		 var joined = user.joined;
+		 if (joined.indexOf(meeting) > -1){
+			 return true;
+		 } else {
+			 return false;
+		 }
+	 };
 
       $scope.singleUser = function(id) {
         $http.get('../api/users' + id)
@@ -157,7 +179,7 @@ findMate.controller('meetingsController', ['$scope',
                 console.log('Error: ' + data);
             });
 
-        $http.put('/declinemeeting/' + id)
+        /*$http.put('/declinemeeting/' + id)
             .success(function (data) {
                 $scope.meetings = data;
                 console.log(data);
@@ -165,7 +187,7 @@ findMate.controller('meetingsController', ['$scope',
             })
             .error(function (data) {
                 console.log('Error: ' + data);
-            });
+            });*/
     };
 
     // join meeting
@@ -181,7 +203,7 @@ findMate.controller('meetingsController', ['$scope',
                 console.log('Error: ' + data);
             });
 
-		$http.put('/joinmeeting/' + id)
+		/*$http.put('/joinmeeting/' + id)
 			.success(function (data) {
 				$scope.meetings = data;
 				console.log(data);
@@ -190,7 +212,7 @@ findMate.controller('meetingsController', ['$scope',
 			.error(function (data) {
 				console.log('Error: ' + data);
 			});
-
+*/
     };
 
     // unjoin meeting
@@ -205,7 +227,7 @@ findMate.controller('meetingsController', ['$scope',
             .error(function (data) {
                 console.log('Error: ' + data);
             });
-
+		/*
         $http.put('/unjoinmeeting/' + id)
 			.success(function (data) {
 				$scope.meetings = data;
@@ -214,7 +236,7 @@ findMate.controller('meetingsController', ['$scope',
 			})
 			.error(function (data) {
 				console.log('Error: ' + data);
-			})
+			}) */
     };
 
     // category filter
