@@ -37,8 +37,8 @@ var userSchema = mongoose.Schema({
     },
 
     // meetings connections
-    invited: {type: Array, default: []},
-    joined:  {type: Array, default: []}
+    //invited: {type: Array, default: []},
+    //joined:  {type: Array, default: []}
 });
 
 // generating a hash

@@ -175,7 +175,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
                   $scope.formData = {}; // clear the form so our user is ready to enter another
                   $scope.meetings = data;
                   console.log(data);
-			      $scope.sendInvites();
+			     // $scope.sendInvites();
 
 			  $mdDialog.hide();
               })

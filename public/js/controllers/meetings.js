@@ -82,21 +82,47 @@ findMate.controller('meetingsController', ['$scope',
              }
              meeting.updated = moment(meeting.updated_at).fromNow();
              meeting.created = moment(meeting.created_at).fromNow();
-/*
-             var invited = meeting.invitedUsers;
-             var joined = meeting.joinedUsers;
-             meeting.invited = false;
-             meeting.joined = false;
 
-             if (invited.indexOf($scope.logged_in_user) > -1){
-             	meeting.invited = true;
-             } 
 
-             if (joined.indexOf($scope.logged_in_user) > -1){
-             	meeting.joined = true;
-             } */
+
+			meeting.invitedUsers = _.uniq(meeting.invitedUsers,
+				  function(item, key, a){
+				  return item.a;
+				  });
+
+			 meeting.participants = _.uniq(meeting.participants,
+			      function(item, key, a){
+				  return item.a;
+			  });
+
+ 			var invitedArray = meeting.invitedUsers;
+ 			var invitedArrayLength = invitedArray.length;
+ 			for (var u = 0; u< invitedArrayLength; u++){
+ 				var invitedUser = invitedArray[u];
+ 					if(invitedUser._id === $scope.logged_in_user._id){
+ 						meeting.invited = true;
+ 					} else {
+ 						meeting.invited = false;
+ 					};
+ 			};// end invited filter
+
+ 			// participants filter
+			 var participantsArray = meeting.participants;
+ 			 var participantsArrayLength = participantsArray.length;
+ 				for (var j = 0; j < participantsArrayLength; j++){
+ 					var joinedUser = participantsArray[j];
+ 					if(joinedUser._id === $scope.logged_in_user._id){
+						 meeting.joined = true;
+ 					} else {
+ 						meeting.joined = false;
+ 					};
+ 				};// end participants filter
          }; // end for loop
     };
+
+	//filters
+
+
 
     // check buttons state
 
