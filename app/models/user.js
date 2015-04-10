@@ -34,7 +34,7 @@ var userSchema = mongoose.Schema({
             enum: ['user', 'admin']
         }],
         default: ['user']
-    },
+    }
 
     // meetings connections
     //invited: {type: Array, default: []},
