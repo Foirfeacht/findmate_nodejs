@@ -25,7 +25,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 
 	 $scope.loadFriends = function(users) {
 		 var user = $scope.logged_in_user;
-		 var friendsRequest = 'https://graph.facebook.com/' + scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + scope.logged_in_user.facebook.token;
+		 var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + $scope.logged_in_user.facebook.token;
 		 $http.get(friendsRequest)
 			 .success(function (data) {
 				 $scope.friends = data.data;
