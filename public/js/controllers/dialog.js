@@ -22,9 +22,10 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
       console.log('Error: ' + data);
     });
 
+
 	 $scope.loadFriends = function(users) {
 		 var user = $scope.logged_in_user;
-		 var friendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
+		 var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + $scope.logged_in_user.facebook.token;
 		 $http.get(friendsRequest)
 			 .success(function (data) {
 				 $scope.friends = data.data;
@@ -51,11 +52,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 	 $scope.$watch('mapService.user', function () {
 		 $scope.loadFriends(mapService.user);
 	 });
-
-    $scope.pushFriends = function(){
-
-    }
-
 
 
     $scope.friendUsers = [];
@@ -118,12 +114,16 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 
   codeLatLng();
 
-  $scope.hide = function() {
-    $mdDialog.hide();
-  };
+  
+
+  $scope.hideDialog = $mdDialog.hide;
 
   $scope.cancel = function() {
     $mdDialog.cancel();
+  };
+
+  $scope.hide = function() {
+    $mdDialog.hide;
   };
 
 
@@ -148,8 +148,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
                   $scope.formData = {}; // clear the form so our user is ready to enter another
                   $scope.meetings = data;
                   console.log(data);
-
-			  $scope.hide();
               })
               .error(function(data) {
                   console.log('Error: ' + data);
