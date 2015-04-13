@@ -18,7 +18,8 @@ var userSchema = mongoose.Schema({
         id           : String,
         token        : String,
         email        : String,
-        name         : String
+        name         : String,
+		image        : String
     },
 
     firstName: {type: String, trim: true},
@@ -34,7 +35,9 @@ var userSchema = mongoose.Schema({
             enum: ['user', 'admin']
         }],
         default: ['user']
-    }
+    },
+
+	image: String
 
     // meetings connections
     //invited: {type: Array, default: []},

@@ -8,6 +8,18 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
 							 $mdSidenav, 
 							 $mdDialog) {
 
+    // init user image
+						$scope.getUserImage = function(){
+							if ($scope.logged_in_user.image = 'facebook'){
+								var user = $scope.logged_in_user;
+								$scope.currentUserPic = 'https://graph.facebook.com/' + user.facebook.id + '/picture?height=350&width=250';
+							};
+							if ($scope.logged_in_user.image = 'vkontakte'){
+								var user = $scope.logged_in_user;
+								$scope.currentUserPic = user.vkontakte.image;
+							};
+						}
+
     //load input data
 
     $scope.formData = {};
