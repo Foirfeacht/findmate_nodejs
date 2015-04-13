@@ -171,11 +171,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
             });
     };
 
-    //update meeting
-    $scope.updateMeeting = function (id) {
-        // not implemented yet
-    };
-
     // get function to refresh on modal closing
 
     $scope.refresh = function() {
@@ -190,9 +185,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
             });
     }
 
-    $scope.showMine = false;
-
-
     // side nav
     $scope.toggleNav = function() {
        $mdSidenav('nav').toggle();
@@ -200,7 +192,7 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
 
 
     // md dialog
-    $scope.showDialog = function(ev){
+    /*$scope.showDialog = function(ev){
         $mdDialog.show({
           controller: 'DialogController',
           templateUrl: './public/partials/dialog.tmpl.ejs',
@@ -212,5 +204,22 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
              }, function() {
                   $scope.refresh();
              })     
-    }
+    }*/
+    $scope.showDialog = function(size){
+        var modalInstance = $modal.open({
+          templateUrl: './public/partials/dialog.tmpl.ejs',
+          controller: 'DialogController',
+          size: size,
+          resolve: {
+            logged_in_user: function () {
+              return $scope.logged_in_user;
+            }
+          }
+        }).then(function(data) {
+                  $scope.refresh();
+                  console.log('refreshed')
+             }, function() {
+                  $scope.refresh();
+             })         
+         };
 }]);

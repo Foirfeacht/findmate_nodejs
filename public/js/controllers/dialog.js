@@ -7,6 +7,9 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
                               moment) {
 
 
+  console.log($scope.logged_in_user);
+
+
   // deal with users service
   $http.get('../api/users')
     .success(function(data) {
@@ -154,32 +157,29 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
               })
     };
 
-						 //timepicker
-						 $scope.formData.startTime = new Date();
+	 //timepicker
+	 $scope.formData.startTime = new Date();
 
-						 $scope.hstep = 1;
-						 $scope.mstep = 15;
-						 $scope.ismeridian = true;
+	 $scope.hstep = 1;
+	 $scope.mstep = 15;
+	 $scope.ismeridian = true;
 
-						 //datepicker
-						 $scope.formData.startTime = new Date();
-						 $scope.minDate = new Date();
-						 $scope.openDatePicker = function($event) {
-							 $event.preventDefault();
-							 $event.stopPropagation();
+	 //datepicker
+	 $scope.formData.startTime = new Date();
+	 $scope.minDate = new Date();
+	 $scope.openDatePicker = function($event) {
+		 $event.preventDefault();
+		 $event.stopPropagation();
 
-							 $scope.opened = true;
-						 };
+		 $scope.opened = true;
+	 };
 
+	 $scope.dateOptions = {
+		 formatYear: 'yy',
+		 startingDay: 1
+	 };
 
-
-						 $scope.dateOptions = {
-							 formatYear: 'yy',
-							 startingDay: 1
-						 };
-
-						 $scope.format = 'yyyy/MM/dd';
-
+	 $scope.format = 'yyyy/MM/dd';
 
 }]);
 
