@@ -8,7 +8,6 @@ var meetingsSchema = new Schema({
     description: {type: String, default: ''},
     category: {type: String, default: 'Развлечения'},
     startDate: Date,
-    startTime: Date,
 	invitedUsers: {type: Array, default: []},
 	joinedUsers: {type: Array, default: []},
     _owner: { type: Schema.Types.ObjectId, ref: 'User' },

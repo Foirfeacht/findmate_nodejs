@@ -313,8 +313,11 @@ md-option {
 }
 
 .create-button {
-	width: 200px;
-	margin: 45px auto 10px;
+	width: 36px;
+    height: 36px;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
 }
 
 .create-button a {

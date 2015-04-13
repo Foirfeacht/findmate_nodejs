@@ -25,7 +25,7 @@
 	      	<div class="date-header">Время и день</div>	
 	      	
             <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
-               	<div>
+               	<!--<div>
                     <timepicker ng-model="formData.startTime" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
                 </div>
 	            <div>
@@ -35,7 +35,18 @@
 		                <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 		              </span>
 		            </p>
-	            </div>
+	            </div>-->
+
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-group"><input type="text" class="form-control" data-ng-model="formData.startDate"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="formData.startDate" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                    </ul>
+                </div>
+
                 
             </section>
 

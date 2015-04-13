@@ -3,7 +3,8 @@ var findMate = angular.module('findMate', ['ui.bootstrap',
                                             'ngMaterial', 
                                             'ngMap', 
                                             'angularMoment', 
-                                            'angularjs-dropdown-multiselect'
+                                            'angularjs-dropdown-multiselect',
+											'ui.bootstrap.datetimepicker'
                                             ]);
 
 findMate.run(function(amMoment) {
