@@ -1,8 +1,8 @@
-findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', '$mdDialog', 'moment',
+findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', '$modalInstance', 'moment',
                      function($scope, 
                               $http,  
                               editService,
-                              $mdDialog,
+                              $modalInstance,
                               moment) {
 
   // working with api
@@ -146,42 +146,31 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
      return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
   };
 
-  $scope.hide = function() {
-    $mdDialog.hide();
-  };
-
-  $scope.cancel = function() {
-    $mdDialog.cancel();
-  };
-
-  // date and timepickers
-            //timepicker
-              
-
-              $scope.hstep = 1;
-              $scope.mstep = 15;
-              $scope.ismeridian = true;
-
-              //datepicker
   
-              $scope.minDate = new Date();
-               $scope.openDatePicker = function($event) {
-                  $event.preventDefault();
-                  $event.stopPropagation();
 
-                  $scope.opened = true;
-                };
+  // datetimepicker              
 
-          
+  $scope.hstep = 1;
+  $scope.mstep = 15;
 
-                $scope.dateOptions = {
-                  formatYear: 'yy',
-                  startingDay: 1
-                };
+  $scope.minDate = new Date();
 
-                $scope.format = 'yyyy/MM/dd';
+  $scope.dateOptions = {
+    showWeeks: false,
+    startingDay: 1
+  };
 
+  $scope.showMeridian = false;
 
+   $scope.format = 'yyyy/MM/dd';
+
+   $scope.ok = function () {
+    $modalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
 
   $scope.formData.invitedUsers = $scope.invitedUsers;
 
@@ -192,7 +181,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                   $scope.formData = {}; // clear the form so our user is ready to enter another
                   $scope.meetings = data;
                   console.log(data);                  
-                  $scope.hide();
+                  $scope.ok();
               })
               .error(function(data) {
                   console.log('Error: ', data);

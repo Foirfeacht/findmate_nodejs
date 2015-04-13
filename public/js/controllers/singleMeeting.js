@@ -1,17 +1,29 @@
 // map controller
 // public/map.js
 
-findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$location', '$mdSidenav', '$mdDialog', 'editService',
+findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$location', '$mdSidenav', '$modal', 'editService',
                     function($scope, 
                              $http,
                              $routeParams, 
                              $location, 
                              $mdSidenav,
-                             $mdDialog,
+                             $modal,
                              editService){
+                        
+    $scope.getUserImage = function(){
+        var user = $scope.logged_in_user;
+        if ($scope.logged_in_user.image = 'facebook'){
+                $scope.currentUserPic = 'https://graph.facebook.com/' + user.facebook.id + '/picture?height=350&width=250';
+        };
+        if ($scope.logged_in_user.image = 'vkontakte'){
+                $scope.currentUserPic = user.vkontakte.image;
+        };
+    };
+
     //init logged in user
     $scope.$watch('logged_in_user', function () {
         $scope.loadFriends();
+        $scope.getUserImage();
     });
 
     $scope.$watch('currentMeeting', function () {
@@ -179,17 +191,18 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
         $scope.showDialog();
     };
 
-    $scope.showDialog = function(ev){
-        $mdDialog.show({
-          controller: 'EditMeetingController',
-          templateUrl: '../public/partials/editMeeting.tmpl.ejs',
-          targetEvent: ev
-             }).then(function(data) {
-                  $scope.refresh();
-                  console.log('refreshed')
-             }, function() {
-                  $scope.refresh();
-             })     
+    $scope.showDialog = function(size){
+        var modalInstance = $modal.open({
+          templateUrl: '../public/partials/dialog.tmpl.ejs',
+          controller: 'DialogController',
+          size: size
+        });
+        modalInstance.result.then(function(data) {
+          $scope.refresh();
+          console.log('refreshed')
+        }, function() {
+          $scope.refresh();
+        })         
     };
 
     $scope.refresh = function(){

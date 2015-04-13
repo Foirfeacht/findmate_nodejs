@@ -8,15 +8,28 @@ findMate.controller('meetingsController', ['$scope',
                                             '$filter',
                                             'dateFilter',
                                             'editService',
-                                            '$mdDialog',
-	 function($scope, $http, $routeParams, $mdSidenav, $filter, date, editService, $mdDialog) {
+                                            '$modal',
+	 function($scope, $http, $routeParams, $mdSidenav, $filter, date, editService, $modal) {
 
 	//expose lodash to scope
 	$scope._ = _;
 
+	//get profile pic
+
+	$scope.getUserImage = function(){
+		var user = $scope.logged_in_user;
+		if ($scope.logged_in_user.image = 'facebook'){
+				$scope.currentUserPic = 'https://graph.facebook.com/' + user.facebook.id + '/picture?height=350&width=250';
+		};
+		if ($scope.logged_in_user.image = 'vkontakte'){
+				$scope.currentUserPic = user.vkontakte.image;
+		};
+	};
+
 	//init logged in user
 	$scope.$watch('logged_in_user', function () {
 		$scope.loadFriends();
+		$scope.getUserImage();
 	});
 
 	//get users
@@ -197,28 +210,25 @@ findMate.controller('meetingsController', ['$scope',
 
     // category filter
 
-        var todayDate = new Date();
-        $scope.todayDay = todayDate.getDate();
+    var todayDate = new Date();
+    $scope.todayDay = todayDate.getDate();
 
-        //datepicker
-	     // $scope.filterMtn.startDate = new Date();
-       $scope.openDatePicker = function($event) {
-          $event.preventDefault();
-          $event.stopPropagation();
+    //datepicker 
 
-          $scope.opened = true;
-        };	  
+    $scope.dateOptions = {
+      formatYear: 'yy',
+      startingDay: 1
+    };
 
-        $scope.dateOptions = {
-          formatYear: 'yy',
-          startingDay: 1
-        };
+    $scope.showMeridian = false;
+    $scope.hstep = 1;
+	$scope.mstep = 15;
 
-        $scope.format = 'yyyy/MM/dd';
+    $scope.format = 'yyyy/MM/dd';
 
-        $scope.categories = [{name: 'Спорт'}, {name: 'Развлечения'}];
+    $scope.categories = [{name: 'Спорт'}, {name: 'Развлечения'}];
 
-        $scope.visibilities = [{name: 'Общие'}, {name: 'Друзья'}];
+    $scope.visibilities = [{name: 'Общие'}, {name: 'Друзья'}];
 		 
     //tabs
     $scope.data = {
@@ -254,18 +264,18 @@ findMate.controller('meetingsController', ['$scope',
         $scope.showDialog();
     };
 
-    $scope.showDialog = function(ev){
-        $mdDialog.show({
-          controller: 'EditMeetingController',
-          templateUrl: './public/partials/editMeeting.tmpl.ejs',
-          targetEvent: ev
-             }).then(function(data) {
-                  $scope.refresh();
-                  console.log('refreshed')
-             }, function() {
-                  $scope.refresh();
-             })     
+    $scope.showDialog = function(size){
+        var modalInstance = $modal.open({
+          templateUrl: './public/partials/dialog.tmpl.ejs',
+          controller: 'DialogController',
+          size: size
+        });
+        modalInstance.result.then(function(data) {
+          $scope.refresh();
+          console.log('refreshed')
+        }, function() {
+          $scope.refresh();
+        })         
     };
-
     
 }]);

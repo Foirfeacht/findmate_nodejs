@@ -1,18 +1,41 @@
-findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDialog', 'moment',
+findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'moment', '$modalInstance',
                      function($scope, 
                               $http, 
                               mapService, 
                               dialogService,
-                              $mdDialog,
                               $modalInstance,
                               moment) {
 
 
-  console.log($scope.logged_in_user);
-
+   $scope.loadFriends = function() {
+     var user = mapService.user;
+     var friendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
+     $http.get(friendsRequest)
+       .success(function (data) {
+         $scope.friends = data.data;
+         var users = $scope.users;
+         var friends = $scope.friends;
+         var userLength = users.length;
+         var friendsLength = friends.length;
+         for (var i = 0; i<userLength; i++){
+           var user = users[i];
+           var id = user.facebook.id;
+           for (var u = 0; u<friendsLength; u++){
+             var friend = friends[u];
+             if (id === friend.id){
+               $scope.friendUsers.push(user);
+             }
+           }
+         }
+       })
+       .error(function (data) {
+         console.log('Error: ' + data);
+       });
+   };
 
   // deal with users service
-  $http.get('../api/users')
+  $scope.getUsers = function(){
+    $http.get('../api/users')
     .success(function(data) {
       $scope.users = data;
       console.log(data);
@@ -20,41 +43,16 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
         var user = data[i];
         user.username = user.facebook.name;
       };
-	  $scope.loadFriends($scope.users);
+       $scope.loadFriends($scope.users);
     })
     .error(function (data) {
       console.log('Error: ' + data);
     });
+  }
 
-
-	 $scope.loadFriends = function(users) {
-		 var user = $scope.logged_in_user;
-		 var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + $scope.logged_in_user.facebook.token;
-		 $http.get(friendsRequest)
-			 .success(function (data) {
-				 $scope.friends = data.data;
-				 var users = users;
-				 var friends = $scope.friends;
-				 var userLength = users.length;
-				 var friendsLength = friends.length;
-				 for (var i = 0; i<userLength; i++){
-					 var user = users[i];
-					 var id = user.facebook.id;
-					 for (var u = 0; u<friendsLength; u++){
-						 var friend = friends[u];
-						 if (id === friend.id){
-							 $scope.friendUsers.push(user);
-						 }
-					 }
-				 }
-			 })
-			 .error(function (data) {
-				 console.log('Error: ' + data);
-			 });
-	 };
 	 //init logged in user from service
 	 $scope.$watch('mapService.user', function () {
-		 $scope.loadFriends(mapService.user);
+		 $scope.getUsers();
 	 });
 
 
@@ -118,18 +116,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 
   codeLatLng();
 
-  
-
-  $scope.hideDialog = $mdDialog.hide;
-
-  $scope.cancel = function() {
-    $mdDialog.cancel();
-  };
-
-  $scope.hide = function() {
-    $mdDialog.hide;
-  };
-
 
 // working with api
 
@@ -152,6 +138,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
                   $scope.formData = {}; // clear the form so our user is ready to enter another
                   $scope.meetings = data;
                   console.log(data);
+                  $scope.ok();
               })
               .error(function(data) {
                   console.log('Error: ' + data);
@@ -159,32 +146,31 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
     };
 
 	 //timepicker
-	 $scope.formData.startTime = new Date();
 
 	 $scope.hstep = 1;
 	 $scope.mstep = 15;
-	 $scope.ismeridian = true;
 
 	 //datepicker
 	 $scope.formData.startTime = new Date();
 	 $scope.minDate = new Date();
-	 $scope.openDatePicker = function($event) {
-		 $event.preventDefault();
-		 $event.stopPropagation();
-
-		 $scope.opened = true;
-	 };
+	 
 
 	 $scope.dateOptions = {
-		 formatYear: 'yy',
-		 startingDay: 1
+		 startingDay: 1,
+     showWeeks: false
 	 };
 
-   $scope.ok = function () {
-    $modalInstance.close($scope.selected.item);
-  };
+   $scope.showMeridian = false;
 
 	 $scope.format = 'yyyy/MM/dd';
+
+   $scope.ok = function () {
+    $modalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
 
 }]);
 

@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../bower_components/angular-material/angular-material.min.css">
         <link rel="stylesheet" href="../../bower_components/mdi/css/materialdesignicons.min.css">
-
+        <link rel="stylesheet" href=".../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css">
         <link rel="stylesheet" href="../../public/css/style.css">        
 	</head>
 	<body ng-cloak ng-controller="mapController" ng-init="logged_in_user=<%= JSON.stringify(user)%>">
@@ -53,7 +53,7 @@
         <div class="content">
 
 
-           <div class="map-container" ng-click="getCoords();showDialog($event)">
+           <div class="map-container" ng-click="getCoords();showDialog('lg')">
                 <map zoom="15" 
                   disable-default-u-i="true"
                   disable-double-click-zoom="true"
@@ -73,16 +73,16 @@
                           </div>
                       </info-window>
                 </map>
-                <!--<div id="map_canvas" ng-click="$scope.getCoords();showDialog($event)"></div>-->
             </div>
 
             
 
         </div><!-- end content -->
         
+    
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../../bower_components/angular/angular.js"></script>
     <script src="../../bower_components/angular-material/angular-material.min.js"></script>
-    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="../../bower_components/angular-aria/angular-aria.min.js"></script>
     
@@ -92,12 +92,10 @@
     <script src="../../bower_components/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js"></script>
     <script src="../../bower_components/moment/moment.js"></script>
     <script src="../../bower_components/angular-moment/angular-moment.min.js"></script>
-    <script src="../../bower_components/moment/locale/ru.js"></script>
-
-    <script type="text/javascript" src="../../bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
-
+    <script src="../../bower_components/moment/locale/ru.js"></script>  
     <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
     <script src="../../bower_components/ngmap/build/scripts/ng-map.min.js"></script>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">

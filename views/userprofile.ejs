@@ -62,7 +62,7 @@
           <div class="col-sm-6">
             <div class="well">
               <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-                <div><img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}"></div>
+                <div><img src="{{currentUserPic}}" alt="{{logged_in_user.name}}"></div>
                 <p>
                   <strong>name</strong>: {{currentUser.facebook.name}}<br>          
                 </p>
@@ -82,7 +82,9 @@
 
             </div>
           </div>
-        </div><!-- end row -->           
+        </div><!-- end row -->   
+
+        <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>        
 
         </div><!-- end content -->
         
@@ -99,6 +101,7 @@
     <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="../../bower_components/ngmap/build/scripts/ng-map.min.js"></script>
     <script src="../../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
+    <script type="text/javascript" src="../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
     <script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">
     </script>

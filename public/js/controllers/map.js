@@ -1,13 +1,12 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSidenav', '$mdDialog', 
+findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSidenav', '$modal',
 					function($scope,
 							 $http,
 							 mapService, 
 							 $mdSidenav, 
-							 $mdDialog,
-                             $modal) {
+							 $modal) {
 
     // init user image
 	$scope.getUserImage = function(){
@@ -108,9 +107,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
         .success(function(data) {
             $scope.meetings = data;
             console.log(data);
-
-
-
         })
         .error(function (data) {
             console.log('Error: ' + data);
@@ -145,10 +141,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
                     .error(function(data) {
                         console.log('Error: ' + data);
                     })
-        //}
-        //else {
-        //    console.log('no coordinates provided')
-        //}
     };
 
     // delete a todo after checking it
@@ -186,41 +178,25 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
             });
     }
 
-    // side nav
-    $scope.toggleNav = function() {
-       $mdSidenav('nav').toggle();
-    };
-
-
-    // md dialog
-    /*$scope.showDialog = function(ev){
-        $mdDialog.show({
-          controller: 'DialogController',
-          templateUrl: './public/partials/dialog.tmpl.ejs',
-          scope: $scope.$new(),
-          targetEvent: ev
-             }).then(function(data) {
-                  $scope.refresh();
-                  console.log('refreshed')
-             }, function() {
-                  $scope.refresh();
-             })     
-    }*/
     $scope.showDialog = function(size){
         var modalInstance = $modal.open({
           templateUrl: './public/partials/dialog.tmpl.ejs',
           controller: 'DialogController',
-          size: size,
-          resolve: {
-            logged_in_user: function () {
-              return $scope.logged_in_user;
-            }
-          }
-        }).then(function(data) {
+          size: size
+        });
+        modalInstance.result.then(function(data) {
                   $scope.refresh();
                   console.log('refreshed')
              }, function() {
                   $scope.refresh();
              })         
          };
+
+
+    // side nav
+    $scope.toggleNav = function() {
+       $mdSidenav('nav').toggle();
+    };
+
+    
 }]);

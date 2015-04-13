@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../bower_components/angular-material/angular-material.min.css">
         <link rel="stylesheet" href="../../bower_components/mdi/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href=".../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css">
         <link rel="stylesheet" href="../../public/css/style.css">        
         
 	</head>
@@ -17,7 +18,7 @@
                 <div class="profile-block">
 
                     <div class="image-wrapper">
-                        <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}">
+                        <img src="{{currentUserPic}}" alt="{{logged_in_user.name}}">
                     </div>
                     <a href="/profile" class="profile-name"> {{logged_in_user.name}} </a>
                 </div>
@@ -98,12 +99,7 @@
 
                 <div class="search">
                 	<label>Дата</label>
-                    <p class="input-group">
-		              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="filterMtn.startDate" is-open="opened" max-date="'2040-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
-		              <span class="input-group-btn">
-		                <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-		              </span>
-		            </p>
+                    <datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hstep" minute-step="mstep" ng-model="formData.startDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
                 </div>
         </div>
 
@@ -433,7 +429,7 @@
 
         </ng-switch>
 
-                <md-button class="md-fab md-primary create-button"><a href="/map">+</a></md-button>
+                <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>
 
 
 
@@ -451,6 +447,7 @@
     <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="../../bower_components/lodash/dist/lodash.min.js"></script>
     <script src="../../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
+    <script type="text/javascript" src="../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
 	<script src="../../public/js/app.js"></script>
     <script src="../../public/js/services/routingService.js"></script>
     <script src="../../public/js/services/editService.js"></script>

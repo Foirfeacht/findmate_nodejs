@@ -1,5 +1,5 @@
-<md-dialog>
-	<md-content>
+<div class="modal-body">
+
 		<div class="form">
 	        <section layout="column" layout-align="center center">
 
@@ -16,35 +16,23 @@
 	        </section>
 
 	        <section layout="column" layout-align="center center">
-	        	<md-select ng-model="formData.category" placeholder="Выберите категорию">
+	        	<!--<md-select ng-model="formData.category" placeholder="Выберите категорию">
 				    <md-option value="Спорт" ng-selected="selected" default>Спорт</md-option>
 				    <md-option value="Развлечения">Развлечения</md-option>
-				</md-select>
+				</md-select>-->
+				<select class="form-control" placeholder="Выберите категорию" ng-model="formData.category">
+				    <option value="Спорт">Спорт</option>
+				    <option value="Развлечения" ng-selected="selected" default>Развлечения</option>
+				 </select>
 	        </section>
 
 	      	<div class="date-header">Время и день</div>	
 	      	
             <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
-               	<!--<div>
-                    <timepicker ng-model="formData.startTime" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
-                </div>
-	            <div>
-	                <p class="input-group">
-		              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.startDate" is-open="opened" min-date="minDate" max-date="'2040-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
-		              <span class="input-group-btn">
-		                <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-		              </span>
-		            </p>
-	            </div>-->
+               	
 
-                <div class="dropdown">
-                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                        <div class="input-group"><input type="text" class="form-control" data-ng-model="formData.startDate"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <datetimepicker data-ng-model="formData.startDate" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
-                    </ul>
+                <div>
+                	<datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hstep" minute-step="mstep" ng-model="formData.startDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
                 </div>
 
                 
@@ -52,10 +40,14 @@
 
 	        <section layout="row" class="visibility">
 	        	<div>
-	                <md-select ng-model="formData.visibility" placeholder="Эту встречу увидят...">
+	                <!--<md-select ng-model="formData.visibility" placeholder="Эту встречу увидят...">
 	                    <md-option value="Общие" ng-selected="selected">Все</md-option>
 	                    <md-option value="Друзья">Друзья</md-option>
-	                </md-select>
+	                </md-select>-->
+	                <select class="form-control" placeholder="Эту встречу увидят..." ng-model="formData.visibility">
+					    <option value="Общие">Все</option>
+					    <option value="Друзья" ng-selected="selected" default>Друзья</option>
+					 </select>
 	            </div>
 	            <div ng-if="formData.visibility === 'Друзья' ">
 	                <div ng-dropdown-multiselect="" options="friendUsers" selected-model="invitedUsers" extra-settings="invitedUsersSettings" translation-texts="invitedUsersText" class="inviteDropdown"></div>
@@ -67,15 +59,16 @@
             </section>
           
 
-	       
-	        <section layout="row" layout-align="center center" class="buttons">
-	        	<div>
-		            <md-button class="md-raised" ng-click="cancel()">Отмена</md-button>
-	            </div>
-	            <div>
-		            <md-button class="md-raised md-primary" ng-click="createMeeting();ok()">Создать</md-button>
-	            </div>
-	        </section>
 	    </div><!-- end form -->
-	</md-content>
-</md-dialog>
+</div> <!-- end body -->
+
+<div class="modal-footer">
+	<section layout="row" layout-align="center center" class="buttons">
+		<div>
+	        <md-button class="md-raised" ng-click="cancel()">Отмена</md-button>
+	    </div>
+	    <div>
+	        <md-button class="md-raised md-primary" ng-click="createMeeting();ok()">Создать</md-button>
+	    </div>
+    </section>
+</div>

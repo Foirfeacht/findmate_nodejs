@@ -145,6 +145,10 @@ map {
    ========== DIALOG ==========
    ============================= */
 
+.modal-dialog {
+	width: 80%;
+}
+
 md-dialog {
 	width: 80%;
 }
@@ -320,8 +324,9 @@ md-option {
     right: 50px;
 }
 
-.create-button a {
+.create-button i {
 	color: #fff;
+	font-size: 1.2em;
 }
 
 
