@@ -6,7 +6,8 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
 							 $http,
 							 mapService, 
 							 $mdSidenav, 
-							 $mdDialog) {
+							 $mdDialog,
+                             $modal) {
 
     // init user image
 	$scope.getUserImage = function(){

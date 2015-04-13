@@ -4,6 +4,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
                               mapService, 
                               dialogService,
                               $mdDialog,
+                              $modalInstance,
                               moment) {
 
 
@@ -178,6 +179,10 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', '$mdDi
 		 formatYear: 'yy',
 		 startingDay: 1
 	 };
+
+   $scope.ok = function () {
+    $modalInstance.close($scope.selected.item);
+  };
 
 	 $scope.format = 'yyyy/MM/dd';
 
