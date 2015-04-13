@@ -146,7 +146,7 @@
 	                    <div layout="row"><strong>Категория:&nbsp; </strong> {{ meeting.category }}</div>
 	                    <div layout="row"><strong>Создатель:&nbsp; </strong><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден: &nbsp;</strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
 
 	                    <div layout="row"><strong>Создано: &nbsp;</strong> {{meeting.created}}</div>
 	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: &nbsp;</strong> {{meeting.updated}}</div>
@@ -200,7 +200,7 @@
 	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
 	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: </strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
 	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
 	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
@@ -252,7 +252,7 @@
 	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
 	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: </strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
 	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
 	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
@@ -300,7 +300,7 @@
 	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
 	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: </strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
 	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
 	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
@@ -347,7 +347,7 @@
 	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
 	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: </strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
 	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
 	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
@@ -389,7 +389,7 @@
 	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
 	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
 	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: </strong> {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}</div>
+	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
 	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
 	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
