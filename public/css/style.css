@@ -320,6 +320,8 @@ md-option {
 	border: 1px thin #fff;
 	border-radius: 50%;
 	margin-right: 8px;
+	height: 56px;
+	width: 56px;
 }
 
 .meeting .join-button,

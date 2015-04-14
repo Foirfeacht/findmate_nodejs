@@ -86,8 +86,8 @@ module.exports = function(app, passport) {
 		// handle the callback after facebook has authorized the user
 		app.get('/connect/facebook/callback',
 			passport.authorize('facebook', {
-				successRedirect : '/map',
-				failureRedirect : '/'
+				successRedirect : '/profile',
+				failureRedirect : '/profile'
 			}));
 
 		// vk -------------------------------
@@ -110,8 +110,8 @@ module.exports = function(app, passport) {
 		// handle the vk after facebook has authorized the user
 		app.get('/connect/vk/callback',
 			passport.authorize('vkontakte', {
-				successRedirect : '/map',
-				failureRedirect : '/'
+				successRedirect : '/profile',
+				failureRedirect : '/profile'
 			}));
 
 // =============================================================================

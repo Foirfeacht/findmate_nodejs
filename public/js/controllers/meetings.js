@@ -253,8 +253,8 @@ findMate.controller('meetingsController', ['$scope',
 
     $scope.showDialog = function(size){
         var modalInstance = $modal.open({
-          templateUrl: './public/partials/dialog.tmpl.ejs',
-          controller: 'DialogController',
+          templateUrl: './public/partials/editMeeting.tmpl.ejs',
+          controller: 'EditMeetingController',
           size: size
         });
         modalInstance.result.then(function(data) {
