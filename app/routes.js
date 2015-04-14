@@ -248,18 +248,19 @@ module.exports = function(app, passport) {
 
 
 	// store user in meetings.joined
-	app.put('/join/meetings/:id', isLoggedIn, function (req, res){
+	app.put('/join/meetings/:meetingId', isLoggedIn, function (req, res){
 		var user = req.user;
+		var selection = {_id: req.meeting._id};
 		var update = { $addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: req.user} };
 
-		Meeting.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, meeting) {
+		Meeting.update(selection, update, {upsert: true}, function (err, meeting) {
 			if (!err) {
 				console.log("meeting joined");
-				/*Meeting.find(function(err, meetings) {
+				Meeting.find(function(err, meetings) {
 					if (err)
 						res.send(err)
 					res.json(meetings);
-				});*/
+				});
 			} else {
 				if(err.name == 'ValidationError') {
 					res.statusCode = 400;
