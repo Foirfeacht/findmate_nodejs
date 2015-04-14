@@ -61,8 +61,7 @@ module.exports = function(passport) {
                             user.facebook.token = token;
                             user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                             user.facebook.email = (profile.emails[0].value || '').toLowerCase();
-
-                            //user.facebook.image = 'https://graph.facebook.com/' + user.facebook.id + '/picture?height=350&width=250'; 
+                            user.facebook.image = 'https://graph.facebook.com/' + user.facebook.id + '/picture?height=350&width=250'; 
 
                             user.save(function(err) {
                                 if (err)
@@ -81,6 +80,7 @@ module.exports = function(passport) {
                         newUser.facebook.token = token;
                         newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                         newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
+                        newUser.facebook.image = 'https://graph.facebook.com/' + newUser.facebook.id + '/picture?height=350&width=250'; 
                         newUser.email          = (profile.emails[0].value || '').toLowerCase();
                         newUser.name           = profile.name.givenName + ' ' + profile.name.familyName;
                         newUser.firstName      = profile.name.givenName;
@@ -104,6 +104,7 @@ module.exports = function(passport) {
                 user.facebook.token = token;
                 user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                 user.facebook.email = (profile.emails[0].value || '').toLowerCase();
+                user.facebook.image = 'https://graph.facebook.com/' + user.facebook.id + '/picture?height=350&width=250';
                 
                 user.save(function(err) {
                     if (err)
@@ -172,7 +173,6 @@ module.exports = function(passport) {
                         newUser.secondName      = profile.name.familyName;
                         newUser.email           = params.email.toLowerCase();
                         newUser.name            = profile.displayName;
-
                         newUser.image           = 'vkontakte';
     
                         newUser.save(function(err) {

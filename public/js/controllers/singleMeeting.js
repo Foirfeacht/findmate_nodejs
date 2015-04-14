@@ -9,21 +9,10 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
                              $mdSidenav,
                              $modal,
                              editService){
-                        
-    $scope.getUserImage = function(){
-        var user = $scope.logged_in_user;
-        if ($scope.logged_in_user.image = 'facebook'){
-                $scope.currentUserPic = 'https://graph.facebook.com/' + user.facebook.id + '/picture?height=350&width=250';
-        };
-        if ($scope.logged_in_user.image = 'vkontakte'){
-                $scope.currentUserPic = user.vkontakte.image;
-        };
-    };
 
     //init logged in user
     $scope.$watch('logged_in_user', function () {
         $scope.loadFriends();
-        $scope.getUserImage();
     });
 
     $scope.$watch('currentMeeting', function () {

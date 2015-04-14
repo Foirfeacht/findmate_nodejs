@@ -18,7 +18,7 @@
                 <div class="profile-block">
 
                     <div class="image-wrapper">
-                        <img src="{{currentUserPic}}" alt="{{logged_in_user.name}}">
+                        <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}">
                     </div>
                     <a href="/profile" class="profile-name"> {{logged_in_user.name}} </a>
                 </div>
@@ -155,14 +155,14 @@
                         <h6>Приглашенные</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                                <img src="{{user.image}}" alt="{{user.name }}">
                             </div>
                         </div>
 
                         <h6>Участники</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                                <img src="{{user.image}}" alt="{{user.name }}">
                             </div>
                         </div>
 
@@ -207,14 +207,14 @@
                         <h6>Приглашенные</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                            	<img src="{{user.image}}" alt="{{user.name }}">
                             </div>
                         </div>
 
                         <h6>Участники</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                               <img src="{{user.image}}" alt="{{user.name }}">
                             </div>
                         </div>
 	                    <div layout="row">
@@ -259,14 +259,14 @@
                         <h6>Приглашенные</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                                <img src="{{user.image}}" alt="{{user.name }}">
                             </div>
                         </div>
 
                         <h6>Участники</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                                <img src="{{user.image}}" alt="{{user.name }}">
                             </div>
                         </div>
 	                    <div layout="row">
@@ -307,14 +307,14 @@
                         <h6>Приглашенные</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                                <img src="{{user.image}}" alt="{{user.name }}">
                             </div>
                         </div>
 
                         <h6>Участники</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                                <img src="{{user.image}}" alt="{{user.name }}">
                             </div>
                         </div>
 	                    <div layout="row">
@@ -355,14 +355,14 @@
                         <h6>Приглашенные</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                                <img src="{{user.image}}" alt="{{user.name }}">
                             </div>
                         </div>
 
                         <h6>Участники</h6>
                         <div layout="row" class="userlist">
                             <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                                <img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                                <img src="{{user.image}}" alt="{{user.name }}">
                             </div>
                         </div>
                     </div>
@@ -396,14 +396,14 @@
 	                    <h6>Приглашенные</h6>
 	                    <div layout="row" class="userlist">
                     		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    			<img src="{{user.image}}" alt="{{user.name }}">
                     		</div>
 	                    </div>
 
 	                    <h6>Участники</h6>
 	                    <div layout="row" class="userlist">
                     		<div ng-repeat="user in meeting.participants | limitTo: 5">
-                    			<img src="https://graph.facebook.com/{{user.facebook.id}}/picture?height=50&width=50" alt="{{user.facebook.name }}">
+                    			<img src="{{user.image}}" alt="{{user.name }}">
                     		</div>
 	                    </div>
 	                    <div layout="column">

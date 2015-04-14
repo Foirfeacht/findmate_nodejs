@@ -129,7 +129,7 @@
                                     {{meeting.ownerName}}
                                 </td>
                                 <td>
-                                     {{ meeting.startDate | date: 'yyyy-MM-dd'}}  {{ meeting.startTime | date:'HH:mm'}}
+                                     {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}
                                 </td>
                                 <td>
                                     <md-button type="submit" class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)">Удалить</md-button>
@@ -165,12 +165,6 @@
 
           </table>
          </div>
-
-            
-
-          <div id="single-meeting">
-          	<div ng-view></div>
-          </div>
     <script src="../../bower_components/angular/angular.js"></script>
     <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
