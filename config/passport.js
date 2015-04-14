@@ -85,7 +85,7 @@ module.exports = function(passport) {
                         newUser.name           = profile.name.givenName + ' ' + profile.name.familyName;
                         newUser.firstName      = profile.name.givenName;
                         newUser.secondName     = profile.name.familyName;
-                        newUser.image          = 'facebook';
+                        newUser.image          = 'https://graph.facebook.com/' + newUser.facebook.id + '/picture?height=350&width=250';
 
                         newUser.save(function(err) {
                             if (err)
@@ -173,7 +173,7 @@ module.exports = function(passport) {
                         newUser.secondName      = profile.name.familyName;
                         newUser.email           = params.email.toLowerCase();
                         newUser.name            = profile.displayName;
-                        newUser.image           = 'vkontakte';
+                        newUser.image           = profile.photos[0].value;;
     
                         newUser.save(function(err) {
                             if (err)
