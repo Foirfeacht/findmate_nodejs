@@ -58,7 +58,7 @@ findMate.controller('meetingsController', ['$scope',
     $scope.refresh();
 
     $scope.loopMeetings = function(meetings){
-		var meetings = meetings;
+		    var meetings = meetings;
         var dateNow = new Date().toJSON();
 
         // loop through data
@@ -77,7 +77,6 @@ findMate.controller('meetingsController', ['$scope',
 
              //format dates
              meeting.startDate = new Date(meeting.startDate);
-             meeting.startTime = new Date(meeting.startTime);
              if (meeting.updated_at !== null){
              	meeting.updated_at = new Date(meeting.updated_at);
              }
@@ -172,7 +171,7 @@ findMate.controller('meetingsController', ['$scope',
 			.success(function (data) {
 				$scope.meetings = data;
 				console.log(data);
-				//$scope.loopMeetings(data);
+				$scope.loopMeetings(data);
 			})
 			.error(function (data) {
 				console.log('Error: ' + data);
@@ -188,7 +187,7 @@ findMate.controller('meetingsController', ['$scope',
 			.success(function (data) {
 				$scope.meetings = data;
 				console.log(data);
-				//$scope.loopMeetings(data);
+				$scope.loopMeetings(data);
 			})
 			.error(function (data) {
 				console.log('Error: ' + data);
