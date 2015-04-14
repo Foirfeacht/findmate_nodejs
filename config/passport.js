@@ -147,8 +147,8 @@ module.exports = function(passport) {
                             user.vkontakte.token = token;
                             user.vkontakte.name  = profile.displayName;
                             user.vkontakte.email = params.email.toLowerCase();
-                            user.vkontakte.image = params.photo_200;
-							//user.vkontakte.image = profile.photos[0].value;
+                            //user.vkontakte.image = params.photo_200;
+							user.vkontakte.image = profile.photos[0].value;
                             user.save(function(err) {
                                 if (err)
                                     return done(err);
@@ -166,10 +166,10 @@ module.exports = function(passport) {
                         newUser.vkontakte.token = token;
                         newUser.vkontakte.name  = profile.displayName;
                         newUser.vkontakte.email = params.email.toLowerCase();
-						newUser.vkontakte.image = params.photo_200;
-						//newUser.vkontakte.image = profile.photos[0].value;
-                        newUser.firstName       = profile.name.firstName;
-                        newUser.secondName      = profile.name.secondName;
+						//newUser.vkontakte.image = params.photo_200;
+						newUser.vkontakte.image = profile.photos[0].value;
+                        newUser.firstName       = profile.name.givenName;
+                        newUser.secondName      = profile.name.familyName;
                         newUser.email           = params.email.toLowerCase();
                         newUser.name            = profile.displayName;
 
@@ -192,8 +192,8 @@ module.exports = function(passport) {
                 user.vkontakte.token = token;
                 user.vkontakte.name  = profile.displayName;
                 user.vkontakte.email = params.email.toLowerCase();
-				user.vkontakte.image = params.photo_200;
-				//user.vkontakte.image = profile.photos[0].value;
+				//user.vkontakte.image = params.photo_200;
+				user.vkontakte.image = profile.photos[0].value;
 
 
                 user.save(function(err) {
