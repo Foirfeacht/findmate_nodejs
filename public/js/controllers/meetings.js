@@ -172,7 +172,7 @@ findMate.controller('meetingsController', ['$scope',
 			.success(function (data) {
 				$scope.meetings = data;
 				console.log(data);
-				$scope.loopMeetings(data);
+				//$scope.loopMeetings(data);
 			})
 			.error(function (data) {
 				console.log('Error: ' + data);
@@ -188,7 +188,7 @@ findMate.controller('meetingsController', ['$scope',
 			.success(function (data) {
 				$scope.meetings = data;
 				console.log(data);
-				$scope.loopMeetings(data);
+				//$scope.loopMeetings(data);
 			})
 			.error(function (data) {
 				console.log('Error: ' + data);
