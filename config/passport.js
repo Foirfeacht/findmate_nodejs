@@ -173,7 +173,7 @@ module.exports = function(passport) {
                         newUser.secondName      = profile.name.familyName;
                         newUser.email           = params.email.toLowerCase();
                         newUser.name            = profile.displayName;
-                        newUser.image           = profile.photos[0].value;;
+                        newUser.image           = profile.photos[0].value;
     
                         newUser.save(function(err) {
                             if (err)
