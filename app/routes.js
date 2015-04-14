@@ -249,7 +249,7 @@ module.exports = function(app, passport) {
 
 	// store user in meetings.joined
 	app.put('/join/meetings/:id', isLoggedIn, function (req, res){
-		var user = req.user;
+		var user = req.reqUser;
 		var update = { $addToSet: {joinedUsers: user}, $pull: {invitedUsers: user} };
 
 		Meeting.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, meeting) {
