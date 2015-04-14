@@ -20,10 +20,13 @@
 				    <md-option value="Спорт" ng-selected="selected" default>Спорт</md-option>
 				    <md-option value="Развлечения">Развлечения</md-option>
 				</md-select>-->
-				<select class="form-control" placeholder="Выберите категорию" ng-model="formData.category">
-				    <option value="Спорт">Спорт</option>
-				    <option value="Развлечения" ng-selected="selected" default>Развлечения</option>
-				 </select>
+                <div class="dropdown-wrap">
+                    <span class="caret"></span>
+                    <select class="form-control" placeholder="Выберите категорию" ng-model="formData.category">
+                        <option value="Спорт">Спорт</option>
+                        <option value="Развлечения" ng-selected="selected" default>Развлечения</option>
+                     </select>
+                 </div>
 	        </section>
 
 	      	<div class="date-header">Время и день</div>	
@@ -44,10 +47,15 @@
 	                    <md-option value="Общие" ng-selected="selected">Все</md-option>
 	                    <md-option value="Друзья">Друзья</md-option>
 	                </md-select>-->
-	                <select class="form-control" placeholder="Эту встречу увидят..." ng-model="formData.visibility">
-					    <option value="Общие">Все</option>
-					    <option value="Друзья" ng-selected="selected" default>Друзья</option>
-					 </select>
+
+                    <div class="dropdown-wrap">
+                        <span class="caret"></span>
+                        <select class="form-control" placeholder="Эту встречу увидят..." ng-model="formData.visibility">
+                            <option value="Общие">Все</option>
+                            <option value="Друзья" ng-selected="selected" default>Друзья</option>
+                        </select>
+                    </div>
+
 	            </div>
 	            <div ng-if="formData.visibility === 'Друзья' ">
 	                <div ng-dropdown-multiselect="" options="friendUsers" selected-model="invitedUsers" extra-settings="invitedUsersSettings" translation-texts="invitedUsersText" class="inviteDropdown"></div>

@@ -19,6 +19,7 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
 		};
 	};
 
+
 	$scope.$watch('logged_in_user', function () {
 		$scope.getUserImage();
 	});
