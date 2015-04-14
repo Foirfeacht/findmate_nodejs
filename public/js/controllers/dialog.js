@@ -145,24 +145,19 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
               })
     };
 
-	 //timepicker
-
-	 $scope.hstep = 1;
-	 $scope.mstep = 15;
-
 	 //datepicker
 	 $scope.formData.startTime = new Date();
-	 $scope.minDate = new Date();
-	 
 
 	 $scope.dateOptions = {
 		 startingDay: 1,
-     showWeeks: false
+     showWeeks: false,
 	 };
 
+   $scope.hstep = 1;
+   $scope.mstep = 15;
+   $scope.minDate = new Date();
    $scope.showMeridian = false;
-
-	 $scope.format = 'yyyy/MM/dd';
+   $scope.format = 'yyyy/MM/dd';
 
    $scope.ok = function () {
     $modalInstance.close();
