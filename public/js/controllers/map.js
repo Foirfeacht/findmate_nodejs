@@ -13,7 +13,8 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
 		var user = $scope.logged_in_user;
 		if ($scope.logged_in_user.image === 'facebook'){
 				$scope.currentUserPic = 'https://graph.facebook.com/' + user.facebook.id + '/picture?height=350&width=250';
-		} else ($scope.logged_in_user.image === 'vkontakte'){
+		} 
+		if ($scope.logged_in_user.image === 'vkontakte'){
 				$scope.currentUserPic = user.vkontakte.image;
 		};
 	};
