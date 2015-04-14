@@ -93,11 +93,11 @@ module.exports = function(app, passport) {
 		// vk -------------------------------
 
 		// send to vk to do the authentication
-		app.get('/auth/vk', passport.authenticate('vkontakte', { scope : ['friends, photos, email'] }));
+		app.get('/auth/vk', passport.authenticate('vkontakte', { scope : ['friends, photos, email, photo_200'] }));
 
 		// handle the callback after vk has authenticated the user
 		app.get('/auth/vk/callback',
-			passport.authenticate('vkontakte', { scope: ['friends, photos, email'],
+			passport.authenticate('vkontakte', { scope: ['friends, photos, email, photo_200'],
 				successRedirect : '/map',
 				failureRedirect : '/'
 			}));
