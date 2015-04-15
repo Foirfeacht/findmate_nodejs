@@ -30,9 +30,6 @@ require('./config/passport')(passport); // pass passport for configuration
 app.use('/public', express.static(__dirname + '/public'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(cors());
-app.configure(function() {
-	app.set('jsonp callback', true);
-});
 
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
