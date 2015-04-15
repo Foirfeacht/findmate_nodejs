@@ -10,7 +10,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
    $scope.loadFriends = function() {
      var user = mapService.user;
      var fbFriendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
-	 var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id='.user.vkontakte.id;
+	 var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id='+ user.vkontakte.id;
 		 if(user.facebook.id){
 			 $http.get(fbFriendsRequest)
 				 .success(function (data) {
