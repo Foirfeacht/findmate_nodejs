@@ -3,6 +3,7 @@
 // set up ======================================================================
 // get all the tools we need
 var express  = require('express');
+var cors     = require('cors'); //enable cross origin ajax requests
 var app      = express();
 var port     = process.env.PORT || 8080;
 var WORKERS  = process.env.WEB_CONCURRENCY || 1;
@@ -28,6 +29,7 @@ require('./config/passport')(passport); // pass passport for configuration
 // setting static components
 app.use('/public', express.static(__dirname + '/public'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use(cors());
 
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
