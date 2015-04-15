@@ -48,16 +48,17 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 				 var users = $scope.users;
 				 var userLength = users.length;
 				 var friendsLength = friends.length;
-				 for (var i = 0; i<userLength; i++){
-				    var vkUser = users[i];
-					if(vkUser.vkontakte){
-					var id = vkUser.vkontakte.id;
-					for (var u = 0; u<friendsLength; u++){
-				 		var friend = [u];
-				 		if (id === friend){
-				 			$scope.friendUsers.push(vkUser);
-				 		};
-				 	};
+				 for (var i = 0; i<userLength; i++) {
+					 var vkUser = users[i];
+					 if (vkUser.vkontakte) {
+						 var id = vkUser.vkontakte.id;
+						 for (var u = 0; u < friendsLength; u++) {
+							 var friend = [u];
+							 if (id === friend) {
+								 $scope.friendUsers.push(vkUser);
+							 };
+						 };
+					 };
 				 };
 			})
 			.error(function (data) {
