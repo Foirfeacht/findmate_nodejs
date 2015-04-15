@@ -38,10 +38,8 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                 description: meeting.description,
                 description: meeting.description,
                 startDate: new Date(meeting.startDate),
-                startTime: new Date(meeting.startTime),
                 updated_at: new Date(),
-                visibility: meeting.visibility,
-                id: meeting._id
+                visibility: meeting.visibility
              }
 
         })
