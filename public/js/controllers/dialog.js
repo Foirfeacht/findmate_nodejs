@@ -7,11 +7,9 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
                               moment) {
 
 
-   $scope.loadFriends = function() {
+   $scope.loadFbFriends = function() {
      var user = mapService.user;
      var fbFriendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
-	 var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id='+ user.vkontakte.id;
-		 if(user.facebook){
 			 $http.get(fbFriendsRequest)
 				 .success(function (data) {
 					 $scope.friends = data.data;
@@ -34,35 +32,36 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 				 .error(function (data) {
 					 console.log('Error: ' + data);
 				 });
-		 };
-	   	if(user.vkontakte){
-			$http.get(vkfriendsRequest)
-				.success(function (data) {
-					console.log(data);
-					/*$scope.friends = data.data;
-					var users = $scope.users;
-					var friends = $scope.friends;
-					var userLength = users.length;
-					var friendsLength = friends.length;
-					for (var i = 0; i<userLength; i++){
-						var user = users[i];
-						var fbId = user.facebook.id;
-						//var vkId = user.vkontakte.id;
-						for (var u = 0; u<friendsLength; u++){
-							var friend = friends[u];
-							if (fbId === friend.id){
-								$scope.friendUsers.push(user);
-							};
-						};
-					};*/
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
-		}
-
 
    };
+
+	$scope.loadVkFriends = function() {
+		var user = mapService.user;
+		var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id=' + user.vkontakte.id;
+		$http.get(vkfriendsRequest)
+			.success(function (data) {
+				console.log(data);
+				/*$scope.friends = data.data;
+				 var users = $scope.users;
+				 var friends = $scope.friends;
+				 var userLength = users.length;
+				 var friendsLength = friends.length;
+				 for (var i = 0; i<userLength; i++){
+				 var user = users[i];
+				 var fbId = user.facebook.id;
+				 //var vkId = user.vkontakte.id;
+				 for (var u = 0; u<friendsLength; u++){
+				 var friend = friends[u];
+				 if (fbId === friend.id){
+				 $scope.friendUsers.push(user);
+				 };
+				 };
+				 };*/
+			})
+			.error(function (data) {
+				console.log('Error: ' + data);
+			});
+	};
 
   // deal with users service
   $scope.getUsers = function(){
@@ -70,7 +69,10 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
     .success(function(data) {
       $scope.users = data;
       console.log(data);
-       $scope.loadFriends($scope.users);
+       $scope.loadFbFriends();
+	   $scope.loadVkFriends();
+			console.log($scope.friendUsers);
+
     })
     .error(function (data) {
       console.log('Error: ' + data);
