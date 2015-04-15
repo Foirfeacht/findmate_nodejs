@@ -9,29 +9,59 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 
    $scope.loadFriends = function() {
      var user = mapService.user;
-     var friendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
-     $http.get(friendsRequest)
-       .success(function (data) {
-         $scope.friends = data.data;
-         var users = $scope.users;
-         var friends = $scope.friends;
-         var userLength = users.length;
-         var friendsLength = friends.length;
-         for (var i = 0; i<userLength; i++){
-           var user = users[i];
-           var fbId = user.facebook.id;
-		   var vkId = user.vkontakte.id;
-           for (var u = 0; u<friendsLength; u++){
-             var friend = friends[u];
-             if (fbId === friend.id){
-               $scope.friendUsers.push(user);
-             }
-           }
-         }
-       })
-       .error(function (data) {
-         console.log('Error: ' + data);
-       });
+     var fbFriendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
+	 var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id='.user.vkontakte.id;
+		 if(user.facebook.id){
+			 $http.get(fbFriendsRequest)
+				 .success(function (data) {
+					 $scope.friends = data.data;
+					 var users = $scope.users;
+					 var friends = $scope.friends;
+					 var userLength = users.length;
+					 var friendsLength = friends.length;
+					 for (var i = 0; i<userLength; i++){
+						 var user = users[i];
+						 var fbId = user.facebook.id;
+						 //var vkId = user.vkontakte.id;
+						 for (var u = 0; u<friendsLength; u++){
+							 var friend = friends[u];
+							 if (fbId === friend.id){
+								 $scope.friendUsers.push(user);
+							 };
+						 };
+					 };
+				 })
+				 .error(function (data) {
+					 console.log('Error: ' + data);
+				 });
+		 };
+	   	if(user.vkontakte.id){
+			$http.get(vkfriendsRequest)
+				.success(function (data) {
+					console.log(data);
+					/*$scope.friends = data.data;
+					var users = $scope.users;
+					var friends = $scope.friends;
+					var userLength = users.length;
+					var friendsLength = friends.length;
+					for (var i = 0; i<userLength; i++){
+						var user = users[i];
+						var fbId = user.facebook.id;
+						//var vkId = user.vkontakte.id;
+						for (var u = 0; u<friendsLength; u++){
+							var friend = friends[u];
+							if (fbId === friend.id){
+								$scope.friendUsers.push(user);
+							};
+						};
+					};*/
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		}
+
+
    };
 
   // deal with users service
