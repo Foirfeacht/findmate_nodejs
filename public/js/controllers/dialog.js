@@ -23,11 +23,10 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 						 if(fbUser.facebook){
 							 console.log(fbUser);
 							 var id = fbUser.facebook.id;
-							 //var vkId = user.vkontakte.id;
 							 for (var u = 0; u<friendsLength; u++){
 								 var friend = friends[u];
 								 if (id === friend.id){
-									 $scope.friendUsers.push(user);
+									 $scope.friendUsers.push(fbUser);
 								 };
 							 };
 						 };
@@ -50,12 +49,13 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 				 var userLength = users.length;
 				 var friendsLength = friends.length;
 				 for (var i = 0; i<userLength; i++){
-				    var user = users[i];
-					var id = user.vkontakte.id;
+				    var vkUser = users[i];
+					if(vkUser.vkontakte){
+					var id = vkUser.vkontakte.id;
 					for (var u = 0; u<friendsLength; u++){
 				 		var friend = [u];
 				 		if (id === friend){
-				 			$scope.friendUsers.push(user);
+				 			$scope.friendUsers.push(vkUser);
 				 		};
 				 	};
 				 };
