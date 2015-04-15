@@ -11,7 +11,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
      var user = mapService.user;
      var fbFriendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
 	 var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id='+ user.vkontakte.id;
-		 if(user.facebook.id){
+		 if(user.facebook){
 			 $http.get(fbFriendsRequest)
 				 .success(function (data) {
 					 $scope.friends = data.data;
@@ -20,8 +20,8 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 					 var userLength = users.length;
 					 var friendsLength = friends.length;
 					 for (var i = 0; i<userLength; i++){
-						 var user = users[i];
-						 var fbId = user.facebook.id;
+						 var fbUser = users[i];
+						 var fbId = fbUser.facebook.id;
 						 //var vkId = user.vkontakte.id;
 						 for (var u = 0; u<friendsLength; u++){
 							 var friend = friends[u];
@@ -35,7 +35,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 					 console.log('Error: ' + data);
 				 });
 		 };
-	   	if(user.vkontakte.id){
+	   	if(user.vkontakte){
 			$http.get(vkfriendsRequest)
 				.success(function (data) {
 					console.log(data);
