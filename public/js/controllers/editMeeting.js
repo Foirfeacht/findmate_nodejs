@@ -10,6 +10,10 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
     $scope.meetingId = editService.meetingId;
     $scope.logged_in_user = editService.user;
 
+						 $scope.$watch('editService.user', function () {
+							 $scope.getUsers();
+						 });
+
 
 
     // init necessary data
@@ -45,49 +49,79 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
             console.log('Error: ' + data);
         });
 
-  // deal with users
-  $http.get('../api/users')
-    .success(function(data) {
-      $scope.users = data;
-      console.log(data);
-      /*for (var i =0; i < data.length; i++){
-        var user = data[i];
-        user.username = user.facebook.name;
-      }*/
-    })
-    .error(function (data) {
-      console.log('Error: ' + data);
-    });
+						 $scope.loadFbFriends = function() {
+							 var user = mapService.user;
+							 var fbFriendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
+							 $http.get(fbFriendsRequest)
+								 .success(function (data) {
+									 var friends = data.data;
+									 var users = $scope.users;
+									 var userLength = users.length;
+									 var friendsLength = friends.length;
 
-    $scope.pushFriends = function(){
-      var users = $scope.users;
-      var friends = $scope.friends;
-      var userLength = users.length;
-      var friendsLength = friends.length;
-      for (var i = 0; i<userLength; i++){
-        var user = users[i];
-        var id = user.facebook.id;
-        for (var u = 0; u<friendsLength; u++){
-          var friend = friends[u];
-          if (id === friend.id){
-            $scope.friendUsers.push(user);
-          }
-        }
-      }
-    }
+									 for (var i = 0; i<userLength; i++){
+										 var fbUser = users[i];
+										 if(fbUser.facebook){
+											 var id = fbUser.facebook.id;
+											 for (var u = 0; u<friendsLength; u++){
+												 var friend = friends[u];
+												 if (id === friend.id){
+													 fbUser.friend = "Facebook"
+													 $scope.friendUsers.push(fbUser);
+												 };
+											 };
+										 };
+									 };
+								 })
+								 .error(function (data) {
+									 console.log('Error: ' + data);
+								 });
 
-    $scope.loadFriends = function(user){
-       var user = user
-       var friendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
-       $http.get(friendsRequest)
-         .success(function(data) {
-           $scope.friends = data.data;    
-           $scope.pushFriends();
-         })
-         .error(function (data) {
-           console.log('Error: ' + data);
-         });
-     };
+						 };
+
+						 $scope.loadVkFriends = function() {
+							 var user = mapService.user;
+							 var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id=' + user.vkontakte.id + '&callback=JSON_CALLBACK';
+							 $http.jsonp(vkfriendsRequest)
+								 .success(function (data) {
+									 var friends = data.response;
+									 var users = $scope.users;
+									 var userLength = users.length;
+									 var friendsLength = friends.length;
+
+									 for (var i = 0; i<userLength; i++) {
+										 var vkUser = users[i];
+										 if (vkUser.vkontakte && vkUser.vkontakte.id != user.vkontakte.id) {
+											 var id = vkUser.vkontakte.id;
+											 for (var u = 0; u < friendsLength; u++) {
+												 var friend = friends[u];
+												 if (friend == id) {
+													 vkUser.friend = "Вконтакте";
+													 $scope.friendUsers.push(vkUser);
+												 };
+											 };
+										 };
+									 };
+								 })
+								 .error(function (data) {
+									 console.log('Error: ' + data);
+								 });
+						 };
+
+						 // deal with users service
+						 $scope.getUsers = function(){
+							 $http.get('../api/users')
+								 .success(function(data) {
+									 $scope.users = data;
+									 console.log(data);
+									 $scope.loadFbFriends();
+									 $scope.loadVkFriends();
+
+								 })
+								 .error(function (data) {
+									 console.log('Error: ' + data);
+								 });
+						 }
 
      
 
@@ -144,8 +178,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
               .success(function (data) {
                   console.log($scope.formData);
                   $scope.meetings = data;
-                  console.log(data);                  
-                  $scope.ok();
+                  console.log(data);
               })
               .error(function(data) {
                   console.log('Error: ', data);
