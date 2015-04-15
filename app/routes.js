@@ -249,8 +249,8 @@ module.exports = function(app, passport) {
 
 	// store user in meetings.joined
 	app.put('/join/meetings/:id', isLoggedIn, function (req, res){
-		var user = req.reqUser;
-		var update = { $addToSet: {joinedUsers: user}, $pull: {invitedUsers: user} };
+		console.log(req.user);
+		var update = { $addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: req.user} };
 
 		Meeting.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, meeting) {
 			if (!err) {
@@ -300,6 +300,7 @@ module.exports = function(app, passport) {
     //update a meeting
     app.put('/api/meetings/:id', isLoggedIn, function (req, res){
     	var user = req.user;
+		var id = req.body.id;
     	var update = {
     		$set: {
     		    		title: req.body.title,
@@ -309,7 +310,10 @@ module.exports = function(app, passport) {
     			        startTime: req.body.startTime,
     			        updated_at: Date.now(),
     			        visibility: req.body.visibility
-    			    }
+    			    },
+			$push: {
+				invitedUsers: req.body.invitedUsers
+			}
     	};
 
 			Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {

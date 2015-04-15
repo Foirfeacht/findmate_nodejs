@@ -32,13 +32,9 @@
 	      	<div class="date-header">Время и день</div>	
 	      	
             <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
-               	
-
                 <div>
                 	<datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hstep" minute-step="mstep" ng-model="formData.startDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
                 </div>
-
-                
             </section>
 
 	        <section layout="row" class="visibility">
@@ -62,15 +58,16 @@
 	            </div>
                 
 	        </section>
-	        <section layout="row" >
-                
-            </section>
+
           
 
 	    </div><!-- end form -->
 </div> <!-- end body -->
 
 <div class="modal-footer">
+    <section layout="row" >
+        <input type="hidden" name="_method" value="put">
+    </section>
 	<section layout="row" layout-align="center center" class="buttons">
 		<div>
 	        <md-button class="md-raised" ng-click="cancel()">Отмена</md-button>

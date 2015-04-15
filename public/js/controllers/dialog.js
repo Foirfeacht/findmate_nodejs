@@ -19,10 +19,11 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
          var friendsLength = friends.length;
          for (var i = 0; i<userLength; i++){
            var user = users[i];
-           var id = user.facebook.id;
+           var fbId = user.facebook.id;
+		   var vkId = user.vkontakte.id;
            for (var u = 0; u<friendsLength; u++){
              var friend = friends[u];
-             if (id === friend.id){
+             if (fbId === friend.id){
                $scope.friendUsers.push(user);
              }
            }

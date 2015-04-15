@@ -24,42 +24,6 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 
             var meeting = $scope.meeting;
 
-             //remove duplicates, delete this part later
-             meeting.invitedUsers = _.uniq(meeting.invitedUsers,
-                function(item, key, a){
-                    return item.a;
-                });
-
-             meeting.participants = _.uniq(meeting.participants,
-                function(item, key, a){
-                    return item.a;
-                });
-
-             //invited filter
-             var invitedArray = meeting.invitedUsers;
-             var invitedArrayLength = invitedArray.length;
-             for (var u = 0; u< invitedArrayLength; u++){
-                var invitedUser = invitedArray[u];
-                if(invitedUser._id === $scope.logged_in_user._id){
-                    meeting.invited = true;
-                } else {
-                    meeting.invited = false;
-                }
-                console.log(meeting.invited);
-             }// end invited filter
-
-             // participants filter
-             var participantsArray = meeting.participants;
-             var participantsArrayLength = participantsArray.length;
-             for (var j = 0; j < participantsArrayLength; j++){
-                var joinedUser = participantsArray[j];
-                if(joinedUser._id === $scope.logged_in_user._id){
-                    meeting.joined = true;
-                } else {
-                    meeting.joined = false;
-                }
-                console.log(meeting.joined);
-             }// end participants filter
 
              //init formdata
 
@@ -86,10 +50,10 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
     .success(function(data) {
       $scope.users = data;
       console.log(data);
-      for (var i =0; i < data.length; i++){
+      /*for (var i =0; i < data.length; i++){
         var user = data[i];
         user.username = user.facebook.name;
-      }
+      }*/
     })
     .error(function (data) {
       console.log('Error: ' + data);
@@ -175,10 +139,10 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
   $scope.formData.invitedUsers = $scope.invitedUsers;
 
   $scope.saveMeeting = function(id) {
+	  console.log($scope.meetingId);
       $http.put('../api/meetings/' + id, $scope.formData)
               .success(function (data) {
                   console.log($scope.formData);
-                  $scope.formData = {}; // clear the form so our user is ready to enter another
                   $scope.meetings = data;
                   console.log(data);                  
                   $scope.ok();
