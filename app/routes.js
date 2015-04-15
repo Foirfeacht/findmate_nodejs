@@ -253,8 +253,8 @@ module.exports = function(app, passport) {
 
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 			if(err)
-				res send (err)
-			
+				res.send (err)
+
 			console.log("meeting joined");
 			Meeting.find(function(err, meetings) {
 				if (err)
