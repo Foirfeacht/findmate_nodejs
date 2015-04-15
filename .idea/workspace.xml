@@ -60,7 +60,7 @@
         <entry file="file://$PROJECT_DIR$/public/js/controllers/dialog.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.25869566" vertical-offset="510" max-vertical-offset="3587">
-              <caret line="44" column="104" selection-start-line="44" selection-start-column="104" selection-end-line="44" selection-end-column="104" />
+              <caret line="44" column="77" selection-start-line="44" selection-start-column="77" selection-end-line="44" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -942,7 +942,7 @@
     <entry file="file://$PROJECT_DIR$/public/js/controllers/dialog.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25869566" vertical-offset="510" max-vertical-offset="3587">
-          <caret line="44" column="104" selection-start-line="44" selection-start-column="104" selection-end-line="44" selection-end-column="104" />
+          <caret line="44" column="77" selection-start-line="44" selection-start-column="77" selection-end-line="44" selection-end-column="77" />
           <folding />
         </state>
       </provider>
