@@ -14,8 +14,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 				 .success(function (data) {
 					 var friends = data.data;
 					 var users = $scope.users;
-					 console.log(users);
-					 console.log(friends);
 					 var userLength = users.length;
 					 var friendsLength = friends.length;
 					 for (var i = 0; i<userLength; i++){
@@ -55,7 +53,9 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 						 for (var u = 0; u < friendsLength; u++) {
 							 var friend = [u];
 							 if (id === friend) {
+								 console.log(vkUser);
 								 $scope.friendUsers.push(vkUser);
+								 console.log($scope.friendUsers);
 							 };
 						 };
 					 };
@@ -74,7 +74,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
       console.log(data);
        $scope.loadFbFriends();
 	   $scope.loadVkFriends();
-			console.log($scope.friendUsers);
+	   console.log($scope.friendUsers);
 
     })
     .error(function (data) {
