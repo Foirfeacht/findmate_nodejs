@@ -48,6 +48,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 				 var friendsLength = friends.length;
 				 for (var i = 0; i<userLength; i++) {
 					 var vkUser = users[i];
+					 console.log(vkUser);
 					 if (vkUser.vkontakte) {
 						 var id = vkUser.vkontakte.id;
 						 for (var u = 0; u < friendsLength; u++) {
