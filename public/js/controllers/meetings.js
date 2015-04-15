@@ -165,16 +165,15 @@ findMate.controller('meetingsController', ['$scope',
     // join meeting
 
     $scope.joinMeeting = function(id){
-      var reqUser = $scope.logged_in_user;
-		$http.put('/join/meetings/' + id)
-			.success(function (data) {
-				$scope.meetings = data;
-				console.log(data);
-				$scope.loopMeetings(data);
-			})
-			.error(function (data) {
-				console.log('Error: ' + data);
-			});
+  		$http.put('/join/meetings/' + id)
+  			.success(function (data) {
+  				$scope.meetings = data;
+  				console.log(data);
+  				$scope.loopMeetings(data);
+  			})
+  			.error(function (data) {
+  				console.log('Error: ' + data);
+  			});
 
     };
 
