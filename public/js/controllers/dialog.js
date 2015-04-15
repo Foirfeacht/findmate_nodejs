@@ -45,7 +45,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 		var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id=' + user.vkontakte.id;
 		$http.jsonp(vkfriendsRequest)
 			.success(function (data) {
-				console.log(data);
+				console.log(data.response);
 				/*$scope.friends = data.data;
 				 var users = $scope.users;
 				 var friends = $scope.friends;
