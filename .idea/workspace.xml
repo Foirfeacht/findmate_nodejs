@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3a578cdc-ea4c-4e1c-862b-957bb4ee81a0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/dialog.js" afterPath="$PROJECT_DIR$/public/js/controllers/dialog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/dialog.tmpl.ejs" afterPath="$PROJECT_DIR$/public/partials/dialog.tmpl.ejs" />
     </list>
     <ignored path="findmate.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,10 +46,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dialog.tmpl.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dialog.tmpl.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/partials/dialog.tmpl.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6719637" vertical-offset="428" max-vertical-offset="1479">
+            <state vertical-scroll-proportion="-22.76923" vertical-offset="428" max-vertical-offset="1479">
               <caret line="60" column="218" selection-start-line="60" selection-start-column="218" selection-end-line="60" selection-end-column="218" />
               <folding />
             </state>
@@ -67,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dialog.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dialog.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/controllers/dialog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="3706">
-              <caret line="106" column="13" selection-start-line="106" selection-start-column="13" selection-end-line="106" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.776087" vertical-offset="901" max-vertical-offset="3655">
+              <caret line="95" column="26" selection-start-line="95" selection-start-column="26" selection-end-line="95" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -162,8 +161,8 @@
         <option value="$PROJECT_DIR$/config/database.js" />
         <option value="$PROJECT_DIR$/config/auth.js" />
         <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/public/js/controllers/dialog.js" />
         <option value="$PROJECT_DIR$/public/partials/dialog.tmpl.ejs" />
+        <option value="$PROJECT_DIR$/public/js/controllers/dialog.js" />
       </list>
     </option>
   </component>
@@ -866,22 +865,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/auth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/partials/editMeeting.tmpl.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.636364" vertical-offset="525" max-vertical-offset="1428">
@@ -916,14 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="117" max-vertical-offset="1037">
-          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/map.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-20.0" vertical-offset="1010" max-vertical-offset="1904">
@@ -932,18 +907,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/controllers/dialog.js">
+    <entry file="file://$PROJECT_DIR$/config/auth.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="969" max-vertical-offset="3706">
-          <caret line="106" column="13" selection-start-line="106" selection-start-column="13" selection-end-line="106" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="117" max-vertical-offset="1037">
+          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/partials/dialog.tmpl.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6719637" vertical-offset="428" max-vertical-offset="1479">
+        <state vertical-scroll-proportion="-22.76923" vertical-offset="428" max-vertical-offset="1479">
           <caret line="60" column="218" selection-start-line="60" selection-start-column="218" selection-end-line="60" selection-end-column="218" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/controllers/dialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.776087" vertical-offset="901" max-vertical-offset="3655">
+          <caret line="95" column="26" selection-start-line="95" selection-start-column="26" selection-end-line="95" selection-end-column="26" />
           <folding />
         </state>
       </provider>

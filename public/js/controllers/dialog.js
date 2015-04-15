@@ -42,7 +42,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 		var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id=' + user.vkontakte.id + '&callback=JSON_CALLBACK';
 		$http.jsonp(vkfriendsRequest)
 			.success(function (data) {
-				console.log(data.response);
 				var friends = data.response;
 				var users = $scope.users;
 				var userLength = users.length;
@@ -52,7 +51,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 					 var vkUser = users[i];
 					 if (vkUser.vkontakte && vkUser.vkontakte.id != user.vkontakte.id) {
 						 var id = vkUser.vkontakte.id;
-						 console.log(id);
 						 for (var u = 0; u < friendsLength; u++) {
 							 var friend = friends[u];
 							 if (friend == id) {
@@ -76,7 +74,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
       console.log(data);
        $scope.loadFbFriends();
 	   $scope.loadVkFriends();
-	   console.log($scope.friendUsers);
 
     })
     .error(function (data) {
@@ -96,7 +93,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
         scrollableHeight: '200px',
         scrollable: true,
         enableSearch: true,
-        displayProp: 'username',
+        displayProp: 'name',
         idProp: '_id',
         externalIdProp: '',
 		groupByTextProvider: function(groupValue) {
