@@ -314,16 +314,16 @@ module.exports = function(app, passport) {
     	};
 
 			Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
-	        if(!meeting) {
-	            res.statusCode = 404;
-	            return res.send({ error: 'Not found' });
-	        }
-	        console.log("meeting updated");
-			            Meeting.find(function(err, meetings) {
-			                if (err)
-			                    res.send(err)
-			                res.json(meetings);
-			            });
+		        if(!meeting) {
+		            res.statusCode = 404;
+		            return res.send({ error: 'Not found' });
+		        };
+		        console.log("meeting updated");
+	            Meeting.find(function(err, meetings) {
+	                if (err)
+	                    res.send(err)
+	                res.json(meetings);
+	            });
 	        });
 	});
 

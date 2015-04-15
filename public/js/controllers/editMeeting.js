@@ -48,7 +48,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
         });
 
 						 $scope.loadFbFriends = function() {
-							 var user = mapService.user;
+							 var user = editService.user;
 							 var fbFriendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
 							 $http.get(fbFriendsRequest)
 								 .success(function (data) {
@@ -78,7 +78,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 						 };
 
 						 $scope.loadVkFriends = function() {
-							 var user = mapService.user;
+							 var user = editService.user;
 							 var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id=' + user.vkontakte.id + '&callback=JSON_CALLBACK';
 							 $http.jsonp(vkfriendsRequest)
 								 .success(function (data) {
