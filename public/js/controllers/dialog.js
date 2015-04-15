@@ -16,6 +16,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 					 var users = $scope.users;
 					 var userLength = users.length;
 					 var friendsLength = friends.length;
+
 					 for (var i = 0; i<userLength; i++){
 						 var fbUser = users[i];
 						 if(fbUser.facebook){
@@ -23,6 +24,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 							 for (var u = 0; u<friendsLength; u++){
 								 var friend = friends[u];
 								 if (id === friend.id){
+									 fbUser.friend = "Facebook"
 									 $scope.friendUsers.push(fbUser);
 								 };
 							 };
@@ -42,10 +44,11 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 			.success(function (data) {
 				console.log(data.response);
 				var friends = data.response;
-				 var users = $scope.users;
-				 var userLength = users.length;
-				 var friendsLength = friends.length;
-				 for (var i = 0; i<userLength; i++) {
+				var users = $scope.users;
+				var userLength = users.length;
+				var friendsLength = friends.length;
+
+				for (var i = 0; i<userLength; i++) {
 					 var vkUser = users[i];
 					 if (vkUser.vkontakte && vkUser.vkontakte.id != user.vkontakte.id) {
 						 var id = vkUser.vkontakte.id;
@@ -53,9 +56,8 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 						 for (var u = 0; u < friendsLength; u++) {
 							 var friend = friends[u];
 							 if (friend == id) {
-								 console.log(vkUser);
+								 vkUser.friend = "Вконтакте";
 								 $scope.friendUsers.push(vkUser);
-								 console.log($scope.friendUsers);
 							 };
 						 };
 					 };
@@ -96,7 +98,14 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
         enableSearch: true,
         displayProp: 'username',
         idProp: '_id',
-        externalIdProp: ''
+        externalIdProp: '',
+		groupByTextProvider: function(groupValue) {
+			if (groupValue === 'Facebook') {
+				return 'Facebook';
+			} else {
+				return 'Вконтакте';
+			}
+		}
     };
     $scope.invitedUsersText = {
         buttonDefaultText: 'Пригласить друзей'
