@@ -83,7 +83,7 @@ findMate.controller('meetingsController', ['$scope',
              meeting.updated = moment(meeting.updated_at).fromNow();
              meeting.created = moment(meeting.created_at).fromNow();
 
-			meeting.invitedUsers = _.uniq(meeting.invitedUsers,
+		/*	meeting.invitedUsers = _.uniq(meeting.invitedUsers,
 				  function(item, key, a){
 				  return item.a;
 				  });
@@ -91,7 +91,9 @@ findMate.controller('meetingsController', ['$scope',
 			 meeting.joinedUsers = _.uniq(meeting.joinedUsers,
 			      function(item, key, a){
 				  return item.a;
-			  });
+			  });*/
+
+
 
  			var invitedArray = meeting.invitedUsers;
  			var invitedArrayLength = invitedArray.length;
