@@ -252,23 +252,15 @@ module.exports = function(app, passport) {
 		var update = { $addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: req.user} };
 
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
-			if (!err) {
-				console.log("meeting joined");
-				Meeting.find(function(err, meetings) {
-					if (err)
-						res.send(err)
-					res.json(meetings);
-				});
-			} else {
-				if(err.name == 'ValidationError') {
-					res.statusCode = 400;
-					res.send({ error: 'Validation error' });
-				} else {
-					res.statusCode = 500;
-					res.send({ error: 'Server error' });
-				}
-				console.log('Internal error(%d): %s',res.statusCode,err.message);
-			}
+			if(err)
+				res send (err)
+			
+			console.log("meeting joined");
+			Meeting.find(function(err, meetings) {
+				if (err)
+					res.send(err)
+				res.json(meetings);
+			});
 		});
 	});
 
