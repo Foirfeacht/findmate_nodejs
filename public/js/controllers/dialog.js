@@ -47,13 +47,12 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
 				 var friendsLength = friends.length;
 				 for (var i = 0; i<userLength; i++) {
 					 var vkUser = users[i];
-					 if (vkUser.vkontakte) {
+					 if (vkUser.vkontakte && vkUser.vkontakte.id != user.vkontakte.id) {
 						 var id = vkUser.vkontakte.id;
 						 console.log(id);
 						 for (var u = 0; u < friendsLength; u++) {
 							 var friend = friends[u];
-							 console.log(friend);
-							 if (friend === id && vkUser != user) {
+							 if (friend === id) {
 								 console.log(vkUser);
 								 $scope.friendUsers.push(vkUser);
 								 console.log($scope.friendUsers);
