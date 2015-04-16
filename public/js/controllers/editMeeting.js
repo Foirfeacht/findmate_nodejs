@@ -49,61 +49,67 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 
 						 $scope.loadFbFriends = function() {
 							 var user = editService.user;
-							 var fbFriendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
-							 $http.get(fbFriendsRequest)
-								 .success(function (data) {
-									 var friends = data.data;
-									 var users = $scope.users;
-									 var userLength = users.length;
-									 var friendsLength = friends.length;
+							 if(user.facebook){
+								 var fbFriendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
+								 $http.get(fbFriendsRequest)
+									 .success(function (data) {
+										 var friends = data.data;
+										 var users = $scope.users;
+										 var userLength = users.length;
+										 var friendsLength = friends.length;
 
-									 for (var i = 0; i<userLength; i++){
-										 var fbUser = users[i];
-										 if(fbUser.facebook){
-											 var id = fbUser.facebook.id;
-											 for (var u = 0; u<friendsLength; u++){
-												 var friend = friends[u];
-												 if (id === friend.id){
-													 fbUser.friend = "Facebook"
-													 $scope.friendUsers.push(fbUser);
+										 for (var i = 0; i<userLength; i++){
+											 var fbUser = users[i];
+											 if(fbUser.facebook){
+												 var id = fbUser.facebook.id;
+												 for (var u = 0; u<friendsLength; u++){
+													 var friend = friends[u];
+													 if (id === friend.id){
+														 fbUser.friend = "Facebook"
+														 $scope.friendUsers.push(fbUser);
+													 };
 												 };
 											 };
 										 };
-									 };
-								 })
-								 .error(function (data) {
-									 console.log('Error: ' + data);
-								 });
+									 })
+									 .error(function (data) {
+										 console.log('Error: ' + data);
+									 });
+							 }
+
 
 						 };
 
 						 $scope.loadVkFriends = function() {
 							 var user = editService.user;
-							 var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id=' + user.vkontakte.id + '&callback=JSON_CALLBACK';
-							 $http.jsonp(vkfriendsRequest)
-								 .success(function (data) {
-									 var friends = data.response;
-									 var users = $scope.users;
-									 var userLength = users.length;
-									 var friendsLength = friends.length;
+							 if(user.vkontakte){
+								 var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id=' + user.vkontakte.id + '&callback=JSON_CALLBACK';
+								 $http.jsonp(vkfriendsRequest)
+									 .success(function (data) {
+										 var friends = data.response;
+										 var users = $scope.users;
+										 var userLength = users.length;
+										 var friendsLength = friends.length;
 
-									 for (var i = 0; i<userLength; i++) {
-										 var vkUser = users[i];
-										 if (vkUser.vkontakte && vkUser.vkontakte.id != user.vkontakte.id) {
-											 var id = vkUser.vkontakte.id;
-											 for (var u = 0; u < friendsLength; u++) {
-												 var friend = friends[u];
-												 if (friend == id) {
-													 vkUser.friend = "Вконтакте";
-													 $scope.friendUsers.push(vkUser);
+										 for (var i = 0; i<userLength; i++) {
+											 var vkUser = users[i];
+											 if (vkUser.vkontakte && vkUser.vkontakte.id != user.vkontakte.id) {
+												 var id = vkUser.vkontakte.id;
+												 for (var u = 0; u < friendsLength; u++) {
+													 var friend = friends[u];
+													 if (friend == id) {
+														 vkUser.friend = "Вконтакте";
+														 $scope.friendUsers.push(vkUser);
+													 };
 												 };
 											 };
 										 };
-									 };
-								 })
-								 .error(function (data) {
-									 console.log('Error: ' + data);
-								 });
+									 })
+									 .error(function (data) {
+										 console.log('Error: ' + data);
+									 });
+							 }
+
 						 };
 
 						 // deal with users service

@@ -193,7 +193,7 @@
 
 	            
 	            
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" >
+	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" >
 	                    
 	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
