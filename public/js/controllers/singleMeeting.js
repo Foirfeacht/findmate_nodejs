@@ -17,56 +17,39 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 
     $scope.$watch('currentMeeting', function () {
         $scope.currentMeetingId = $scope.currentMeeting._id;
-        $scope.currentMeeting.startDate = new Date($scope.currentMeeting.startDate);
-         $scope.currentMeeting.startTime = new Date($scope.currentMeeting.startTime);
-         if ($scope.currentMeeting.updated_at !== null){
-            $scope.currentMeeting.updated_at = new Date($scope.currentMeeting.updated_at);
-         }
-         $scope.currentMeeting.updated = moment($scope.currentMeeting.updated_at).fromNow();
-         $scope.currentMeeting.created = moment($scope.currentMeeting.created_at).fromNow();
-         var dateNow = new Date().toJSON();           
 
-                 //remove duplicates, delete this part later
-                 $scope.currentMeeting.invitedUsers = _.uniq($scope.currentMeeting.invitedUsers,
-                    function(item, key, a){
-                        return item.a;
-                    });
+        $http.get('../api/meetings/' + $scope.currentMeetingId)
+         .success(function(data) {
+            $scope.meeting = data;
+            $scope.meeting.startDate = new Date($scope.meeting.startDate);
+            $scope.meeting.startTime = new Date($scope.meeting.startTime);
+            if ($scope.meeting.updated_at !== null){
+                $scope.meeting.updated_at = new Date($scope.meeting.updated_at);
+            };
+            $scope.meeting.updated = moment($scope.meeting.updated_at).fromNow();
+            $scope.meeting.created = moment($scope.meeting.created_at).fromNow();
+            console.log(data);
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });
+                
 
-                 $scope.currentMeeting.joinedUsers = _.uniq($scope.currentMeeting.joinedUsers,
-                    function(item, key, a){
-                        return item.a;
-                    });
-
-                 //invited filter
-                 var invitedArray = $scope.currentMeeting.invitedUsers;
-                 var invitedArrayLength = invitedArray.length;
-                 for (var u = 0; u< invitedArrayLength; u++){
-                    var invitedUser = invitedArray[u];
-                    if(invitedUser._id === $scope.logged_in_user._id){
-                        $scope.currentMeeting.invited = true;
-                    } else {
-                        $scope.currentMeeting.invited = false;
-                    }
-                    console.log($scope.currentMeeting.invited);
-                 }// end invited filter
-
-                 // participants filter
-                 var joinedArray = $scope.currentMeeting.joinedUsers;
-                 var joinedArrayLength = joinedArray.length;
-                 for (var j = 0; j < joinedArrayLength; j++){
-                    var joinedUser = joinedArray[j];
-                    if(joinedUser._id === $scope.logged_in_user._id){
-                        $scope.currentMeeting.joined = true;
-                    } else {
-                        $scope.currentMeeting.joined = false;
-                    }
-                    console.log($scope.currentMeeting.joined);
-                 }// end participants filter
     });
 
+    //button show filter
+    $scope.showButton = function(array) {
+      var id = $scope.logged_in_user._id;
+      var i, found, obj;
+      for (i = 0; i < array.length; ++i) {
+          obj = array[i];
+          if (obj._id == id) {
+              return true;
+          }
+      };
+      return false;
+    };
     
-    
-
     // join meeting
 
     $scope.joinMeeting = function(id){
@@ -74,18 +57,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
         $http.put('/join/meetings/' + id)
             .success(function (data) {
                 $scope.meetings = data;
-                var meetings = $scope.meetings;
                 console.log(data);
-                var meetingsLength = meetings.length;
-                 for(var i = 0; i < meetingsLength; i++) {
-                     var meeting = meetings[i];
-                     if (meeting._id === id){
-                        meeting.joined = true;
-                        console.log(meeting);
-                     }
-                     
-                 }
-
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -97,16 +69,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
         $http.put('/unjoin/meetings/' + id)
             .success(function (data) {
                 $scope.meetings = data;
-                var meetings = $scope.meetings;
                 console.log(data);
-                var meetingsLength = meetings.length;
-                 for(var i = 0; i < meetingsLength; i++) {
-                     var meeting = meetings[i];
-                     if (meeting._id === id){
-                        meeting.joined = false;
-                        console.log(meeting);
-                     }   
-                 }
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -141,16 +104,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
         $http.put('/decline/meetings/' + id)
             .success(function (data) {
                 $scope.meetings = data;
-                var meetings = $scope.meetings;
                 console.log(data);
-                var meetingsLength = meetings.length;
-                 for(var i = 0; i < meetingsLength; i++) {
-                     var meeting = meetings[i];
-                     if (meeting._id === id){
-                        meeting.invited = false;
-                        console.log(meeting);
-                     }     
-                 }
             })
             .error(function (data) {
                 console.log('Error: ' + data);

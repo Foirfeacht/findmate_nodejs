@@ -7,18 +7,18 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 
   // working with api
 
-    $scope.meetingId = editService.meetingId;
-    $scope.logged_in_user = editService.user;
+  $scope.meetingId = editService.meetingId;
+  $scope.logged_in_user = editService.user;
 
-						 $scope.$watch('editService.user', function () {
-							 $scope.getUsers();
-						 });
+	$scope.$watch('editService.user', function () {
+		 $scope.getUsers();
+	});
 
 
 
-    // init necessary data
+  // init necessary data
 
-    $scope.formData = {}
+  $scope.formData = {}
   
   //get single meeting
   $http.get('../api/meetings/' + $scope.meetingId)
