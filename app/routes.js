@@ -300,7 +300,7 @@ module.exports = function(app, passport) {
     			        updated_at: Date.now(),
     			        visibility: req.body.visibility
     			    },
-			$push: {
+			$addToSet: {
 				invitedUsers: req.body.invitedUsers
 			}
     	};
@@ -309,7 +309,10 @@ module.exports = function(app, passport) {
 		        if(!meeting) {
 		            res.statusCode = 404;
 		            return res.send({ error: 'Not found' });
-		        };
+		        }
+				if(err){
+					res.send(err)
+				}
 		        console.log("meeting updated");
 	            Meeting.find(function(err, meetings) {
 	                if (err)
