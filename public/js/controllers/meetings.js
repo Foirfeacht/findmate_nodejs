@@ -17,6 +17,8 @@ findMate.controller('meetingsController', ['$scope',
 	//init logged in user
 	$scope.$watch('logged_in_user', function () {
 		$scope.loadFriends();
+		console.log($scope.logged_in_user);
+		$scope.refresh();
 	});
 
 	//get users
@@ -55,7 +57,7 @@ findMate.controller('meetingsController', ['$scope',
     }
 
     // when landing on the page, get all events and show them
-    $scope.refresh();
+
 
     $scope.loopMeetings = function(meetings){
 		    var meetings = meetings;
@@ -83,6 +85,22 @@ findMate.controller('meetingsController', ['$scope',
              meeting.updated = moment(meeting.updated_at).fromNow();
              meeting.created = moment(meeting.created_at).fromNow();
 
+			 console.log(meeting.joinedUsers.indexOf($scope.logged_in_user));
+			 console.log(_.indexOf(meeting.joinedUsers, $scope.logged_in_user, 0));
+			 console.log(meeting.joinedUsers)
+
+		/*	meeting.invitedUsers = _.uniq(meeting.invitedUsers,
+				  function(item, key, a){
+				  return item.a;
+				  });
+
+			 meeting.joinedUsers = _.uniq(meeting.joinedUsers,
+			      function(item, key, a){
+				  return item.a;
+			  });*/
+
+/*
+
  			var invitedArray = meeting.invitedUsers;
  			var invitedArrayLength = invitedArray.length;
  			for (var u = 0; u< invitedArrayLength; u++){
@@ -92,7 +110,6 @@ findMate.controller('meetingsController', ['$scope',
  					} else {
  						meeting.invited = false;
  					};
-				console.log(meeting);
  			};// end invited filter
 
  			// joined filter
@@ -105,10 +122,20 @@ findMate.controller('meetingsController', ['$scope',
  					} else {
  						meeting.joined = false;
  					};
-					console.log(meeting);
- 				};// end joined filter
+ 				};// end joined filter */
          }; // end for loop
     };
+
+		 //ng if function
+		 $scope.showJoined = function (meeting) {
+			 var meeting = meeting;
+			 if (meeting.joinedUsers.indexOf($scope.logged_in_user) > -1){
+				 console.log(meeting.joinedUsers.indexOf($scope.logged_in_user))
+				 return true;
+			 } else {
+				 return false;
+			 };
+		 };
 
 
 

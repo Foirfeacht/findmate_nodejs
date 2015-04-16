@@ -139,7 +139,7 @@
 
 	            
 	            
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting._owner._id === logged_in_user._id">
+	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-if="meeting._owner._id === logged_in_user._id">
 	             
 	                    <div layout="row" class="meeting-title"><strong>Название:&nbsp; </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание:&nbsp; </strong> {{ meeting.description }}</div>
@@ -193,7 +193,7 @@
 
 	            
 	            
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" >
+	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" >
 	                    
 	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
@@ -220,8 +220,8 @@
 	                    <div layout="row">
 	                    	<md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
 	                        <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-if="meeting.invited">Отклонить приглашение</md-button>
-	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-if="!meeting.joined">Учавствовать</md-button>
-                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-if="meeting.joined">Не учавствовать</md-button>
+	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showJoined(meeting)">Учавствовать</md-button>
+                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="showJoined(meeting)">Не учавствовать</md-button>
 	                    </div>
 
 	                    <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
@@ -245,7 +245,7 @@
                 <h1 class="active-meetings">Приглашения</h1>
                 <div class="meetings-display row">
 
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | filter: {invited: true} | orderBy: startDate">
+	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | filter: {invited: true} | orderBy: 'startDate'">
 	                    
 	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
@@ -292,7 +292,7 @@
 	            <h1 class="active-meetings">Принятые приглашения</h1>
 	            <div class="meetings-display row">	            
 	            
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | filter: {joined: true} | orderBy: startDate">
+	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | filter: {joined: true} | orderBy: 'startDate'">
 
 	                 
 	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
@@ -340,7 +340,7 @@
                 <h1 class="active-meetings">Прошедшие</h1>
                 <div class="meetings-display row">
 
-                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="!meeting.active">
+                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-if="!meeting.active">
                     
                         <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
@@ -382,7 +382,7 @@
                 <h1 class="active-meetings">События друзей</h1>
                 <div class="meetings-display row" ng-repeat="friend in friends" ng-if="friends">
 
-                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: startDate" ng-if="meeting.ownerFacebook === friend.id">
+                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-if="meeting.ownerFacebook === friend.id">
     
                         <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>

@@ -1,7 +1,6 @@
-var mongoose = require('mongoose'); 
-//var User     = require('./user.js');
+var mongoose = require('mongoose');
 
-var Schema = mongoose.Schema; 
+var Schema = mongoose.Schema;
 
 var meetingsSchema = new Schema({
     title: {type: String, required: 'Заголовок не может быть пустым'},
@@ -21,7 +20,8 @@ var meetingsSchema = new Schema({
     position: String,
     location: String,
     marker: Schema.Types.Mixed,
-    visibility: {type: String, default: 'Общие'}
+    visibility: {type: String, default: 'Общие'},
+	messages: {type: Array, default: []}
 });
 
 module.exports = mongoose.model('Meeting', meetingsSchema);

@@ -227,7 +227,7 @@ module.exports = function(app, passport) {
 
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 			if (!err) {
-				console.log("meeting updated");
+				console.log("invite declined");
 				Meeting.find(function(err, meetings) {
 					if (err)
 						res.send(err)
@@ -300,7 +300,7 @@ module.exports = function(app, passport) {
     			        updated_at: Date.now(),
     			        visibility: req.body.visibility
     			    },
-			$push: {
+			$addToSet: {
 				invitedUsers: req.body.invitedUsers
 			}
     	};
@@ -309,7 +309,10 @@ module.exports = function(app, passport) {
 		        if(!meeting) {
 		            res.statusCode = 404;
 		            return res.send({ error: 'Not found' });
-		        };
+		        }
+				if(err){
+					res.send(err)
+				}
 		        console.log("meeting updated");
 	            Meeting.find(function(err, meetings) {
 	                if (err)
@@ -400,17 +403,20 @@ module.exports = function(app, passport) {
 				});
 	});
 
-/*
-    app.get('*', isLoggedIn, function(req, res){
-		res.render('index.ejs')
+	/*app.get('/views/partials/:name', isLoggedIn, function (req, res) {
+		var name = req.params.name;
+		res.render('views/partials/' + name, {
+			user : req.user
+		});
 	});
-*/
+
+    app.get('*', isLoggedIn, function(req, res){
+		user = req.user
+		res.render('main.ejs')
+	});*/
 };
 
-/*app.get('/partials/:name', isLoggedIn, function (req, res) {
-	var name = req.params.name;
-	res.render('partials/' + name);
-});
+/*
 */
 
 
