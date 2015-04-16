@@ -123,10 +123,10 @@ findMate.controller('meetingsController', ['$scope',
 		 //ng if function
 		 $scope.showJoined = function (meeting) {
 			 var meeting = meeting;
-			 if (meeting.joinedUsers.indexOf($scope.logged_in_user) > -1){
-				 return false;
-			 } else {
+			 if (meeting.joinedUsers.indexOf($scope.logged_in_user) === -1){
 				 return true;
+			 } else {
+				 return false;
 			 };
 		 };
 
