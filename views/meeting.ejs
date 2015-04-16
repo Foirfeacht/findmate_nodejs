@@ -88,6 +88,19 @@
                    
                 </div>
             </div>
+
+            <div layout="column" class="messages">
+                <div layout="column" class="message" ng-repeat="message in currentMeeting.messages">
+                    <div class="message-owner">{{ message.ownerName}}</div>
+                    <div class="message-content">{{ message.content}}</div>
+                </div>
+
+                <div class="alert alert-danger" role="alert" ng-if="!currentMeeting.messages.length">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only"></span>
+                    Сообщений пока нет
+                </div>
+            </div>
             
              <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>
 

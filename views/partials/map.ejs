@@ -1,32 +1,21 @@
-<div class="map-container">
-    <div id="map_canvas"></div>
-</div>
-       
-
-
-<div class="form">
-    <input type="text" class="form-control input-lg text-center" placeholder="Название встречи" ng-model="formData.title">
-    <input type="text" class="form-control input-lg text-center" placeholder="Описание" ng-model="formData.description">
-     <div class="datetime-pickers_wrapper">
-        <div class="datetime-pickers">
-            <div class="timepicker-wrapper">
-                <timepicker ng-model="formData.startTime" hour-step="hstep" minute-step="mstep" show-meridian="false"></timepicker>
-            </div>
-            <div class="datepicker-wrapper">
-                <p class="input-group">
-                  <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.startDate" is-open="datepickers.startDate" min-date="minDate" max-date="'2050-06-22'" datepicker-options="dateOptions" close-text="Close" class="meetings-datepicker">
-                  <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open($event, 'startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
-                  </span>
-                </p>
-            </div>
-        </div>
-       
-
-    <label class="control-label">Эту встречу увидят...</label>
-    <select class="form-control input-lg" ng-model="formData.visibility">
-        <option value="all">Все</option>
-        <option value="friends" default>Друзья</option>
-    </select>
-    <button class="btn btn-primary" type="submit" ng-click="createMeeting()">OK</button>
-</div>
+    <div class="map-container" ng-click="getCoords();showDialog('lg')">
+        <map zoom="15"
+             disable-default-u-i="true"
+             disable-double-click-zoom="true"
+             draggable="false"
+             keyboard-shortcuts="false"
+             max-zoom="16"
+             min-zoom="11"
+             tilt="45"
+             map-type-id="TERRAIN">
+            <marker position="{{meeting.position}}" ng-repeat="meeting in meetings" ng-disabled="clickMarker"></marker>
+            <info-window position="{{meeting.position}}" visible="true" ng-repeat="meeting in meetings">
+                <div class="info-content">
+                    <div>meeting.location</div>
+                    <div>meeting.title </div>
+                    <div>meeting.description</div>
+                    <div><md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button></div>
+                </div>
+            </info-window>
+        </map>
+    </div>

@@ -403,17 +403,20 @@ module.exports = function(app, passport) {
 				});
 	});
 
-/*
-    app.get('*', isLoggedIn, function(req, res){
-		res.render('index.ejs')
+	/*app.get('/views/partials/:name', isLoggedIn, function (req, res) {
+		var name = req.params.name;
+		res.render('views/partials/' + name, {
+			user : req.user
+		});
 	});
-*/
+
+    app.get('*', isLoggedIn, function(req, res){
+		user = req.user
+		res.render('main.ejs')
+	});*/
 };
 
-/*app.get('/partials/:name', isLoggedIn, function (req, res) {
-	var name = req.params.name;
-	res.render('partials/' + name);
-});
+/*
 */
 
 

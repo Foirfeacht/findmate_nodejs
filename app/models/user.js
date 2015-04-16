@@ -2,8 +2,6 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 
-var Schema = mongoose.Schema;
-
 // define the schema for our user model
 var userSchema = mongoose.Schema({
 
@@ -37,8 +35,10 @@ var userSchema = mongoose.Schema({
         }],
         default: ['user']
     },
-
-	image: String
+	created: {
+		type: Date,
+		default: Date.now
+	}
 
     // meetings connections
     //invited: {type: Array, default: []},

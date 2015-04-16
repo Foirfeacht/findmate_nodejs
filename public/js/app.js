@@ -27,8 +27,8 @@ findMate.filter('filterByFriends', function () {
         $routeProvider
 
             // route for the home page
-            .when('/main', {
-                templateUrl : './views/map.ejs',
+            .when('/', {
+                templateUrl : './views/partials/map.ejs',
                 controller  : 'mainController'
             })
 
@@ -42,12 +42,12 @@ findMate.filter('filterByFriends', function () {
                 controller  : 'profileController'
             })
 
-            .when('meetings', {
+            .when('/meetings', {
                 templateUrl : './views/meetings.ejs',
                 controller  : 'meetingsController'
             })
 
-            .when('api/meetings/:id', {
+            .when('meetings/:id', {
                 templateUrl : './views/meeting.ejs',
                 controller  : 'meetingsController'
             })
@@ -55,6 +55,5 @@ findMate.filter('filterByFriends', function () {
             .otherwise({
 		        redirectTo: '/main'
 		    });
-});
+});*/
 
-*/''
