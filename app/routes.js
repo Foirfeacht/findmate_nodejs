@@ -227,7 +227,7 @@ module.exports = function(app, passport) {
 
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 			if (!err) {
-				console.log("meeting updated");
+				console.log("invite declined");
 				Meeting.find(function(err, meetings) {
 					if (err)
 						res.send(err)

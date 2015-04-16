@@ -93,7 +93,7 @@ findMate.controller('meetingsController', ['$scope',
 				  return item.a;
 			  });*/
 
-
+/*
 
  			var invitedArray = meeting.invitedUsers;
  			var invitedArrayLength = invitedArray.length;
@@ -104,7 +104,6 @@ findMate.controller('meetingsController', ['$scope',
  					} else {
  						meeting.invited = false;
  					};
-				console.log(meeting);
  			};// end invited filter
 
  			// joined filter
@@ -117,10 +116,19 @@ findMate.controller('meetingsController', ['$scope',
  					} else {
  						meeting.joined = false;
  					};
-					console.log(meeting);
- 				};// end joined filter
+ 				};// end joined filter */
          }; // end for loop
     };
+
+		 //ng if function
+		 $scope.showJoined = function (meeting) {
+			 var meeting = meeting;
+			 if (meeting.joinedUsers.indexOf($scope.logged_in_user) > -1){
+				 return false;
+			 } else {
+				 return true;
+			 };
+		 };
 
 
 
