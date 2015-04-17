@@ -1,0 +1,81 @@
+<!doctype html>
+<html ng-app="findMate" ng-init="logged_in_user=<%= JSON.stringify(user)%>">
+<head>
+    <title>Профиль {{logged_in_user.name}}</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="../../bower_components/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../public/css/admin.css">
+    <link rel="stylesheet" href="../../public/css/style.css">
+
+</head>
+<body ng-controller="profileController">
+<!--=============================== navigation ===============================-->
+<md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
+    <nav>
+        <div class="profile-block">
+
+            <div class="image-wrapper">
+                <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}">
+            </div>
+            <a href="/profile" class="profile-name"> {{logged_in_user.name}} </a>
+        </div>
+        <ul>
+            <li>
+                <a href="/profile">
+                    <i class="mdi mdi-account"></i>Profile
+                </a>
+            </li>
+            <li>
+                <a href="/meetings">
+                    <i class="mdi mdi-map-marker-radius"></i>Встречи
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="mdi mdi-settings"></i>Настройки
+                </a>
+            </li>
+            <li>
+                <a href="/logout">
+                    <i class="mdi mdi-logout"></i>Выйти
+                </a>
+            </li>
+        </ul>
+    </nav>
+</md-sidenav>
+
+
+
+<!--=============================== main content ===============================-->
+<md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i class="mdi mdi-menu"></i></md-button>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Under Construction</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Выйти</a>
+    </div>
+
+
+<md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>
+</div>
+<script src="../../bower_components/angular/angular.js"></script>
+<script src="../../bower_components/jquery/dist/jquery.js"></script>
+<script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="../../bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="../../bower_components/angular-material/angular-material.min.js"></script>
+<script src="../../bower_components/angular-route/angular-route.min.js"></script>
+<script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="../../public/js/app.js"></script>
+<script src="../../public/js/controllers/profile.js"></script>
+<script src="../../bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+<script type="text/javascript" src="../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
+<script src="../../bower_components/moment/moment.js"></script>
+<script src="../../bower_components/angular-moment/angular-moment.min.js"></script>
+<script src="../../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
+
+
+</body>
+</html>

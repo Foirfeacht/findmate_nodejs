@@ -21,7 +21,17 @@ var meetingsSchema = new Schema({
     location: String,
     marker: Schema.Types.Mixed,
     visibility: {type: String, default: 'Общие'},
-	messages: {type: Array, default: []}
+	comments: [commentsSchema]
+});
+
+var commentsSchema = new Schema({
+	content: {type: String, required: 'Сообщение не может быть пустым'},
+	owner: { type: Schema.Types.ObjectId, ref: 'User' },
+	ownerName: { type: String, ref: 'User' },
+	ownerFacebook: {type: String, ref: 'User'},
+	ownerVkontakte: {type: String, ref: 'User'},
+	owner: { type: Schema.Types.ObjectId, ref: 'User' },
+	created_at: Date
 });
 
 module.exports = mongoose.model('Meeting', meetingsSchema);

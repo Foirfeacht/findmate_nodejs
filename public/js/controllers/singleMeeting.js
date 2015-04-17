@@ -1,14 +1,15 @@
 // map controller
 // public/map.js
 
-findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$location', '$mdSidenav', '$modal', 'editService',
+findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$location', '$mdSidenav', '$modal', 'editService', 'moment',
                     function($scope, 
                              $http,
                              $routeParams, 
                              $location, 
                              $mdSidenav,
                              $modal,
-                             editService){
+                             editService,
+							 moment){
 
     //init logged in user
     $scope.$watch('logged_in_user', function () {
@@ -17,39 +18,41 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 
     $scope.$watch('currentMeeting', function () {
         $scope.currentMeetingId = $scope.currentMeeting._id;
-
-        $http.get('../api/meetings/' + $scope.currentMeetingId)
-         .success(function(data) {
-            $scope.meeting = data;
-            $scope.meeting.startDate = new Date($scope.meeting.startDate);
-            $scope.meeting.startTime = new Date($scope.meeting.startTime);
-            if ($scope.meeting.updated_at !== null){
-                $scope.meeting.updated_at = new Date($scope.meeting.updated_at);
-            };
-            $scope.meeting.updated = moment($scope.meeting.updated_at).fromNow();
-            $scope.meeting.created = moment($scope.meeting.created_at).fromNow();
-            console.log(data);
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
-                
-
+		$scope.refresh();
     });
 
-    //button show filter
-    $scope.showButton = function(array) {
-      var id = $scope.logged_in_user._id;
-      var i, found, obj;
-      for (i = 0; i < array.length; ++i) {
-          obj = array[i];
-          if (obj._id == id) {
-              return true;
-          }
-      };
-      return false;
-    };
-    
+						$scope.refresh = function () {
+							$http.get('../api/meetings/' + $scope.currentMeetingId)
+								.success(function(data) {
+									$scope.meeting = data;
+									$scope.meeting.startDate = new Date($scope.meeting.startDate);
+									$scope.meeting.startTime = new Date($scope.meeting.startTime);
+									if ($scope.meeting.updated_at !== null){
+										$scope.meeting.updated_at = new Date($scope.meeting.updated_at);
+									};
+									$scope.meeting.updated = moment($scope.meeting.updated_at).fromNow();
+									$scope.meeting.created = moment($scope.meeting.created_at).fromNow();
+									console.log(data);
+
+									//button show filter
+									$scope.showButton = function(array) {
+										var id = $scope.logged_in_user._id;
+										var i, obj;
+										for (i = 0; i < array.length; ++i) {
+											obj = array[i];
+											if (obj._id == id) {
+												return true;
+											}
+										};
+										return false;
+									};
+								})
+								.error(function (data) {
+									console.log('Error: ' + data);
+								});
+						};
+
+
     // join meeting
 
     $scope.joinMeeting = function(id){
@@ -58,6 +61,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
             .success(function (data) {
                 $scope.meetings = data;
                 console.log(data);
+				$scope.refresh();
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -70,6 +74,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
             .success(function (data) {
                 $scope.meetings = data;
                 console.log(data);
+				$scope.refresh();
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -118,19 +123,19 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 
     //edit service update
 
-    $scope.$watch('meetingId', function() {
-        editService.getId($scope.meetingId, $scope.logged_in_user);
+    $scope.$watch('currentMeetingId', function() {
+        editService.getId($scope.currentMeetingId, $scope.logged_in_user);
     });
 
     $scope.$on('valuesUpdated', function() {
-        $scope.meetingId = editService.meetingId;
+        $scope.currentMeetingId = editService.meetingId;
         $scope.logged_in_user = editService.user;
     });
 
     // edit meeting dialog
     $scope.editMeeting = function(id){
         $scope.meetingId = id;
-        console.log($scope.meetingId);
+        console.log($scope.currentMeetingId);
         $scope.showDialog();
     };
 
@@ -149,71 +154,43 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
     };
 
     $scope.refresh = function(){
-        $http.get('../api/meetings/' + currentMeetingId)
-        .success(function(data) {
-            $scope.meeting = data;
-            var meeting = $scope.meeting;
-            console.log(data);
-            var dateNow = new Date().toJSON();           
-
-                 //remove duplicates, delete this part later
-                 meeting.invitedUsers = _.uniq(meeting.invitedUsers,
-                    function(item, key, a){
-                        return item.a;
-                    });
-
-                 meeting.joinedUsers = _.uniq(meeting.joinedUsers,
-                    function(item, key, a){
-                        return item.a;
-                    });
-
-                 // date filter
-                 var meetingDate = meeting.startDate;
-                 if (meetingDate > dateNow){
-                     meeting.active = true;
-                 } else {
-                    meeting.active = false;
-                 };// end date filter
-
-                 meeting.startDate = new Date(meeting.startDate);
-	             meeting.startTime = new Date(meeting.startTime);
-	             if (meeting.updated_at !== null){
-	             	meeting.updated_at = new Date(meeting.updated_at);
-	             }
-	             meeting.updated = moment(meeting.updated_at).fromNow();
-	             meeting.created = moment(meeting.created_at).fromNow();
-
-                 //invited filter
-                 var invitedArray = meeting.invitedUsers;
-                 var invitedArrayLength = invitedArray.length;
-                 for (var u = 0; u< invitedArrayLength; u++){
-                    var invitedUser = invitedArray[u];
-                    if(invitedUser._id === $scope.logged_in_user._id){
-                        meeting.invited = true;
-                    } else {
-                        meeting.invited = false;
-                    }
-                    console.log(meeting.invited);
-                 }// end invited filter
-
-                 // participants filter
-                 var joinedArray = meeting.joinedUsers;
-                 var joinedArrayLength = joinedArray.length;
-                 for (var j = 0; j < joinedArrayLength; j++){
-                    var joinedUser = joinedArray[j];
-                    if(joinedUser._id === $scope.logged_in_user._id){
-                        meeting.joined = true;
-                    } else {
-                        meeting.joined = false;
-                    }
-                    console.log(meeting.joined);
-                 }// end participants filter
-
+        $http.get('../api/meetings/' + $scope.currentMeetingId)
+        	.success(function(data) {
+				$scope.meeting = data;
+				var meeting = $scope.meeting;
+				console.log(data);
+				meeting.startDate = new Date(meeting.startDate);
+				meeting.startTime = new Date(meeting.startTime);
+				if (meeting.updated_at !== null){
+					meeting.updated_at = new Date(meeting.updated_at);
+				};
+				meeting.updated = moment(meeting.updated_at).fromNow();
+				meeting.created = moment(meeting.created_at).fromNow();
         })
         .error(function (data) {
             console.log('Error: ' + data);
         });
     }
+						// submit comments
+
+						$scope.commentData = {
+							content: ''
+						};
+
+						$scope.submitComment = function () {
+							$http.put('/addComment/meetings/' + $scope.currentMeetingId, $scope.commentData)
+								.success(function (data) {
+									console.log(data);
+									console.log($scope.commentData);
+									$scope.commentData = {}; // clear the form so our user is ready to enter another
+									$scope.meetings = data;
+									$scope.refresh();
+									//deferred.resolve(data);
+								})
+								.error(function(data) {
+									console.log('Error: ' + data);
+								})
+						};
 
     
 }]);

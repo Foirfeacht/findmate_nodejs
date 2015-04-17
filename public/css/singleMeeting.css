@@ -1,0 +1,33 @@
+.content {
+    width: 100%;
+}
+
+.meetings-display {
+    width: 50%;
+}
+
+.meeting {
+    width: 80%;
+    margin: 0 auto;
+    min-width: 400px;
+}
+
+.comments {
+    width: 50%;
+}
+
+/* =============================
+   ========== COMMENT ==========
+   ============================= */
+
+.comment-form div {
+    width: 100%;
+}
+
+.comments {
+    min-width: 50%;
+}
+
+.comment-form textarea {
+    resize: vertical;
+}

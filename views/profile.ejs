@@ -57,80 +57,26 @@
 		<a href="/logout" class="btn btn-default btn-sm">Выйти</a>
 	</div>
 
-	<div class="row">
-
-
-		<!-- FACEBOOK INFORMATION -->
-		<div class="col-sm-6">
-			<div class="well">
-				<h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-
-
-				<% if (user.facebook.token) { %>
-					<div><img src="{{logged_in_user.facebook.image}}" alt="{{logged_in_user.facebook.name}}"></div>
-					<p>
-						<strong>name</strong>: {{logged_in_user.facebook.name}}<br>
-					
-					</p>
-
-					<a href="/unlink/facebook" class="btn btn-primary">Отключить</a>
-				<% } else { %>
-					<a href="/connect/facebook" class="btn btn-primary">Подключить Facebook</a>
-				<% } %>
-
-			</div>
-		</div>
-	</div><!-- end row -->
-
-	<!-- VK INFORMATION -->
-		<div class="col-sm-6">
-			<div class="well">
-				<h3 class="text-primary"><span class="fa fa-facebook"></span> Vkontakte</h3>
-
-
-				<% if (user.vkontakte.token) { %>
-					<div><img src="{{logged_in_user.vkontakte.image}}"></div>
-					<p>
-						<strong>name</strong>: {{logged_in_user.vkontakte.name}}<br>
-					
-					</p>
-
-					<a href="/unlink/vk" class="btn btn-primary">Отключить</a>
-				<% } else { %>
-					<a href="/connect/vk" class="btn btn-primary">Подключить Вконтакте</a>
-				<% } %>
-
-			</div>
-		</div>
-	</div><!-- end row -->
-
     <div layout="column">
-        <div class="display row" ng-show="selectedUser">
-              <table class="admin-table friends">
-               <thead>
-               <tr>
-                <td width="20%"></td>
-                <td width="30%">Name</td>
-                <td width="50%">id</td>
-               </tr>
-               </thead>
-               <tbody>
-               <tr ng-repeat="friend in friends">
-                <td>
-                    <img src="https://graph.facebook.com/{{friend.id}}/picture?height=350&width=250" alt="{{friend.name}}" width="60" height="60">
-                </td>
-                <td>
-                 {{friend.name}}
-                </td>
-               <td>
-                  {{friend.id}}
-               </td>
-               </tr>
-               </tbody>
-
-              </table>
-         </div>
+        <div class="image">
+            <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}"></div>
+        </div>
+        <div class="name">{{logged_in_user.name}}</div>
+        <div class="join-accounts" layout="row">
+            <div>
+                <md-button class="md-raised md-primary" ng-if="user.facebook" href="/unlink/facebook">Отключить Facebook</md-button>
+                <md-button class="md-raised md-primary" ng-if="!user.facebook" href="/connect/facebook">Подключить Facebook</md-button>
+            </div>
+            <div>
+                <md-button class="md-raised md-primary" ng-if="user.vkontakte" href="/unlink/vk">Отключить Vkontakte</md-button>
+                <md-button class="md-raised md-primary" ng-if="!user.vkontakte" href="/connect/vk">Подключить Vkontakte</md-button>
+            </div>
+        </div>
     </div>
+
+
+
+
 
 	 <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>
 </div>

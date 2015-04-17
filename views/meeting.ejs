@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../../bower_components/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href=".../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css">
         <link rel="stylesheet" href="../../public/css/style.css">
+        <link rel="stylesheet" href="../../public/css/singleMeeting.css">
         
     </head>
     <body ng-controller="singleMeetingController" ng-init="currentMeeting = <%= JSON.stringify(meeting)%>; logged_in_user=<%= JSON.stringify(user)%>">
@@ -51,8 +52,8 @@
         <!--=============================== main content ===============================-->
         <md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i class="mdi mdi-menu"></i></md-button>
 
-        <div class="content">
-            <div class="meetings-display" layout="column" layout-sm="column">
+        <div class="content" layout="row">
+            <div class="meetings-display">
 
                 <div class="meeting">
                     <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
@@ -92,20 +93,34 @@
                    
             </div><!-- end display -->
             
-            <div layout="column" class="messages">
-                <div layout="column" class="message" ng-repeat="message in currentMeeting.messages">
-                    <div class="message-owner">{{ message.ownerName}}</div>
-                    <div class="message-content">{{ message.content}}</div>
+            <div class="comments">
+                <div layout="column" class="comment" ng-repeat="comment in meeting.comments">
+                    <div class="comment-owner"><a href="users/{{comment._owner._id}}">{{ comment.ownerName}}</a></div>
+                    <div class="comment-content">{{ comment.content}}</div>
+                    <div class="comment-createdat">{{comment.created_at}}</div>
                 </div>
 
-                <div class="alert alert-danger" role="alert" ng-if="!currentMeeting.messages.length">
+                <div class="alert alert-danger" role="alert" ng-if="!meeting.comments.length">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span class="sr-only"></span>
-                    Сообщений пока нет
+                    Комментариев нет
+                </div>
+
+                <div class="comment-form">
+                    <h4>Оставить комментарий</h4>
+                    <div>
+                        <md-input-container>
+                            <textarea ng-model="commentData.content" ng-keyup="$event.keyCode == 13 ? submitComment() : null"></textarea>
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-button class="md-raised md-primary" ng-click="submitComment()">Отправить</md-button>
+                    </div>
                 </div>
             </div><!-- end messages -->
 
-            </div><!-- end content -->
+
+        </div><!-- end content -->
             
              <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>
 

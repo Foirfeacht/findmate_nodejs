@@ -49,6 +49,27 @@ findMate.controller('meetingsController', ['$scope',
             var meetings = $scope.meetings;
             console.log(data);
              $scope.loopMeetings(meetings);
+				// ng show for buttons
+
+				$scope.showButton = function(array) {
+					var id = $scope.logged_in_user._id;
+					var i, obj;
+					for (i = 0; i < array.length; ++i) {
+						obj = array[i];
+						if (obj._id == id) {
+							return true;
+						}
+					};
+					return false;
+				};
+
+				$scope.checkOwner = function(id){
+					var currentUserId = $scope.logged_in_user._id;
+					if (id === currentUserId){
+						return true;
+					}
+					return false;
+				}
         })
         .error(function (data) {
             console.log('Error: ' + data);
@@ -121,17 +142,7 @@ findMate.controller('meetingsController', ['$scope',
          }; // end for loop
     };
 
-    $scope.showButton = function(array) {
-      var id = $scope.logged_in_user._id;
-      var i, found, obj;
-      for (i = 0; i < array.length; ++i) {
-          obj = array[i];
-          if (obj._id == id) {
-              return true;
-          }
-      };
-      return false;
-  };
+
 
     // delete a meeting
     $scope.deleteMeeting = function(id) {
@@ -139,6 +150,7 @@ findMate.controller('meetingsController', ['$scope',
             .success(function (data) {
                 $scope.meetings = data;
                 console.log(data);
+				$scope.refresh();
 				
             })
             .error(function(data) {
@@ -152,8 +164,9 @@ findMate.controller('meetingsController', ['$scope',
 
        $http.put('/decline/meetings/' + id)
             .success(function (data) {
-                $scope.meetings = data;
+                //$scope.meetings = data;
                 console.log(data);
+			   $scope.refresh();
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -165,8 +178,9 @@ findMate.controller('meetingsController', ['$scope',
     $scope.joinMeeting = function(id){
   		$http.put('/join/meetings/' + id)
   			.success(function (data) {
-  				$scope.meetings = data;
+  				//$scope.meetings = data;
   				console.log(data);
+				$scope.refresh();
   			})
   			.error(function (data) {
   				console.log('Error: ' + data);
@@ -180,8 +194,9 @@ findMate.controller('meetingsController', ['$scope',
 
         $http.put('/unjoin/meetings/' + id)
     			.success(function (data) {
-    				$scope.meetings = data;
+    				//$scope.meetings = data;
     				console.log(data);
+					$scope.refresh();
     			})
     			.error(function (data) {
     				console.log('Error: ' + data);
