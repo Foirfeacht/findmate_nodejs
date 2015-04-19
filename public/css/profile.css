@@ -1,0 +1,87 @@
+.profile-container {
+	overflow: hidden;
+	width: 100%;
+}
+
+.container {
+	margin: 10px auto;
+}
+
+
+/* =============== IMAGE ============ */
+.image-container {
+	position: relative;
+	overflow: hidden;
+	width: 50%;
+}
+
+.image-container > div {
+	float: left;
+}
+
+.image {
+	/*width: 350px;
+	height: 480px;*/
+	width: 50%;
+	position: relative;
+}
+
+.image img {
+	width: auto;
+	max-height: 400px;
+	max-width: 100%;
+} 
+
+.switch-image {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	display: none;
+}
+
+.image:hover .switch-image {
+	display: block;
+}
+
+.image-selector {
+	width: 50%;
+	position: relative;
+	height: 400px;
+}
+
+.image-selector > div {
+	width: 100%;
+	height: 200px;
+}
+
+.image-selector img {
+	/*min-width: 175px;*/
+	height: auto;
+	max-height: 200px;
+	max-width: 80%;
+	margin: 0 15px;
+}
+
+.image-selector img.selected-image {
+	border: 2px solid #3949AB;
+	border-radius: 5px;
+}
+
+.select-image-button {
+	position: absolute;
+	top: 45%;
+	right: 5%;
+}
+
+/* ========= USER ======= */
+
+.user-container {
+	width: 50%;	
+}
+
+/* ===== join accounts ===== */
+
+.join-accounts > div {
+	width: 50%;
+}
+

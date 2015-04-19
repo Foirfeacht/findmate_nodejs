@@ -23,6 +23,7 @@ var userSchema = mongoose.Schema({
 
     firstName: {type: String, trim: true},
     lastName: {type: String, trim: true},
+    about: {type: String},
 
     name:  String,
     image: String,

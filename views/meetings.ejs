@@ -328,7 +328,7 @@
                             </div>
                         </div>
 	                    <div layout="row">
-		                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="!showButton(meeting.invitedUsers)">Отклонить приглашение</md-button>
+		                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение</md-button>
 	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Учавствовать</md-button>
                             <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="showButton(meeting.joinedUsers)">Не учавствовать</md-button>
 	                    </div>

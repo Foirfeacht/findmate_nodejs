@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="../../bower_components/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../public/css/admin.css">
+    <link rel="stylesheet" href="../../public/css/profile.css">
     <link rel="stylesheet" href="../../public/css/style.css">
 
 </head>
@@ -57,26 +57,53 @@
 		<a href="/logout" class="btn btn-default btn-sm">Выйти</a>
 	</div>
 
-    <div layout="column">
-        <div class="image">
-            <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}"></div>
-        </div>
-        <div class="name">{{logged_in_user.name}}</div>
-        <div class="join-accounts" layout="row">
-            <div>
-                <md-button class="md-raised md-primary" ng-if="user.facebook" href="/unlink/facebook">Отключить Facebook</md-button>
-                <md-button class="md-raised md-primary" ng-if="!user.facebook" href="/connect/facebook">Подключить Facebook</md-button>
+    <div class="profile-container">
+
+        <!--==== image ====-->
+
+        <div class="image-container">
+            <div class="image">
+                <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}">
+                <div class="switch-image" ng-show="toggleSelectorButton" ng-click="toggleImageSelector()"><md-button class="md-fab md-primary"><i class="mdi mdi-pencil"></i></md-button></div>
+            </div><!-- end image -->
+            <div class="image-selector" layout="column">
+
+                <div class="image-selector-container" ng-show="facebookImage" ng-click="selectImage(logged_in_user.facebook.image, facebook)">
+                    <img src="{{logged_in_user.facebook.image}}" alt="{{logged_in_user.facebook.name}}" ng-class="{image-selected: facebookSelected"}>
+                </div>
+
+                <div class="image-selector-container" ng-show="vkontakteImage" ng-click="selectImage(logged_in_user.vkontakte.image, vk)">
+                    <img src="{{logged_in_user.vkontakte.image}}" alt="{{logged_in_user.vkontakte.name}}" ng-class="{image-selected: vkSelected}">
+                </div>
+
+                <md-button class="md-fab md-primary select-image-button" ng-show="selectImageButton" ng-click="changeProfileImage()">
+                    <i class="mdi mdi-check"></i>
+                </md-button>   
+
+            </div><!-- end selector -->
+            
+        </div><!-- end image contaner -->
+
+        <div class="user-container">
+            <!--==== name ====-->
+            <div class="name-container container">{{logged_in_user.name}}</div>
+            <div class="description container">
+                {{logged_in_user.about}}
             </div>
-            <div>
-                <md-button class="md-raised md-primary" ng-if="user.vkontakte" href="/unlink/vk">Отключить Vkontakte</md-button>
-                <md-button class="md-raised md-primary" ng-if="!user.vkontakte" href="/connect/vk">Подключить Vkontakte</md-button>
+            <div class="join-accounts container" layout="row">
+                <div>
+                    <md-button class="md-raised md-primary" ng-if="logged_in_user.facebook.token" href="/unlink/facebook">Отключить Facebook</md-button>
+                    <md-button class="md-raised md-primary" ng-if="!logged_in_user.facebook.token" href="/connect/facebook">Подключить Facebook</md-button>
+                </div>
+                <div>
+                    <md-button class="md-raised md-primary" ng-if="logged_in_user.vkontakte.token" href="/unlink/vk">Отключить Vkontakte</md-button>
+                    <md-button class="md-raised md-primary" ng-if="!logged_in_user.vkontakte.token" href="/connect/vk">Подключить Vkontakte</md-button>
+                </div>
             </div>
-        </div>
-    </div>
+        </div><!-- end user contaner -->
 
-
-
-
+        
+    </div><!-- end profile contaner -->
 
 	 <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>
 </div>
