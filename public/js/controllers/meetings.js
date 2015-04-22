@@ -13,12 +13,16 @@ findMate.controller('meetingsController', ['$scope',
 
 	//expose lodash to scope
 	$scope._ = _;
-	
-	//init logged in user
-	$scope.$watch('logged_in_user', function () {
-		$scope.loadFriends();
-		$scope.refresh();
-	});
+
+		 $http.get('/current_user')
+			 .success(function(data) {
+				 $scope.currentUser = data;
+				 $scope.loadFriends();
+			 })
+			 .error(function (data) {
+				 console.log('Error: ' + data);
+			 });
+
 
 	//get users
 
@@ -32,7 +36,7 @@ findMate.controller('meetingsController', ['$scope',
       	});
 
 	$scope.loadFriends = function(){
-		 var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + $scope.logged_in_user.facebook.token;
+		 var friendsRequest = 'https://graph.facebook.com/' + $scope.currentUser.facebook.id + '/friends' + '?access_token=' + $scope.currentUser.facebook.token;
 		 $http.get(friendsRequest)
 			 .success(function(data) {
 				 $scope.friends = data.data;
@@ -71,7 +75,7 @@ findMate.controller('meetingsController', ['$scope',
         };
 
         $scope.checkOwner = function(id){
-          var currentUserId = $scope.logged_in_user._id;
+          var currentUserId = $scope.currentUser._id;
           if (id === currentUserId){
             return true;
           }
@@ -90,7 +94,6 @@ findMate.controller('meetingsController', ['$scope',
          for(var i = 0; i < meetingsLength; i++) {
              var meeting = meetings[i];
 
-
              // date filter
              var meetingDate = meeting.startDate;
              if (meetingDate > dateNow){
@@ -107,40 +110,6 @@ findMate.controller('meetingsController', ['$scope',
              meeting.updated = moment(meeting.updated_at).fromNow();
              meeting.created = moment(meeting.created_at).fromNow();
 
-		/*	meeting.invitedUsers = _.uniq(meeting.invitedUsers,
-				  function(item, key, a){
-				  return item.a;
-				  });
-
-			 meeting.joinedUsers = _.uniq(meeting.joinedUsers,
-			      function(item, key, a){
-				  return item.a;
-			  });*/
-
-/*
-
- 			var invitedArray = meeting.invitedUsers;
- 			var invitedArrayLength = invitedArray.length;
- 			for (var u = 0; u< invitedArrayLength; u++){
- 				var invitedUser = invitedArray[u];
- 					if(invitedUser._id === $scope.logged_in_user._id){
- 						meeting.invited = true;
- 					} else {
- 						meeting.invited = false;
- 					};
- 			};// end invited filter
-
- 			// joined filter
-			 var joinedArray = meeting.joinedUsers;
- 			 var joinedArrayLength = joinedArray.length;
- 				for (var j = 0; j < joinedArrayLength; j++){
- 					var joinedUser = joinedArray[j];
- 					if(joinedUser._id === $scope.logged_in_user._id){
-						 meeting.joined = true;
- 					} else {
- 						meeting.joined = false;
- 					};
- 				};// end joined filter */
          }; // end for loop
     };
 
@@ -243,12 +212,12 @@ findMate.controller('meetingsController', ['$scope',
     //edit service update
 
     $scope.$watch('meetingId', function() {
-        editService.getId($scope.meetingId, $scope.logged_in_user);
+        editService.getId($scope.meetingId, $scope.currentUser);
     });
 
     $scope.$on('valuesUpdated', function() {
         $scope.meetingId = editService.meetingId;
-        $scope.logged_in_user = editService.user;
+        $scope.currentUser = editService.user;
     });
 
     // edit meeting dialog

@@ -139,12 +139,9 @@ module.exports = function(grunt) {
 	// Build task(s).
 	grunt.registerTask('build', ['lint']);
 
-	//watch and livereload
-	grunt.registerTask('watch', ['watch']);
-
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
 
 	//start task
-	grunt.registerTask('start', ['lint', 'concurrent:default']);
+	grunt.registerTask('start', ['concurrent:default']);
 };

@@ -7,7 +7,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
     $http.get('/current_user')
         .success(function(data) {
             $scope.currentUser = data;
-            console.log(data);
         })
         .error(function (data) {
             console.log('Error: ' + data);
@@ -82,12 +81,12 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
 
 
     $scope.$watch('latLng', function() {
-        mapService.getCoords($scope.latLng, $scope.logged_in_user);
+        mapService.getCoords($scope.latLng, $scope.currentUser);
     });
 
     $scope.$on('valuesUpdated', function() {
         $scope.latLng = mapService.latLng;
-        $scope.logged_in_user = mapService.user;
+        $scope.currentUser = mapService.user;
     });
 
 

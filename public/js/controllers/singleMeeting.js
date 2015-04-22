@@ -10,11 +10,14 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
                              $modal,
                              editService,
 							 moment){
-
-    //init logged in user
-    $scope.$watch('logged_in_user', function () {
-        $scope.loadFriends();
-    });
+	$http.get('/current_user')
+	     .success(function(data) {
+			$scope.currentUser = data;
+			$scope.loadFriends();
+		 })
+		.error(function (data) {
+			console.log('Error: ' + data);
+		});
 
     $scope.$watch('currentMeeting', function () {
         $scope.currentMeetingId = $scope.currentMeeting._id;
@@ -44,7 +47,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 
     //button show filter
           $scope.showButton = function(array) {
-            var id = $scope.logged_in_user._id;
+            var id = $scope.currentUser._id;
             var i, obj;
             for (i = 0; i < array.length; ++i) {
               obj = array[i];
@@ -85,7 +88,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
     };
 
          $scope.loadFriends = function(){
-             var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + $scope.logged_in_user.facebook.token;
+             var friendsRequest = 'https://graph.facebook.com/' + $scope.currentUser.facebook.id + '/friends' + '?access_token=' + $scope.currentUser.facebook.token;
              $http.get(friendsRequest)
                  .success(function(data) {
                      $scope.friends = data.data;
@@ -115,12 +118,12 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
     //edit service update
 
     $scope.$watch('currentMeetingId', function() {
-        editService.getId($scope.currentMeetingId, $scope.logged_in_user);
+        editService.getId($scope.currentMeetingId, $scope.currentUser);
     });
 
     $scope.$on('valuesUpdated', function() {
         $scope.currentMeetingId = editService.meetingId;
-        $scope.logged_in_user = editService.user;
+        $scope.currentUser = editService.user;
     });
 
     // edit meeting dialog
@@ -187,7 +190,6 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 					$scope.commentData = {}; // clear the form so our user is ready to enter another
 					$scope.meetings = data;
 					$scope.refresh();
-					//deferred.resolve(data);
 				})
 				.error(function(data) {
 					console.log('Error: ' + data);

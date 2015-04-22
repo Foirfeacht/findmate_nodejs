@@ -22,7 +22,7 @@
     "express-session": "~1.0.0",
     "lodash": "^3.6.0",
     "method-override": "~1.0.0",
-    "mongoose": "^3.8.26",
+    "mongoose": "~3.8",
     "morgan": "~1.0.0",
     "node-static": "~0.7.6",
     "passport": "~0.1.17",
