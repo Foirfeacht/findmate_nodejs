@@ -87,12 +87,11 @@ module.exports = function(app) {
 				res.send (err)
 
 			console.log("meeting joined");
-			/*Meeting.find(function(err, meetings) {
+			Meeting.find(function(err, meetings) {
 			 if (err)
 			 res.send(err)
 			 res.json(meetings);
-			 });*/
-			res.json(meeting);
+			 });
 		});
 	});
 
@@ -106,12 +105,12 @@ module.exports = function(app) {
 				res.send (err)
 
 			console.log("meeting joined");
-			/*Meeting.find(function(err, meetings) {
+			Meeting.find(function(err, meetings) {
 			 if (err)
 			 res.send(err)
 			 res.json(meetings);
-			 });*/
-			res.json(meeting);
+			 });
+			//res.json(meeting);
 		});
 	});
 
@@ -125,13 +124,12 @@ module.exports = function(app) {
 				res.send (err)
 
 			console.log("meeting updated");
-			console.log(meeting.joinedUsers);
-			/*Meeting.find(function(err, meetings) {
+			Meeting.find(function(err, meetings) {
 			 if (err)
 			 res.send(err)
 			 res.json(meetings);
-			 });*/
-			res.json(meeting);
+			 });
+			//res.json(meeting);
 		});
 	});
 
@@ -203,15 +201,17 @@ module.exports = function(app) {
 	});
 
 	// delete a meeting from single meeting page
-	app.delete('/api/meeting/:meeting_id', isLoggedIn, function(req, res) {
+	app.delete('/remove/meetings/:meeting_id', isLoggedIn, function(req, res) {
 		Meeting.remove({
 			_id : req.params.meeting_id
 		}, function(err, meeting) {
 			if (err)
 				res.send(err);
-
+		}).then(function(err){
+			if (err)
+				res.send(err);
 			res.redirect('/meetings');
-		});
+		})
 	});
 
 	// =============================================================================

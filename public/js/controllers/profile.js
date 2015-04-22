@@ -1,7 +1,8 @@
 // map controller
 // public/map.js
 
-findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', function($scope, $http, $mdSidenav) {
+findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$modal',
+ function($scope, $http, $mdSidenav, $modal) {
 	// side nav
     $scope.toggleNav = function() {
        $mdSidenav('nav').toggle();
@@ -30,15 +31,27 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', funct
         if (provider === 'facebook') {
            $scope.facebookSelected = true; 
         }
-        if (provider = "vk"){
+        if (provider === "vk"){
             $scope.vkSelected = true;
         }
     }
 
     $scope.changeProfileImage = function(){
         $scope.toggleSelectorButton = true;
-
     }
+
+    $scope.user = $scope.logged_in_user;
+    console.log($scope.user);
+
+    $scope.showConfirm = function(size){
+        var modalInstance = $modal.open({
+          templateUrl: './public/partials/confirmRemove.tmpl.ejs',
+          controller: 'confirmRemoveController',
+          size: size,
+          scope: $scope
+        });    
+    };
+
 
     /*var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + $scope.logged_in_user.facebook.token;
         $http.get(friendsRequest)

@@ -41,6 +41,28 @@ module.exports = function(app) {
 			user : req.user
 		});
 	});
+
+	app.get('/current_user', isLoggedIn, function(req, res){
+		var user = req.user;
+		res.json(user);
+	});
+
+	// delete a user
+	app.delete('/delete/:user_id', isLoggedIn, function(req, res) {
+		User.remove({
+			_id : req.params.user_id
+		}, function(err, user) {
+			if (err)
+				res.send(err);
+			Meeting.find({ '_owner._id': req.params.user_id }).remove(function (err, meetings) {
+				if (err)
+					res.send(err);
+				res.redirect('/');
+			});
+
+			
+		});
+	});
 }
 
 // route middleware to ensure user is logged in

@@ -18,40 +18,44 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 
     $scope.$watch('currentMeeting', function () {
         $scope.currentMeetingId = $scope.currentMeeting._id;
-		$scope.refresh();
+		    $scope.refresh();
     });
 
-						$scope.refresh = function () {
-							$http.get('../api/meetings/' + $scope.currentMeetingId)
-								.success(function(data) {
-									$scope.meeting = data;
-									$scope.meeting.startDate = new Date($scope.meeting.startDate);
-									$scope.meeting.startTime = new Date($scope.meeting.startTime);
-									if ($scope.meeting.updated_at !== null){
-										$scope.meeting.updated_at = new Date($scope.meeting.updated_at);
-									};
-									$scope.meeting.updated = moment($scope.meeting.updated_at).fromNow();
-									$scope.meeting.created = moment($scope.meeting.created_at).fromNow();
-									console.log(data);
+    $scope.prevent = function ($event) {
+      $event.preventDefault();
+    }
 
-									//button show filter
-									$scope.showButton = function(array) {
-										var id = $scope.logged_in_user._id;
-										var i, obj;
-										for (i = 0; i < array.length; ++i) {
-											obj = array[i];
-											if (obj._id == id) {
-												return true;
-											}
-										};
-										return false;
-									};
-								})
-								.error(function (data) {
-									console.log('Error: ' + data);
-								});
-						};
+		$scope.refresh = function () {
+			$http.get('../api/meetings/' + $scope.currentMeetingId)
+				.success(function(data) {
+					$scope.meeting = data;
+					$scope.meeting.startDate = new Date($scope.meeting.startDate);
+					$scope.meeting.startTime = new Date($scope.meeting.startTime);
+					if ($scope.meeting.updated_at !== null){
+						$scope.meeting.updated_at = new Date($scope.meeting.updated_at);
+					};
+					$scope.meeting.updated = moment($scope.meeting.updated_at).fromNow();
+					$scope.meeting.created = moment($scope.meeting.created_at).fromNow();
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
 
+    //button show filter
+          $scope.showButton = function(array) {
+            var id = $scope.logged_in_user._id;
+            var i, obj;
+            for (i = 0; i < array.length; ++i) {
+              obj = array[i];
+              if (obj._id == id) {
+                return true;
+              }
+            };
+            return false;
+          };
+
+  
 
     // join meeting
 
@@ -59,9 +63,8 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 
         $http.put('/join/meetings/' + id)
             .success(function (data) {
-                $scope.meetings = data;
+                $scope.meeting = data;
                 console.log(data);
-				$scope.refresh();
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -72,9 +75,9 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 
         $http.put('/unjoin/meetings/' + id)
             .success(function (data) {
-                $scope.meetings = data;
+                $scope.meeting = data;
                 console.log(data);
-				$scope.refresh();
+				//$scope.refresh();
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -91,18 +94,6 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
                      console.log('Error: ' + data);
                  });
          };
-
-    // delete a todo after checking it
-    $scope.deleteMeeting = function(id) {
-        $http.delete('../api/meeting/' + id)
-            .success(function (data) {
-                $scope.meetings = data;
-                console.log(data);
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });
-    };
 
     $scope.declineInvitation = function(id){
 
@@ -154,43 +145,54 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
     };
 
     $scope.refresh = function(){
-        $http.get('../api/meetings/' + $scope.currentMeetingId)
-        	.success(function(data) {
-				$scope.meeting = data;
-				var meeting = $scope.meeting;
-				console.log(data);
-				meeting.startDate = new Date(meeting.startDate);
-				meeting.startTime = new Date(meeting.startTime);
-				if (meeting.updated_at !== null){
-					meeting.updated_at = new Date(meeting.updated_at);
-				};
-				meeting.updated = moment(meeting.updated_at).fromNow();
-				meeting.created = moment(meeting.created_at).fromNow();
+      $http.get('../api/meetings/' + $scope.currentMeetingId)
+        .success(function(data) {
+    				$scope.meeting = data;
+    				var meeting = $scope.meeting;
+    				console.log(data);
+    				meeting.startDate = new Date(meeting.startDate);
+    				meeting.startTime = new Date(meeting.startTime);
+    				if (meeting.updated_at !== null){
+    					meeting.updated_at = new Date(meeting.updated_at);
+    				};
+    				meeting.updated = moment(meeting.updated_at).fromNow();
+    				meeting.created = moment(meeting.created_at).fromNow();
         })
         .error(function (data) {
             console.log('Error: ' + data);
         });
-    }
-						// submit comments
+    };
 
-						$scope.commentData = {
-							content: ''
-						};
+    // delete a meeting
+    $scope.deleteMeeting = function(id) {
+        $http.delete('/remove/meetings/' + id)
+            .success(function (data) {
+              console.log('removed');
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
+		// submit comments
 
-						$scope.submitComment = function () {
-							$http.put('/addComment/meetings/' + $scope.currentMeetingId, $scope.commentData)
-								.success(function (data) {
-									console.log(data);
-									console.log($scope.commentData);
-									$scope.commentData = {}; // clear the form so our user is ready to enter another
-									$scope.meetings = data;
-									$scope.refresh();
-									//deferred.resolve(data);
-								})
-								.error(function(data) {
-									console.log('Error: ' + data);
-								})
-						};
+		$scope.commentData = {
+			content: ''
+		};
+
+		$scope.submitComment = function () {
+			$http.put('/addComment/meetings/' + $scope.currentMeetingId, $scope.commentData)
+				.success(function (data) {
+					console.log(data);
+					console.log($scope.commentData);
+					$scope.commentData = {}; // clear the form so our user is ready to enter another
+					$scope.meetings = data;
+					$scope.refresh();
+					//deferred.resolve(data);
+				})
+				.error(function(data) {
+					console.log('Error: ' + data);
+				})
+		};
 
     
 }]);

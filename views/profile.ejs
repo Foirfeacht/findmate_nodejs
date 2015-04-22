@@ -69,7 +69,7 @@
             <div class="image-selector" layout="column">
 
                 <div class="image-selector-container" ng-show="facebookImage" ng-click="selectImage(logged_in_user.facebook.image, facebook)">
-                    <img src="{{logged_in_user.facebook.image}}" alt="{{logged_in_user.facebook.name}}" ng-class="{image-selected: facebookSelected"}>
+                    <img src="{{logged_in_user.facebook.image}}" alt="{{logged_in_user.facebook.name}}" ng-class="{'image-selected' : facebookSelected"}>
                 </div>
 
                 <div class="image-selector-container" ng-show="vkontakteImage" ng-click="selectImage(logged_in_user.vkontakte.image, vk)">
@@ -96,9 +96,12 @@
                     <md-button class="md-raised md-primary" ng-if="!logged_in_user.facebook.token" href="/connect/facebook">Подключить Facebook</md-button>
                 </div>
                 <div>
-                    <md-button class="md-raised md-primary" ng-if="logged_in_user.vkontakte.token" href="/unlink/vk">Отключить Vkontakte</md-button>
-                    <md-button class="md-raised md-primary" ng-if="!logged_in_user.vkontakte.token" href="/connect/vk">Подключить Vkontakte</md-button>
+                    <md-button class="md-raised md-warn" ng-if="logged_in_user.vkontakte.token" href="/unlink/vk">Отключить Vkontakte</md-button>
+                    <md-button class="md-raised md-warn" ng-if="!logged_in_user.vkontakte.token" href="/connect/vk">Подключить Vkontakte</md-button>
                 </div>
+            </div>
+            <div class="delete-account container">
+                <md-button class="md-raised md-warn" ng-click="showConfirm()">Удалить аккаунт</md-button>   
             </div>
         </div><!-- end user contaner -->
 
@@ -115,14 +118,14 @@
 <script src="../../bower_components/angular-route/angular-route.min.js"></script>
 <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
 <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-<script src="../../public/js/app.js"></script>
-<script src="../../public/js/controllers/profile.js"></script>
 <script src="../../bower_components/ngmap/build/scripts/ng-map.min.js"></script>
 <script type="text/javascript" src="../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
 <script src="../../bower_components/moment/moment.js"></script>
 <script src="../../bower_components/angular-moment/angular-moment.min.js"></script>
 <script src="../../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
-
+<script src="../../public/js/app.js"></script>
+<script src="../../public/js/controllers/profile.js"></script>
+<script src="../../public/js/controllers/confirmRemove.js"></script>
 
 </body>
 </html>

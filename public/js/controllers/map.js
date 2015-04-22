@@ -2,18 +2,22 @@
 // public/map.js
 
 findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSidenav', '$modal',
-					function($scope,
-							 $http,
-							 mapService, 
-							 $mdSidenav, 
-							 $modal) {
+	function($scope, $http, mapService, $mdSidenav, $modal) {
+
+    $http.get('/current_user')
+        .success(function(data) {
+            $scope.currentUser = data;
+            console.log(data);
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });
 
     //load input data
 
     $scope.formData = {};
 
     //map
-
 
     $scope.markers = [];
 

@@ -1,6 +1,6 @@
 // and event model
 var Meeting    = require('./../models/meeting');
-var User 	   = require('./../models/user');
+var User 	   = require('./../models/user');   
 
 module.exports = function(app, passport) {
 // =============================================================================
