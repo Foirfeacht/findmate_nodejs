@@ -4,7 +4,6 @@
 // and event model
 var Meeting    = require('../models/meeting');
 var User 	   = require('../models/user');
-var debug 	   = require('debug')('app:meetings')
 
 module.exports = function(app) {
 	// =============================================================================
