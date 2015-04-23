@@ -43,10 +43,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-//live reload, dev only
-app.use(require('connect-livereload')({
-    port: 35729
-  }));
+
 
 // routes ======================================================================
 require('./app/routes/authentication.js')(app, passport); // load our routes and pass in our app and fully configured passport
