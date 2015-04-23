@@ -182,7 +182,8 @@ module.exports = function(app) {
 	app.get('/meetings/:meetingId', isLoggedIn, function(req, res){
 		res.render('meeting.ejs', {
 			meeting: req.meeting,
-			user : req.user
+			user : req.user,
+			title: req.meeting.title
 		});
 	});
 

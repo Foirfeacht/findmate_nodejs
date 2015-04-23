@@ -36,7 +36,8 @@ module.exports = function(app) {
 	app.get('/users/:userId', isLoggedIn, function(req, res){
 		res.render('userprofile.ejs', {
 			profile: req.profile,
-			user : req.user
+			user : req.user,
+			title: "Профиль" + req.user.profile
 		});
 	});
 

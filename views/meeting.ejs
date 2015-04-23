@@ -1,146 +1,86 @@
-<!doctype html>
-<html ng-app="findMate"> 
-    <head>
-        <title><%= meeting.title %></title>
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../../bower_components/angular-material/angular-material.min.css">
-        <link rel="stylesheet" href="../../bower_components/mdi/css/materialdesignicons.min.css">
-        <link rel="stylesheet" href=".../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css">
-        <link rel="stylesheet" href="../../public/css/style.css">
-        <link rel="stylesheet" href="../../public/css/singleMeeting.css">
+<% include partials/head %>
+
+<body ng-controller="singleMeetingController" ng-init="currentMeeting = <%= JSON.stringify(meeting)%>;">
+
+<% include partials/menu %>    
+   
+    <!--=============================== main content ===============================-->
+    <div class="content" layout="row">
+        <div class="meetings-display">
+
+            <div class="meeting">
+                <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+                <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+                <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
+                <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+                <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
+                <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
+                <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+                <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
+
+                <h6>Приглашенные</h6>
+                <div layout="row" class="userlist">
+                    <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                        <img src="{{user.image}}" alt="{{user.name }}">
+                    </div>
+                </div>
+
+                <h6>Участники</h6>
+                <div layout="row" class="userlist">
+                    <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
+                       <img src="{{user.image}}" alt="{{user.name }}">
+                    </div>
+                </div>
+                <div layout="row">
+                    <md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)" ng-if="currentUser._id === meeting._owner._id">Удалить</md-button>
+                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение</md-button>
+                    <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Учавствовать</md-button>
+                    <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="showButton(meeting.joinedUsers)">Не учавствовать</md-button>
+                </div>
+
+                <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-if="currentUser._id === meeting._owner._id">
+                    <i class="mdi mdi-pencil"></i>
+                </md-button>
+            </div>
+
+               
+        </div><!-- end display -->
         
-    </head>
-    <body ng-controller="singleMeetingController" ng-init="currentMeeting = <%= JSON.stringify(meeting)%>;">
-<!--=============================== navigation ===============================-->
-        <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
-            <nav>
-                <div class="profile-block">
+        <div class="comments">
+            <div layout="column" class="comment" ng-repeat="comment in meeting.comments">
+                <div class="comment-owner"><a href="users/{{comment._owner._id}}">{{ comment.ownerName}}</a></div>
+                <div class="comment-content">{{ comment.content}}</div>
+                <div class="comment-createdat">{{comment.created_at}}</div>
+            </div>
 
-                    <div class="image-wrapper">
-                        <img src="{{currentUser.image}}" alt="{{currentUser.name}}">
-                    </div>
-                    <a href="/profile" class="profile-name"> {{currentUser.name}} </a>
+            <div class="alert alert-danger" role="alert" ng-if="!meeting.comments.length">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only"></span>
+                Комментариев нет
+            </div>
+
+            <div class="comment-form">
+                <h4>Оставить комментарий</h4>
+                <div>
+                    <md-input-container>
+                        <textarea ng-model="commentData.content" ng-keyup="$event.keyCode == 13 ? submitComment() : null"></textarea>
+                    </md-input-container>
                 </div>
-                <ul>
-                    <li>
-                        <a href="/profile">
-                            <i class="mdi mdi-account"></i>Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/meetings">
-                            <i class="mdi mdi-map-marker-radius"></i>Встречи
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="mdi mdi-settings"></i>Настройки
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/logout">
-                            <i class="mdi mdi-logout"></i>Выйти
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </md-sidenav>
+                <div>
+                    <md-button class="md-raised md-primary" ng-click="submitComment()">Отправить</md-button>
+                </div>
+            </div>
+        </div><!-- end messages -->
 
+
+    </div><!-- end content -->
         
-
-        <!--=============================== main content ===============================-->
-        <md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i class="mdi mdi-menu"></i></md-button>
-
-        <div class="content" layout="row">
-            <div class="meetings-display">
-
-                <div class="meeting">
-                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
-                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
-                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
-                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
-                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
-                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
-
-                    <h6>Приглашенные</h6>
-                    <div layout="row" class="userlist">
-                        <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                            <img src="{{user.image}}" alt="{{user.name }}">
-                        </div>
-                    </div>
-
-                    <h6>Участники</h6>
-                    <div layout="row" class="userlist">
-                        <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                           <img src="{{user.image}}" alt="{{user.name }}">
-                        </div>
-                    </div>
-                    <div layout="row">
-                        <md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)" ng-if="currentUser._id === meeting._owner._id">Удалить</md-button>
-                        <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение</md-button>
-                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Учавствовать</md-button>
-                        <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="showButton(meeting.joinedUsers)">Не учавствовать</md-button>
-                    </div>
-
-                    <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-if="currentUser._id === meeting._owner._id">
-                        <i class="mdi mdi-pencil"></i>
-                    </md-button>
-                </div>
-
-                   
-            </div><!-- end display -->
-            
-            <div class="comments">
-                <div layout="column" class="comment" ng-repeat="comment in meeting.comments">
-                    <div class="comment-owner"><a href="users/{{comment._owner._id}}">{{ comment.ownerName}}</a></div>
-                    <div class="comment-content">{{ comment.content}}</div>
-                    <div class="comment-createdat">{{comment.created_at}}</div>
-                </div>
-
-                <div class="alert alert-danger" role="alert" ng-if="!meeting.comments.length">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    <span class="sr-only"></span>
-                    Комментариев нет
-                </div>
-
-                <div class="comment-form">
-                    <h4>Оставить комментарий</h4>
-                    <div>
-                        <md-input-container>
-                            <textarea ng-model="commentData.content" ng-keyup="$event.keyCode == 13 ? submitComment() : null"></textarea>
-                        </md-input-container>
-                    </div>
-                    <div>
-                        <md-button class="md-raised md-primary" ng-click="submitComment()">Отправить</md-button>
-                    </div>
-                </div>
-            </div><!-- end messages -->
-
-
-        </div><!-- end content -->
-            
-             <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>
-
-     <script src="../../bower_components/angular/angular.js"></script>
-    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
-    <script src="../../bower_components/angular-aria/angular-aria.min.js"></script>
-    <script src="../../bower_components/angular-material/angular-material.min.js"></script>
-    <script src="../../bower_components/angular-route/angular-route.min.js"></script>
-    <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="../../bower_components/lodash/dist/lodash.min.js"></script>
-    <script src="../../bower_components/ngmap/build/scripts/ng-map.min.js"></script>
-    <script src="../../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
-    <script src="../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
-    <script src="../../bower_components/moment/moment.js"></script>
-    <script src="../../bower_components/angular-moment/angular-moment.min.js"></script>
-    <script src="../../public/js/app.js"></script>
-    <script src="../../public/js/services/editService.js"></script>
-    <script src="../../public/js/controllers/singleMeeting.js"></script>
-    <script src="../../public/js/controllers/editMeeting.js"></script>
+         <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>
+         
+<% include partials/footer %>
+    
+<script src="../../public/js/services/editService.js"></script>
+<script src="../../public/js/controllers/singleMeeting.js"></script>
+<script src="../../public/js/controllers/editMeeting.js"></script>
 </body>
 </html>

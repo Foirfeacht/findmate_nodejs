@@ -1,0 +1,39 @@
+<!--=============================== navigation ===============================-->
+<md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
+<nav>
+    <div class="profile-block">
+
+        <div class="image-wrapper">
+            <img src="{{ currentUser.image }}" alt="{{currentUser.name}}">
+        </div>
+        <a href="/profile" class="profile-name"> {{currentUser.name}} </a>
+    </div>
+    <ul>
+        <li>
+            <a href="/profile">
+                <i class="mdi mdi-account"></i>Профиль
+            </a>
+        </li>
+        <li>
+            <a href="/meetings">
+                <i class="mdi mdi-map-marker-radius"></i>Встречи
+            </a>
+        </li>
+        <li>
+            <a href="/settings">
+                <i class="mdi mdi-settings"></i>Настройки
+            </a>
+        </li>
+        <li>
+            <a href="/logout">
+                <i class="mdi mdi-logout"></i>Выйти
+            </a>
+        </li>
+    </ul>
+</nav>
+</md-sidenav>
+
+
+
+
+<md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i class="mdi mdi-menu"></i></md-button>

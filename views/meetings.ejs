@@ -1,468 +1,407 @@
-<!doctype html>
-<html ng-app="findMate"> 
-	<head>
-		<title>События</title>
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../../bower_components/angular-material/angular-material.min.css">
-        <link rel="stylesheet" href="../../bower_components/mdi/css/materialdesignicons.min.css">
-        <link rel="stylesheet" href=".../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css">
-        <link rel="stylesheet" href="../../public/css/style.css">        
-        
-	</head>
-	<body ng-cloak ng-controller="meetingsController">
+<% include partials/head %>
 
-       <!--=============================== navigation ===============================-->
-        <md-sidenav class="md-sidenav-left menu" id="menu" md-component-id="nav">
-            <nav>
-                <div class="profile-block">
+<body ng-cloak ng-controller="meetingsController">
+  <% include partials/menu %>
+<!--=============================== main content ===============================-->
+<div class="content">
 
-                    <div class="image-wrapper">
-                        <img src="{{currentUser.image}}" alt="{{currentUser.name}}">
-                    </div>
-                    <a href="/profile" class="profile-name"> {{currentUser.name}} </a>
-                </div>
-                <ul>
-                    <li>
-                        <a href="/profile">
-                            <i class="mdi mdi-account"></i>Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/meetings">
-                            <i class="mdi mdi-map-marker-radius"></i>Встречи
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/settings">
-                            <i class="mdi mdi-settings"></i>Настройки
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/logout">
-                            <i class="mdi mdi-logout"></i>Выйти
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </md-sidenav>
+<!-- filters-->
 
-        
+<div layout="row">
 
-        <!--=============================== main content ===============================-->
-        <md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i class="mdi mdi-menu"></i></md-button>
-        <div class="content">
+    <div class="search">
+        <md-input-container md-no-float>
+            <label><md-icon class="mdi mdi-magnify search-icon"></md-icon>Название</label>
+            
+            <input ng-model="filterMtn.title" type="text">
+        </md-input-container>
+    </div>
 
-        <!-- filters-->
+    <div class="search">
+        <md-input-container md-no-float>
+            <label><md-icon class="mdi mdi-magnify search-icon"></md-icon>Описание</label>
+            
+            <input ng-model="filterMtn.description" type="text">
+        </md-input-container>
+    </div>
 
-        <div layout="row">
+    <div class="search">
+        <md-input-container md-no-float>
+            <label><md-icon class="mdi mdi-magnify search-icon"></md-icon>Организатор</label>
+            
+            <input ng-model="filterMtn.ownerName" type="text">
+        </md-input-container>
+    </div>        
 
-	        <div class="search">
-	            <md-input-container md-no-float>
-	                <label><md-icon class="mdi mdi-magnify search-icon"></md-icon>Название</label>
-	                
-	                <input ng-model="filterMtn.title" type="text">
-	            </md-input-container>
-	        </div>
+</div>
 
-	        <div class="search">
-	            <md-input-container md-no-float>
-	                <label><md-icon class="mdi mdi-magnify search-icon"></md-icon>Описание</label>
-	                
-	                <input ng-model="filterMtn.description" type="text">
-	            </md-input-container>
-	        </div>
-
-	        <div class="search">
-	            <md-input-container md-no-float>
-	                <label><md-icon class="mdi mdi-magnify search-icon"></md-icon>Организатор</label>
-	                
-	                <input ng-model="filterMtn.ownerName" type="text">
-	            </md-input-container>
-	        </div>        
-
-	    </div>
-
-	    <div class="select-filters" layout="row">
-	            <div class="select-filter">
-	                <md-select  placeholder="Сортировать по категории" ng-model="filterMtn.category">
-	                    <md-option value=" ">Все</md-option>
-	                    <md-option value="{{category.name}}" ng-repeat="category in categories">{{category.name}}</md-option>
-	                </md-select>
-	            </div>
-	            <div class="select-filter">
-	                <md-select  placeholder="Сортировать по видимости" ng-model="filterMtn.visibility">
-	                    <md-option value=" ">Все</md-option>
-	                    <md-option value="{{visibility.name}}" ng-repeat="visibility in visibilities">{{visibility.name}}</md-option>
-	                </md-select>
-	            </div>
-
-                <div class="search">
-                	<label>Дата</label>
-                    <datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hstep" minute-step="mstep" ng-model="formData.startDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
-                </div>
+<div class="select-filters" layout="row">
+        <div class="select-filter">
+            <md-select  placeholder="Сортировать по категории" ng-model="filterMtn.category">
+                <md-option value=" ">Все</md-option>
+                <md-option value="{{category.name}}" ng-repeat="category in categories">{{category.name}}</md-option>
+            </md-select>
+        </div>
+        <div class="select-filter">
+            <md-select  placeholder="Сортировать по видимости" ng-model="filterMtn.visibility">
+                <md-option value=" ">Все</md-option>
+                <md-option value="{{visibility.name}}" ng-repeat="visibility in visibilities">{{visibility.name}}</md-option>
+            </md-select>
         </div>
 
-        <!-- tabs -->
+        <div class="search">
+        	<label>Дата</label>
+            <datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hstep" minute-step="mstep" ng-model="formData.startDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+        </div>
+</div>
 
-        <md-tabs class="md-primary" md-selected="data.selectedIndex">
-            <md-tab id="tab1" aria-controls="tab1-content">
-               Мои события
-            </md-tab>
-            <md-tab id="tab2" aria-controls="tab2-content">
-               Все события
-            </md-tab>
-            <md-tab id="tab3" aria-controls="tab3-content">
-               Приглашения
-            </md-tab>
-            <md-tab id="tab4" aria-controls="tab4-content">
-               Принятые приглашения
-            </md-tab>
-            <md-tab id="tab5" aria-controls="tab5-content">
-                Прошедшие
-            </md-tab>
-            <md-tab id="tab6" aria-controls="tab6-content">
-                События друзей
-            </md-tab>
-        </md-tabs>
+<!-- tabs -->
 
-        <!-- end tabs -->
+<md-tabs class="md-primary" md-selected="data.selectedIndex">
+    <md-tab id="tab1" aria-controls="tab1-content">
+       Мои события
+    </md-tab>
+    <md-tab id="tab2" aria-controls="tab2-content">
+       Все события
+    </md-tab>
+    <md-tab id="tab3" aria-controls="tab3-content">
+       Приглашения
+    </md-tab>
+    <md-tab id="tab4" aria-controls="tab4-content">
+       Принятые приглашения
+    </md-tab>
+    <md-tab id="tab5" aria-controls="tab5-content">
+        Прошедшие
+    </md-tab>
+    <md-tab id="tab6" aria-controls="tab6-content">
+        События друзей
+    </md-tab>
+</md-tabs>
 
-        <ng-switch on="data.selectedIndex" class="tabpanel-container">
+<!-- end tabs -->
 
-        <!-- tab 1 -->
+<ng-switch on="data.selectedIndex" class="tabpanel-container">
 
-        	<div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
-                   
-	            <h1 class="active-meetings">Созданные события от {{currentUser.name}}</h1>
-	            <div class="meetings-display row">
+<!-- tab 1 -->
 
-	            
-	            
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-if="meeting._owner._id === currentUser._id">
-	             
-	                    <div layout="row" class="meeting-title"><strong>Название:&nbsp; </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание:&nbsp; </strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория:&nbsp; </strong> {{ meeting.category }}</div>
-	                    <div layout="row"><strong>Создатель:&nbsp; </strong><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден: &nbsp;</strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
+	<div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
+           
+        <h1 class="active-meetings">Созданные события от {{currentUser.name}}</h1>
+        <div class="meetings-display row">
 
-	                    <div layout="row"><strong>Создано: &nbsp;</strong> {{meeting.created}}</div>
-	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: &nbsp;</strong> {{meeting.updated}}</div>
+        
+        
+            <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-if="meeting._owner._id === currentUser._id">
+         
+                <div layout="row" class="meeting-title"><strong>Название:&nbsp; </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+                <div layout="row"><strong>Описание:&nbsp; </strong> {{ meeting.description }}</div>
+                <div layout="row"><strong>Категория:&nbsp; </strong> {{ meeting.category }}</div>
+                <div layout="row"><strong>Создатель:&nbsp; </strong><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+                <div layout="row"><strong>Виден: &nbsp;</strong> {{ meeting.visibility }}</div>
+                <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
 
-
-                        <h6>Приглашенные</h6>
-                        <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                                <img src="{{user.image}}" alt="{{user.name }}">
-                            </div>
-                        </div>
-
-                        <h6>Участники</h6>
-                        <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                                <img src="{{user.image}}" alt="{{user.name }}">
-                            </div>
-                        </div>
-
-                        <div layout="row">
-                        	<md-button class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="currentUser._id === meeting._owner._id">
-		                    	Удалить
-		                    </md-button>
-                        </div>
-
-	                    <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-if="currentUser._id === meeting._owner._id">
-	                    	<i class="mdi mdi-pencil"></i>
-	                    </md-button>
-	                </div>
+                <div layout="row"><strong>Создано: &nbsp;</strong> {{meeting.created}}</div>
+                <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: &nbsp;</strong> {{meeting.updated}}</div>
 
 
-	                <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
-					  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-					  <span class="sr-only"></span>
-					  Встреч пока нет
-					</div>
-	            </div>
-	        </div>
-
-	        <!-- tab two -->
-
-	        <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
-                   
-	            <h1 class="active-meetings">Все события</h1>
-	            <div class="meetings-display row">
-
-	            
-	            
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" >
-	                    
-	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
-	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
-	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
-	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
-
-                        <h6>Приглашенные</h6>
-                        <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                            	<img src="{{user.image}}" alt="{{user.name }}">
-                            </div>
-                        </div>
-
-                        <h6>Участники</h6>
-                        <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                               <img src="{{user.image}}" alt="{{user.name }}">
-                            </div>
-                        </div>
-	                    <div layout="row">
-	                    	<md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)" ng-show="checkOwner(meeting._owner._id)">Удалить</md-button>
-	                        <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение</md-button>
-	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Учавствовать</md-button>
-                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="showButton(meeting.joinedUsers)">Не учавствовать</md-button>
-	                    </div>
-
-                        <div class="meeting-footer">
-                            <div >
-                                <i class="mdi mdi-account-multiple"></i> {{ meeting.joinedUsers.length }}
-                            </div>
-                            <div>
-                                <i class="mdi mdi-comment"></i> {{ meeting.comments.length }}
-                            </div>
-                        </div>
-
-	                    <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-show="checkOwner(meeting._owner._id)">
-	                    	<i class="mdi mdi-pencil"></i>
-	                    </md-button>
-	                </div><!-- end meeting -->
-
-	                <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
-					  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-					  <span class="sr-only"></span>
-					  Встреч пока нет
-					</div>
-	            </div><!-- end display -->
-	        </div><!-- end tab -->
-
-          
-
-            <!-- tab three -->
-
-            <div role="tabpanel" id="tab3-content"  aria-labelledby="tab3" ng-switch-when="2" md-swipe-left="next()" md-swipe-right="previous()">
-                <h1 class="active-meetings">Приглашения</h1>
-                <div class="meetings-display row">
-
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | filter: {invited: true} | orderBy: 'startDate'">
-	                    
-	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
-	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
-	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
-	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
-
-                        <h6>Приглашенные</h6>
-                        <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                                <img src="{{user.image}}" alt="{{user.name }}">
-                            </div>
-                        </div>
-
-                        <h6>Участники</h6>
-                        <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                                <img src="{{user.image}}" alt="{{user.name }}">
-                            </div>
-                        </div>
-	                    <div layout="row">
-		                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="showButton(meeting.invited)">Отклонить приглашение</md-button>
-	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Учавствовать</md-button>
-                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="showButton(meeting.joinedUsers)">Не учавствовать</md-button>
-	                    </div>
-
-	                </div>
-
-	                <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
-					  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-					  <span class="sr-only"></span>
-					  Встреч пока нет
-					</div>
-	            </div>
-	        </div>
-
-            <!-- tab four -->
-
-	        <div role="tabpanel" id="tab4-content" aria-labelledby="tab4" ng-switch-when="3" md-swipe-left="next()" md-swipe-right="previous()" >
-                   
-	            <h1 class="active-meetings">Принятые приглашения</h1>
-	            <div class="meetings-display row">	            
-	            
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn  | orderBy: 'startDate'" ng-show="showButton(meeting.joinedUsers)">
-	                 
-	                    <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
-	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
-	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
-	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
-
-                        <h6>Приглашенные</h6>
-                        <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                                <img src="{{user.image}}" alt="{{user.name }}">
-                            </div>
-                        </div>
-
-                        <h6>Участники</h6>
-                        <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                                <img src="{{user.image}}" alt="{{user.name }}">
-                            </div>
-                        </div>
-	                    <div layout="row">
-		                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение</md-button>
-	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Учавствовать</md-button>
-                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="showButton(meeting.joinedUsers)">Не учавствовать</md-button>
-	                    </div>
-
-	                </div>
-
-	                <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
-					  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-					  <span class="sr-only"></span>
-					  Встреч пока нет
-					</div>
-	            </div>
-	        </div>
-
-            <!-- tab five -->
-
-            <div role="tabpanel" id="tab5-content" aria-labelledby="tab5" ng-switch-when="4" md-swipe-left="next()" md-swipe-right="previous()">
-
-                <h1 class="active-meetings">Прошедшие</h1>
-                <div class="meetings-display row">
-
-                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-if="!meeting.active">
-                    
-                        <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
-	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
-	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
-	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
-
-
-                        <h6>Приглашенные</h6>
-                        <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                                <img src="{{user.image}}" alt="{{user.name }}">
-                            </div>
-                        </div>
-
-                        <h6>Участники</h6>
-                        <div layout="row" class="userlist">
-                            <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
-                                <img src="{{user.image}}" alt="{{user.name }}">
-                            </div>
-                        </div>
+                <h6>Приглашенные</h6>
+                <div layout="row" class="userlist">
+                    <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                        <img src="{{user.image}}" alt="{{user.name }}">
                     </div>
+                </div>
 
-                    <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                        <span class="sr-only"></span>
-                        Встреч пока нет
+                <h6>Участники</h6>
+                <div layout="row" class="userlist">
+                    <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
+                        <img src="{{user.image}}" alt="{{user.name }}">
+                    </div>
+                </div>
+
+                <div layout="row">
+                	<md-button class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="currentUser._id === meeting._owner._id">
+                    	Удалить
+                    </md-button>
+                </div>
+
+                <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-if="currentUser._id === meeting._owner._id">
+                	<i class="mdi mdi-pencil"></i>
+                </md-button>
+            </div>
+
+
+            <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
+			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			  <span class="sr-only"></span>
+			  Встреч пока нет
+			</div>
+        </div>
+    </div>
+
+    <!-- tab two -->
+
+    <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
+           
+        <h1 class="active-meetings">Все события</h1>
+        <div class="meetings-display row">
+
+        
+        
+            <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" >
+                
+                <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+                <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+                <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
+                <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+                <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
+                <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
+                <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+                <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
+
+                <h6>Приглашенные</h6>
+                <div layout="row" class="userlist">
+                    <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                    	<img src="{{user.image}}" alt="{{user.name }}">
+                    </div>
+                </div>
+
+                <h6>Участники</h6>
+                <div layout="row" class="userlist">
+                    <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
+                       <img src="{{user.image}}" alt="{{user.name }}">
+                    </div>
+                </div>
+                <div layout="row">
+                	<md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)" ng-show="checkOwner(meeting._owner._id)">Удалить</md-button>
+                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение</md-button>
+                    <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Учавствовать</md-button>
+                    <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="showButton(meeting.joinedUsers)">Не учавствовать</md-button>
+                </div>
+
+                <div class="meeting-footer">
+                    <div >
+                        <i class="mdi mdi-account-multiple"></i> {{ meeting.joinedUsers.length }}
+                    </div>
+                    <div>
+                        <i class="mdi mdi-comment"></i> {{ meeting.comments.length }}
+                    </div>
+                </div>
+
+                <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-show="checkOwner(meeting._owner._id)">
+                	<i class="mdi mdi-pencil"></i>
+                </md-button>
+            </div><!-- end meeting -->
+
+            <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
+			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			  <span class="sr-only"></span>
+			  Встреч пока нет
+			</div>
+        </div><!-- end display -->
+    </div><!-- end tab -->
+
+  
+
+    <!-- tab three -->
+
+    <div role="tabpanel" id="tab3-content"  aria-labelledby="tab3" ng-switch-when="2" md-swipe-left="next()" md-swipe-right="previous()">
+        <h1 class="active-meetings">Приглашения</h1>
+        <div class="meetings-display row">
+
+            <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | filter: {invited: true} | orderBy: 'startDate'">
+                
+                <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+                <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+                <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
+                <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+                <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
+                <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
+                <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+                <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
+
+                <h6>Приглашенные</h6>
+                <div layout="row" class="userlist">
+                    <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                        <img src="{{user.image}}" alt="{{user.name }}">
+                    </div>
+                </div>
+
+                <h6>Участники</h6>
+                <div layout="row" class="userlist">
+                    <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
+                        <img src="{{user.image}}" alt="{{user.name }}">
+                    </div>
+                </div>
+                <div layout="row">
+                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="showButton(meeting.invited)">Отклонить приглашение</md-button>
+                    <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Учавствовать</md-button>
+                    <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="showButton(meeting.joinedUsers)">Не учавствовать</md-button>
+                </div>
+
+            </div>
+
+            <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
+			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			  <span class="sr-only"></span>
+			  Встреч пока нет
+			</div>
+        </div>
+    </div>
+
+    <!-- tab four -->
+
+    <div role="tabpanel" id="tab4-content" aria-labelledby="tab4" ng-switch-when="3" md-swipe-left="next()" md-swipe-right="previous()" >
+           
+        <h1 class="active-meetings">Принятые приглашения</h1>
+        <div class="meetings-display row">	            
+        
+            <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn  | orderBy: 'startDate'" ng-show="showButton(meeting.joinedUsers)">
+             
+                <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+                <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+                <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
+                <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+                <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
+                <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
+                <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+                <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
+
+                <h6>Приглашенные</h6>
+                <div layout="row" class="userlist">
+                    <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                        <img src="{{user.image}}" alt="{{user.name }}">
+                    </div>
+                </div>
+
+                <h6>Участники</h6>
+                <div layout="row" class="userlist">
+                    <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
+                        <img src="{{user.image}}" alt="{{user.name }}">
+                    </div>
+                </div>
+                <div layout="row">
+                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение</md-button>
+                    <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Учавствовать</md-button>
+                    <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="showButton(meeting.joinedUsers)">Не учавствовать</md-button>
+                </div>
+
+            </div>
+
+            <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
+			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			  <span class="sr-only"></span>
+			  Встреч пока нет
+			</div>
+        </div>
+    </div>
+
+    <!-- tab five -->
+
+    <div role="tabpanel" id="tab5-content" aria-labelledby="tab5" ng-switch-when="4" md-swipe-left="next()" md-swipe-right="previous()">
+
+        <h1 class="active-meetings">Прошедшие</h1>
+        <div class="meetings-display row">
+
+            <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-if="!meeting.active">
+            
+                <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+                <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+                <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
+                <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+                <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
+                <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
+                <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+                <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
+
+
+                <h6>Приглашенные</h6>
+                <div layout="row" class="userlist">
+                    <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+                        <img src="{{user.image}}" alt="{{user.name }}">
+                    </div>
+                </div>
+
+                <h6>Участники</h6>
+                <div layout="row" class="userlist">
+                    <div ng-repeat="user in meeting.joinedUsers | limitTo: 5">
+                        <img src="{{user.image}}" alt="{{user.name }}">
                     </div>
                 </div>
             </div>
 
-            <!-- tab six -->
+            <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only"></span>
+                Встреч пока нет
+            </div>
+        </div>
+    </div>
 
-            <div role="tabpanel" id="tab6-content" aria-labelledby="tab6" ng-switch-when="5" md-swipe-left="next()" md-swipe-right="previous()">
+    <!-- tab six -->
 
-                <h1 class="active-meetings">События друзей</h1>
-                <div class="meetings-display row" ng-repeat="friend in friends" ng-if="friends">
+    <div role="tabpanel" id="tab6-content" aria-labelledby="tab6" ng-switch-when="5" md-swipe-left="next()" md-swipe-right="previous()">
 
-                    <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-if="meeting.ownerFacebook === friend.id">
-    
-                        <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
-	                    <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
-	                    <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
-	                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-	                    <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
-	                    <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
-	                    <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
-	                    <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
+        <h1 class="active-meetings">События друзей</h1>
+        <div class="meetings-display row" ng-repeat="friend in friends" ng-if="friends">
 
-	                    <h6>Приглашенные</h6>
-	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                    			<img src="{{user.image}}" alt="{{user.name }}">
-                    		</div>
-	                    </div>
+            <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-if="meeting.ownerFacebook === friend.id">
 
-	                    <h6>Участники</h6>
-	                    <div layout="row" class="userlist">
-                    		<div ng-repeat="user in meeting.participants | limitTo: 5">
-                    			<img src="{{user.image}}" alt="{{user.name }}">
-                    		</div>
-	                    </div>
-	                    <div layout="column">
-		                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="!showButton(meeting.invitedUsers)">Отклонить приглашение</md-button>
-	                        <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Учавствовать</md-button>
-                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Не учавствовать</md-button>
-	                    </div>
-                    </div>
+                <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
+                <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+                <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
+                <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+                <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
+                <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
+                <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+                <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
 
-                    <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                        <span class="sr-only"></span>
-                        Встреч пока нет
-                    </div>
+                <h6>Приглашенные</h6>
+                <div layout="row" class="userlist">
+            		<div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
+            			<img src="{{user.image}}" alt="{{user.name }}">
+            		</div>
                 </div>
-                <div class="alert alert-danger" role="alert" ng-if="!friends.length">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    <span class="sr-only"></span>
-                    Ваших друзей в приложении нет
+
+                <h6>Участники</h6>
+                <div layout="row" class="userlist">
+            		<div ng-repeat="user in meeting.participants | limitTo: 5">
+            			<img src="{{user.image}}" alt="{{user.name }}">
+            		</div>
+                </div>
+                <div layout="column">
+                    <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="!showButton(meeting.invitedUsers)">Отклонить приглашение</md-button>
+                    <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Учавствовать</md-button>
+                    <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Не учавствовать</md-button>
                 </div>
             </div>
 
+            <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only"></span>
+                Встреч пока нет
+            </div>
+        </div>
+        <div class="alert alert-danger" role="alert" ng-if="!friends.length">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+            Ваших друзей в приложении нет
+        </div>
+    </div>
 
-        </ng-switch>
 
-                <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>
-
+</ng-switch>
 
 
-    <script src="../../bower_components/angular/angular.js"></script>
-    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
-    <script src="../../bower_components/angular-aria/angular-aria.min.js"></script>
-    <script src="../../bower_components/angular-material/angular-material.min.js"></script>
-    <script src="../../bower_components/angular-route/angular-route.min.js"></script>   
-    <script src="../../bower_components/moment/moment.js"></script>
-    <script src="../../bower_components/angular-moment/angular-moment.min.js"></script>
-    <script src="../../bower_components/moment/locale/ru.js"></script>
-    <script src="../../bower_components/ngmap/build/scripts/ng-map.min.js"></script>
-    <script src="../../public/js/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="../../public/js/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="../../bower_components/lodash/dist/lodash.min.js"></script>
-    <script src="../../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
-    <script src="../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
-	<script src="../../public/js/app.js"></script>
-    <script src="../../public/js/services/routingService.js"></script>
-    <script src="../../public/js/services/editService.js"></script>
-    <script src="../../public/js/controllers/meetings.js"></script>
-    <script src="../../public/js/controllers/editMeeting.js"></script>
+<md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>
+
+</div><!-- end content -->
+
+<% include partials/footer %>
+
+<script src="../../public/js/services/routingService.js"></script>
+<script src="../../public/js/services/editService.js"></script>
+<script src="../../public/js/controllers/meetings.js"></script>
+<script src="../../public/js/controllers/editMeeting.js"></script>
 
 </body>
 </html>

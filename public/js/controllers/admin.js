@@ -3,6 +3,13 @@
 
 findMate.controller('adminController', ['$scope', '$http', '$routeParams', '$mdSidenav', function($scope, $http, $routeParams, $mdSidenav) {
 
+    $http.get('/current_user')
+        .success(function(data) {
+            $scope.currentUser = data;
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });
     
     // when landing on the page, get all events and show them
     $http.get('../api/meetings')

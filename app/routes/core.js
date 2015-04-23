@@ -18,7 +18,8 @@ module.exports = function(app) {
 	// PROFILE SECTION =========================
 	app.get('/profile', isLoggedIn, function(req, res) {
 		res.render('profile.ejs', {
-			user : req.user
+			user : req.user,
+			title: "Профиль " + req.user.name
 		});
 	});
 
@@ -31,7 +32,8 @@ module.exports = function(app) {
 	// MAP ==============================
 	app.get('/map', isLoggedIn, function(req, res) {
 		res.render('map.ejs', {
-			user : req.user
+			user : req.user,
+			title: "События"
 		});
 	});
 
@@ -44,14 +46,16 @@ module.exports = function(app) {
 	// MEETINGS ==============================
 	app.get('/meetings', isLoggedIn, function(req, res) {
 		res.render('meetings.ejs', {
-			user : req.user
+			user : req.user,
+			title: "События"
 		});
 	});
 
 	// SETTINGS ==============================
 	app.get('/settings', isLoggedIn, function(req, res) {
 		res.render('settings.ejs', {
-			user : req.user
+			user : req.user,
+			title: "Настройки"
 		});
 	});
 
@@ -60,13 +64,15 @@ module.exports = function(app) {
 
 	app.get('/admin', isLoggedIn, function(req, res) {
 		res.render('admin.ejs', {
-			user : req.user
+			user : req.user,
+			title: "Админка"
 		});
 	});
 
 	app.get('/main', isLoggedIn, function(req, res) {
 		res.render('main.ejs', {
-			user : req.user
+			user : req.user,
+			title: "Главная"
 		});
 	});
 }
