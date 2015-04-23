@@ -18,9 +18,9 @@
                 <div class="profile-block">
 
                     <div class="image-wrapper">
-                        <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}">
+                        <img src="{{currentUser.image}}" alt="{{currentUser.name}}">
                     </div>
-                    <a href="/profile" class="profile-name"> {{logged_in_user.name}} </a>
+                    <a href="/profile" class="profile-name"> {{currentUser.name}} </a>
                 </div>
                 <ul>
                     <li>
@@ -79,13 +79,13 @@
                         </div>
                     </div>
                     <div layout="row">
-                        <md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">Удалить</md-button>
+                        <md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)" ng-if="currentUser._id === meeting._owner._id">Удалить</md-button>
                         <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)" ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение</md-button>
                         <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)" ng-show="!showButton(meeting.joinedUsers)">Учавствовать</md-button>
                         <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)" ng-show="showButton(meeting.joinedUsers)">Не учавствовать</md-button>
                     </div>
 
-                    <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
+                    <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-if="currentUser._id === meeting._owner._id">
                         <i class="mdi mdi-pencil"></i>
                     </md-button>
                 </div>

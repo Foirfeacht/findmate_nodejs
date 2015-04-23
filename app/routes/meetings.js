@@ -4,6 +4,7 @@
 // and event model
 var Meeting    = require('../models/meeting');
 var User 	   = require('../models/user');
+var debug 	   = require('debug')('app:meetings')
 
 module.exports = function(app) {
 	// =============================================================================
@@ -86,11 +87,11 @@ module.exports = function(app) {
 			if(err)
 				res.send (err)
 
-			console.log("meeting joined");
+			debug("meeting joined");
 			Meeting.find(function(err, meetings) {
-			 if (err)
-			 res.send(err)
-			 res.json(meetings);
+				 if (err)
+				 res.send(err)
+				 res.json(meetings);
 			 });
 		});
 	});
@@ -104,11 +105,11 @@ module.exports = function(app) {
 			if(err)
 				res.send (err)
 
-			console.log("meeting joined");
+			debug("meeting joined");
 			Meeting.find(function(err, meetings) {
-			 if (err)
-			 res.send(err)
-			 res.json(meetings);
+				 if (err)
+				 res.send(err)
+				 res.json(meetings);
 			 });
 			//res.json(meeting);
 		});
@@ -123,7 +124,7 @@ module.exports = function(app) {
 			if(err)
 				res.send (err)
 
-			console.log("meeting updated");
+			debug("meeting updated");
 			Meeting.find(function(err, meetings) {
 			 if (err)
 			 res.send(err)
@@ -134,8 +135,10 @@ module.exports = function(app) {
 	});
 
 	//update a meeting
-	app.put('/api/meetings/:id', isLoggedIn, function (req, res){
+	app.put('/api/meetings/:meetingId', isLoggedIn, function (req, res){
 		var user = req.user;
+		var meeting = req.meeting;
+		var id = req.meeting._id
 		var update = {
 			$set: {
 				title: req.body.title,
@@ -150,7 +153,7 @@ module.exports = function(app) {
 			}
 		};
 
-		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
+		meeting.update(id, update, function (err, meeting) {
 			if(!meeting) {
 				res.statusCode = 404;
 				return res.send({ error: 'Not found' });
@@ -158,7 +161,7 @@ module.exports = function(app) {
 			if(err){
 				res.send(err)
 			}
-			console.log("meeting updated");
+			debug("meeting updated");
 			Meeting.find(function(err, meetings) {
 				if (err)
 					res.send(err)
@@ -237,8 +240,7 @@ module.exports = function(app) {
 				res.statusCode = 404;
 				return res.send({ error: 'Not found' });
 			}
-			console.log("comment updated");
-			console.log(meeting.comments);
+			debug("comment updated");
 			Meeting.find(function(err, meetings) {
 				if (err)
 					res.send(err)

@@ -35,6 +35,7 @@
     "start": "grunt start"
   },
   "devDependencies": {
+    "connect-livereload": "^0.5.3",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-concurrent": "^1.0.0",
@@ -43,6 +44,8 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-node-inspector": "^0.1.6",
     "grunt-nodemon": "^0.4.0",
-    "load-grunt-tasks": "^3.1.0"
+    "load-grunt-tasks": "^3.1.0",
+    "debug": "^2.1.3",
+    "chalk": "^1.0.0"
   }
 }

@@ -18,9 +18,9 @@
                 <div class="profile-block">
 
                     <div class="image-wrapper">
-                        <img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}">
+                        <img src="{{currentUser.image}}" alt="{{currentUser.name}}">
                     </div>
-                    <a href="/profile" class="profile-name"> {{logged_in_user.name}} </a>
+                    <a href="/profile" class="profile-name"> {{currentUser.name}} </a>
                 </div>
                 <ul>
                     <li>
@@ -134,12 +134,12 @@
 
         	<div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
                    
-	            <h1 class="active-meetings">Созданные события от {{logged_in_user.name}}</h1>
+	            <h1 class="active-meetings">Созданные события от {{currentUser.name}}</h1>
 	            <div class="meetings-display row">
 
 	            
 	            
-	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-if="meeting._owner._id === logged_in_user._id">
+	                <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-if="meeting._owner._id === currentUser._id">
 	             
 	                    <div layout="row" class="meeting-title"><strong>Название:&nbsp; </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
 	                    <div layout="row"><strong>Описание:&nbsp; </strong> {{ meeting.description }}</div>
@@ -167,12 +167,12 @@
                         </div>
 
                         <div layout="row">
-                        	<md-button class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
+                        	<md-button class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)" ng-if="currentUser._id === meeting._owner._id">
 		                    	Удалить
 		                    </md-button>
                         </div>
 
-	                    <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-if="logged_in_user._id === meeting._owner._id">
+	                    <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)" ng-if="currentUser._id === meeting._owner._id">
 	                    	<i class="mdi mdi-pencil"></i>
 	                    </md-button>
 	                </div>

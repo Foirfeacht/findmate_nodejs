@@ -14,6 +14,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 	     .success(function(data) {
 			$scope.currentUser = data;
 			$scope.loadFriends();
+			$scope.refresh();
 		 })
 		.error(function (data) {
 			console.log('Error: ' + data);
@@ -21,29 +22,29 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 
     $scope.$watch('currentMeeting', function () {
         $scope.currentMeetingId = $scope.currentMeeting._id;
-		    $scope.refresh();
+		$scope.refresh();
     });
 
     $scope.prevent = function ($event) {
       $event.preventDefault();
     }
 
-		$scope.refresh = function () {
-			$http.get('../api/meetings/' + $scope.currentMeetingId)
-				.success(function(data) {
-					$scope.meeting = data;
-					$scope.meeting.startDate = new Date($scope.meeting.startDate);
-					$scope.meeting.startTime = new Date($scope.meeting.startTime);
-					if ($scope.meeting.updated_at !== null){
-						$scope.meeting.updated_at = new Date($scope.meeting.updated_at);
-					};
-					$scope.meeting.updated = moment($scope.meeting.updated_at).fromNow();
-					$scope.meeting.created = moment($scope.meeting.created_at).fromNow();
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
-		};
+	$scope.refresh = function () {
+		$http.get('../api/meetings/' + $scope.currentMeetingId)
+			.success(function(data) {
+				$scope.meeting = data;
+				$scope.meeting.startDate = new Date($scope.meeting.startDate);
+				$scope.meeting.startTime = new Date($scope.meeting.startTime);
+				if ($scope.meeting.updated_at !== null){
+					$scope.meeting.updated_at = new Date($scope.meeting.updated_at);
+				};
+				$scope.meeting.updated = moment($scope.meeting.updated_at).fromNow();
+				$scope.meeting.created = moment($scope.meeting.created_at).fromNow();
+			})
+			.error(function (data) {
+				console.log('Error: ' + data);
+			});
+	};
 
     //button show filter
           $scope.showButton = function(array) {

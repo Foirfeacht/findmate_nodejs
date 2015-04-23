@@ -18,6 +18,7 @@ findMate.controller('meetingsController', ['$scope',
 			 .success(function(data) {
 				 $scope.currentUser = data;
 				 $scope.loadFriends();
+         $scope.refresh();
 			 })
 			 .error(function (data) {
 				 console.log('Error: ' + data);
@@ -52,39 +53,35 @@ findMate.controller('meetingsController', ['$scope',
             $scope.meetings = data;
             var meetings = $scope.meetings;
             console.log(data);
-             $scope.loopMeetings(meetings);
-				// ng show for buttons
-
-				
+             $scope.loopMeetings(meetings);				
         })
         .error(function (data) {
             console.log('Error: ' + data);
         });
-    }
+    };
 
+    // ng show for buttons
     $scope.showButton = function(array) {
-          var id = $scope.logged_in_user._id;
-          var i, obj;
-          for (i = 0; i < array.length; ++i) {
-            obj = array[i];
-            if (obj._id == id) {
-              return true;
-            }
-          };
-          return false;
-        };
-
-        $scope.checkOwner = function(id){
-          var currentUserId = $scope.currentUser._id;
-          if (id === currentUserId){
-            return true;
-          }
-          return false;
+      var id = $scope.currentUser._id;
+      var i, obj;
+      for (i = 0; i < array.length; ++i) {
+        obj = array[i];
+        if (obj._id == id) {
+          return true;
         }
+      };
+      return false;
+    };
 
-    // when landing on the page, get all events and show them
+    $scope.checkOwner = function(id){
+      var currentUserId = $scope.currentUser._id;
+      if (id === currentUserId){
+        return true;
+      }
+      return false;
+    };
 
-
+    // check active status and format date
     $scope.loopMeetings = function(meetings){
 		    var meetings = meetings;
         var dateNow = new Date().toJSON();
@@ -113,15 +110,13 @@ findMate.controller('meetingsController', ['$scope',
          }; // end for loop
     };
 
-
-
     // delete a meeting
     $scope.deleteMeeting = function(id) {
         $http.delete('../api/meetings/' + id)
             .success(function (data) {
                 $scope.meetings = data;
                 console.log(data);
-				$scope.refresh();
+				        $scope.refresh();
 				
             })
             .error(function(data) {
@@ -132,7 +127,6 @@ findMate.controller('meetingsController', ['$scope',
     // decline invitation
 
     $scope.declineInvitation = function(id){
-
        $http.put('/decline/meetings/' + id)
             .success(function (data) {
                 $scope.meetings = data;

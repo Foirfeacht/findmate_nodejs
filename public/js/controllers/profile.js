@@ -8,6 +8,15 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
        $mdSidenav('nav').toggle();
     };
 
+    $http.get('/current_user')
+	     .success(function(data) {
+			$scope.currentUser = data;
+			$scope.loadFriends();
+		 })
+		.error(function (data) {
+			console.log('Error: ' + data);
+		});
+
     // image selector
     $scope.toggleSelectorButton = true;
     $scope.facebookImage = false;
@@ -20,8 +29,8 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
     $scope.toggleImageSelector = function(){
         $scope.toggleSelectorButton = false;
         $scope.selectImageButton = true;
-        $scope.facebookImage = $scope.logged_in_user.facebook ? true : false;
-        $scope.vkontakteImage = $scope.logged_in_user.vkontakte ? true : false;
+        $scope.facebookImage = $scope.currentUser.facebook ? true : false;
+        $scope.vkontakteImage = $scope.currentUser.vkontakte ? true : false;
         console.log ($scope.facebookImage + ' '  + $scope.vkontakteImage + ' ' + $scope.selectImageButton);
     }
 
@@ -40,9 +49,6 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
         $scope.toggleSelectorButton = true;
     }
 
-    $scope.user = $scope.logged_in_user;
-    console.log($scope.user);
-
     $scope.showConfirm = function(size){
         var modalInstance = $modal.open({
           templateUrl: './public/partials/confirmRemove.tmpl.ejs',
@@ -53,7 +59,7 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
     };
 
 
-    /*var friendsRequest = 'https://graph.facebook.com/' + $scope.logged_in_user.facebook.id + '/friends' + '?access_token=' + $scope.logged_in_user.facebook.token;
+    /*var friendsRequest = 'https://graph.facebook.com/' + $scope.currentUser.facebook.id + '/friends' + '?access_token=' + $scope.currentUser.facebook.token;
         $http.get(friendsRequest)
             .success(function(data) {
                 $scope.friends = data.data;

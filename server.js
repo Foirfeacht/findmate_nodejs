@@ -17,11 +17,13 @@ var bodyParser     = require('body-parser');
 var session        = require('express-session');
 var methodOverride = require('method-override');
 var _              = require('lodash');
-//var static 		   = require('node-static');
 
-var configDB = require('./config/database.js');
+//debugging
+var chalk 		   = require('chalk');
+var debug          = require('debug')('express');
 
 // configuration ===============================================================
+var configDB = require('./config/database.js');
 mongoose.connect(configDB.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
@@ -44,15 +46,21 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
+//live reload, dev only
+app.use(require('connect-livereload')({
+    port: 35729
+  }));
+
 // routes ======================================================================
 require('./app/routes/authentication.js')(app, passport); // load our routes and pass in our app and fully configured passport
 require('./app/routes/core.js')(app);
 require('./app/routes/meetings.js')(app);
 require('./app/routes/users.js')(app);
+require('./app/routes/errors.js')(app);
 
 
 // launch ======================================================================
 app.listen(port);
-console.log('The magic happens on port ' + port);
+debug('The magic happens on port ' + port);
 
 exports = module.exports = app;

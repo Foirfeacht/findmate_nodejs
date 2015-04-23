@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 			},
 			serverJS: {
 				files: watchFiles.serverJS,
-				tasks: ['jshint'],
+				//tasks: ['jshint'],
 				options: {
 					livereload: true
 				}
@@ -35,14 +35,14 @@ module.exports = function(grunt) {
 			},
 			clientJS: {
 				files: watchFiles.clientJS,
-				tasks: ['jshint'],
+				//tasks: ['jshint'],
 				options: {
 					livereload: true
 				}
 			},
 			clientCSS: {
 				files: watchFiles.clientCSS,
-				tasks: ['csslint'],
+				//tasks: ['csslint'],
 				options: {
 					livereload: true
 				}
@@ -66,7 +66,7 @@ module.exports = function(grunt) {
 		},
 		nodemon: {
 			dev: {
-				script: 'server.js',
+				script: 'DEBUG=express:* server.js',
 				options: {
 					nodeArgs: ['--debug'],
 					ext: 'js,html',
@@ -143,5 +143,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
 
 	//start task
-	grunt.registerTask('start', ['concurrent:default']);
+	grunt.registerTask('start', ['lint', 'concurrent:default']);
 };
