@@ -18,9 +18,6 @@ var session        = require('express-session');
 var methodOverride = require('method-override');
 var _              = require('lodash');
 
-//debugging
-var chalk 		   = require('chalk');
-var debug          = require('debug')('express');
 
 // configuration ===============================================================
 var configDB = require('./config/database.js');
