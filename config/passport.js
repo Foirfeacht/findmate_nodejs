@@ -29,8 +29,6 @@ module.exports = function(passport) {
         });
     });
 
-   
-
     // =========================================================================
     // FACEBOOK ================================================================
     // =========================================================================
@@ -50,7 +48,7 @@ module.exports = function(passport) {
             // check if the user is already logged in
             if (!req.user) {
 
-                User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+                User.findOne({ 'email' : profile.emails[0].value.toLowerCase() }, function(err, user) {
                     if (err)
                         return done(err);
 
@@ -137,7 +135,7 @@ module.exports = function(passport) {
             // check if the user is already logged in
             if (!req.user) {
 
-                User.findOne({ 'vkontakte.id' : profile.id }, function(err, user) {
+                User.findOne({ 'vkontakte.id' : params.email.toLowerCase() }, function(err, user) {
                     if (err)
                         return done(err);
 

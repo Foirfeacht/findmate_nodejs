@@ -1,14 +1,11 @@
-findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'moment', '$modalInstance',
+findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalInstance',
                      function($scope, 
                               $http, 
-                              mapService, 
-                              dialogService,
                               $modalInstance,
                               moment) {
 
-
    $scope.loadFbFriends = function() {
-     var user = mapService.user;
+     var user = $scope.currentUser;
      var fbFriendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
 			 $http.get(fbFriendsRequest)
 				 .success(function (data) {
@@ -38,7 +35,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
    };
 
 	$scope.loadVkFriends = function() {
-		var user = mapService.user;
+		var user = $scope.currentUser;
 		var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id=' + user.vkontakte.id + '&callback=JSON_CALLBACK';
 		$http.jsonp(vkfriendsRequest)
 			.success(function (data) {
@@ -79,7 +76,9 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
     .error(function (data) {
       console.log('Error: ' + data);
     });
-  }
+  };
+
+  $scope.getUsers();
 
 	 //init logged in user from service
 	 $scope.$watch('mapService.user', function () {
@@ -96,32 +95,33 @@ findMate.controller('DialogController', ['$scope', '$http', 'mapService', 'momen
         displayProp: 'name',
         idProp: '_id',
         externalIdProp: '',
-		groupByTextProvider: function(groupValue) {
-			if (groupValue === 'Facebook') {
-				return 'Facebook';
-			} else {
-				return 'Вконтакте';
-			}
-		}
+		    groupByTextProvider: function(groupValue) {
+    			if (groupValue === 'Facebook') {
+    				return 'Facebook';
+    			} else {
+    				return 'Вконтакте';
+    			};
+    		}
     };
+
     $scope.invitedUsersText = {
         buttonDefaultText: 'Пригласить друзей'
     };
   
 
    $scope.formData = {
-    latLng: mapService.latLng,
-    category: "Развлечения",
-    visibility: "Общие",
-    startDate:  new Date(),
-    startTime: new Date(),
-	invitedUsers: $scope.invitedUsers
-  };
+      latLng: $scope.latLng,
+      category: "Развлечения",
+      visibility: "Общие",
+      startDate:  new Date(),
+      startTime: new Date(),
+  	  invitedUsers: $scope.invitedUsers
+   };
 
   
 
   // working with service
-  $scope.latLng = mapService.latLng;
+  //$scope.latLng = mapService.latLng;
 
   $scope.formData.latitude = $scope.latLng.lat();
   $scope.formData.longitude = $scope.latLng.lng();

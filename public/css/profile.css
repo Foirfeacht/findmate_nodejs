@@ -79,6 +79,10 @@
 	width: 50%;	
 }
 
+.name-container {
+	font-size: 1.2em;
+}
+
 /* ===== join accounts ===== */
 
 .join-accounts > div {

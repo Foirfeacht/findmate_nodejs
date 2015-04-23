@@ -1,8 +1,8 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSidenav', '$modal',
-	function($scope, $http, mapService, $mdSidenav, $modal) {
+findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
+	function($scope, $http, $mdSidenav, $modal) {
 
     $http.get('/current_user')
         .success(function(data) {
@@ -22,9 +22,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
 
     $scope.formData.marker = '';
 
-    $scope.latLng = mapService.latLng;
-
-    //$scope.getCoords = mapService.getCoords
     //
     $scope.$on('mapInitialized', function(event, map) {
         if(navigator.geolocation) {
@@ -79,17 +76,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
         }); //end addListener
     });
 
-
-    $scope.$watch('latLng', function() {
-        mapService.getCoords($scope.latLng, $scope.currentUser);
-    });
-
-    $scope.$on('valuesUpdated', function() {
-        $scope.latLng = mapService.latLng;
-        $scope.currentUser = mapService.user;
-    });
-
-
     // when landing on the page, get all events and show them
     $http.get('../api/meetings')
         .success(function(data) {
@@ -117,18 +103,15 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
 
     // when submitting the add form, send the text to the node API
     $scope.createMeeting = function() {
-        //if($scope.latitude && $scope.longitude){
-            $http.post('../api/meetings', $scope.formData)
-                    .success(function (data) {
-                        console.log($scope.formData);
-
-                        $scope.formData = {}; // clear the form so our user is ready to enter another
-                        $scope.meetings = data;
-                        console.log(data);
-                    })
-                    .error(function(data) {
-                        console.log('Error: ' + data);
-                    })
+        $http.post('../api/meetings', $scope.formData)
+                .success(function (data) {
+                    console.log($scope.formData);
+                    $scope.meetings = data;
+                    console.log(data);
+                })
+                .error(function(data) {
+                    console.log('Error: ' + data);
+                })
     };
 
     // delete a todo after checking it
@@ -137,15 +120,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
             .success(function (data) {
                 $scope.meetings = data;
                 console.log(data);
-                $scope.deleteMarkers();
-                var l = data.length;
-                    for( var i = 0; i < l; i++) {
-                        var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-                        var marker = new google.maps.Marker({
-                            position: latLng,
-                            map: $scope.map
-                        });
-                }
             })
             .error(function(data) {
                 console.log('Error: ' + data);
@@ -159,7 +133,6 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
             .success(function(data) {
                 $scope.meetings = data;
                 console.log(data);
-
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -170,7 +143,8 @@ findMate.controller('mapController', ['$scope', '$http', 'mapService', '$mdSiden
         var modalInstance = $modal.open({
           templateUrl: './public/partials/dialog.tmpl.ejs',
           controller: 'DialogController',
-          size: size
+          size: size,
+          scope: $scope
         });
         modalInstance.result.then(function(data) {
                   $scope.refresh();

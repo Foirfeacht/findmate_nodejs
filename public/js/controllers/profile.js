@@ -11,7 +11,6 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
     $http.get('/current_user')
 	     .success(function(data) {
 			$scope.currentUser = data;
-			$scope.loadFriends();
 		 })
 		.error(function (data) {
 			console.log('Error: ' + data);
@@ -48,15 +47,16 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
     $scope.changeProfileImage = function(){
         $scope.toggleSelectorButton = true;
 		if($scope.selectedImage){
-
 			var user = $scope.currentUser;
-			var image = "'https://graph.facebook.com/' + user.facebook.id + '/picture?height=350&width=250'"
-			var image = JSON.stringify(image);
+			var image = $scope.selectedImage;
 			console.log(image);
-			$http.put('/update_userimage/' + $scope.currentUser._id, image)
+			$http.put('/update_userimage/users/' + user._id, {image: image})
 				.success(function (data) {
 					$scope.currentUser = data;
 					console.log(data);
+					$scope.facebookImage = false;
+				    $scope.vkontakteImage = false;
+				    $scope.selectImageButton = false;
 				})
 				.error(function (data) {
 					console.log('Error: ' + data);
@@ -73,17 +73,4 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
         });    
     };
 
-
-    /*var friendsRequest = 'https://graph.facebook.com/' + $scope.currentUser.facebook.id + '/friends' + '?access_token=' + $scope.currentUser.facebook.token;
-        $http.get(friendsRequest)
-            .success(function(data) {
-                $scope.friends = data.data;
-                $scope.frList = {};
-                console.log(data.data);
-
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
-    */
 }]);
