@@ -32,7 +32,7 @@
   },
   "scripts": {
     "prestart": "npm install",
-    "start": "grunt start"
+    "start": "node server.js"
   },
   "devDependencies": {
     "connect-livereload": "^0.5.3",
