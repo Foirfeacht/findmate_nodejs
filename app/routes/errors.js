@@ -6,8 +6,8 @@ module.exports = function(app) {
 	  });
 	  
 	  // Handle 500
-	  app.use(function(error, req, res, next) {
+	 /* app.use(function(error, req, res, next) {
 	      res.status(500);
 	     res.render('errors/500.ejs');
-	  });
+	  });*/
 }

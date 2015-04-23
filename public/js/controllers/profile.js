@@ -31,22 +31,37 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
         $scope.selectImageButton = true;
         $scope.facebookImage = $scope.currentUser.facebook ? true : false;
         $scope.vkontakteImage = $scope.currentUser.vkontakte ? true : false;
-        console.log ($scope.facebookImage + ' '  + $scope.vkontakteImage + ' ' + $scope.selectImageButton);
     }
 
     $scope.selectImage = function (image, provider) {
+		var user = $scope.currentUser;
         $scope.selectedImage = image;
         console.log($scope.selectedImage);
-        if (provider === 'facebook') {
-           $scope.facebookSelected = true; 
-        }
-        if (provider === "vk"){
+		if (user.facebook && image === user.facebook.image) {
+			$scope.facebookSelected = true;
+		}
+        if (user.vk && image === user.vk.image){
             $scope.vkSelected = true;
         }
     }
 
     $scope.changeProfileImage = function(){
         $scope.toggleSelectorButton = true;
+		if($scope.selectedImage){
+
+			var user = $scope.currentUser;
+			var image = "'https://graph.facebook.com/' + user.facebook.id + '/picture?height=350&width=250'"
+			var image = JSON.stringify(image);
+			console.log(image);
+			$http.put('/update_userimage/' + $scope.currentUser._id, image)
+				.success(function (data) {
+					$scope.currentUser = data;
+					console.log(data);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
     }
 
     $scope.showConfirm = function(size){

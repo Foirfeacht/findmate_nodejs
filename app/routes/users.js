@@ -63,6 +63,21 @@ module.exports = function(app) {
 			
 		});
 	});
+
+	//update user image
+	app.put('/update_userimage/users/:id', isLoggedIn, function (req, res){
+		console.log(req.body.image)
+	
+		var update = { image: req.body.image };
+
+		User.findByIdAndUpdate(req.params.id, update, function (err, user) {
+			if(err)
+				res.send (err)
+
+			console.log("image updated");
+			res.json(user);
+		});
+	});
 }
 
 // route middleware to ensure user is logged in

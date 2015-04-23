@@ -62,7 +62,7 @@
 	margin: 0 15px;
 }
 
-.image-selector img.selected-image {
+.image-selector img.image-selected {
 	border: 2px solid #3949AB;
 	border-radius: 5px;
 }
