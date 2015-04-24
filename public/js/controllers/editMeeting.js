@@ -178,7 +178,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 
   $scope.saveMeeting = function(id) {
 	  console.log($scope.meetingId);
-      $http.put('/api/meetings/' + id, $scope.formData)
+      $http.put('../api/meetings/' + id, $scope.formData)
               .success(function (data) {
                   console.log($scope.formData);
                   $scope.meetings = data;
