@@ -143,5 +143,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
 
 	//start task
-	grunt.registerTask('start', ['lint', 'concurrent:default']);
+	grunt.registerTask('start', ['concurrent:default']);
 };

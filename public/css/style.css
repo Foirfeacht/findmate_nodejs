@@ -141,6 +141,14 @@ map {
 	left: 0;
 }
 
+.angular-mapbox-map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 /* =============================
    ========== DIALOG ==========
    ============================= */

@@ -39,7 +39,8 @@ module.exports = function(app) {
 
 	app.get('/mapbox', isLoggedIn, function(req, res) {
 		res.render('mapBox.ejs', {
-			user : req.user
+			user : req.user,
+			title: "События"
 		});
 	});
 

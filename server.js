@@ -50,7 +50,10 @@ require('./app/routes/meetings.js')(app);
 require('./app/routes/users.js')(app);
 require('./app/routes/errors.js')(app);
 
-
+//live reload, dev only
+app.use(require('connect-livereload')({
+    port: 35729
+  }));
 
 // launch ======================================================================
 app.listen(port);

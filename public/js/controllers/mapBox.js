@@ -1,206 +1,136 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapBoxController', ['$scope', '$http', 'mapService', '$mdSidenav', '$mdDialog', function($scope, $http, mapService, $mdSidenav, $mdDialog) {
+findMate.controller('mapBoxController', ['$scope', '$http', '$mdSidenav', '$modal', 'mapboxService',
+		function($scope, $http, $mdSidenav, $modal, mapboxService) {
 
-    //load input data
+			$http.get('/current_user')
+				.success(function(data) {
+					$scope.currentUser = data;
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
 
-    L.mapbox.accessToken = 'pk.eyJ1IjoiYnVybmluZyIsImEiOiJBSUt1Z1JvIn0.B9XLW7EfsPIFuYlWbBCOaw';
-    
-    $scope.map = L.mapbox.map('map', 'examples.map-4l7djmvo', {
-        center: [53.902216, 27.561839],
-        zoom: 15 
-    });
+			//load input data
 
+			$scope.formData = {};
 
+			//map
 
-    $scope.formData = {};
+			$scope.markers = [];
 
-    //map
+			$scope.formData.marker = '';
 
-    //$scope.map = mapService.map;
+			/*
+			L.mapbox.accessToken = 'pk.eyJ1IjoiYnVybmluZyIsImEiOiJBSUt1Z1JvIn0.B9XLW7EfsPIFuYlWbBCOaw';
 
-    $scope.markers = [];
+			$scope.map = L.mapbox.map('map', 'burning.m0ic6jl6', {
+				center: [53.902216, 27.561839],
+				zoom: 15
+			});*/
 
-    $scope.formData.marker = '';
+			mapboxService.init({ accessToken: 'pk.eyJ1IjoiYnVybmluZyIsImEiOiJBSUt1Z1JvIn0.B9XLW7EfsPIFuYlWbBCOaw' });
 
-    $scope.latLng = mapService.latLng;
+			// when landing on the page, get all events and show them
+			$http.get('../api/meetings')
+				.success(function(data) {
+					$scope.meetings = data;
+					console.log(data);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
 
-   
+			$scope.joinMeeting = function(id){
 
-
-    $scope.$watch('latLng', function() {
-        mapService.getCoords($scope.latLng);
-    });
-
-    $scope.$on('valuesUpdated', function() {
-        $scope.latLng = mapService.latLng;
-    });
-    // map methods, need revising
-
- /*   $scope.setAllMap = function(map) {
-        map = $scope.map
-        for (var i = 0; i < $scope.markers.length; i++) {
-           $scope.markers[i].setMap(map);
-        }
-    }
-
-    $scope.clearMarkers = function() {
-      $scope.setAllMap(null);
-    }
-
-    $scope.deleteMarkers = function(){
-        $scope.clearMarkers();
-        $scope.markers = [];
-    }*/
-
-    // when landing on the page, get all events and show them
-    $http.get('../api/meetings')
-        .success(function(data) {
-            $scope.meetings = data;
-            console.log(data);
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
+				$http.put('/join/meetings/' + id)
+					.success(function (data) {
+						$scope.meetings = data;
+						//$scope.active = false;
+						console.log(data);
+					})
+					.error(function (data) {
+						console.log('Error: ' + data);
+					})
+			};
 
 
 
-    // when submitting the add form, send the text to the node API
-    $scope.createMeeting = function() {
-        //if($scope.latitude && $scope.longitude){
-            $http.post('../api/meetings', $scope.formData)
-                    .success(function (data) {
-                        console.log($scope.formData);
+			// when submitting the add form, send the text to the node API
+			$scope.createMeeting = function() {
+				$http.post('../api/meetings', $scope.formData)
+					.success(function (data) {
+						console.log($scope.formData);
+						$scope.meetings = data;
+						console.log(data);
+					})
+					.error(function(data) {
+						console.log('Error: ' + data);
+					})
+			};
 
-                        // create marker
-                        var marker = new google.maps.Marker({
-                            position: $scope.latLng,
-                            map: $scope.map,
-                            title: $scope.formData.title
-                        });
+			// delete a todo after checking it
+			$scope.deleteMeeting = function(id) {
+				$http.delete('../api/meetings/' + id)
+					.success(function (data) {
+						$scope.meetings = data;
+						console.log(data);
+					})
+					.error(function(data) {
+						console.log('Error: ' + data);
+					});
+			};
 
-                        $scope.markers.push(marker);
+			// get function to refresh on modal closing
 
-                        var infoContent = '<div id="content">' + $scope.formData.location + '<br>' + $scope.formData.title + '<br>' + 
-                                            $scope.formData.description + '</div>';
+			$scope.refresh = function() {
+				$http.get('../api/meetings')
+					.success(function(data) {
+						$scope.meetings = data;
+						console.log(data);
+					})
+					.error(function (data) {
+						console.log('Error: ' + data);
+					});
+			};
 
-                        var infowindow = new google.maps.InfoWindow({
-                          content: infoContent
-                        });
+			$scope.getCoords = function($event){
+				/*map.on('click', function($event) {
+					var latitude = e.latlng.lat;
+					var longitude = e.latlng.lng;
+					console.log(latitude + " - " + longitude);
+				});*/
+				/*console.log($event);
+				var latitude = $event.latlng.lat;
+				var longitude = $event.latlng.lng;
+				console.log(latitude + " - " + longitude);
+*/
+				mapboxService.getMapInstances();
+				console.log(mapboxService.getMapInstances());
+			};
 
-                        google.maps.event.addListener(marker, 'click', function() {
-                           infowindow.open($scope.map, marker);
-                        });
-
-                        $scope.formData = {}; // clear the form so our user is ready to enter another
-                        $scope.meetings = data;
-                        console.log(data);
-                    })
-                    .error(function(data) {
-                        console.log('Error: ' + data);
-                    })
-        //}
-        //else {
-        //    console.log('no coordinates provided')
-        //}
-    };
-
-    // delete a todo after checking it
-    $scope.deleteMeeting = function(id) {
-        $http.delete('../api/meetings/' + id)
-            .success(function (data) {
-                $scope.meetings = data;
-                console.log(data);
-                $scope.deleteMarkers();
-                var l = data.length;
-                    for( var i = 0; i < l; i++) {
-                        var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-                        var marker = new google.maps.Marker({
-                            position: latLng,
-                            map: $scope.map
-                        });
-                }
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });
-    };
-
-    //update meeting
-    $scope.updateMeeting = function (id) {
-        // not implemented yet
-    };
-;
-
-    $scope.completeMeeting = function(id){
-        console.log('clicked');
-        $http.put('/api/meetings/' + id)
-            .success(function (data) {
-                $scope.meetings = data;
-                data.active = false;
-                console.log('function active');
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            })
-    } 
-
-    // get function to refresh on modal closing
-
-    $scope.refresh = function() {
-        $http.get('../api/meetings')
-            .success(function(data) {
-                $scope.meetings = data;
-                console.log(data);
-
-                // draw markers from database
-                var l = data.length;
-                for( var i = 0; i < l; i++) {
-                    var latLng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        map: $scope.map
-                    });
-                    $scope.markers.push(marker);
-
-                    console.log(data[i].location + '\n' + data[i].title + '\n' + data[i].description);
+			$scope.showDialog = function(size){
+				//$scope.getCoords($event);
+				var modalInstance = $modal.open({
+					templateUrl: './public/partials/dialog.tmpl.ejs',
+					controller: 'DialogController',
+					size: size,
+					scope: $scope
+				});
+				modalInstance.result.then(function(data) {
+					$scope.refresh();
+					console.log('refreshed')
+				}, function() {
+					$scope.refresh();
+				})
+			};
 
 
-                    var infoContent = '<div id="content">' + data[i].location + '<br>' + data[i].title + '<br>' + 
-                                        data[i].description + '</div>';
-
-                    var infowindow = new google.maps.InfoWindow({
-                      content: infoContent
-                    });
-
-                    google.maps.event.addListener(marker, 'click', function() {
-                       infowindow.open($scope.map, marker);
-                    });
-                }
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
-    }   
-
-    // side nav
-    $scope.toggleNav = function() {
-       $mdSidenav('nav').toggle();
-    };
+			// side nav
+			$scope.toggleNav = function() {
+				$mdSidenav('nav').toggle();
+			};
 
 
-    // md dialog
-    $scope.showDialog = function(ev){
-        $mdDialog.show({
-          controller: 'DialogController',
-          templateUrl: './public/partials/dialog.tmpl.ejs',
-          targetEvent: ev
-             }).then(function(data) {
-                  $scope.refresh();
-                  console.log('refreshed')
-             }, function() {
-                  $scope.refresh();
-             })     
-    }
 }]);
