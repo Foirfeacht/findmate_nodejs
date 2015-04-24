@@ -53,6 +53,6 @@ require('./app/routes/errors.js')(app);
 
 // launch ======================================================================
 app.listen(port);
-debug('The magic happens on port ' + port);
+console.log('The magic happens on port ' + port);
 
 exports = module.exports = app;
