@@ -39,6 +39,7 @@
     "angular-bootstrap-datetimepicker": "~0.3.12",
     "angular-ui-bootstrap-datetimepicker": "~0.11.2",
     "bootstrap-material-design": "~0.3.0",
-    "angular-mapbox": "~0.1.4"
+    "angular-mapbox": "~0.1.4",
+    "angular-leaflet-directive": "~0.7.15"
   }
 }

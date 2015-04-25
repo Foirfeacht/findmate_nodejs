@@ -1,19 +1,22 @@
 <% include partials/head %>
 	<body ng-cloak ng-controller="mapBoxController">
         <% include partials/menu %>
-        <div class="content">
+        <div class="content map">
 
 
             <div class="map-container">
           <!--      <div id="map" ng-click="getCoords();showDialog('lg')"></div>-->
-                <mapbox map-id="burning.m0ic6jl6" lat="53.902216" lng="27.561839" zoom="15" ng-click="getCoords()">
+                <!--<mapbox map-id="burning.m0ic6jl6" lat="53.902216" lng="27.561839" zoom="15" ng-click="getCoords()">
                     <div ng-repeat="meeting in meetings">
                         <marker lat="{{meeting.latitude}}" lng="{{meeting.longitude}}" color="#39cccc">
                             <h1>{{meeting.title}}</h1>
                             <p>{{meeting.description}}</p>
                         </marker>
                     </div>
-                </mapbox>
+                </mapbox>-->
+                <leaflet width="100%" height="100%" center="center" layers="layers" markers="markers">
+                    
+                </leaflet>
             </div><!-- end map container -->
 
         </div><!-- end content -->

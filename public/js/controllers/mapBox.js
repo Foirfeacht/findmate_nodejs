@@ -1,8 +1,8 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapBoxController', ['$scope', '$http', '$mdSidenav', '$modal', 'mapboxService',
-		function($scope, $http, $mdSidenav, $modal, mapboxService) {
+findMate.controller('mapBoxController', ['$scope', '$http', '$mdSidenav', '$modal',
+		function($scope, $http, $mdSidenav, $modal) {
 
 			$http.get('/current_user')
 				.success(function(data) {
@@ -16,11 +16,20 @@ findMate.controller('mapBoxController', ['$scope', '$http', '$mdSidenav', '$moda
 
 			$scope.formData = {};
 
+			$scope.formData.marker = '';
+
 			//map
 
-			$scope.markers = [];
-
-			$scope.formData.marker = '';
+			// when landing on the page, get all events and show them
+			$http.get('../api/meetings')
+				.success(function(data) {
+					$scope.meetings = data;
+					console.log(data);
+					
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
 
 			/*
 			L.mapbox.accessToken = 'pk.eyJ1IjoiYnVybmluZyIsImEiOiJBSUt1Z1JvIn0.B9XLW7EfsPIFuYlWbBCOaw';
@@ -30,17 +39,57 @@ findMate.controller('mapBoxController', ['$scope', '$http', '$mdSidenav', '$moda
 				zoom: 15
 			});*/
 
-			mapboxService.init({ accessToken: 'pk.eyJ1IjoiYnVybmluZyIsImEiOiJBSUt1Z1JvIn0.B9XLW7EfsPIFuYlWbBCOaw' });
+			//mapboxService.init({ accessToken: 'pk.eyJ1IjoiYnVybmluZyIsImEiOiJBSUt1Z1JvIn0.B9XLW7EfsPIFuYlWbBCOaw' });
 
-			// when landing on the page, get all events and show them
-			$http.get('../api/meetings')
-				.success(function(data) {
-					$scope.meetings = data;
-					console.log(data);
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
+			$scope.init = function(){
+        
+		        $scope.center = {
+		            autoDiscover: true,
+		            zoom: 15
+		        };
+		        
+		        //define mapbox as the map
+		        $scope.layers = {
+		            baselayers: {
+		                mapbox_terrain: {
+		                    name: 'Mapbox Terrain',
+		                    url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYnVybmluZyIsImEiOiJBSUt1Z1JvIn0.B9XLW7EfsPIFuYlWbBCOaw',
+		                    type: 'xyz',
+		                    layerOptions: {
+		                        apikey: 'pk.eyJ1IjoiYnVybmluZyIsImEiOiJBSUt1Z1JvIn0.B9XLW7EfsPIFuYlWbBCOaw',
+		                        mapid: 'burning.m0ic6jl6'
+		                    }
+		                }
+		            }
+		        };
+
+		        $scope.markers = {};
+		    };
+
+		    //init map
+		    $scope.init();
+
+		    // update markers dynamically, temporary solution
+		    $scope.$watch('meetings', function () {
+		    	if($scope.meetings){
+		    		for (var i = 0; i < $scope.meetings.length; i++) {
+					    $scope.markers['m' + i] = {
+					        lat: + $scope.meetings[i].latitude,
+					        lng: + $scope.meetings[i].longitude,
+					        message: $scope.meetings[i].title
+					    };
+					};
+		    	};
+		    });
+
+		    // catch click on map
+		    $scope.$on('leafletDirectiveMap.click', function(event, args){
+			    var leafEvent = args.leafletEvent.latlng;
+			    $scope.formData.position = leafEvent;
+			    console.log($scope.formData.position);
+			    $scope.formData.latitude = leafEvent.lat;
+			    $scope.formData.longitude = leafEvent.lng;
+			});
 
 			$scope.joinMeeting = function(id){
 
@@ -106,8 +155,8 @@ findMate.controller('mapBoxController', ['$scope', '$http', '$mdSidenav', '$moda
 				var longitude = $event.latlng.lng;
 				console.log(latitude + " - " + longitude);
 */
-				mapboxService.getMapInstances();
-				console.log(mapboxService.getMapInstances());
+				//mapboxService.getMapInstances();
+				//console.log(mapboxService.getMapInstances());
 			};
 
 			$scope.showDialog = function(size){
