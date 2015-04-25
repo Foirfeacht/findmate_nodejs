@@ -1,6 +1,6 @@
 {
   "name": "findmate",
-  "version": "0.2.9",
+  "version": "0.4.7",
   "homepage": "https://github.com/Foirfeacht/findmate_nodejs",
   "authors": [
     "foirfeacht <vitaliy.maltsev@gmail.com>"
@@ -40,6 +40,7 @@
     "angular-ui-bootstrap-datetimepicker": "~0.11.2",
     "bootstrap-material-design": "~0.3.0",
     "angular-mapbox": "~0.1.4",
-    "angular-leaflet-directive": "~0.7.15"
+    "angular-leaflet-directive": "~0.7.15",
+    "ngSticky": "~1.7.9"
   }
 }

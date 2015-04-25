@@ -1,6 +1,7 @@
 <% include partials/head %>
 
 <body ng-cloak ng-controller="mapController">
+<% include partials/header %>
 <% include partials/menu %>
  <!--=============================== main content ===============================-->
     <div class="content map">
@@ -18,14 +19,7 @@
               styles="{{mapStyles.flatmap}}"
               map-type-id="TERRAIN">
                   <marker position="{{meeting.position}}" ng-repeat="meeting in meetings" icon="../public/images/{{meeting.category.icon}}.png" on-click="showInfoWindow(event, meeting)"></marker>
-                  <!--<info-window position="{{meeting.position}}" id="marker-info">
-                      <div class="info-content"> 
-                         <div>{{ meeting.location}}</div>
-                         <div>{{ meeting.title}} </div>
-                         <div>{{ meeting.description}}</div>
-
-                      </div>
-                  </info-window>-->
+                 
             </map>
         </div>
 
@@ -35,9 +29,11 @@
         
 <% include partials/footer %>
 
+
 <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">
 </script>
+<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
 <script src="../../public/js/controllers/map.js"></script>
 <script src="../../public/js/controllers/dialog.js"></script>
 

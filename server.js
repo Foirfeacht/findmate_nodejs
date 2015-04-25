@@ -24,8 +24,9 @@ var log = require('winston');
 
 
 // configuration ===============================================================
-var configDB = require('./config/database.js');
-mongoose.connect(configDB.url); // connect to our database
+var config = require('./config/config');
+//var configDB = require('./config/database.js');
+mongoose.connect(config.db); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -34,7 +35,6 @@ app.use('/public', express.static(__dirname + '/public'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(cors());
 
-app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -55,9 +55,12 @@ require('./app/routes/users.js')(app);
 require('./app/routes/errors.js')(app);
 
 //live reload, dev only
-/*app.use(require('connect-livereload')({
-    port: 35729
-  }));*/
+if (process.env.NODE_ENV === 'development') {
+	app.use(require('connect-livereload')({
+	    port: 35729
+	  }));
+	app.use(morgan('dev')); // log every request to the console
+}
 
 // launch ======================================================================
 app.listen(port);

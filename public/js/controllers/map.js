@@ -80,8 +80,9 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		$scope.showInfoWindow = function (event, meeting) {
 			console.log(meeting);
+			var position = new google.maps.LatLng(meeting.latitude,meeting.longitude);
 			var infowindow = new google.maps.InfoWindow();
-			var center = new google.maps.LatLng(meeting.latitude,meeting.longitude);
+			
 
 			infowindow.setContent(
 				'<h3>' + meeting.title + '</h3>' +
@@ -89,8 +90,30 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				'<p><strong>' + meeting.location +  '</strong></p>'
 			);
 
-			infowindow.setPosition(center);
+			infowindow.setPosition(position);
 			infowindow.open($scope.map);
+		};
+
+		$scope.showInfobox = function (event, meeting) {
+			console.log(meeting);
+			var position = new google.maps.LatLng(meeting.latitude,meeting.longitude);
+			
+			var infobox = new InfoBox({
+		         content: '<h3>' + meeting.title + '</h3>',
+		         disableAutoPan: false,
+		         maxWidth: 150,
+		         pixelOffset: new google.maps.Size(-140, 0),
+		         zIndex: null,
+		         boxStyle: {
+		            background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
+		            opacity: 0.75,
+		            width: "280px"
+		        },
+		        closeBoxMargin: "12px 4px 2px 2px",
+		        closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+		        infoBoxClearance: new google.maps.Size(1, 1)
+		    });
+		    infobox.open($scope.map, this)
 		};
 
     // when landing on the page, get all events and show them

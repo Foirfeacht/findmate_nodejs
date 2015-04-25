@@ -1,6 +1,6 @@
 {
   "name": "findmate",
-  "version": "0.2.9",
+  "version": "0.4.7",
   "author": "Vitaly Maltsev",
   "license": "MIT",
   "main": "server.js",
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "prestart": "npm install",
-    "start": "npm start"
+    "start": "grunt start"
   },
   "devDependencies": {
     "connect-livereload": "^0.5.3",

@@ -7,7 +7,7 @@ var User       = require('../app/models/user');
 
 
 // load the auth variables
-var configAuth = require('./auth'); // use this one for testing
+var config = require('./config'); // use this one for testing
 
 module.exports = function(passport) {
 
@@ -34,9 +34,9 @@ module.exports = function(passport) {
     // =========================================================================
     passport.use(new FacebookStrategy({
 
-        clientID          : configAuth.facebookAuth.clientID,
-        clientSecret      : configAuth.facebookAuth.clientSecret,
-        callbackURL       : configAuth.facebookAuth.callbackURL,
+        clientID          : config.auth.facebook.clientID,
+        clientSecret      : config.auth.facebook.clientSecret,
+        callbackURL       : config.auth.facebook.callbackURL,
         passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
 
     },
@@ -121,9 +121,9 @@ module.exports = function(passport) {
     // =========================================================================
     passport.use(new VKontakteStrategy({
 
-        clientID          : configAuth.vkontakteAuth.clientID,
-        clientSecret      : configAuth.vkontakteAuth.clientSecret,
-        callbackURL       : configAuth.vkontakteAuth.callbackURL,
+        clientID          : config.auth.vkontakte.clientID,
+        clientSecret      : config.auth.vkontakte.clientSecret,
+        callbackURL       : config.auth.vkontakte.callbackURL,
         passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
 
     },
