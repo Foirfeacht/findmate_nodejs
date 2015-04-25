@@ -27,7 +27,8 @@
     "passport": "~0.1.17",
     "passport-facebook": "~1.0.2",
     "passport-local": "~0.1.6",
-    "passport-vkontakte": "^0.3.0"
+    "passport-vkontakte": "^0.3.0",
+    "winston": "^1.0.0"
   },
   "scripts": {
     "prestart": "npm install",
@@ -43,7 +44,6 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-node-inspector": "^0.1.6",
     "grunt-nodemon": "^0.4.0",
-    "load-grunt-tasks": "^3.1.0",
-    "winston": "^1.0.0"
+    "load-grunt-tasks": "^3.1.0"
   }
 }
