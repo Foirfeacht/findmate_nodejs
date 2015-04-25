@@ -41,9 +41,6 @@ var userSchema = mongoose.Schema({
 		default: Date.now
 	}
 
-    // meetings connections
-    //invited: {type: Array, default: []},
-    //joined:  {type: Array, default: []}
 });
 
 // generating a hash

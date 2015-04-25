@@ -15,16 +15,23 @@
 
 	        </section>
 
+            <section layout="column" layout-align="center center">
+
+                <md-input-container>
+                    <label>Адрес</label>
+                    <input type="text" ng-model="formData.location" ng-required ng-disabled="">
+                </md-input-container>
+
+            </section>
+
 	        <section layout="column" layout-align="center center">
-	        	<!--<md-select ng-model="formData.category" placeholder="Выберите категорию">
-				    <md-option value="Спорт" ng-selected="selected" default>Спорт</md-option>
-				    <md-option value="Развлечения">Развлечения</md-option>
-				</md-select>-->
+
                 <div class="dropdown-wrap">
                     <span class="caret"></span>
                     <select class="form-control" placeholder="Выберите категорию" ng-model="formData.category">
-                        <option value="Спорт">Спорт</option>
-                        <option value="Развлечения" ng-selected="selected" default>Развлечения</option>
+                        <option value="{{category.value.en}}" ng-repeat="category in categories">
+                            <span class="list-icon"><img src="../public/images/{{category.icon}}.png"/></span> {{category.value.ru}}
+                        </option>
                      </select>
                  </div>
 	        </section>
@@ -43,21 +50,20 @@
 
 	        <section layout="row" class="visibility">
 	        	<div>
-	                <!--<md-select ng-model="formData.visibility" placeholder="Эту встречу увидят...">
-	                    <md-option value="Общие" ng-selected="selected">Все</md-option>
-	                    <md-option value="Друзья">Друзья</md-option>
-	                </md-select>-->
+
 
                     <div class="dropdown-wrap">
                         <span class="caret"></span>
                         <select class="form-control" placeholder="Эту встречу увидят..." ng-model="formData.visibility">
-                            <option value="Общие">Все</option>
-                            <option value="Друзья" ng-selected="selected" default>Друзья</option>
+                            <option value="all">
+                                Все
+                            </option>
+                            <option value="friends" ng-selected="selected" default>Друзья</option>
                         </select>
                     </div>
 
 	            </div>
-	            <div ng-if="formData.visibility === 'Друзья' ">
+	            <div ng-if="formData.visibility === 'friends' ">
 	                <div ng-dropdown-multiselect="" options="friendUsers" selected-model="invitedUsers" extra-settings="invitedUsersSettings" translation-texts="invitedUsersText" class="inviteDropdown" group-by="friend"></div>
 	            </div>
                 

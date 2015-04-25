@@ -5,6 +5,9 @@
 var Meeting    = require('../models/meeting');
 var User 	   = require('../models/user');
 
+//logger
+var log = require('winston');
+
 module.exports = function(app) {
 	// =============================================================================
 // ROUTES FOR MEETINGS ==================================================
@@ -104,7 +107,7 @@ module.exports = function(app) {
 			if(err)
 				res.send (err)
 
-			debug("meeting joined");
+			log.info("meeting joined");
 			Meeting.find(function(err, meetings) {
 				 if (err)
 				 res.send(err)
@@ -123,7 +126,7 @@ module.exports = function(app) {
 			if(err)
 				res.send (err)
 
-			debug("meeting updated");
+			log.info("meeting updated");
 			Meeting.find(function(err, meetings) {
 			 if (err)
 			 res.send(err)
@@ -160,7 +163,7 @@ module.exports = function(app) {
 			if(err){
 				res.send(err)
 			}
-			debug("meeting updated");
+			log.info("meeting updated");
 			Meeting.find(function(err, meetings) {
 				if (err)
 					res.send(err)
@@ -218,6 +221,38 @@ module.exports = function(app) {
 	});
 
 	// =============================================================================
+	// ROUTES FOR MEETING USERS==================================================
+	// =============================================================================
+
+	// store user in meetings.joined
+	/*app.put('/join/meetings/:id', isLoggedIn, function (req, res){
+		var update = { $push: {
+			users: {
+				userId: req.user._id,
+				firstName: req.user.firstName,
+				lastName: req.user.lastName,
+				name:  req.user.name,
+				image: req.user.image,
+				email: req.user.email,
+				status: 'joined'
+			}
+		}};
+
+		Meeting.findByIdAndUpdate(req.params.id, update, {safe: true, upsert: true}, function (err, meeting) {
+			if(err)
+				res.send (err)
+
+	 log.info("meeting joined");
+			Meeting.find(function(err, meetings) {
+				if (err)
+					res.send(err)
+				res.json(meetings);
+			});
+			//res.json(meeting);
+		});
+	});*/
+
+	// =============================================================================
 	// ROUTES FOR COMMENTS==================================================
 	// =============================================================================
 
@@ -240,7 +275,7 @@ module.exports = function(app) {
 				res.statusCode = 404;
 				return res.send({ error: 'Not found' });
 			}
-			debug("comment updated");
+			//log.info("comment updated");
 			Meeting.find(function(err, meetings) {
 				if (err)
 					res.send(err)
@@ -249,7 +284,7 @@ module.exports = function(app) {
 		});
 
 	});
-}
+};
 
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {

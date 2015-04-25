@@ -6,25 +6,26 @@
     <div class="content map">
 
 
-       <div class="map-container" ng-click="getCoords();showDialog('lg')">
-            <map zoom="15" 
+       <div class="map-container" ng-dblclick="getCoords();showDialog('lg')">
+            <map zoom="{{zoom}}"
               disable-default-u-i="true"
               disable-double-click-zoom="true"
               draggable="false"
               keyboard-shortcuts="false"
-              max-zoom="16"
-              min-zoom="11"
+              max-zoom="{{maxZoom}}"
+              min-zoom="{{minZoom}}"
               tilt="45"
+              styles="{{mapStyles.flatmap}}"
               map-type-id="TERRAIN">
-                  <marker position="{{meeting.position}}" ng-repeat="meeting in meetings" ng-disabled="clickMarker"></marker>
-                  <info-window position="{{meeting.position}}" visible="true" ng-repeat="meeting in meetings">
+                  <marker position="{{meeting.position}}" ng-repeat="meeting in meetings" icon="../public/images/{{meeting.category.icon}}.png" on-click="showInfoWindow(event, meeting)"></marker>
+                  <!--<info-window position="{{meeting.position}}" id="marker-info">
                       <div class="info-content"> 
-                         <div>meeting.location</div>
-                         <div>meeting.title </div>
-                         <div>meeting.description</div>      
-                         <div><md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)">Учавствовать</md-button></div>
+                         <div>{{ meeting.location}}</div>
+                         <div>{{ meeting.title}} </div>
+                         <div>{{ meeting.description}}</div>
+
                       </div>
-                  </info-window>
+                  </info-window>-->
             </map>
         </div>
 

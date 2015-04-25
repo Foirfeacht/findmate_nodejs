@@ -18,6 +18,10 @@ var session        = require('express-session');
 var methodOverride = require('method-override');
 var _              = require('lodash');
 
+//dev section
+
+var log = require('winston');
+
 
 // configuration ===============================================================
 var configDB = require('./config/database.js');
@@ -51,9 +55,9 @@ require('./app/routes/users.js')(app);
 require('./app/routes/errors.js')(app);
 
 //live reload, dev only
-app.use(require('connect-livereload')({
+/*app.use(require('connect-livereload')({
     port: 35729
-  }));
+  }));*/
 
 // launch ======================================================================
 app.listen(port);

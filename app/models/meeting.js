@@ -2,10 +2,18 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
+//var meetingUsersSchema = require('../../app/models/meetingUser')
+
 var meetingsSchema = new Schema({
     title: {type: String, required: 'Заголовок не может быть пустым'},
     description: {type: String, default: ''},
-    category: {type: String, default: 'Развлечения'},
+	category: {
+		value_: {
+			ru: {type: String, default: 'Развлечения'},
+			en: {type: String, default: 'Entertainment'}
+		},
+		icon: {type: String, default: 'entertainment'}
+	},
     startDate: Date,
 	invitedUsers: {type: Array, default: []},
 	joinedUsers: {type: Array, default: []},
@@ -19,9 +27,11 @@ var meetingsSchema = new Schema({
     latitude: String,
     position: String,
     location: String,
+	icon: String,
     marker: Schema.Types.Mixed,
-    visibility: {type: String, default: 'Общие'},
+    visibility: {type: String, default: 'all'},
 	comments: [commentsSchema]
+	//users: [meetingUsersSchema]
 });
 
 var commentsSchema = new Schema({

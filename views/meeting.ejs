@@ -11,9 +11,8 @@
             <div class="meeting">
                 <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
                 <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
-                <div layout="row"><strong>Категория: </strong> {{ meeting.category }}</div>
+                <div layout="row"><strong>Категория: </strong> {{ meeting.category.value.ru }}</div>
                 <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
-                <div layout="row"><strong>Виден: </strong> {{ meeting.visibility }}</div>
                 <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}</div>
                 <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
                 <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
