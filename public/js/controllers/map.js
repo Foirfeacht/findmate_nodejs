@@ -24,12 +24,11 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
     //
     $scope.$on('mapInitialized', function(event, map) {
+    	$scope.pos = null;
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
               $scope.pos = new google.maps.LatLng(position.coords.latitude,
                                                position.coords.longitude);
-
-              map.setCenter($scope.pos);
               console.log('positioned at ' + $scope.pos)
             }, function() {
               handleNoGeolocation(true);
@@ -46,6 +45,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
                     console.log('Error: Your browser doesn\'t support geolocation.');
                 }
             };
+        $scope.map.setCenter($scope.pos || 53.902407, 27.561621);
 
         google.maps.event.addListener($scope.map, "click", function (event) {
             $scope.latitude = event.latLng.lat();
@@ -131,15 +131,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
         $http.put('/join/meetings/' + id)
             .success(function (data) {
                 $scope.meetings = data;
-                //$scope.active = false;
                 console.log(data);
             })
             .error(function (data) {
                 console.log('Error: ' + data);
             })
     };
-
-
 
     // when submitting the add form, send the text to the node API
     $scope.createMeeting = function() {
@@ -191,7 +188,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
                   console.log('refreshed')
              }, function() {
                   $scope.refresh();
-             })         
+             });      
     };
 
 		$scope.ok = function() {
@@ -207,7 +204,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
        $mdSidenav('nav').toggle();
     };
 
-		$scope.zoom = 15
+		$scope.zoom = 15;
 		$scope.maxZoom = 16;
 		$scope.minZoom = 12;
 

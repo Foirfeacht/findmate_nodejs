@@ -1,5 +1,6 @@
 <% include partials/head %>
-<body ng-cloak ng-controller="userController" ng-init="currentUser = <%= JSON.stringify(profile)%>; logged_in_user=<%= JSON.stringify(user)%>">
+<body ng-cloak ng-controller="userController" ng-init="profile = <%= JSON.stringify(profile)%>">
+<% include partials/header %>
 <% include partials/menu %>
 
 <!--=============================== main content ===============================-->
@@ -14,27 +15,15 @@
   <!-- FACEBOOK INFORMATION -->
   <div class="col-sm-6">
     <div class="well">
-      <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-        <div><img src="{{currentUserPic}}" alt="{{logged_in_user.name}}"></div>
+        <div><img src="{{profile.image}}" alt="{{profile.name}}"></div>
         <p>
-          <strong>name</strong>: {{currentUser.facebook.name}}<br>          
+          <strong>name</strong>: {{profile.name}}<br>          
         </p>
 
 
     </div>
   </div>
-  <!-- FACEBOOK INFORMATION -->
-  <div class="col-sm-6">
-    <div class="well">
-      <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-        <div><img src="{{logged_in_user.image}}" alt="{{logged_in_user.name}}"></div>
-        <p>
-          <strong>name</strong>: {{currentUser.vkontakte.name}}<br>          
-        </p>
-
-
-    </div>
-  </div>
+  
 </div><!-- end row -->   
 
 <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>        

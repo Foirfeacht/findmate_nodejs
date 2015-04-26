@@ -215,21 +215,13 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
               })
     };
 
-		/*$scope.ok = function() {
-			$modalInstance.close();
-		};
-
-		$scope.cancel = function() {
-			$modalInstance.dismiss();
-		};*/
-
 	 //datepicker
-	 $scope.formData.startTime = new Date();
+ $scope.formData.startTime = new Date();
 
-	 $scope.dateOptions = {
-		 startingDay: 1,
-     	 showWeeks: false,
-	 };
+ $scope.dateOptions = {
+	 startingDay: 1,
+ 	 showWeeks: false,
+ };
 
    $scope.hstep = 1;
    $scope.mstep = 15;
