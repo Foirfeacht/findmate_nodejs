@@ -6,10 +6,10 @@
 <!--=============================== main content ===============================-->
 <div class="container">
 
-	<div class="page-header text-center">
-		<h1><span class="fa fa-anchor"></span> Профиль</h1>
-		<a href="/logout" class="btn btn-default btn-sm">Выйти</a>
-	</div>
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Профиль</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Выйти</a>
+    </div>
 
     <div class="profile-container">
 
@@ -18,25 +18,36 @@
         <div class="image-container">
             <div class="image">
                 <img src="{{currentUser.image}}" alt="{{currentUser.name}}">
-                <div class="switch-image" ng-show="toggleSelectorButton" ng-click="toggleImageSelector()"><md-button class="md-fab md-primary"><i class="mdi mdi-pencil"></i></md-button></div>
-            </div><!-- end image -->
+
+                <div class="switch-image" ng-show="toggleSelectorButton" ng-click="toggleImageSelector()">
+                    <md-button class="md-fab md-primary"><i class="mdi mdi-pencil"></i></md-button>
+                </div>
+            </div>
+            <!-- end image -->
             <div class="image-selector" layout="column">
 
-                <div class="image-selector-container" ng-show="facebookImage" ng-click="selectImage(currentUser.facebook.image)">
-                    <img src="{{currentUser.facebook.image}}" alt="{{currentUser.facebook.name}}" ng-class="{'image-selected' : facebookSelected}"}>
+                <div class="image-selector-container" ng-show="facebookImage"
+                     ng-click="selectImage(currentUser.facebook.image)">
+                    <img src="{{currentUser.facebook.image}}" alt="{{currentUser.facebook.name}}"
+                         ng-class="{'image-selected' : facebookSelected}" }>
                 </div>
 
-                <div class="image-selector-container" ng-show="vkontakteImage" ng-click="selectImage(currentUser.vkontakte.image, vk)">
-                    <img src="{{currentUser.vkontakte.image}}" alt="{{currentUser.vkontakte.name}}" ng-class="{'image-selected': vkSelected}">
+                <div class="image-selector-container" ng-show="vkontakteImage"
+                     ng-click="selectImage(currentUser.vkontakte.image, vk)">
+                    <img src="{{currentUser.vkontakte.image}}" alt="{{currentUser.vkontakte.name}}"
+                         ng-class="{'image-selected': vkSelected}">
                 </div>
 
-                <md-button class="md-fab md-primary select-image-button" ng-show="selectImageButton" ng-click="changeProfileImage()">
+                <md-button class="md-fab md-primary select-image-button" ng-show="selectImageButton"
+                           ng-click="changeProfileImage()">
                     <i class="mdi mdi-check"></i>
-                </md-button>   
+                </md-button>
 
-            </div><!-- end selector -->
-            
-        </div><!-- end image contaner -->
+            </div>
+            <!-- end selector -->
+
+        </div>
+        <!-- end image contaner -->
 
         <div class="user-container">
             <!--==== name ====-->
@@ -46,24 +57,36 @@
             </div>
             <div class="join-accounts container" layout="row">
                 <div>
-                    <md-button class="md-raised md-primary" ng-if="currentUser.facebook.token" href="/unlink/facebook">Отключить Facebook</md-button>
-                    <md-button class="md-raised md-primary" ng-if="!currentUser.facebook.token" href="/connect/facebook">Подключить Facebook</md-button>
+                    <md-button class="md-raised md-primary" ng-if="currentUser.facebook.token" href="/unlink/facebook">
+                        Отключить Facebook
+                    </md-button>
+                    <md-button class="md-raised md-primary" ng-if="!currentUser.facebook.token"
+                               href="/connect/facebook">Подключить Facebook
+                    </md-button>
                 </div>
                 <div>
-                    <md-button class="md-raised md-warn" ng-if="currentUser.vkontakte.token" href="/unlink/vk">Отключить Vkontakte</md-button>
-                    <md-button class="md-raised md-warn" ng-if="!currentUser.vkontakte.token" href="/connect/vk">Подключить Vkontakte</md-button>
+                    <md-button class="md-raised md-warn" ng-if="currentUser.vkontakte.token" href="/unlink/vk">Отключить
+                        Vkontakte
+                    </md-button>
+                    <md-button class="md-raised md-warn" ng-if="!currentUser.vkontakte.token" href="/connect/vk">
+                        Подключить Vkontakte
+                    </md-button>
                 </div>
             </div>
             <div class="delete-account container">
-                <md-button class="md-raised md-warn" ng-click="showConfirm()">Удалить аккаунт</md-button>   
+                <md-button class="md-raised md-warn" ng-click="showConfirm()">Удалить аккаунт</md-button>
             </div>
-        </div><!-- end user contaner -->
+        </div>
+        <!-- end user contaner -->
 
-        
-    </div><!-- end profile contaner -->
 
-	 <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>
-</div><!-- end container -->
+    </div>
+    <!-- end profile contaner -->
+
+    <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i>
+    </md-button>
+</div>
+<!-- end container -->
 <% include partials/footer %>
 <script src="../../public/js/controllers/profile.js"></script>
 <script src="../../public/js/controllers/confirmRemove.js"></script>

@@ -12,11 +12,11 @@ module.exports = {
 			callbackURL: 'http://localhost:8080/auth/facebook/callback'
 		},
 
-		vkontakte : {
-				clientID		: '4862983',
-				clientSecret 	: 'ToCVIhFVKa96FLPgLyJm',
-				callbackURL 	: 'https://findmates-demo.herokuapp.com/auth/vk/callback'
-			}
-	} 
-	
+		vkontakte: {
+			clientID: '4862983',
+			clientSecret: 'ToCVIhFVKa96FLPgLyJm',
+			callbackURL: 'https://findmates-demo.herokuapp.com/auth/vk/callback'
+		}
+	}
+
 };

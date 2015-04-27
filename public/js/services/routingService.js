@@ -1,15 +1,15 @@
- findMate.service('routingService', function($rootScope) {
+findMate.service('routingService', function ($rootScope) {
 
- 	var getParam, idParam;
+	var getParam, idParam;
 
-    getParam = function(id){
-        this.idParam = id;
-        $rootScope.$broadcast("valuesUpdated");
-    }      
+	getParam = function (id) {
+		this.idParam = id;
+		$rootScope.$broadcast("valuesUpdated");
+	}
 
- 		return {
-		      idParam: idParam,
- 			getParam: getParam
- 		}
+	return {
+		idParam: idParam,
+		getParam: getParam
+	}
 
 });

@@ -9,7 +9,7 @@ var meetingUsersSchema = new Schema({
 	firstName: String,
 	lastName: String,
 
-	name:  String,
+	name: String,
 	image: String,
 	email: String,
 

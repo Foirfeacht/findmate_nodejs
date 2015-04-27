@@ -2,23 +2,23 @@
  * Created by vmaltsev on 4/17/2015.
  */
 // and event model
-var Meeting    = require('../models/meeting');
-var User 	   = require('../models/user');
+var Meeting = require('../models/meeting');
+var User = require('../models/user');
 
 //logger
 var log = require('winston');
 
-module.exports = function(app) {
+module.exports = function (app) {
 	// =============================================================================
 // ROUTES FOR MEETINGS ==================================================
 // =============================================================================
 
 
 // get all meetings
-	app.get('/api/meetings', isLoggedIn, function(req, res) {
+	app.get('/api/meetings', isLoggedIn, function (req, res) {
 		var user = req.user;
 		// use mongoose to get all meetings in the database
-		Meeting.find(function(err, meetings) {
+		Meeting.find(function (err, meetings) {
 
 			// if there is an error retrieving, send the error. nothing after res.send(err) will execute
 			if (err)
@@ -29,12 +29,12 @@ module.exports = function(app) {
 	});
 
 	// create meeting and send back all meetings after creation
-	app.post('/api/meetings', isLoggedIn, function(req, res) {
+	app.post('/api/meetings', isLoggedIn, function (req, res) {
 		var user = req.user;
 
 		// create a meeting, information comes from AJAX request from Angular
 		Meeting.create({
-			title : req.body.title,
+			title: req.body.title,
 			description: req.body.description,
 			category: req.body.category,
 			startDate: req.body.startDate,
@@ -44,22 +44,25 @@ module.exports = function(app) {
 			longitude: req.body.longitude,
 			position: req.body.position,
 			location: req.body.location,
-			visibility : req.body.visibility || 'Все',
+			visibility: req.body.visibility || 'Все',
 			_owner: req.user._id,
 			ownerName: req.user.name,
 			ownerFacebook: req.user.facebook.id,
 			ownerVkontakte: req.user.vkontakte.id,
 			invitedUsers: req.body.invitedUsers
-		}, function(err, meeting) {
-			if (err)
+		}, function (err, meeting) {
+			if (err) {
 				res.send(err);
+			}
+			;
 
 			// get and return all the meetins after you create another
-			Meeting.find(function(err, meetings) {
-				if (err)
-					res.send(err)
+			Meeting.find(function (err, meetings) {
+				if (err) {
+					res.send(err);
+				}
 				//res.json(meetings);
-				app.io.broadcast('new meeting', {msg: meetings});
+				app.io.broadcast('meetings changed', {msg: meetings});
 			});
 		});
 
@@ -67,8 +70,8 @@ module.exports = function(app) {
 
 	//meeting by id middleware
 
-	var meetingByID = function(req, res, next, id) {
-		Meeting.findById(id).populate('_owner', 'ownerName').exec(function(err, meeting) {
+	var meetingByID = function (req, res, next, id) {
+		Meeting.findById(id).populate('_owner', 'ownerName').exec(function (err, meeting) {
 			if (err) return next(err);
 			if (!meeting) return next(new Error('Failed to load meeting ' + id));
 			req.meeting = meeting;
@@ -82,66 +85,73 @@ module.exports = function(app) {
 	// decline invitation
 
 
-	app.put('/decline/meetings/:id', isLoggedIn, function (req, res){
+	app.put('/decline/meetings/:id', isLoggedIn, function (req, res) {
 
-		var update = { $pull: {invitedUsers: {_id: req.user._id}} };
+		var update = {$pull: {invitedUsers: {_id: req.user._id}}};
 
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
-			if(err)
-				res.send (err)
+			if (err) {
+				res.send(err);
+			}
+			;
 
-			debug("meeting joined");
-			Meeting.find(function(err, meetings) {
-				 if (err)
-				 res.send(err)
-				 res.json(meetings);
-			 });
+			log.info("meeting joined");
+			Meeting.find(function (err, meetings) {
+				if (err) {
+					res.send(err);
+				}
+				;
+				app.io.broadcast('meetings changed', {msg: meetings});
+			});
 		});
 	});
 
 
 	// store user in meetings.joined
-	app.put('/join/meetings/:id', isLoggedIn, function (req, res){
-		var update = { $addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: {_id: req.user._id}} };
+	app.put('/join/meetings/:id', isLoggedIn, function (req, res) {
+		var update = {$addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: {_id: req.user._id}}};
 
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
-			if(err)
-				res.send (err)
-
+			if (err) {
+				res.send(err);
+			}
+			;
 			log.info("meeting joined");
-			Meeting.find(function(err, meetings) {
-				 if (err)
-				 res.send(err)
-				 res.json(meetings);
-			 });
-			//res.json(meeting);
+			Meeting.find(function (err, meetings) {
+				if (err) {
+					res.send(err);
+				}
+				;
+				app.io.broadcast('meetings changed', {msg: meetings});
+			});
+
 		});
 	});
 
 	// and delete user from meetings.joined
-	app.put('/unjoin/meetings/:id', isLoggedIn, function (req, res){
+	app.put('/unjoin/meetings/:id', isLoggedIn, function (req, res) {
 
-		var update = { $pull: {joinedUsers: {_id: req.user._id}}};
+		var update = {$pull: {joinedUsers: {_id: req.user._id}}};
 
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
-			if(err)
-				res.send (err)
+			if (err)
+				res.send(err)
 
 			log.info("meeting updated");
-			Meeting.find(function(err, meetings) {
-			 if (err)
-			 res.send(err)
-			 res.json(meetings);
-			 });
-			//res.json(meeting);
+			Meeting.find(function (err, meetings) {
+				if (err) {
+					res.send(err);
+				}
+				;
+				app.io.broadcast('meetings changed', {msg: meetings});
+			});
 		});
 	});
 
 	//update a meeting
-	app.put('/api/meetings/:meetingId', isLoggedIn, function (req, res){
-		var user = req.user;
+	app.put('/api/meetings/:id', isLoggedIn, function (req, res) {
 		var meeting = req.meeting;
-		var id = req.meeting._id
+		var id = req.params.id;
 		var update = {
 			$set: {
 				title: req.body.title,
@@ -156,19 +166,22 @@ module.exports = function(app) {
 			}
 		};
 
-		meeting.update(id, update, function (err, meeting) {
-			if(!meeting) {
+		Meeting.findByIdAndUpdate(id, update, function (err, meeting) {
+			if (!meeting) {
 				res.statusCode = 404;
-				return res.send({ error: 'Not found' });
+				return res.send({error: 'Not found'});
 			}
-			if(err){
-				res.send(err)
+			if (err) {
+				res.send(err);
 			}
+			;
 			log.info("meeting updated");
-			Meeting.find(function(err, meetings) {
-				if (err)
-					res.send(err)
-				res.json(meetings);
+			Meeting.find(function (err, meetings) {
+				if (err) {
+					res.send(err);
+				}
+				;
+				app.io.broadcast('meetings changed', {msg: meetings});
 			});
 		});
 	});
@@ -176,45 +189,46 @@ module.exports = function(app) {
 
 	// get single meeting
 
-	app.get('/api/meetings/:meetingId', isLoggedIn, function(req, res){
+	app.get('/api/meetings/:meetingId', isLoggedIn, function (req, res) {
 		res.json(req.meeting);
 	});
 
 	//route to single meeting
 
-	app.get('/meetings/:meetingId', isLoggedIn, function(req, res){
+	app.get('/meetings/:meetingId', isLoggedIn, function (req, res) {
 		res.render('meeting.ejs', {
 			meeting: req.meeting,
-			user : req.user,
+			user: req.user,
 			title: req.meeting.title
 		});
+		//app.io.broadcast('meeting rendered', {msg: meetings});
 	});
 
 	// delete a meeting
-	app.delete('/api/meetings/:meeting_id', isLoggedIn, function(req, res) {
+	app.delete('/api/meetings/:meeting_id', isLoggedIn, function (req, res) {
 		Meeting.remove({
-			_id : req.params.meeting_id
-		}, function(err, meeting) {
+			_id: req.params.meeting_id
+		}, function (err, meeting) {
 			if (err)
 				res.send(err);
 
 			// get and return all the meetings after you create another
-			Meeting.find(function(err, meetings) {
+			Meeting.find(function (err, meetings) {
 				if (err)
 					res.send(err)
-				res.json(meetings);
+				app.io.broadcast('meetings changed', {msg: meetings});
 			});
 		});
 	});
 
 	// delete a meeting from single meeting page
-	app.delete('/remove/meetings/:meeting_id', isLoggedIn, function(req, res) {
+	app.delete('/remove/meetings/:meeting_id', isLoggedIn, function (req, res) {
 		Meeting.remove({
-			_id : req.params.meeting_id
-		}, function(err, meeting) {
+			_id: req.params.meeting_id
+		}, function (err, meeting) {
 			if (err)
 				res.send(err);
-		}).then(function(err){
+		}).then(function (err) {
 			if (err)
 				res.send(err);
 			res.redirect('/meetings');
@@ -227,64 +241,95 @@ module.exports = function(app) {
 
 	// store user in meetings.joined
 	/*app.put('/join/meetings/:id', isLoggedIn, function (req, res){
-		var update = { $push: {
-			users: {
-				userId: req.user._id,
-				firstName: req.user.firstName,
-				lastName: req.user.lastName,
-				name:  req.user.name,
-				image: req.user.image,
-				email: req.user.email,
-				status: 'joined'
-			}
-		}};
+	 var update = { $push: {
+	 users: {
+	 userId: req.user._id,
+	 firstName: req.user.firstName,
+	 lastName: req.user.lastName,
+	 name:  req.user.name,
+	 image: req.user.image,
+	 email: req.user.email,
+	 status: 'joined'
+	 }
+	 }};
 
-		Meeting.findByIdAndUpdate(req.params.id, update, {safe: true, upsert: true}, function (err, meeting) {
-			if(err)
-				res.send (err)
+	 Meeting.findByIdAndUpdate(req.params.id, update, {safe: true, upsert: true}, function (err, meeting) {
+	 if(err)
+	 res.send (err)
 
 	 log.info("meeting joined");
-			Meeting.find(function(err, meetings) {
-				if (err)
-					res.send(err)
-				res.json(meetings);
-			});
-			//res.json(meeting);
-		});
-	});*/
+	 Meeting.find(function(err, meetings) {
+	 if (err)
+	 res.send(err)
+	 res.json(meetings);
+	 });
+	 //res.json(meeting);
+	 });
+	 });*/
 
 	// =============================================================================
 	// ROUTES FOR COMMENTS==================================================
 	// =============================================================================
 
 	// add message to meetings
-	app.put('/addComment/meetings/:id', isLoggedIn, function (req, res){
+	app.put('/addComment/meetings/:id', isLoggedIn, function (req, res) {
 
-		var update = { $push: {
-			comments: {
-				content: req.body.content,
-				created_at: new Date(),
-				_owner: req.user._id,
-				ownerName: req.user.name,
-				ownerFacebook: req.user.facebook.id,
-				ownerVkontakte: req.user.vkontakte.id
+		var update = {
+			$push: {
+				comments: {
+					content: req.body.content,
+					created_at: new Date(),
+					_owner: req.user._id,
+					ownerName: req.user.name,
+					ownerFacebook: req.user.facebook.id,
+					ownerVkontakte: req.user.vkontakte.id
+				}
 			}
-		}};
+		};
 
 		Meeting.findByIdAndUpdate(req.params.id, update, {safe: true, upsert: true}, function (err, meeting) {
-			if(!meeting) {
+			if (!meeting) {
 				res.statusCode = 404;
-				return res.send({ error: 'Not found' });
+				return res.send({error: 'Not found'});
 			}
 			//log.info("comment updated");
-			Meeting.find(function(err, meetings) {
-				if (err)
-					res.send(err)
-				res.json(meetings);
+			Meeting.find(function (err, meetings) {
+				if (err) {
+					res.send(err);
+				}
+				;
+				app.io.broadcast('comment added', {msg: meetings});
+				res.send('comment added');
 			});
 		});
-
 	});
+
+	// delete a comment
+	app.delete('/api/meetings/:id/comments/:commentId', isLoggedIn, function (req, res) {
+		var update = {
+			$pull: {
+				comments: {
+					comment: comment._id
+				}
+			}
+		};
+		Meeting.findByIdAndUpdate(req.params.id, update, {safe: true}, function (err, meeting) {
+			if (!meeting) {
+				res.statusCode = 404;
+				return res.send({error: 'Not found'});
+			}
+			//log.info("comment updated");
+			Meeting.find(function (err, meetings) {
+				if (err) {
+					res.send(err);
+				}
+				;
+				app.io.broadcast('comment added', {msg: meetings});
+				res.send('comment added');
+			});
+		});
+	});
+
 };
 
 // route middleware to ensure user is logged in

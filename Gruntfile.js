@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	// Unified Watch Object
 	var watchFiles = {
 		serverViews: ['app/**/*.js'],
@@ -72,9 +72,9 @@ module.exports = function(grunt) {
 					ext: 'js,html',
 					watch: watchFiles.serverViews.concat(watchFiles.serverJS),
 					env: {
-				        PORT: '8080'
-				      },
-				    ignore: ['node_modules/**', 'bower_components/**', 'public/**', 'views/**', 'Gruntfile.js', 'README.md', '.git/**']
+						PORT: '8080'
+					},
+					ignore: ['node_modules/**', 'bower_components/**', 'public/**', 'views/**', 'Gruntfile.js', 'README.md', '.git/**']
 				}
 			}
 		},
@@ -116,7 +116,7 @@ module.exports = function(grunt) {
 	grunt.option('force', true);
 
 	// A Task for loading the configuration object
-	grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function() {
+	grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function () {
 		var init = require('./config/init')();
 		var config = require('./config/config');
 

@@ -1,7 +1,7 @@
-var mountFolder = function(connect, dir) {
+var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     require('load-grunt-tasks')(grunt);
 
@@ -17,14 +17,14 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', [
         'dev',
-    'uglify',
+        'uglify',
         'cssmin'
     ]);
 
     grunt.initConfig({
         cmpnt: grunt.file.readJSON('bower.json'),
         banner: '/*! ngTable v<%= cmpnt.version %> by Vitalii Savchuk(esvit666@gmail.com) - ' +
-            'https://github.com/esvit/ng-table - New BSD License */\n',
+        'https://github.com/esvit/ng-table - New BSD License */\n',
         clean: {
 
             working: {
@@ -111,7 +111,7 @@ module.exports = function(grunt) {
             },
             serve: {
                 options: {
-                    middleware: function(connect) {
+                    middleware: function (connect) {
                         return [
                             mountFolder(connect, '.')
                         ];

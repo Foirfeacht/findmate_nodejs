@@ -1,21 +1,21 @@
 // server.js
 
 // set up ======================================================================
-var express  = require('express.io');
-var cors     = require('cors'); //enable cross origin ajax requests
-var app      = express();
+var express = require('express.io');
+var cors = require('cors'); //enable cross origin ajax requests
+var app = express();
 app.http().io();
-var WORKERS  = process.env.WEB_CONCURRENCY || 1;
+var WORKERS = process.env.WEB_CONCURRENCY || 1;
 var mongoose = require('mongoose');
 var passport = require('passport');
-var flash    = require('connect-flash');
+var flash = require('connect-flash');
 
-var morgan         = require('morgan');
-var cookieParser   = require('cookie-parser');
-var bodyParser     = require('body-parser');
-var session        = require('express-session');
+var morgan = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var session = require('express-session');
 var methodOverride = require('method-override');
-var _              = require('lodash'); 
+var _ = require('lodash');
 
 //dev section
 
@@ -35,12 +35,12 @@ app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(cors());
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
-app.use(session({ 
+app.use(session({
 	secret: config.secret
 })); // session secret
 app.use(passport.initialize());
@@ -57,8 +57,8 @@ require('./app/routes/errors.js')(app);
 //live reload, dev only
 if (process.env.NODE_ENV === 'development') {
 	app.use(require('connect-livereload')({
-	    port: 35729
-	  }));
+		port: 35729
+	}));
 	app.use(morgan('dev')); // log every request to the console
 }
 

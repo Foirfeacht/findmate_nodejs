@@ -12,7 +12,10 @@
   "authors": [
     "Vitalii Fedorenko"
   ],
-  "main": ["./datetimepicker.js", "./datetimepicker.css"],
+  "main": [
+    "./datetimepicker.js",
+    "./datetimepicker.css"
+  ],
   "license": "MIT",
   "homepage": "https://github.com/zhaber/datetimepicker",
   "ignore": [

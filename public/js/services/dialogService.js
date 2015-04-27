@@ -1,15 +1,15 @@
- findMate.service('dialogService', function($rootScope) {
+findMate.service('dialogService', function ($rootScope) {
 
- 	var getUsers, users;
+	var getUsers, users;
 
-    getUsers = function(users){
-        this.users = users;
-        $rootScope.$broadcast("usersUpdated");
-    }      
+	getUsers = function (users) {
+		this.users = users;
+		$rootScope.$broadcast("usersUpdated");
+	}
 
- 		return {
-		    users: users,
- 			getUsers: getUsers
- 		}
+	return {
+		users: users,
+		getUsers: getUsers
+	}
 
 });
