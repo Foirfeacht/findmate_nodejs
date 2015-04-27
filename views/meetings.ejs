@@ -293,7 +293,7 @@
         <h1 class="active-meetings">Прошедшие</h1>
         <div class="meetings-display row">
 
-            <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-if="!meeting.active">
+            <div class="meeting col-sm-3 col-sm-offset-1" ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'" ng-show="!checkDate(meeting)">
             
                 <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a>  </div>
                 <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>

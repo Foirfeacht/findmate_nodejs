@@ -24,11 +24,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
     //
     $scope.$on('mapInitialized', function(event, map) {
-    	$scope.pos = null;
+    	$scope.defaultPos = new google.maps.LatLng(53.902407, 27.561621);
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
               $scope.pos = new google.maps.LatLng(position.coords.latitude,
                                                position.coords.longitude);
+              $scope.map.setCenter($scope.pos);
               console.log('positioned at ' + $scope.pos)
             }, function() {
               handleNoGeolocation(true);
@@ -40,12 +41,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
             function handleNoGeolocation(errorFlag) {
                 if (errorFlag) {
-                    consloe.log('Error: The Geolocation service failed.');
+                    console.log('Error: The Geolocation service failed.');
                 } else {
                     console.log('Error: Your browser doesn\'t support geolocation.');
                 }
             };
-        $scope.map.setCenter($scope.pos || 53.902407, 27.561621);
+        $scope.map.setCenter($scope.pos || $scope.defaultPos);
 
         google.maps.event.addListener($scope.map, "click", function (event) {
             $scope.latitude = event.latLng.lat();
@@ -126,6 +127,15 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
             console.log('Error: ' + data);
         });
 
+    //refresh data with socket
+    socket.on('new meeting', function(data) {
+    	console.log(data);
+	    $scope.$apply(function() {
+		    $scope.meetings =data.msg; 
+		});
+	    console.log($scope.meetings);
+	});
+
     $scope.joinMeeting = function(id){
 
         $http.put('/join/meetings/' + id)
@@ -183,12 +193,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
           size: size,
           scope: $scope
         });
-		$scope.$modalInstance.result.then(function(data) {
+		/*$scope.$modalInstance.result.then(function(data) {
                   $scope.refresh();
                   console.log('refreshed')
              }, function() {
                   $scope.refresh();
-             });      
+             }); */     
     };
 
 		$scope.ok = function() {

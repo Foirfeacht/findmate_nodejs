@@ -1,6 +1,6 @@
 {
   "name": "findmate",
-  "version": "0.4.7",
+  "version": "0.5",
   "author": "Vitaly Maltsev",
   "license": "MIT",
   "main": "server.js",
@@ -21,6 +21,7 @@
     "ejs": "~0.8.5",
     "express": "~4.0.0",
     "express-session": "~1.0.0",
+    "express.io": "^1.1.13",
     "lodash": "^3.6.0",
     "method-override": "~1.0.0",
     "mongo-connect": "0.0.6",

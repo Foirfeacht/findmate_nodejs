@@ -47,6 +47,14 @@ findMate.controller('meetingsController', ['$scope',
 			 });
 	 };
 
+   socket.on('new meeting', function(data) {
+      console.log(data);
+      $scope.$apply(function() {
+        $scope.meetings =data.msg; 
+      });
+      console.log($scope.meetings);
+  });
+
     $scope.refresh = function(){
         $http.get('../api/meetings')
         .success(function(data) {
@@ -81,6 +89,15 @@ findMate.controller('meetingsController', ['$scope',
       return false;
     };
 
+    $scope.checkDate = function(meeting){
+      var dateNow = new Date().toJSON();
+      if (meeting.startDate > dateNow){
+        return true;
+      } else {
+        return false;
+      };
+    };
+
     // check active status and format date
     $scope.loopMeetings = function(meetings){
 		    var meetings = meetings;
@@ -90,14 +107,6 @@ findMate.controller('meetingsController', ['$scope',
         var meetingsLength = meetings.length;
          for(var i = 0; i < meetingsLength; i++) {
              var meeting = meetings[i];
-
-             // date filter
-             var meetingDate = meeting.startDate;
-             if (meetingDate > dateNow){
-                 meeting.active = true;
-             } else {
-                meeting.active = false;
-             };// end date filter
 
              //format dates
              meeting.startDate = new Date(meeting.startDate);
@@ -226,11 +235,11 @@ findMate.controller('meetingsController', ['$scope',
           controller: 'EditMeetingController',
           size: size
         });
-        modalInstance.result.then(function(data) {
+       /* modalInstance.result.then(function(data) {
           $scope.refresh();
           console.log('refreshed')
         }, function() {
           $scope.refresh();
-        })         
+        })      */   
     };
 }]);

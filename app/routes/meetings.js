@@ -58,7 +58,8 @@ module.exports = function(app) {
 			Meeting.find(function(err, meetings) {
 				if (err)
 					res.send(err)
-				res.json(meetings);
+				//res.json(meetings);
+				app.io.broadcast('new meeting', {msg: meetings});
 			});
 		});
 

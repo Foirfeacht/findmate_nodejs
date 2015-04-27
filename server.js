@@ -1,9 +1,10 @@
 // server.js
 
 // set up ======================================================================
-var express  = require('express');
+var express  = require('express.io');
 var cors     = require('cors'); //enable cross origin ajax requests
 var app      = express();
+app.http().io();
 var WORKERS  = process.env.WEB_CONCURRENCY || 1;
 var mongoose = require('mongoose');
 var passport = require('passport');
