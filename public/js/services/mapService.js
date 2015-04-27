@@ -1,17 +1,17 @@
- findMate.service('mapService', function($rootScope) {
+findMate.service('mapService', function ($rootScope) {
 
- 	var getCoords, latLng, user;
+	var getCoords, latLng, user;
 
-    getCoords = function(latLng, user){
-        this.latLng = latLng;
-        this.user = user;
-        $rootScope.$broadcast("valuesUpdated");
-    }      
+	getCoords = function (latLng, user) {
+		this.latLng = latLng;
+		this.user = user;
+		$rootScope.$broadcast("valuesUpdated");
+	}
 
- 		return {
-		    latLng: latLng,
-		    user: user,
- 			getCoords: getCoords
- 		}
+	return {
+		latLng: latLng,
+		user: user,
+		getCoords: getCoords
+	}
 
 });

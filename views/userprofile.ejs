@@ -1,37 +1,40 @@
 <% include partials/head %>
-<body ng-cloak ng-controller="userController" ng-init="profile = <%= JSON.stringify(profile)%>">
+<body ng-cloak ng-controller="userController" ng-init="profile = <%= JSON.stringify(profile) %>">
 <% include partials/header %>
 <% include partials/menu %>
 
 <!--=============================== main content ===============================-->
 <div class="content">
-<div class="page-header text-center">
-  <h1><span class="fa fa-anchor"></span> Профиль </h1>
-</div>
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Профиль </h1>
+    </div>
 
-<div class="row">
+    <div class="row">
 
 
-  <!-- FACEBOOK INFORMATION -->
-  <div class="col-sm-6">
-    <div class="well">
-        <div><img src="{{profile.image}}" alt="{{profile.name}}"></div>
-        <p>
-          <strong>name</strong>: {{profile.name}}<br>          
-        </p>
+        <!-- FACEBOOK INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <div><img src="{{profile.image}}" alt="{{profile.name}}"></div>
+                <p>
+                    <strong>name</strong>: {{profile.name}}<br>
+                </p>
 
+
+            </div>
+        </div>
 
     </div>
-  </div>
-  
-</div><!-- end row -->   
+    <!-- end row -->
 
-<md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i></md-button>        
+    <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i>
+    </md-button>
 
-</div><!-- end content -->
-        
+</div>
+<!-- end content -->
+
 <% include partials/footer %>
-  
+
 <script src="../../public/js/app.js"></script>
 <script src="../../public/js/services/mapService.js"></script>
 <script src="../../public/js/controllers/dialog.js"></script>

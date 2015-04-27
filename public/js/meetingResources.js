@@ -1,3 +1,3 @@
-findMate.factory('Meeting', function($resource) {
-	 return $resource('/api/meetings/:id');
+findMate.factory('Meeting', function ($resource) {
+	return $resource('/api/meetings/:id');
 })

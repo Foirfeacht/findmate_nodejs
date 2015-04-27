@@ -2,181 +2,184 @@
 // public/map.js
 
 findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$location', '$mdSidenav', '$modal', 'editService', 'moment',
-                    function($scope, 
-                             $http,
-                             $routeParams, 
-                             $location, 
-                             $mdSidenav,
-                             $modal,
-                             editService,
-							 moment){
-	$http.get('/current_user')
-	     .success(function(data) {
-			$scope.currentUser = data;
-			$scope.loadFriends();
-			$scope.refresh();
-		 })
-		.error(function (data) {
-			console.log('Error: ' + data);
-		});
-
-    $scope.$watch('currentMeeting', function () {
-        $scope.currentMeetingId = $scope.currentMeeting._id;
-		$scope.refresh();
-    });
-
-    $scope.prevent = function ($event) {
-      $event.preventDefault();
-    }
-
-	$scope.refresh = function () {
-		$http.get('../api/meetings/' + $scope.currentMeetingId)
-			.success(function(data) {
-				$scope.meeting = data;
-				$scope.meeting.startDate = new Date($scope.meeting.startDate);
-				$scope.meeting.startTime = new Date($scope.meeting.startTime);
-				if ($scope.meeting.updated_at !== null){
-					$scope.meeting.updated_at = new Date($scope.meeting.updated_at);
-				};
-				$scope.meeting.updated = moment($scope.meeting.updated_at).fromNow();
-				$scope.meeting.created = moment($scope.meeting.created_at).fromNow();
+	function ($scope,
+			  $http,
+			  $routeParams,
+			  $location,
+			  $mdSidenav,
+			  $modal,
+			  editService,
+			  moment) {
+		$http.get('/current_user')
+			.success(function (data) {
+				$scope.currentUser = data;
+				$scope.loadFriends();
+				$scope.refresh();
 			})
 			.error(function (data) {
 				console.log('Error: ' + data);
 			});
-	};
 
-    //button show filter
-          $scope.showButton = function(array) {
-            var id = $scope.currentUser._id;
-            var i, obj;
-            for (i = 0; i < array.length; ++i) {
-              obj = array[i];
-              if (obj._id == id) {
-                return true;
-              }
-            };
-            return false;
-          };
+		$scope.$watch('currentMeeting', function () {
+			$scope.currentMeetingId = $scope.currentMeeting._id;
+			$scope.refresh();
+		});
+		//listen for socket changes
+		socket.on('meetings changed', function (data) {
+			$scope.refresh();
+		});
 
-  
+		//listen for socket changes
+		socket.on('comment added', function (data) {
+			$scope.refresh();
+		});
 
-    // join meeting
 
-    $scope.joinMeeting = function(id){
+		$scope.refresh = function () {
+			$http.get('../api/meetings/' + $scope.currentMeetingId)
+				.success(function (data) {
+					$scope.meeting = data;
+					$scope.meeting.startDate = new Date($scope.meeting.startDate);
+					$scope.meeting.startTime = new Date($scope.meeting.startTime);
+					if ($scope.meeting.updated_at !== null) {
+						$scope.meeting.updated_at = new Date($scope.meeting.updated_at);
+					}
+					;
+					$scope.meeting.updated = moment($scope.meeting.updated_at).fromNow();
+					$scope.meeting.created = moment($scope.meeting.created_at).fromNow();
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
 
-        $http.put('/join/meetings/' + id)
-            .success(function (data) {
-                $scope.meeting = data;
-                console.log(data);
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            })
-    };
+		//button show filter
+		$scope.showButton = function (array) {
+			var id = $scope.currentUser._id;
+			var i, obj;
+			for (i = 0; i < array.length; ++i) {
+				obj = array[i];
+				if (obj._id == id) {
+					return true;
+				}
+			}
+			;
+			return false;
+		};
 
-    $scope.unjoinMeeting = function(id){
+		// join meeting
 
-        $http.put('/unjoin/meetings/' + id)
-            .success(function (data) {
-                $scope.meeting = data;
-                console.log(data);
-				//$scope.refresh();
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            })
-    };
+		$scope.joinMeeting = function (id) {
 
-         $scope.loadFriends = function(){
-             var friendsRequest = 'https://graph.facebook.com/' + $scope.currentUser.facebook.id + '/friends' + '?access_token=' + $scope.currentUser.facebook.token;
-             $http.get(friendsRequest)
-                 .success(function(data) {
-                     $scope.friends = data.data;
-                 })
-                 .error(function (data) {
-                     console.log('Error: ' + data);
-                 });
-         };
+			$http.put('/join/meetings/' + id)
+				.success(function (data) {
 
-    $scope.declineInvitation = function(id){
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				})
+		};
 
-        $http.put('/decline/meetings/' + id)
-            .success(function (data) {
-                $scope.meetings = data;
-                console.log(data);
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            })
-    };
+		$scope.unjoinMeeting = function (id) {
 
-    // side nav
-    $scope.toggleNav = function() {
-       $mdSidenav('nav').toggle();
-    };
+			$http.put('/unjoin/meetings/' + id)
+				.success(function (data) {
 
-    //edit service update
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				})
+		};
 
-    $scope.$watch('currentMeetingId', function() {
-        editService.getId($scope.currentMeetingId, $scope.currentUser);
-    });
+		$scope.loadFriends = function () {
+			var friendsRequest = 'https://graph.facebook.com/' + $scope.currentUser.facebook.id + '/friends' + '?access_token=' + $scope.currentUser.facebook.token;
+			$http.get(friendsRequest)
+				.success(function (data) {
+					$scope.friends = data.data;
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
 
-    $scope.$on('valuesUpdated', function() {
-        $scope.currentMeetingId = editService.meetingId;
-        $scope.currentUser = editService.user;
-    });
+		$scope.declineInvitation = function (id) {
 
-    // edit meeting dialog
-    $scope.editMeeting = function(id){
-        $scope.meetingId = id;
-        console.log($scope.currentMeetingId);
-        $scope.showDialog();
-    };
+			$http.put('/decline/meetings/' + id)
+				.success(function (data) {
 
-    $scope.showDialog = function(size){
-        var modalInstance = $modal.open({
-          templateUrl: '../public/partials/editMeeting.tmpl.ejs',
-          controller: 'EditMeetingController',
-          size: size
-        });
-        modalInstance.result.then(function(data) {
-          $scope.refresh();
-          console.log('refreshed')
-        }, function() {
-          $scope.refresh();
-        })         
-    };
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				})
+		};
 
-    $scope.refresh = function(){
-      $http.get('../api/meetings/' + $scope.currentMeetingId)
-        .success(function(data) {
-    				$scope.meeting = data;
-    				var meeting = $scope.meeting;
-    				console.log(data);
-    				meeting.startDate = new Date(meeting.startDate);
-    				meeting.startTime = new Date(meeting.startTime);
-    				if (meeting.updated_at !== null){
-    					meeting.updated_at = new Date(meeting.updated_at);
-    				};
-    				meeting.updated = moment(meeting.updated_at).fromNow();
-    				meeting.created = moment(meeting.created_at).fromNow();
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
-    };
+		// side nav
+		$scope.toggleNav = function () {
+			$mdSidenav('nav').toggle();
+		};
 
-    // delete a meeting
-    $scope.deleteMeeting = function(id) {
-        $http.delete('/remove/meetings/' + id)
-            .success(function (data) {
-              console.log('removed');
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });
-    };
+		//edit service update
+
+		$scope.$watch('currentMeetingId', function () {
+			editService.getId($scope.currentMeetingId, $scope.currentUser);
+		});
+
+		$scope.$on('valuesUpdated', function () {
+			$scope.currentMeetingId = editService.meetingId;
+			$scope.currentUser = editService.user;
+		});
+
+		// edit meeting dialog
+		$scope.editMeeting = function (id) {
+			$scope.meetingId = id;
+			console.log($scope.currentMeetingId);
+			$scope.showDialog();
+		};
+
+		$scope.showDialog = function (size) {
+			var modalInstance = $modal.open({
+				templateUrl: '../public/partials/editMeeting.tmpl.ejs',
+				controller: 'EditMeetingController',
+				size: size
+			});
+			modalInstance.result.then(function (data) {
+				$scope.refresh();
+				console.log('refreshed')
+			}, function () {
+				$scope.refresh();
+			})
+		};
+
+		$scope.refresh = function () {
+			$http.get('../api/meetings/' + $scope.currentMeetingId)
+				.success(function (data) {
+					$scope.meeting = data;
+					var meeting = $scope.meeting;
+					console.log(data);
+					meeting.startDate = new Date(meeting.startDate);
+					meeting.startTime = new Date(meeting.startTime);
+					if (meeting.updated_at !== null) {
+						meeting.updated_at = new Date(meeting.updated_at);
+					}
+					;
+					meeting.updated = moment(meeting.updated_at).fromNow();
+					meeting.created = moment(meeting.created_at).fromNow();
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		// delete a meeting
+		$scope.deleteMeeting = function (id) {
+			$http.delete('/remove/meetings/' + id)
+				.success(function (data) {
+					console.log('removed');
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
 		// submit comments
 
 		$scope.commentData = {
@@ -186,16 +189,25 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 		$scope.submitComment = function () {
 			$http.put('/addComment/meetings/' + $scope.currentMeetingId, $scope.commentData)
 				.success(function (data) {
-					console.log(data);
-					console.log($scope.commentData);
 					$scope.commentData = {}; // clear the form so our user is ready to enter another
-					$scope.meetings = data;
-					$scope.refresh();
 				})
-				.error(function(data) {
-					console.log('Error: ' + data);
+				.error(function (data) {
+					console.log('Error: ', data);
 				})
 		};
 
-    
-}]);
+		//delete comments
+		// delete a meeting
+		$scope.deleteComment = function (comment) {
+			console.log(comment);
+			$http.delete('../api/meetings/' + $scope.currentMeetingId + '/comment/' + comment._id)
+				.success(function (data) {
+
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+
+	}]);

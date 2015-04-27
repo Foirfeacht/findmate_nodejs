@@ -3,37 +3,39 @@
 <body ng-cloak ng-controller="mapController">
 <% include partials/header %>
 <% include partials/menu %>
- <!--=============================== main content ===============================-->
-    <div class="content map">
+<!--=============================== main content ===============================-->
+<div class="content map">
 
 
-       <div class="map-container" ng-dblclick="getCoords();showDialog('lg')">
-            <map zoom="{{zoom}}"
-              disable-default-u-i="true"
-              disable-double-click-zoom="true"
-              draggable="true"
-              keyboard-shortcuts="false"
-              max-zoom="{{maxZoom}}"
-              min-zoom="{{minZoom}}"
-              tilt="45"
-              styles="{{mapStyles.flatmap}}"
-              map-type-id="TERRAIN">
-                  <marker position="{{meeting.position}}" ng-repeat="meeting in meetings" icon="../public/images/{{meeting.category.icon}}.png" on-click="showInfoWindow(event, meeting)"></marker>
-                 
-            </map>
-        </div>
+    <div class="map-container" ng-dblclick="getCoords();showDialog('lg')">
+        <map zoom="{{zoom}}"
+             disable-default-u-i="true"
+             disable-double-click-zoom="true"
+             draggable="true"
+             keyboard-shortcuts="false"
+             max-zoom="{{maxZoom}}"
+             min-zoom="{{minZoom}}"
+             tilt="45"
+             styles="{{mapStyles.flatmap}}"
+             map-type-id="TERRAIN">
+            <marker position="{{meeting.position}}" ng-repeat="meeting in meetings"
+                    icon="../public/images/{{meeting.category.icon}}.png"
+                    on-click="showInfoWindow(event, meeting)"></marker>
 
-            
+        </map>
+    </div>
 
-</div><!-- end content -->
-        
+
+</div>
+<!-- end content -->
+
 <% include partials/footer %>
 
-
 <script type="text/javascript"
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">
 </script>
-<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
+<script type="text/javascript"
+        src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
 <script src="../../public/js/controllers/map.js"></script>
 <script src="../../public/js/controllers/dialog.js"></script>
 

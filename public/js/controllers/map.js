@@ -2,93 +2,93 @@
 // public/map.js
 
 findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
-	function($scope, $http, $mdSidenav, $modal) {
+	function ($scope, $http, $mdSidenav, $modal) {
 
-    $http.get('/current_user')
-        .success(function(data) {
-            $scope.currentUser = data;
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
+		$http.get('/current_user')
+			.success(function (data) {
+				$scope.currentUser = data;
+			})
+			.error(function (data) {
+				console.log('Error: ' + data);
+			});
 
-    //load input data
+		//load input data
 
-    $scope.formData = {};
+		$scope.formData = {};
 
-    //map
+		//map
 
-    $scope.markers = [];
+		$scope.markers = [];
 
-    $scope.formData.marker = '';
+		$scope.formData.marker = '';
 
-    //
-    $scope.$on('mapInitialized', function(event, map) {
-    	$scope.defaultPos = new google.maps.LatLng(53.902407, 27.561621);
-        if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-              $scope.pos = new google.maps.LatLng(position.coords.latitude,
-                                               position.coords.longitude);
-              $scope.map.setCenter($scope.pos);
-              console.log('positioned at ' + $scope.pos)
-            }, function() {
-              handleNoGeolocation(true);
-            });
-        } else {
-            // Browser doesn't support Geolocation
-                handleNoGeolocation(false);
-            }
+		//
+		$scope.$on('mapInitialized', function (event, map) {
+			$scope.defaultPos = new google.maps.LatLng(53.902407, 27.561621);
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function (position) {
+					$scope.pos = new google.maps.LatLng(position.coords.latitude,
+						position.coords.longitude);
+					$scope.map.setCenter($scope.pos);
+					console.log('positioned at ' + $scope.pos)
+				}, function () {
+					handleNoGeolocation(true);
+				});
+			} else {
+				// Browser doesn't support Geolocation
+				handleNoGeolocation(false);
+			}
 
-            function handleNoGeolocation(errorFlag) {
-                if (errorFlag) {
-                    console.log('Error: The Geolocation service failed.');
-                } else {
-                    console.log('Error: Your browser doesn\'t support geolocation.');
-                }
-            };
-        $scope.map.setCenter($scope.pos || $scope.defaultPos);
+			function handleNoGeolocation(errorFlag) {
+				if (errorFlag) {
+					console.log('Error: The Geolocation service failed.');
+				} else {
+					console.log('Error: Your browser doesn\'t support geolocation.');
+				}
+			};
+			$scope.map.setCenter($scope.pos || $scope.defaultPos);
 
-        google.maps.event.addListener($scope.map, "click", function (event) {
-            $scope.latitude = event.latLng.lat();
-            $scope.longitude = event.latLng.lng();
-            
+			google.maps.event.addListener($scope.map, "click", function (event) {
+				$scope.latitude = event.latLng.lat();
+				$scope.longitude = event.latLng.lng();
 
-            // get address from coords
-            $scope.geocoder = new google.maps.Geocoder();
 
-            $scope.latLng = new google.maps.LatLng($scope.latitude, $scope.longitude);
+				// get address from coords
+				$scope.geocoder = new google.maps.Geocoder();
 
-            $scope.codeLatLng = function() {
-				console.log($scope.latLng);
-                $scope.geocoder.geocode({'latLng': $scope.latLng}, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                      if (results[0]) {
-                        $scope.location = results[0].formatted_address;
-                        console.log(results[0].formatted_address);
-						  console.log(results);
-                      } else {
-                        console.log('No results found');
-                      }
-                    } else {
-                      console.log('Geocoder failed due to: ' + status);
-                    }
-                });
-            }
+				$scope.latLng = new google.maps.LatLng($scope.latitude, $scope.longitude);
 
-            $scope.codeLatLng();
-        }); //end addListener
-    });
+				$scope.codeLatLng = function () {
+					console.log($scope.latLng);
+					$scope.geocoder.geocode({'latLng': $scope.latLng}, function (results, status) {
+						if (status == google.maps.GeocoderStatus.OK) {
+							if (results[0]) {
+								$scope.location = results[0].formatted_address;
+								console.log(results[0].formatted_address);
+								console.log(results);
+							} else {
+								console.log('No results found');
+							}
+						} else {
+							console.log('Geocoder failed due to: ' + status);
+						}
+					});
+				}
+
+				$scope.codeLatLng();
+			}); //end addListener
+		});
 
 		$scope.showInfoWindow = function (event, meeting) {
 			console.log(meeting);
-			var position = new google.maps.LatLng(meeting.latitude,meeting.longitude);
+			var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
 			var infowindow = new google.maps.InfoWindow();
-			
+
 
 			infowindow.setContent(
 				'<h3>' + meeting.title + '</h3>' +
-				'<p>' + meeting.description +  '</p>' +
-				'<p><strong>' + meeting.location +  '</strong></p>'
+				'<p>' + meeting.description + '</p>' +
+				'<p><strong>' + meeting.location + '</strong></p>'
 			);
 
 			infowindow.setPosition(position);
@@ -97,122 +97,122 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		$scope.showInfobox = function (event, meeting) {
 			console.log(meeting);
-			var position = new google.maps.LatLng(meeting.latitude,meeting.longitude);
-			
+			var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
+
 			var infobox = new InfoBox({
-		         content: '<h3>' + meeting.title + '</h3>',
-		         disableAutoPan: false,
-		         maxWidth: 150,
-		         pixelOffset: new google.maps.Size(-140, 0),
-		         zIndex: null,
-		         boxStyle: {
-		            background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
-		            opacity: 0.75,
-		            width: "280px"
-		        },
-		        closeBoxMargin: "12px 4px 2px 2px",
-		        closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
-		        infoBoxClearance: new google.maps.Size(1, 1)
-		    });
-		    infobox.open($scope.map, this)
+				content: '<h3>' + meeting.title + '</h3>',
+				disableAutoPan: false,
+				maxWidth: 150,
+				pixelOffset: new google.maps.Size(-140, 0),
+				zIndex: null,
+				boxStyle: {
+					background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
+					opacity: 0.75,
+					width: "280px"
+				},
+				closeBoxMargin: "12px 4px 2px 2px",
+				closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+				infoBoxClearance: new google.maps.Size(1, 1)
+			});
+			infobox.open($scope.map, this)
 		};
 
-    // when landing on the page, get all events and show them
-    $http.get('../api/meetings')
-        .success(function(data) {
-            $scope.meetings = data;
-            console.log(data);
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
+		// when landing on the page, get all events and show them
+		$http.get('../api/meetings')
+			.success(function (data) {
+				$scope.meetings = data;
+				console.log(data);
+			})
+			.error(function (data) {
+				console.log('Error: ' + data);
+			});
 
-    //refresh data with socket
-    socket.on('new meeting', function(data) {
-    	console.log(data);
-	    $scope.$apply(function() {
-		    $scope.meetings =data.msg; 
+		//refresh data with socket
+		socket.on('meetings changed', function (data) {
+			console.log(data);
+			$scope.$apply(function () {
+				$scope.meetings = data.msg;
+			});
+			console.log($scope.meetings);
 		});
-	    console.log($scope.meetings);
-	});
 
-    $scope.joinMeeting = function(id){
+		$scope.joinMeeting = function (id) {
 
-        $http.put('/join/meetings/' + id)
-            .success(function (data) {
-                $scope.meetings = data;
-                console.log(data);
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            })
-    };
+			$http.put('/join/meetings/' + id)
+				.success(function (data) {
+					$scope.meetings = data;
+					console.log(data);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				})
+		};
 
-    // when submitting the add form, send the text to the node API
-    $scope.createMeeting = function() {
-        $http.post('../api/meetings', $scope.formData)
-                .success(function (data) {
-                    console.log($scope.formData);
-                    $scope.meetings = data;
-                    console.log(data);
-                })
-                .error(function(data) {
-                    console.log('Error: ' + data);
-                })
-    };
+		// when submitting the add form, send the text to the node API
+		$scope.createMeeting = function () {
+			$http.post('../api/meetings', $scope.formData)
+				.success(function (data) {
+					console.log($scope.formData);
+					$scope.meetings = data;
+					console.log(data);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				})
+		};
 
-    // delete a todo after checking it
-    $scope.deleteMeeting = function(id) {
-        $http.delete('../api/meetings/' + id)
-            .success(function (data) {
-                $scope.meetings = data;
-                console.log(data);
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });
-    };
+		// delete a todo after checking it
+		$scope.deleteMeeting = function (id) {
+			$http.delete('../api/meetings/' + id)
+				.success(function (data) {
+					$scope.meetings = data;
+					console.log(data);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
 
-    // get function to refresh on modal closing
+		// get function to refresh on modal closing
 
-    $scope.refresh = function() {
-        $http.get('../api/meetings')
-            .success(function(data) {
-                $scope.meetings = data;
-                console.log(data);
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
-    }
+		$scope.refresh = function () {
+			$http.get('../api/meetings')
+				.success(function (data) {
+					$scope.meetings = data;
+					console.log(data);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		}
 
-    $scope.showDialog = function(size){
-		$scope.$modalInstance = $modal.open({
-          templateUrl: './public/partials/dialog.tmpl.ejs',
-          controller: 'DialogController',
-          size: size,
-          scope: $scope
-        });
-		/*$scope.$modalInstance.result.then(function(data) {
-                  $scope.refresh();
-                  console.log('refreshed')
-             }, function() {
-                  $scope.refresh();
-             }); */     
-    };
+		$scope.showDialog = function (size) {
+			$scope.$modalInstance = $modal.open({
+				templateUrl: './public/partials/dialog.tmpl.ejs',
+				controller: 'DialogController',
+				size: size,
+				scope: $scope
+			});
+			/*$scope.$modalInstance.result.then(function(data) {
+			 $scope.refresh();
+			 console.log('refreshed')
+			 }, function() {
+			 $scope.refresh();
+			 }); */
+		};
 
-		$scope.ok = function() {
+		$scope.ok = function () {
 			$scope.$modalInstance.close();
 		};
 
-		$scope.cancel = function() {
+		$scope.cancel = function () {
 			$scope.$modalInstance.dismiss('cancel');
 		};
 
-    // side nav
-    $scope.toggleNav = function() {
-       $mdSidenav('nav').toggle();
-    };
+		// side nav
+		$scope.toggleNav = function () {
+			$mdSidenav('nav').toggle();
+		};
 
 		$scope.zoom = 15;
 		$scope.maxZoom = 16;
@@ -616,5 +616,4 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		}
 
 
-    
-}]);
+	}]);

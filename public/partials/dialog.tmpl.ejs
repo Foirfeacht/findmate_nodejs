@@ -1,88 +1,95 @@
 <div class="modal-body">
 
-		<div class="form">
-	        <section layout="column" layout-align="center center">
+    <div class="form">
+        <section layout="column" layout-align="center center">
 
-	                <md-input-container>
-	                    <label>Название встречи</label>
-	                    <input type="text" ng-model="formData.title" ng-required>
-	                </md-input-container>
+            <md-input-container>
+                <label>Название встречи</label>
+                <input type="text" ng-model="formData.title" ng-required>
+            </md-input-container>
 
-	                <md-input-container>
-	                    <label>Описание встречи</label>
-	                    <input type="text" ng-model="formData.description">
-	                </md-input-container>
+            <md-input-container>
+                <label>Описание встречи</label>
+                <input type="text" ng-model="formData.description">
+            </md-input-container>
 
-	        </section>
+        </section>
 
-            <section layout="column" layout-align="center center">
+        <section layout="column" layout-align="center center">
 
-                <md-input-container>
-                    <label>Адрес</label>
-                    <input type="text" ng-model="formData.location" ng-required ng-disabled="">
-                </md-input-container>
+            <md-input-container>
+                <label>Адрес</label>
+                <input type="text" ng-model="formData.location" ng-required ng-disabled="">
+            </md-input-container>
 
-            </section>
+        </section>
 
-	        <section layout="column" layout-align="center center">
+        <section layout="column" layout-align="center center">
+
+            <div class="dropdown-wrap">
+                <span class="caret"></span>
+                <select class="form-control" placeholder="Выберите категорию" ng-model="formData.category">
+                    <option value="{{category.value.en}}" ng-repeat="category in categories">
+                        <span class="list-icon"><img src="../public/images/{{category.icon}}.png"/></span>
+                        {{category.value.ru}}
+                    </option>
+                </select>
+            </div>
+        </section>
+
+        <div class="date-header">Время и день</div>
+
+        <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
+
+
+            <div>
+                <datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hstep" minute-step="mstep"
+                                ng-model="formData.startDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy"
+                                date-options="dateOptions" date-disabled="disabled(date, mode)"
+                                readonly-time="false"></datetimepicker>
+            </div>
+
+
+        </section>
+
+        <section layout="row" class="visibility">
+            <div>
+
 
                 <div class="dropdown-wrap">
                     <span class="caret"></span>
-                    <select class="form-control" placeholder="Выберите категорию" ng-model="formData.category">
-                        <option value="{{category.value.en}}" ng-repeat="category in categories">
-                            <span class="list-icon"><img src="../public/images/{{category.icon}}.png"/></span> {{category.value.ru}}
+                    <select class="form-control" placeholder="Эту встречу увидят..." ng-model="formData.visibility">
+                        <option value="all">
+                            Все
                         </option>
-                     </select>
-                 </div>
-	        </section>
-
-	      	<div class="date-header">Время и день</div>	
-	      	
-            <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
-               	
-
-                <div>
-                	<datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hstep" minute-step="mstep" ng-model="formData.startDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+                        <option value="friends" ng-selected="selected" default>Друзья</option>
+                    </select>
                 </div>
 
-                
-            </section>
+            </div>
+            <div ng-if="formData.visibility === 'friends' ">
+                <div ng-dropdown-multiselect="" options="friendUsers" selected-model="invitedUsers"
+                     extra-settings="invitedUsersSettings" translation-texts="invitedUsersText" class="inviteDropdown"
+                     group-by="friend"></div>
+            </div>
 
-	        <section layout="row" class="visibility">
-	        	<div>
+        </section>
+        <section layout="row">
+
+        </section>
 
 
-                    <div class="dropdown-wrap">
-                        <span class="caret"></span>
-                        <select class="form-control" placeholder="Эту встречу увидят..." ng-model="formData.visibility">
-                            <option value="all">
-                                Все
-                            </option>
-                            <option value="friends" ng-selected="selected" default>Друзья</option>
-                        </select>
-                    </div>
-
-	            </div>
-	            <div ng-if="formData.visibility === 'friends' ">
-	                <div ng-dropdown-multiselect="" options="friendUsers" selected-model="invitedUsers" extra-settings="invitedUsersSettings" translation-texts="invitedUsersText" class="inviteDropdown" group-by="friend"></div>
-	            </div>
-                
-	        </section>
-	        <section layout="row" >
-                
-            </section>
-          
-
-	    </div><!-- end form -->
+    </div>
+    <!-- end form -->
 </div> <!-- end body -->
 
 <div class="modal-footer">
-	<section layout="row" layout-align="center center" class="buttons">
-		<div>
-	        <md-button class="md-raised" ng-click="cancel()">Отмена</md-button>
-	    </div>
-	    <div>
-	        <md-button class="md-raised md-primary" ng-click="createMeeting();ok()">Создать</md-button>
-	    </div>
+    <section layout="row" layout-align="center center" class="buttons">
+        <div>
+            <md-button class="md-raised" ng-click="cancel()">Отмена</md-button>
+        </div>
+        <div>
+            <md-button class="md-raised md-primary" ng-click="createMeeting();ok()">Создать</md-button>
+        </div>
     </section>
 </div>
