@@ -148,8 +148,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					icon: 'sport'
 				}
 			}
-			console.log(category);
-			console.log($scope.formData.category);
 		}
 
 

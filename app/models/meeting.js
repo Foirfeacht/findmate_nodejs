@@ -33,7 +33,6 @@ var meetingsSchema = new Schema({
 	marker: Schema.Types.Mixed,
 	visibility: {type: String, default: 'all'},
 	comments: [commentsSchema]
-	//users: [meetingUsersSchema]
 });
 
 var commentsSchema = new Schema({

@@ -322,8 +322,7 @@ module.exports = function (app) {
 			Meeting.find(function (err, meetings) {
 				if (err) {
 					res.send(err);
-				}
-				;
+				};
 				app.io.broadcast('comment added', {msg: meetings});
 				res.send('comment added');
 			});

@@ -23,9 +23,7 @@ var log = require('winston');
 
 // configuration ===============================================================
 var config = require('./config/config');
-
 mongoose.connect(config.db); // connect to our database
-
 require('./config/passport')(passport); // pass passport for configuration
 
 // setting static components
