@@ -4,6 +4,7 @@
 // and event model
 var Meeting = require('../models/meeting');
 var User = require('../models/user');
+var mongoose = require('mongoose');
 
 //logger
 var log = require('winston');
@@ -53,8 +54,8 @@ module.exports = function (app) {
 		}, function (err, meeting) {
 			if (err) {
 				res.send(err);
-			}
-			;
+			};
+			app.io.broadcast('meeting added', {msg: meeting});
 
 			// get and return all the meetins after you create another
 			Meeting.find(function (err, meetings) {
@@ -99,8 +100,7 @@ module.exports = function (app) {
 			Meeting.find(function (err, meetings) {
 				if (err) {
 					res.send(err);
-				}
-				;
+				};
 				app.io.broadcast('meetings changed', {msg: meetings});
 			});
 		});
@@ -114,14 +114,12 @@ module.exports = function (app) {
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 			if (err) {
 				res.send(err);
-			}
-			;
+			};
 			log.info("meeting joined");
 			Meeting.find(function (err, meetings) {
 				if (err) {
 					res.send(err);
-				}
-				;
+				};
 				app.io.broadcast('meetings changed', {msg: meetings});
 			});
 
@@ -141,8 +139,7 @@ module.exports = function (app) {
 			Meeting.find(function (err, meetings) {
 				if (err) {
 					res.send(err);
-				}
-				;
+				};
 				app.io.broadcast('meetings changed', {msg: meetings});
 			});
 		});
@@ -173,14 +170,12 @@ module.exports = function (app) {
 			}
 			if (err) {
 				res.send(err);
-			}
-			;
+			};
 			log.info("meeting updated");
 			Meeting.find(function (err, meetings) {
 				if (err) {
 					res.send(err);
-				}
-				;
+				};
 				app.io.broadcast('meetings changed', {msg: meetings});
 			});
 		});
@@ -277,6 +272,7 @@ module.exports = function (app) {
 		var update = {
 			$push: {
 				comments: {
+					_id: mongoose.Types.ObjectId(),
 					content: req.body.content,
 					created_at: new Date(),
 					_owner: req.user._id,
@@ -305,20 +301,14 @@ module.exports = function (app) {
 	});
 
 	// delete a comment
-	app.delete('/api/meetings/:id/comments/:commentId', isLoggedIn, function (req, res) {
-		var update = {
-			$pull: {
-				comments: {
-					comment: comment._id
-				}
-			}
-		};
-		Meeting.findByIdAndUpdate(req.params.id, update, {safe: true}, function (err, meeting) {
+	app.put('/delete/meetings/:id/comments/:commentId', isLoggedIn, function (req, res) {
+		var update = {$pull: {comments: {_id: mongoose.Types.ObjectId(req.params.commentId)}}};
+		Meeting.findByIdAndUpdate(req.params.id, update, {safe: true, upsert: true}, function (err, meeting) {
 			if (!meeting) {
 				res.statusCode = 404;
 				return res.send({error: 'Not found'});
 			}
-			//log.info("comment updated");
+			log.info("comment deleted " + req.params.commentId);
 			Meeting.find(function (err, meetings) {
 				if (err) {
 					res.send(err);

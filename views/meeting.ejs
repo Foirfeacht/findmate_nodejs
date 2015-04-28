@@ -65,7 +65,7 @@
             <div class="comment-content">{{ comment.content}}</div>
             <div class="comment-createdat">{{comment.created_at}}</div>
             <div class="comment-delete">
-                <!--<md-button class="md-fab md-warn" ng-click="deleteComment(comment)">X</md-button>-->
+                <md-button class="md-fab md-warn delete-comment" ng-click="deleteComment(comment._id)">X</md-button>
             </div>
         </div>
 

@@ -30,7 +30,6 @@ var meetingsSchema = new Schema({
 	position: String,
 	location: String,
 	icon: String,
-	marker: Schema.Types.Mixed,
 	visibility: {type: String, default: 'all'},
 	comments: [commentsSchema]
 });
@@ -42,7 +41,6 @@ var commentsSchema = new Schema({
 	ownerName: {type: String, ref: 'User'},
 	ownerFacebook: {type: String, ref: 'User'},
 	ownerVkontakte: {type: String, ref: 'User'},
-	owner: {type: Schema.Types.ObjectId, ref: 'User'},
 	created_at: Date
 });
 

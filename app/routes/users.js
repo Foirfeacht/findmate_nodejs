@@ -4,6 +4,10 @@
 // and event model
 var Meeting = require('../models/meeting');
 var User = require('../models/user');
+var mongoose = require('mongoose');
+
+//logger
+var log = require('winston');
 
 module.exports = function (app) {
 	// =============================================================================
@@ -62,10 +66,9 @@ module.exports = function (app) {
 
 		});
 	});
-
 	//update user image
 	app.put('/update_userimage/users/:id', isLoggedIn, function (req, res) {
-		console.log(req.body.image)
+		console.log(req.body.image);
 
 		var update = {image: req.body.image};
 
@@ -77,7 +80,49 @@ module.exports = function (app) {
 			res.json(user);
 		});
 	});
-}
+
+	//send a ntoification to user
+	app.put('/pushNotification/users/:id', isLoggedIn, function (req, res) {
+
+		var meeting = req.body;
+
+		var update = {
+			$push: {
+				notifications: {
+					_id: mongoose.Types.ObjectId(),
+					content: 'Ваш друг ' + req.user.name + ' приглашает вас принять участие в ' + meeting.name,
+					owner: req.user._id,
+					ownerName: req.user.name,
+					created_at: new Date(),
+					status: 'Unread',
+					ifNew: true,
+					_meeting: meeting._id,
+					meetingTitle: meeting.title,
+					meetingStartDate: meeting.startDate,
+					meetingPosition: meeting.position,
+					meetingLocation: meeting.location
+				}
+			}
+		};
+
+		User.findByIdAndUpdate(req.params.id, update, {safe: true, upsert: true}, function (err, user) {
+			if (!user) {
+				res.statusCode = 404;
+				return res.send({error: 'Not found'});
+			}
+			log.info("invite sent");
+			User.find(function (err, users) {
+				if (err) {
+					res.send(err);
+				};
+				app.io.broadcast('push notification added', {msg: users});
+				res.send('notification sent');
+			});
+		});
+	});
+
+
+};
 
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {

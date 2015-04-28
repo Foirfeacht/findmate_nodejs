@@ -198,9 +198,10 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 
 		//delete comments
 		// delete a meeting
-		$scope.deleteComment = function (comment) {
-			console.log(comment);
-			$http.delete('../api/meetings/' + $scope.currentMeetingId + '/comment/' + comment._id)
+		$scope.deleteComment = function (id) {
+			console.log(id);
+			///api/meetings/:id/comments/:commentId
+			$http.put('/delete/meetings/' + $scope.currentMeetingId + '/comments/' + id)
 				.success(function (data) {
 
 				})

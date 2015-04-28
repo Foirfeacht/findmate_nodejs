@@ -21,10 +21,16 @@ findMate.constant('angularMomentConfig', {
 findMate.filter('filterByFriends', function () {
 	return function (item) {
 		if (item.facebook.name) {
-		}
-		;
+		};
 		return item.toUpperCase();
 	};
+});
+
+//config material
+findMate.config(function($mdThemingProvider) {
+	$mdThemingProvider.theme('default')
+		.primaryPalette('orange')
+		.accentPalette('deep-orange');
 });
 
 /*findMate.config(function($routeProvider) {

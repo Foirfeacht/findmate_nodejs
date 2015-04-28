@@ -182,7 +182,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 				if (status == google.maps.GeocoderStatus.OK) {
 					if (results[0]) {
 						$scope.formData.location = results[0].formatted_address;
-						console.log(results[0].formatted_address);
+						console.log(results);
 					} else {
 						console.log('No results found');
 					}
@@ -207,14 +207,17 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 				console.log('Error: ' + data);
 			});
 
+		socket.on('meeting added', function (data) {
+			$scope.newMeeting = data;
+			console.log($scope.newMeeting);
+
+		});
 
 		$scope.createMeeting = function () {
 			$scope.defineCategory($scope.formData.category);
 			$http.post('../api/meetings', $scope.formData)
 				.success(function (data) {
-					console.log($scope.formData);
 					$scope.formData = {}; // clear the form so our user is ready to enter another
-					$scope.meetings = data;
 					console.log(data);
 					$scope.ok();
 				})

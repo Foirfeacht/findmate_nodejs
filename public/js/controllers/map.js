@@ -136,6 +136,17 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			console.log($scope.meetings);
 		});
 
+		socket.on('push notification added', function (data) {
+			console.log(data.msg);
+			$http.get('/current_user')
+				.success(function (data) {
+					$scope.currentUser = data;
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		});
+
 		$scope.joinMeeting = function (id) {
 
 			$http.put('/join/meetings/' + id)
@@ -172,6 +183,33 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 					console.log('Error: ' + data);
 				});
 		};
+		//send notification
+		socket.on('meeting added', function (data) {
+			$scope.newMeeting = data.msg;
+			if($scope.newMeeting._owner === $scope.currentUser._id){
+
+				console.log($scope.newMeeting);
+				if($scope.newMeeting.invitedUsers.length > 0){
+					var invited = $scope.newMeeting.invitedUsers;
+					var l = invited.length;
+					for (var i = 0; i < l; i++){
+						var user = invited[i];
+						console.log(user);
+						$scope.sendInvitation($scope.newMeeting, user._id);
+					}
+				}
+			};
+		});
+
+		$scope.sendInvitation = function (meeting, userId) {
+			$http.put('/pushNotification/users/' + userId, meeting)
+				.success(function (data) {
+
+				})
+				.error(function (data) {
+					console.log('Error: ', data);
+				})
+		}
 
 		// get function to refresh on modal closing
 
