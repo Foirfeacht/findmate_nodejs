@@ -2,124 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a578cdc-ea4c-4e1c-862b-957bb4ee81a0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/comment.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-moment/.bower.json" afterPath="$PROJECT_DIR$/bower_components/angular-moment/.bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/ng-table/.bower.json" afterPath="$PROJECT_DIR$/bower_components/ng-table/.bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/ng-table/.bowerrc" afterPath="$PROJECT_DIR$/bower_components/ng-table/.bowerrc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/ng-table/.jshintrc" afterPath="$PROJECT_DIR$/bower_components/ng-table/.jshintrc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/errors/404.ejs" afterPath="$PROJECT_DIR$/views/errors/404.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/errors/500.ejs" afterPath="$PROJECT_DIR$/views/errors/500.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gruntfile.js" afterPath="$PROJECT_DIR$/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angularjs-dropdown-multiselect/Gruntfile.js" afterPath="$PROJECT_DIR$/bower_components/angularjs-dropdown-multiselect/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/bootstrap/Gruntfile.js" afterPath="$PROJECT_DIR$/bower_components/bootstrap/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/bootstrap-material-design/Gruntfile.js" afterPath="$PROJECT_DIR$/bower_components/bootstrap-material-design/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/ng-table/Gruntfile.js" afterPath="$PROJECT_DIR$/bower_components/ng-table/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/leaflet/Jakefile.js" afterPath="$PROJECT_DIR$/bower_components/leaflet/Jakefile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/admin.css" afterPath="$PROJECT_DIR$/public/css/admin.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin.ejs" afterPath="$PROJECT_DIR$/views/admin.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/admin.js" afterPath="$PROJECT_DIR$/public/js/controllers/admin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-animate/angular-animate.js" afterPath="$PROJECT_DIR$/bower_components/angular-animate/angular-animate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-animate/angular-animate.min.js.map" afterPath="$PROJECT_DIR$/bower_components/angular-animate/angular-animate.min.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-animate/angular-animate.min.js" afterPath="$PROJECT_DIR$/bower_components/angular-animate/angular-animate.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-aria/angular-aria.js" afterPath="$PROJECT_DIR$/bower_components/angular-aria/angular-aria.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-aria/angular-aria.min.js.map" afterPath="$PROJECT_DIR$/bower_components/angular-aria/angular-aria.min.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-aria/angular-aria.min.js" afterPath="$PROJECT_DIR$/bower_components/angular-aria/angular-aria.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular/angular-csp.css" afterPath="$PROJECT_DIR$/bower_components/angular/angular-csp.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-material/angular-material.css" afterPath="$PROJECT_DIR$/bower_components/angular-material/angular-material.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-material/angular-material.js" afterPath="$PROJECT_DIR$/bower_components/angular-material/angular-material.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-material/angular-material.min.css" afterPath="$PROJECT_DIR$/bower_components/angular-material/angular-material.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-material/angular-material.min.js" afterPath="$PROJECT_DIR$/bower_components/angular-material/angular-material.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-moment/angular-moment.min.js.map" afterPath="$PROJECT_DIR$/bower_components/angular-moment/angular-moment.min.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-moment/angular-moment.min.js" afterPath="$PROJECT_DIR$/bower_components/angular-moment/angular-moment.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-route/angular-route.js" afterPath="$PROJECT_DIR$/bower_components/angular-route/angular-route.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-route/angular-route.min.js.map" afterPath="$PROJECT_DIR$/bower_components/angular-route/angular-route.min.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-route/angular-route.min.js" afterPath="$PROJECT_DIR$/bower_components/angular-route/angular-route.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular/angular.js" afterPath="$PROJECT_DIR$/bower_components/angular/angular.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular/angular.min.js.map" afterPath="$PROJECT_DIR$/bower_components/angular/angular.min.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular/angular.min.js" afterPath="$PROJECT_DIR$/bower_components/angular/angular.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="$PROJECT_DIR$/public/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/authentication.js" afterPath="$PROJECT_DIR$/app/routes/authentication.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/bootstrap-material-design/bootstrap-elements.html" afterPath="$PROJECT_DIR$/bower_components/bootstrap-material-design/bootstrap-elements.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-bootstrap/bower.json" afterPath="$PROJECT_DIR$/bower_components/angular-bootstrap/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-material/bower.json" afterPath="$PROJECT_DIR$/bower_components/angular-material/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-moment/bower.json" afterPath="$PROJECT_DIR$/bower_components/angular-moment/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-ui-bootstrap-datetimepicker/bower.json" afterPath="$PROJECT_DIR$/bower_components/angular-ui-bootstrap-datetimepicker/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angularjs-dropdown-multiselect/bower.json" afterPath="$PROJECT_DIR$/bower_components/angularjs-dropdown-multiselect/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/font-awesome/bower.json" afterPath="$PROJECT_DIR$/bower_components/font-awesome/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/ng-table/bower.json" afterPath="$PROJECT_DIR$/bower_components/ng-table/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/confirmRemove.js" afterPath="$PROJECT_DIR$/public/js/controllers/confirmRemove.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/confirmRemove.tmpl.ejs" afterPath="$PROJECT_DIR$/public/partials/confirmRemove.tmpl.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/core.js" afterPath="$PROJECT_DIR$/app/routes/core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/filters/dateFilter.js" afterPath="$PROJECT_DIR$/public/js/filters/dateFilter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker-tpls-0.8.js" afterPath="$PROJECT_DIR$/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker-tpls-0.8.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css" afterPath="$PROJECT_DIR$/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js" afterPath="$PROJECT_DIR$/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/env/development.js" afterPath="$PROJECT_DIR$/config/env/development.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angularjs-dropdown-multiselect/development_index.html" afterPath="$PROJECT_DIR$/bower_components/angularjs-dropdown-multiselect/development_index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/dialog.js" afterPath="$PROJECT_DIR$/public/js/controllers/dialog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/dialog.tmpl.ejs" afterPath="$PROJECT_DIR$/public/partials/dialog.tmpl.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/services/dialogService.js" afterPath="$PROJECT_DIR$/public/js/services/dialogService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/editMeeting.js" afterPath="$PROJECT_DIR$/public/js/controllers/editMeeting.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partials/editMeeting.tmpl.ejs" afterPath="$PROJECT_DIR$/public/partials/editMeeting.tmpl.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/services/editService.js" afterPath="$PROJECT_DIR$/public/js/services/editService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/errors.js" afterPath="$PROJECT_DIR$/app/routes/errors.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-ui-bootstrap-datetimepicker/example.js" afterPath="$PROJECT_DIR$/bower_components/angular-ui-bootstrap-datetimepicker/example.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/footer.ejs" afterPath="$PROJECT_DIR$/views/partials/footer.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-leaflet-directive/generate-examples.js" afterPath="$PROJECT_DIR$/bower_components/angular-leaflet-directive/generate-examples.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-mapbox/gulpfile.js" afterPath="$PROJECT_DIR$/bower_components/angular-mapbox/gulpfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/ngmap/gulpfile.js" afterPath="$PROJECT_DIR$/bower_components/ngmap/gulpfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/head.ejs" afterPath="$PROJECT_DIR$/views/partials/head.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/header.ejs" afterPath="$PROJECT_DIR$/views/partials/header.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-ui-bootstrap-datetimepicker/index.html" afterPath="$PROJECT_DIR$/bower_components/angular-ui-bootstrap-datetimepicker/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/index.js" afterPath="$PROJECT_DIR$/app/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/filters/loggedInUser.js" afterPath="$PROJECT_DIR$/public/js/filters/loggedInUser.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/main.ejs" afterPath="$PROJECT_DIR$/views/main.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/main.js" afterPath="$PROJECT_DIR$/public/js/controllers/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/map.ejs" afterPath="$PROJECT_DIR$/views/map.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/map.js" afterPath="$PROJECT_DIR$/public/js/controllers/map.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/mapBox.ejs" afterPath="$PROJECT_DIR$/views/mapBox.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/mapBox.js" afterPath="$PROJECT_DIR$/public/js/controllers/mapBox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/services/mapService.js" afterPath="$PROJECT_DIR$/public/js/services/mapService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/mapbox.css" afterPath="$PROJECT_DIR$/public/css/mapbox.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/matchmedia/matchMedia.addListener.js" afterPath="$PROJECT_DIR$/bower_components/matchmedia/matchMedia.addListener.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/matchmedia/matchMedia.js" afterPath="$PROJECT_DIR$/bower_components/matchmedia/matchMedia.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/meeting.ejs" afterPath="$PROJECT_DIR$/views/meeting.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/meeting.js" afterPath="$PROJECT_DIR$/app/models/meeting.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/meetingResources.js" afterPath="$PROJECT_DIR$/public/js/meetingResources.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/meetingUser.js" afterPath="$PROJECT_DIR$/app/models/meetingUser.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/meetings.ejs" afterPath="$PROJECT_DIR$/views/meetings.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/meetings.js" afterPath="$PROJECT_DIR$/app/routes/meetings.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/meetings.js" afterPath="$PROJECT_DIR$/public/js/controllers/meetings.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/menu.ejs" afterPath="$PROJECT_DIR$/views/partials/menu.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/moment/moment.js" afterPath="$PROJECT_DIR$/bower_components/moment/moment.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/bootstrap/package.js" afterPath="$PROJECT_DIR$/bower_components/bootstrap/package.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/bootstrap-material-design/package.js" afterPath="$PROJECT_DIR$/bower_components/bootstrap-material-design/package.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-material/package.json" afterPath="$PROJECT_DIR$/bower_components/angular-material/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/ng-table/package.json" afterPath="$PROJECT_DIR$/bower_components/ng-table/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/passport.js" afterPath="$PROJECT_DIR$/config/passport.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/mdi/preview.html" afterPath="$PROJECT_DIR$/bower_components/mdi/preview.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/env/production.js" afterPath="$PROJECT_DIR$/config/env/production.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/profile.css" afterPath="$PROJECT_DIR$/public/css/profile.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/profile.ejs" afterPath="$PROJECT_DIR$/views/profile.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/profile.js" afterPath="$PROJECT_DIR$/public/js/controllers/profile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/services/routingService.js" afterPath="$PROJECT_DIR$/public/js/services/routingService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/settings.ejs" afterPath="$PROJECT_DIR$/views/settings.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/singleMeeting.js" afterPath="$PROJECT_DIR$/public/js/controllers/singleMeeting.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-bootstrap/ui-bootstrap-tpls.js" afterPath="$PROJECT_DIR$/bower_components/angular-bootstrap/ui-bootstrap-tpls.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" afterPath="$PROJECT_DIR$/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/angular-bootstrap/ui-bootstrap-tpls.min.js" afterPath="$PROJECT_DIR$/public/js/angular-bootstrap/ui-bootstrap-tpls.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-bootstrap/ui-bootstrap.js" afterPath="$PROJECT_DIR$/bower_components/angular-bootstrap/ui-bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/angular-bootstrap/ui-bootstrap.min.js" afterPath="$PROJECT_DIR$/bower_components/angular-bootstrap/ui-bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/angular-bootstrap/ui-bootstrap.min.js" afterPath="$PROJECT_DIR$/public/js/angular-bootstrap/ui-bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/user.js" afterPath="$PROJECT_DIR$/app/models/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/userprofile.ejs" afterPath="$PROJECT_DIR$/views/userprofile.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controllers/userprofile.js" afterPath="$PROJECT_DIR$/public/js/controllers/userprofile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/users.js" afterPath="$PROJECT_DIR$/app/routes/users.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="findmate.iws" />
@@ -147,8 +30,8 @@
       <file leaf-file-name="meetings.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/meetings.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.620689" vertical-offset="4520" max-vertical-offset="5899">
-              <caret line="284" column="39" selection-start-line="284" selection-start-column="39" selection-end-line="284" selection-end-column="39" />
+            <state vertical-scroll-proportion="-10.620689" vertical-offset="4486" max-vertical-offset="5882">
+              <caret line="282" column="39" selection-start-line="282" selection-start-column="39" selection-end-line="282" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -166,28 +49,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="authentication.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes/authentication.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1239" max-vertical-offset="2159">
-              <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="map.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/controllers/map.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.5172415" vertical-offset="1862" max-vertical-offset="10608">
-              <caret line="136" column="11" selection-start-line="129" selection-start-column="8" selection-end-line="136" selection-end-column="11" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
@@ -198,10 +59,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="meeting.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="meeting.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/meeting.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7035794" vertical-offset="510" max-vertical-offset="1887">
+            <state vertical-scroll-proportion="-24.192308" vertical-offset="510" max-vertical-offset="1887">
               <caret line="67" column="104" selection-start-line="67" selection-start-column="104" selection-end-line="67" selection-end-column="104" />
               <folding />
             </state>
@@ -223,7 +84,7 @@
       <file leaf-file-name="meeting.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/meeting.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="935">
               <caret line="0" column="35" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
               <folding />
             </state>
@@ -242,11 +103,31 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="32" max-vertical-offset="1241">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="footer.ejs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/partials/footer.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.19239374" vertical-offset="168" max-vertical-offset="1088">
+              <caret line="20" column="63" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="dialog.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/controllers/dialog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3058" max-vertical-offset="4250">
-              <caret line="213" column="60" selection-start-line="213" selection-start-column="60" selection-end-line="213" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3007" max-vertical-offset="4216">
+              <caret line="210" column="44" selection-start-line="210" selection-start-column="44" selection-end-line="210" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -285,7 +166,6 @@
         <option value="$PROJECT_DIR$/app/routes/core.js" />
         <option value="$PROJECT_DIR$/Gruntfile.js" />
         <option value="$PROJECT_DIR$/public/js/app.js" />
-        <option value="$PROJECT_DIR$/views/partials/footer.ejs" />
         <option value="$PROJECT_DIR$/bower_components/angular-mapbox/dist/angular-mapbox.js" />
         <option value="$PROJECT_DIR$/views/mapBox.ejs" />
         <option value="$PROJECT_DIR$/public/js/controllers/mapBox.js" />
@@ -314,6 +194,7 @@
         <option value="$PROJECT_DIR$/app/models/comment.js" />
         <option value="$PROJECT_DIR$/app/models/meeting.js" />
         <option value="$PROJECT_DIR$/views/meeting.ejs" />
+        <option value="$PROJECT_DIR$/views/partials/footer.ejs" />
       </list>
     </option>
   </component>
@@ -862,14 +743,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/footer.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.0" vertical-offset="68" max-vertical-offset="969">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bower_components/angular-mapbox/examples/example-app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.092391305" vertical-offset="0" max-vertical-offset="1683">
@@ -967,14 +840,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1409" max-vertical-offset="2584">
           <caret line="145" column="33" selection-start-line="145" selection-start-column="33" selection-end-line="145" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="1275">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1111,8 +976,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controllers/dialog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3058" max-vertical-offset="4250">
-          <caret line="213" column="60" selection-start-line="213" selection-start-column="60" selection-end-line="213" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3007" max-vertical-offset="4216">
+          <caret line="210" column="44" selection-start-line="210" selection-start-column="44" selection-end-line="210" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -1127,8 +992,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/meetings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.620689" vertical-offset="4520" max-vertical-offset="5899">
-          <caret line="284" column="39" selection-start-line="284" selection-start-column="39" selection-end-line="284" selection-end-column="39" />
+        <state vertical-scroll-proportion="-10.620689" vertical-offset="4486" max-vertical-offset="5882">
+          <caret line="282" column="39" selection-start-line="282" selection-start-column="39" selection-end-line="282" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -1173,8 +1038,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/meeting.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7035794" vertical-offset="510" max-vertical-offset="1887">
+        <state vertical-scroll-proportion="-24.192308" vertical-offset="510" max-vertical-offset="1887">
           <caret line="67" column="104" selection-start-line="67" selection-start-column="104" selection-end-line="67" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="32" max-vertical-offset="1241">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/footer.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19239374" vertical-offset="168" max-vertical-offset="1088">
+          <caret line="20" column="63" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
           <folding />
         </state>
       </provider>
