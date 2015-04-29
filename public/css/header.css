@@ -131,17 +131,16 @@
 
 .menu ul li {
     width: 100%;
-
 }
 
 .menu ul li a {
     display: block;
-    padding: 20px 0;
-    font-size: 2em;
-    color: #2c3e50;
+    padding: 10px 0;
+    font-size: 1.6em;
+    color: #211400;
     font-weight: 700;
-    width: 80%;
-    margin-left: 20%;
+    width: 100%;
+    padding-left: 20%;
     text-align: left;
     line-height: auto;
 }
@@ -152,6 +151,8 @@
 
 .menu ul li:hover {
     background: #2c3e50;
+    background: #2B2B2B;
+    background: #EA8B00;
 }
 
 .menu ul li:hover a {
@@ -164,7 +165,7 @@
     width: 200px;
     height: 200px;
     overflow: hidden;
-    margin: 40px auto 10px;
+    margin: 80px auto 10px;
 }
 
 .profile-block img {
