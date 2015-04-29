@@ -62,7 +62,7 @@ module.exports = function (app) {
 
 	// MESSAGES ==============================
 	app.get('/messages', isLoggedIn, function (req, res) {
-		res.render('mapBox.ejs', {
+		res.render('messages.ejs', {
 			user: req.user,
 			title: "Уведомления | " + req.user.name
 		});

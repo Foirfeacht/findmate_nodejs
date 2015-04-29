@@ -92,6 +92,7 @@ module.exports = function (app) {
 					_id: mongoose.Types.ObjectId(),
 					owner: req.user._id,
 					ownerName: req.user.name,
+					ownerImage: req.user.image,
 					created_at: new Date(),
 					status: 'Unread',
 					ifNew: true,
@@ -100,6 +101,8 @@ module.exports = function (app) {
 					meetingStartDate: meeting.startDate,
 					meetingPosition: meeting.position,
 					meetingLocation: meeting.location,
+					meetingIcon: meeting.category.icon,
+					meetingCategory: meeting.category.value.ru,
 					type: 'Notification'
 				}
 			}

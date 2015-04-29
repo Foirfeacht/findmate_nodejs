@@ -10,7 +10,7 @@ var meetingsSchema = new Schema({
 	title: {type: String, required: 'Заголовок не может быть пустым'},
 	description: {type: String, default: ''},
 	category: {
-		value_: {
+		value: {
 			ru: {type: String, default: 'Развлечения'},
 			en: {type: String, default: 'Entertainment'}
 		},

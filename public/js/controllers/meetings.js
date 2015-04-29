@@ -237,6 +237,32 @@ findMate.controller('meetingsController', ['$scope',
 			$scope.currentUser = editService.user;
 		});
 
+    //push notifications
+
+    socket.on('push notification added', function (data) {
+      console.log(data.msg);
+      $http.get('/current_user')
+        .success(function (data) {
+          $scope.currentUser = data;
+          $scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+          $scope.showNotification();
+        })
+        .error(function (data) {
+          console.log('Error: ' + data);
+        });
+    });
+
+    //notification
+    $scope.showNotification = function() {
+      $mdToast.show({
+        controller: 'notificationController',
+        templateUrl: './public/partials/invite-notification.ejs',
+          hideDelay: 0,
+        position: 'bottom right',
+        scope: $scope
+      });
+    };
+
 		// edit meeting dialog
 		$scope.editMeeting = function (id) {
 			$scope.meetingId = id;
@@ -249,11 +275,5 @@ findMate.controller('meetingsController', ['$scope',
 				controller: 'EditMeetingController',
 				size: size
 			});
-			/* modalInstance.result.then(function(data) {
-			 $scope.refresh();
-			 console.log('refreshed')
-			 }, function() {
-			 $scope.refresh();
-			 })      */
 		};
 	}]);

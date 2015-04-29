@@ -56,6 +56,8 @@ module.exports = function (app) {
 			if (err) {
 				res.send(err);
 			};
+
+			app.io.broadcast('meeting added', {msg: meeting});
 			
 			// get and return all the meetins after you create another
 			Meeting.find(function (err, meetings) {

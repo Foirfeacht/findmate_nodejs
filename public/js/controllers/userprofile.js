@@ -20,4 +20,30 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
 		};
 
 		$scope.showMessageBox = false;
+
+		//push notifications
+
+	    socket.on('push notification added', function (data) {
+	      console.log(data.msg);
+	      $http.get('/current_user')
+	        .success(function (data) {
+	          $scope.currentUser = data;
+	          $scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+	          $scope.showNotification();
+	        })
+	        .error(function (data) {
+	          console.log('Error: ' + data);
+	        });
+	    });
+
+	    //notification
+	    $scope.showNotification = function() {
+	      $mdToast.show({
+	        controller: 'notificationController',
+	        templateUrl: './public/partials/invite-notification.ejs',
+	          hideDelay: 0,
+	        position: 'bottom right',
+	        scope: $scope
+	      });
+	    };
 	}]);

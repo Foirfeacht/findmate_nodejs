@@ -9,12 +9,17 @@
             </div>
             <div class="message-box" ng-show="showMessageBox">
                 <div><span class="mark-as-read">Пометить как прочитанное</a></div>
-                <div class="message" ng-repeat="notification in currentUser.notifications | limitTo: 3">
-                    <div>{{ notification.created_at | date: 'yyyy-MM-dd,
-                        HH:mm'}}</div>
-                    <div>Ваш друг приглашает вас принять участие в {{notification.meetingTitle}}</div>
-                    <div><a href="meetings/{{notification._meeting}}">Показать на карте</a></div>
-                </div>
+                <div class="messagebox-message" ng-repeat="notification in currentUser.notifications | limitTo: 3">
+                    <div class="messagebox-icon">
+                        <img src="./public/images/{{notification.meetingIcon}}.png">
+                    </div><!-- end icon -->
+                    <div class="messagebox-content">
+                        <div>{{ notification.created_at | date: 'yyyy-MM-dd,
+                            HH:mm'}}</div>
+                        <div>Ваш друг {{ notification.ownerName }} приглашает вас принять участие в {{notification.meetingTitle}}</div>
+                        <div><a href="meetings/{{notification._meeting}}">Показать на карте</a></div>
+                    </div><!-- end messagebox content -->
+                </div><!-- end message -->
                 <div><a href="/notifications">Показать все</a></div>
             </div>
 

@@ -6,7 +6,34 @@
 <!--=============================== main content ===============================-->
 <div class="content">
 
+<div class="message-display">
+    <div class="single-message" ng-repeat="notification in currentUser.notifications">
 
+        <div class="singlemessage-message">
+
+            <div class="singlemessage-userimage">
+                <img src="{{notification.ownerImage}}" >
+            </div>
+
+            <div class="singlemessage-text">
+                <div>{{ notification.created_at | date: 'yyyy-MM-dd, HH:mm'}}</div>
+                <div>Ваш друг приглашает вас принять участие в {{notification.meetingTitle}}</div>
+                <div>Когда? {{ notification.meetingStartDate }}</div>
+                <div>Где? {{ notification.meetingLocation }}</div>
+                <div><a href="meetings/{{notification._meeting}}">Показать на карте</a></div>
+            </div>
+
+            <div class="singlemessage-icon">
+                <img src="./public/images/{{notification.meetingIcon}}.png">
+            </div>
+
+        </div>
+
+        <div class="singlemessage-buttons">
+            
+        </div>
+    </div>
+</div>
 
 
 </div>

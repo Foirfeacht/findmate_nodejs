@@ -61,6 +61,8 @@ var notificationSchema = new Schema({
 	meetingStartDate: Date,
 	meetingPosition: String,
 	meetingLocation: String,
+	meetingIcon: String,
+	meetingCategory: String,
 	messageType: {type: String, enum: ['Message', 'Notification'], default: 'Message'}
 });
 

@@ -55,16 +55,40 @@
     top: 40px;
     right: 0;
     padding: 10px;
+    font-size: 0.8em;
 }
 
 .inbox-button:hover .message-box {
     display: block;
 }
 
-.message {
+.messagebox-message {
     width: 100%;
     border-bottom: 1px solid #000;
+    overflow: hidden;
+    padding: 5px 0;
 }
+
+.messagebox-message > div {
+    float: left;
+}
+
+.messagebox-icon {
+    width: 64px;
+}
+
+.messagebox-icon img {
+    width: 56px;
+    height: 56px;
+    display: block;
+    margin: 0 auto; 
+}
+
+.messagebox-content {
+    width: 404px;
+}
+
+
 /* =============================
    =========== MENU ============
    ============================= */
