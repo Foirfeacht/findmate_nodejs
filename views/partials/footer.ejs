@@ -24,10 +24,10 @@
         src="../../bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
 
 <!-- socket io -->
-
-<script src="../../public/js/socket/socket.io.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script>
     var socket = io.connect();
+    socket.emit('connected');
 </script>
 
 <!-- mapbox -->
@@ -52,6 +52,7 @@
 
 <!-- app -->
 <script src="../../public/js/app.js"></script>
+<script src="../../public/js/controllers/notification.js"></script>
 
 
 

@@ -1,4 +1,22 @@
 <md-toolbar class="md-default-theme header" sticky>
-    <md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i
-                class="mdi mdi-menu"></i></md-button>
+    <div class="menu-right-area">
+        <md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i class="mdi mdi-menu"></i></md-button>
+    </div>
+    <div class="inbox-button">
+            <i class="mdi mdi-email " ng-click="showMessageBox = !showMessageBox" ng-mouseover="showMessageBox"></i>
+            <div class="message-alert md-warn">
+                <span>{{currentUser.notifications.length}}</span>
+            </div>
+            <div class="message-box" ng-show="showMessageBox">
+                <div><span class="mark-as-read">Пометить как прочитанное</a></div>
+                <div class="message" ng-repeat="notification in currentUser.notifications | limitTo: 3">
+                    <div>{{ notification.created_at | date: 'yyyy-MM-dd,
+                        HH:mm'}}</div>
+                    <div>Ваш друг приглашает вас принять участие в {{notification.meetingTitle}}</div>
+                    <div><a href="meetings/{{notification._meeting}}">Показать на карте</a></div>
+                </div>
+                <div><a href="/notifications">Показать все</a></div>
+            </div>
+
+    </div>
 </md-toolbar>

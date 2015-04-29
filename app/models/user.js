@@ -2,8 +2,10 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
+var Schema = mongoose.Schema;
+
 // define the schema for our user model
-var userSchema = mongoose.Schema({
+var userSchema = new Schema({
 
 	facebook: {
 		id: String,
@@ -39,8 +41,27 @@ var userSchema = mongoose.Schema({
 	created: {
 		type: Date,
 		default: Date.now
-	}
+	},
+	notifications: [notificationSchema]
 
+});
+
+var notificationSchema = new Schema({
+	_id: {type: Schema.Types.ObjectId},
+	content: {type: String},
+	owner: {type: Schema.Types.ObjectId, ref: 'User'},
+	ownerName: {type: String, ref: 'User'},
+	ownerFacebook: {type: String, ref: 'User'},
+	ownerVkontakte: {type: String, ref: 'User'},
+	created_at: Date,
+	status: {type: String, enum: ['Read', 'Unread'], default: 'Unread'},
+	ifNew: Boolean,
+	_meeting: {type: Schema.Types.ObjectId, ref: 'Meeting'},
+	meetingTitle: String,
+	meetingStartDate: Date,
+	meetingPosition: String,
+	meetingLocation: String,
+	messageType: {type: String, enum: ['Message', 'Notification'], default: 'Message'}
 });
 
 // generating a hash

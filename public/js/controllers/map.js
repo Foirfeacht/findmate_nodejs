@@ -1,12 +1,13 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
-	function ($scope, $http, $mdSidenav, $modal) {
+findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate',
+	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate) {
 
 		$http.get('/current_user')
 			.success(function (data) {
 				$scope.currentUser = data;
+				console.log($scope.currentUser);
 			})
 			.error(function (data) {
 				console.log('Error: ' + data);
@@ -136,6 +137,30 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			console.log($scope.meetings);
 		});
 
+		socket.on('push notification added', function (data) {
+			console.log(data.msg);
+			$http.get('/current_user')
+				.success(function (data) {
+					$scope.currentUser = data;
+					$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+					$scope.showNotification();
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		});
+
+		//notification
+		$scope.showNotification = function() {
+			$mdToast.show({
+				controller: 'notificationController',
+				templateUrl: './public/partials/invite-notification.ejs',
+				//hideDelay: 6000,
+				position: 'bottom right',
+				scope: $scope
+			});
+		};
+
 		$scope.joinMeeting = function (id) {
 
 			$http.put('/join/meetings/' + id)
@@ -172,6 +197,33 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 					console.log('Error: ' + data);
 				});
 		};
+		//send notification
+		socket.on('meeting added', function (data) {
+			$scope.newMeeting = data.msg;
+			if($scope.newMeeting._owner === $scope.currentUser._id){
+
+				console.log($scope.newMeeting);
+				if($scope.newMeeting.invitedUsers.length > 0){
+					var invited = $scope.newMeeting.invitedUsers;
+					var l = invited.length;
+					for (var i = 0; i < l; i++){
+						var user = invited[i];
+						console.log(user);
+						$scope.sendInvitation($scope.newMeeting, user._id);
+					}
+				}
+			};
+		});
+
+		$scope.sendInvitation = function (meeting, userId) {
+			$http.put('/pushNotification/users/' + userId, meeting)
+				.success(function (data) {
+
+				})
+				.error(function (data) {
+					console.log('Error: ', data);
+				})
+		}
 
 		// get function to refresh on modal closing
 
@@ -207,6 +259,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		$scope.toggleNav = function () {
 			$mdSidenav('nav').toggle();
 		};
+
+		$scope.showMessageBox = false;
 
 		$scope.zoom = 15;
 		$scope.maxZoom = 16;

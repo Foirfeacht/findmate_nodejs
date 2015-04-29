@@ -56,6 +56,17 @@ findMate.controller('meetingsController', ['$scope',
 			console.log($scope.meetings);
 		});
 
+		socket.on('push notification added', function (data) {
+			console.log(data.msg);
+			$http.get('/current_user')
+				.success(function (data) {
+					$scope.currentUser = data;
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		});
+
 		$scope.refresh = function () {
 			$http.get('../api/meetings')
 				.success(function (data) {
@@ -212,6 +223,8 @@ findMate.controller('meetingsController', ['$scope',
 		$scope.toggleNav = function () {
 			$mdSidenav('nav').toggle();
 		};
+
+		$scope.showMessageBox = false;
 
 		//edit service update
 

@@ -18,4 +18,6 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
 		$scope.toggleNav = function () {
 			$mdSidenav('nav').toggle();
 		};
+
+		$scope.showMessageBox = false;
 	}]);

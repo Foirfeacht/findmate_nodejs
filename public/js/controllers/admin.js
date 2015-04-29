@@ -120,4 +120,6 @@ findMate.controller('adminController', ['$scope', '$http', '$routeParams', '$mdS
 	$scope.toggleNav = function () {
 		$mdSidenav('nav').toggle();
 	};
+
+	$scope.showMessageBox = false;
 }]);
