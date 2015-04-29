@@ -60,6 +60,14 @@ module.exports = function (app) {
 		});
 	});
 
+	// MESSAGES ==============================
+	app.get('/messages', isLoggedIn, function (req, res) {
+		res.render('mapBox.ejs', {
+			user: req.user,
+			title: "Уведомления | " + req.user.name
+		});
+	});
+
 
 	// ADMIN ==============================
 

@@ -21,11 +21,12 @@ module.exports = function (app) {
 		Meeting.find(function (err, meetings) {
 
 			// if there is an error retrieving, send the error. nothing after res.send(err) will execute
-			if (err)
+			if (err){
 				res.send(err)
+			};
 
 			res.json(meetings); // return all meetings in JSON format
-		}).populate('_owner', 'ownerName');
+		});
 	});
 
 	// create meeting and send back all meetings after creation
@@ -53,14 +54,13 @@ module.exports = function (app) {
 		}, function (err, meeting) {
 			if (err) {
 				res.send(err);
-			}
-			;
+			};
 
 			// get and return all the meetins after you create another
 			Meeting.find(function (err, meetings) {
 				if (err) {
 					res.send(err);
-				}
+				};
 				//res.json(meetings);
 				app.io.broadcast('meetings changed', {msg: meetings});
 			});
@@ -92,15 +92,13 @@ module.exports = function (app) {
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 			if (err) {
 				res.send(err);
-			}
-			;
+			};
 
 			log.info("meeting joined");
 			Meeting.find(function (err, meetings) {
 				if (err) {
 					res.send(err);
-				}
-				;
+				};
 				app.io.broadcast('meetings changed', {msg: meetings});
 			});
 		});
@@ -114,14 +112,12 @@ module.exports = function (app) {
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 			if (err) {
 				res.send(err);
-			}
-			;
+			};
 			log.info("meeting joined");
 			Meeting.find(function (err, meetings) {
 				if (err) {
 					res.send(err);
-				}
-				;
+				};
 				app.io.broadcast('meetings changed', {msg: meetings});
 			});
 
@@ -134,15 +130,15 @@ module.exports = function (app) {
 		var update = {$pull: {joinedUsers: {_id: req.user._id}}};
 
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
-			if (err)
+			if (err){
 				res.send(err)
+			};
 
 			log.info("meeting updated");
 			Meeting.find(function (err, meetings) {
 				if (err) {
 					res.send(err);
-				}
-				;
+				};
 				app.io.broadcast('meetings changed', {msg: meetings});
 			});
 		});
@@ -173,8 +169,7 @@ module.exports = function (app) {
 			}
 			if (err) {
 				res.send(err);
-			}
-			;
+			};
 			log.info("meeting updated");
 			Meeting.find(function (err, meetings) {
 				if (err) {
@@ -209,13 +204,15 @@ module.exports = function (app) {
 		Meeting.remove({
 			_id: req.params.meeting_id
 		}, function (err, meeting) {
-			if (err)
+			if (err){
 				res.send(err);
+			};
 
 			// get and return all the meetings after you create another
 			Meeting.find(function (err, meetings) {
-				if (err)
+				if (err){
 					res.send(err)
+				};
 				app.io.broadcast('meetings changed', {msg: meetings});
 			});
 		});
@@ -296,8 +293,7 @@ module.exports = function (app) {
 			Meeting.find(function (err, meetings) {
 				if (err) {
 					res.send(err);
-				}
-				;
+				};
 				app.io.broadcast('comment added', {msg: meetings});
 				res.send('comment added');
 			});

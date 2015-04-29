@@ -193,12 +193,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				size: size,
 				scope: $scope
 			});
-			/*$scope.$modalInstance.result.then(function(data) {
-			 $scope.refresh();
-			 console.log('refreshed')
-			 }, function() {
-			 $scope.refresh();
-			 }); */
 		};
 
 		$scope.ok = function () {
