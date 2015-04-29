@@ -1,12 +1,13 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
-	function ($scope, $http, $mdSidenav, $modal) {
+findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate',
+	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate) {
 
 		$http.get('/current_user')
 			.success(function (data) {
 				$scope.currentUser = data;
+				console.log($scope.currentUser);
 			})
 			.error(function (data) {
 				console.log('Error: ' + data);
@@ -141,11 +142,24 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			$http.get('/current_user')
 				.success(function (data) {
 					$scope.currentUser = data;
+					$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+					$scope.showNotification();
 				})
 				.error(function (data) {
 					console.log('Error: ' + data);
 				});
 		});
+
+		//notification
+		$scope.showNotification = function() {
+			$mdToast.show({
+				controller: 'notificationController',
+				templateUrl: './public/partials/invite-notification.ejs',
+				//hideDelay: 6000,
+				position: 'bottom right',
+				scope: $scope
+			});
+		};
 
 		$scope.joinMeeting = function (id) {
 
@@ -231,12 +245,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				size: size,
 				scope: $scope
 			});
-			/*$scope.$modalInstance.result.then(function(data) {
-			 $scope.refresh();
-			 console.log('refreshed')
-			 }, function() {
-			 $scope.refresh();
-			 }); */
 		};
 
 		$scope.ok = function () {
@@ -251,6 +259,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		$scope.toggleNav = function () {
 			$mdSidenav('nav').toggle();
 		};
+
+		$scope.showMessageBox = false;
 
 		$scope.zoom = 15;
 		$scope.maxZoom = 16;

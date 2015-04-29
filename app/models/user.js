@@ -48,7 +48,7 @@ var userSchema = new Schema({
 
 var notificationSchema = new Schema({
 	_id: {type: Schema.Types.ObjectId},
-	content: {type: String, required: 'Сообщение не может быть пустым'},
+	content: {type: String},
 	owner: {type: Schema.Types.ObjectId, ref: 'User'},
 	ownerName: {type: String, ref: 'User'},
 	ownerFacebook: {type: String, ref: 'User'},
@@ -60,7 +60,8 @@ var notificationSchema = new Schema({
 	meetingTitle: String,
 	meetingStartDate: Date,
 	meetingPosition: String,
-	meetingLocation: String
+	meetingLocation: String,
+	messageType: {type: String, enum: ['Message', 'Notification'], default: 'Message'}
 });
 
 // generating a hash

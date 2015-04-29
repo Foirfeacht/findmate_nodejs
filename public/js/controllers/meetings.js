@@ -224,6 +224,8 @@ findMate.controller('meetingsController', ['$scope',
 			$mdSidenav('nav').toggle();
 		};
 
+		$scope.showMessageBox = false;
+
 		//edit service update
 
 		$scope.$watch('meetingId', function () {

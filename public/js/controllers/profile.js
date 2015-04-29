@@ -8,6 +8,8 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 			$mdSidenav('nav').toggle();
 		};
 
+		$scope.showMessageBox = false;
+
 		$http.get('/current_user')
 			.success(function (data) {
 				$scope.currentUser = data;

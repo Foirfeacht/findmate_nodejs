@@ -87,10 +87,9 @@ module.exports = function (app) {
 		var meeting = req.body;
 
 		var update = {
-			$push: {
+			$addToSet: {
 				notifications: {
 					_id: mongoose.Types.ObjectId(),
-					content: 'Ваш друг ' + req.user.name + ' приглашает вас принять участие в ' + meeting.name,
 					owner: req.user._id,
 					ownerName: req.user.name,
 					created_at: new Date(),
@@ -100,7 +99,8 @@ module.exports = function (app) {
 					meetingTitle: meeting.title,
 					meetingStartDate: meeting.startDate,
 					meetingPosition: meeting.position,
-					meetingLocation: meeting.location
+					meetingLocation: meeting.location,
+					type: 'Notification'
 				}
 			}
 		};

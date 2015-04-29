@@ -118,6 +118,8 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 			$mdSidenav('nav').toggle();
 		};
 
+		$scope.showMessageBox = false;
+
 		//edit service update
 
 		$scope.$watch('currentMeetingId', function () {
