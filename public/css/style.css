@@ -1,268 +1,574 @@
 /* =============================
    ========== GENERAL ==========
    ============================= */
-
 body {
-    margin: 0;
-    height: 100%;
-    padding-top: 0;
-}
+  margin: 0;
+  height: 100%;
+  padding-top: 0; }
 
 a:hover {
-    text-decoration: none;
-}
+  text-decoration: none; }
 
 .content {
-    width: 100%;
-    position: relative;
-    padding: 100px 100px;
-}
-
+  width: 100%;
+  position: relative;
+  padding: 100px 100px; }
 
 /* =============================
    ========== DIALOG ==========
    ============================= */
-
 .modal-dialog {
-    width: 80%;
-}
+  width: 80%; }
 
 md-dialog {
-    width: 80%;
-}
+  width: 80%; }
 
 .datepickers input {
-    width: 80%;
-    margin: 0 auto;
-}
+  width: 80%;
+  margin: 0 auto; }
 
 .buttons div {
-    width: 50%;
-}
+  width: 50%; }
 
 .dropdown-wrap {
-    position: relative;
-    width: 100%;
-}
+  position: relative;
+  width: 100%; }
 
 .form-control {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border: 0;
-}
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0; }
 
 .caret {
-    position: absolute;
-    right: 15px;
-    top: 40%;
-    border-top: 8px solid #BDBDBD;
-    border-right: 8px solid transparent;
-    border-bottom: 0 dotted;
-    border-left: 8px solid transparent;
-}
+  position: absolute;
+  right: 15px;
+  top: 40%;
+  border-top: 8px solid #BDBDBD;
+  border-right: 8px solid transparent;
+  border-bottom: 0 dotted;
+  border-left: 8px solid transparent; }
 
 md-select {
-    z-index: 999;
-}
+  z-index: 999; }
 
 .buttons div button {
-    width: 200px;
-    display: block;
-    margin: 10px auto;
-}
+  width: 200px;
+  display: block;
+  margin: 10px auto; }
 
 .modal-btn {
-    position: absolute;
-    z-index: 9999;
-    top: 50%;
-    left: 50%;
-}
+  position: absolute;
+  z-index: 9999;
+  top: 50%;
+  left: 50%; }
 
 .form {
-    width: 80%;
-    margin: 20px auto;
-}
+  width: 80%;
+  margin: 20px auto; }
 
 md-input-container {
-    width: 100%;
-}
+  width: 100%; }
 
 md-select {
-    width: 90%;
-    margin-bottom: 30px;
-}
+  width: 90%;
+  margin-bottom: 30px; }
 
 md-select span {
-    width: 100%;
-}
+  width: 100%; }
 
 md-option {
-    width: 100%;
-}
+  width: 100%; }
 
 .datetime-pickers > div {
-    width: 50%;
-}
+  width: 50%; }
 
 .date-header {
-    width: 100%;
-    text-align: center;
-}
+  width: 100%;
+  text-align: center; }
 
 /******* bOotstrap dropdown *******/
 .visibility > div {
-    width: 50%;
-}
+  width: 50%; }
 
 .inviteDropdown,
 .inviteDropdown > div {
-    width: 100%;
-}
+  width: 100%; }
 
 .dropdown-toggle {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #333;
-}
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #333; }
 
 .dropdown-menu {
-    width: 100%;
-    border: none;
-
-}
+  width: 100%;
+  border: none; }
 
 .form input,
 .form select {
-    margin: 10px auto;
-    width: 100%;
-}
+  margin: 10px auto;
+  width: 100%; }
 
 /* =============================
    ========== MEETING ==========
    ============================= */
-
 .meeting-display {
-    width: 100%;
-    overflow: hidden;
-}
+  width: 100%;
+  overflow: hidden; }
 
 .meeting {
-    width: 30%;
-    margin: 30px 15px;
-    border: 1px thin rgba(0, 0, 0, 0.8);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    padding: 20px 20px 0;
-    min-height: 520px;
-    position: relative;
-}
+  width: 30%;
+  margin: 30px 15px;
+  border: 1px thin rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 20px 20px 0;
+  min-height: 520px;
+  position: relative; }
 
 .meeting div {
-    padding: 4px 0;
-}
+  padding: 4px 0; }
 
 .meeting-title {
-    font-weight: 700;
-}
+  font-weight: 700; }
 
 .meeting .userlist img {
-    border: 1px thin #fff;
-    border-radius: 50%;
-    margin-right: 8px;
-    height: 56px;
-    width: 56px;
-}
+  border: 1px thin #fff;
+  border-radius: 50%;
+  margin-right: 8px;
+  height: 56px;
+  width: 56px; }
 
 .meeting .join-button,
 .delete-button {
-    width: auto;
-    padding: 10px 15px;
-    display: block;
-    margin: 10px auto;
-}
+  width: auto;
+  padding: 10px 15px;
+  display: block;
+  margin: 10px auto; }
 
 .edit-button {
-    position: absolute;
-    right: 30px;
-    top: 20px;
-    height: 36px;
-    width: 36px;
-}
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  height: 36px;
+  width: 36px; }
 
 .edit-button i {
-    font-size: 1.2em;
-}
+  font-size: 1.2em; }
 
 .meeting-footer {
-    padding: 5px 0;
-    background: #0091EA;
-    color: #fff;
-    font-size: 1.1em;
-    overflow: hidden;
-}
+  padding: 5px 0;
+  background: #0091EA;
+  color: #fff;
+  font-size: 1.1em;
+  overflow: hidden; }
 
 .meeting-footer > div {
-    float: right;
-    margin-right: 20px;
-}
+  float: right;
+  margin-right: 20px; }
 
 .meeting-footer i {
-    font-size: 1.2em;
-}
+  font-size: 1.2em; }
 
 /********* SEARCH AND FILTERS ********/
-
 .search {
-    width: 80%;
-    margin: 0 auto;
-}
+  width: 80%;
+  margin: 0 auto; }
 
 .search md-icon {
-    position: relative;
-    top: 3px;
-    font-size: 1.3em;
-}
+  position: relative;
+  top: 3px;
+  font-size: 1.3em; }
 
 .search input {
-    width: 90%;
-}
+  width: 90%; }
 
 .select-filters {
-    width: 100%;
-}
+  width: 100%; }
 
 .select-filter {
-    width: 50%;
-}
+  width: 50%; }
 
 .create-button {
-    width: 36px;
-    height: 36px;
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
-}
+  width: 36px;
+  height: 36px;
+  position: fixed;
+  bottom: 50px;
+  right: 50px; }
 
 .create-button i {
-    color: #fff;
-    font-size: 2em;
-    position: absolute;
-    top: 30%;
-    left: 30%;
-}
+  color: #fff;
+  font-size: 2em;
+  position: absolute;
+  top: 30%;
+  left: 30%; }
 
 .datepicker-wrapper {
-    margin-top: 35px;
-}
+  margin-top: 35px; }
 
 .input-group .form-control {
-    width: 100%;
-}
+  width: 100%; }
 
 .input-group-btn > .btn {
-    position: absolute;
-    top: 10px;
-}
+  position: absolute;
+  top: 10px; }
 
+/* =============================
+   =========== HEADER ============
+   ============================= */
+.header {
+  z-index: 999; }
 
+.inbox-button {
+  display: block;
+  margin: 0 auto;
+  position: fixed;
+  top: 15px;
+  right: 140px; }
 
+.inbox-button:hover {
+  cursor: pointer; }
+
+.inbox-button i {
+  font-size: 2em;
+  display: block;
+  margin: 0 auto;
+  width: auto;
+  height: auto; }
+
+.message-alert {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #D74040; }
+
+.message-alert span {
+  display: block;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  font-size: 0.6em;
+  color: #fff; }
+
+.message-box {
+  position: absolute;
+  width: 500px;
+  min-height: 250px;
+  background: #fff;
+  top: 40px;
+  right: 0;
+  padding: 10px;
+  font-size: 0.8em; }
+
+.inbox-button:hover .message-box {
+  display: block; }
+
+.messagebox-message {
+  width: 100%;
+  border-bottom: 1px solid #000;
+  overflow: hidden;
+  padding: 5px 0; }
+
+.messagebox-message > div {
+  float: left; }
+
+.messagebox-icon {
+  width: 64px; }
+
+.messagebox-icon img {
+  width: 56px;
+  height: 56px;
+  display: block;
+  margin: 0 auto; }
+
+.messagebox-content {
+  width: 404px; }
+
+/* =============================
+   =========== MENU ============
+   ============================= */
+.menu-button {
+  position: fixed;
+  top: 20px;
+  left: 40px;
+  z-index: 300; }
+
+.menu-button:hover {
+  cursor: pointer; }
+
+.menu-button i {
+  font-size: 2em; }
+
+.menu {
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20%;
+  z-index: 300;
+  /*background: #2c3e50;*/
+  background: #fff;
+  border: 1px thin rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #2c3e50;
+  font-weight: 700; }
+
+.menu ul {
+  width: 100%;
+  list-style: none;
+  padding: 0; }
+
+.menu ul li {
+  width: 100%; }
+
+.menu ul li a {
+  display: block;
+  padding: 10px 0;
+  font-size: 1.6em;
+  color: #211400;
+  font-weight: 700;
+  width: 100%;
+  padding-left: 20%;
+  text-align: left;
+  line-height: auto; }
+
+.menu ul li a i {
+  margin-right: 20px; }
+
+.menu ul li:hover {
+  background: #2c3e50;
+  background: #2B2B2B;
+  background: #EA8B00; }
+
+.menu ul li:hover a {
+  color: #fff; }
+
+.profile-block .image-wrapper {
+  border: 1px soldi #fff;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  margin: 80px auto 10px; }
+
+.profile-block img {
+  width: 100%;
+  height: 100%; }
+
+.profile-block .profile-name {
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-size: 1.1em;
+  margin-bottom: 30px; }
+
+.display {
+  width: 100%;
+  overflow: hidden; }
+
+.admin-table {
+  width: 95%;
+  margin: 20px auto;
+  border: 1px thin rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 15px 20px; }
+
+.admin-table tr:hover {
+  cursor: pointer; }
+
+.admin-table td {
+  padding: 10px 10px; }
+
+.admin-table thead td {
+  font-weight: 700;
+  line-height: 2em;
+  border: 1px solid #fff; }
+
+.active {
+  background: #B4CDE5;
+  color: #3e6d8e; }
+
+.admin-table .friends img {
+  border-radius: 50%;
+  border: 1px thin #000; }
+
+.userimg img {
+  border: 1px thin #fff;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  height: 50px;
+  width: 50px; }
+
+#map {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0; }
+
+.content.map {
+  padding: 100px 0 0; }
+
+.map-container {
+  width: 100%;
+  height: 800px;
+  height: 100vh;
+  position: relative; }
+
+map {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0; }
+
+.infobox-wrapper {
+  display: none; }
+
+#infobox {
+  border: 2px solid black;
+  margin-top: 8px;
+  background: #333;
+  color: #FFF;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  padding: .5em 1em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  text-shadow: 0 -1px #000000;
+  -webkit-box-shadow: 0 0 8px #000;
+  box-shadow: 0 0 8px #000; }
+
+/* =============================
+   =========== NOTIFICATIONS ============
+   ============================= */
+.message-display {
+  width: 60%;
+  margin: 0 auto; }
+
+.singlemessage-message {
+  width: 100%;
+  overflow: hidden;
+  margin: 10px auto; }
+
+.singlemessage-message > div {
+  float: left; }
+
+.singlemessage-userimage,
+.singlemessage-icon {
+  width: 10%;
+  min-width: 64px; }
+
+.singlemessage-userimage img,
+.singlemessage-icon img {
+  width: 56px;
+  height: 56px; }
+
+.singlemessage-text {
+  width: 80%; }
+
+.singlemessage-buttons > div {
+  width: 50%; }
+
+.profile-container {
+  overflow: hidden;
+  width: 100%; }
+
+.container {
+  margin: 10px auto; }
+
+/* =============== IMAGE ============ */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  width: 50%; }
+
+.image-container > div {
+  float: left; }
+
+.image {
+  /*width: 350px;
+  height: 480px;*/
+  width: 50%;
+  position: relative; }
+
+.image img {
+  width: auto;
+  max-height: 400px;
+  max-width: 100%; }
+
+.switch-image {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: none; }
+
+.image:hover .switch-image {
+  display: block; }
+
+.image-selector {
+  width: 50%;
+  position: relative;
+  height: 400px; }
+
+.image-selector > div {
+  width: 100%;
+  height: 200px; }
+
+.image-selector img {
+  /*min-width: 175px;*/
+  height: auto;
+  max-height: 200px;
+  max-width: 80%;
+  margin: 0 15px; }
+
+.image-selector img.image-selected {
+  border: 2px solid #3949AB;
+  border-radius: 5px; }
+
+.select-image-button {
+  position: absolute;
+  top: 45%;
+  right: 5%; }
+
+/* ========= USER ======= */
+.user-container {
+  width: 50%; }
+
+.name-container {
+  font-size: 1.2em; }
+
+/* ===== join accounts ===== */
+.join-accounts > div {
+  width: 50%; }
+
+.content {
+  width: 100%; }
+
+.meetings-display {
+  width: 50%; }
+
+.meeting {
+  width: 80%;
+  margin: 0 auto;
+  min-width: 400px; }
+
+.comments {
+  width: 50%; }
+
+/* =============================
+   ========== COMMENT ==========
+   ============================= */
+.comment-form div {
+  width: 100%; }
+
+.comments {
+  min-width: 50%; }
+
+.comment-form textarea {
+  resize: vertical; }

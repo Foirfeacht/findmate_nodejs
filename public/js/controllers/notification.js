@@ -4,6 +4,8 @@
 findMate.controller('notificationController', ['$scope', '$http', '$mdToast',
 	function ($scope, $http, $mdToast) {
 
+		console.log($scope.addedNotification);
+
 		$scope.closeToast = function() {
 			$mdToast.hide();
 		};

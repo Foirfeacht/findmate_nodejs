@@ -7,6 +7,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		$http.get('/current_user')
 			.success(function (data) {
 				$scope.currentUser = data;
+				console.log($scope.currentUser);
 			})
 			.error(function (data) {
 				console.log('Error: ' + data);
@@ -142,6 +143,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				.success(function (data) {
 					$scope.currentUser = data;
 					$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+					console.log($scope.addedNotification);
 					$scope.showNotification();
 				})
 				.error(function (data) {
@@ -154,9 +156,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			$mdToast.show({
 				controller: 'notificationController',
 				templateUrl: './public/partials/invite-notification.ejs',
-			    hideDelay: 12000,
-				position: 'bottom left',
-				scope: $scope
+				hideDelay: 6000,
+				position: 'bottom left'
 			});
 		};
 

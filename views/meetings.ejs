@@ -98,13 +98,13 @@
 
                 <div class="meeting col-sm-3 col-sm-offset-1"
                      ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'"
-                     ng-if="meeting._owner._id === currentUser._id">
+                     ng-if="meeting.owner._id === currentUser._id">
 
                     <div layout="row" class="meeting-title"><strong>Название:&nbsp; </strong> <a
                                 href="meetings/{{meeting._id}}"> {{ meeting.title}}</a></div>
                     <div layout="row"><strong>Описание:&nbsp; </strong> {{ meeting.description }}</div>
                     <div layout="row"><strong>Категория:&nbsp; </strong> {{ meeting.category.value.ru }}</div>
-                    <div layout="row"><strong>Создатель:&nbsp; </strong><a href="users/{{meeting._owner._id}}">{{
+                    <div layout="row"><strong>Создатель:&nbsp; </strong><a href="users/{{meeting.owner._id}}">{{
                             meeting.ownerName }}</a></div>
                     <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd,
                         HH:mm'}}
@@ -134,13 +134,13 @@
 
                     <div layout="row">
                         <md-button class="md-raised md-warn delete-button" ng-click="deleteMeeting(meeting._id)"
-                                   ng-if="currentUser._id === meeting._owner._id">
+                                   ng-if="currentUser._id === meeting.owner._id">
                             Удалить
                         </md-button>
                     </div>
 
                     <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)"
-                               ng-if="currentUser._id === meeting._owner._id">
+                               ng-if="currentUser._id === meeting.owner._id">
                         <i class="mdi mdi-pencil"></i>
                     </md-button>
                 </div>
@@ -171,7 +171,7 @@
                                 href="meetings/{{meeting._id}}"> {{ meeting.title}}</a></div>
                     <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
                     <div layout="row"><strong>Категория: </strong> {{ meeting.category.value.ru }}</div>
-                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+                    <div layout="row"><a href="users/{{meeting.owner._id}}">{{ meeting.owner.name }}</a></div>
                     <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd,
                         HH:mm'}}
                     </div>
@@ -197,7 +197,7 @@
                     </div>
                     <div layout="row">
                         <md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)"
-                                   ng-show="checkOwner(meeting._owner._id)">Удалить
+                                   ng-show="checkOwner(meeting.owner._id)">Удалить
                         </md-button>
                         <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)"
                                    ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение
@@ -220,7 +220,7 @@
                     </div>
 
                     <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)"
-                               ng-show="checkOwner(meeting._owner._id)">
+                               ng-show="checkOwner(meeting.owner._id)">
                         <i class="mdi mdi-pencil"></i>
                     </md-button>
                 </div>
@@ -252,7 +252,7 @@
                                 href="meetings/{{meeting._id}}"> {{ meeting.title}}</a></div>
                     <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
                     <div layout="row"><strong>Категория: </strong> {{ meeting.category.value.ru }}</div>
-                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+                    <div layout="row"><a href="users/{{meeting.owner._id}}">{{ meeting.owner.name }}</a></div>
                     <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd,
                         HH:mm'}}
                     </div>
@@ -315,7 +315,7 @@
                                 href="meetings/{{meeting._id}}"> {{ meeting.title}}</a></div>
                     <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
                     <div layout="row"><strong>Категория: </strong> {{ meeting.category.value.ru }}</div>
-                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+                    <div layout="row"><a href="users/{{meeting.owner._id}}">{{ meeting.owner.name }}</a></div>
                     <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd,
                         HH:mm'}}
                     </div>
@@ -378,7 +378,7 @@
                                 href="meetings/{{meeting._id}}"> {{ meeting.title}}</a></div>
                     <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
                     <div layout="row"><strong>Категория: </strong> {{ meeting.category.value.ru }}</div>
-                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+                    <div layout="row"><a href="users/{{meeting.owner._id}}">{{ meeting.owner.name }}</a></div>
                     <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd,
                         HH:mm'}}
                     </div>
@@ -424,13 +424,13 @@
 
                 <div class="meeting col-sm-3 col-sm-offset-1"
                      ng-repeat="meeting in meetings | filter: query | filter: filterMtn | orderBy: 'startDate'"
-                     ng-if="meeting.ownerFacebook === friend.id">
+                     ng-if="meeting.owner.facebook.id === friend.id || meeting.owner.vkontakte.id = friend.id">
 
                     <div layout="row" class="meeting-title"><strong>Название: </strong> <a
-                                href="meetings/{{meeting._id}}"> {{ meeting.title}}</a></div>
+                                href="meetings/{{meeting.id}}"> {{ meeting.title}}</a></div>
                     <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
                     <div layout="row"><strong>Категория: </strong> {{ meeting.category.value.ru }}</div>
-                    <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+                    <div layout="row"><a href="users/{{meeting.owner._id}}">{{ meeting.owner.name }}</a></div>
                     <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd,
                         HH:mm'}}
                     </div>

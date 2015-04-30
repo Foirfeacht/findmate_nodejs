@@ -13,7 +13,7 @@
                     meeting.title}}</a></div>
             <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
             <div layout="row"><strong>Категория: </strong> {{ meeting.category.value.ru }}</div>
-            <div layout="row"><a href="users/{{meeting._owner._id}}">{{ meeting.ownerName }}</a></div>
+            <div layout="row"><a href="users/{{meeting.owner._id}}">{{ meeting.owner.name }}</a></div>
             <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}
             </div>
             <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
@@ -36,7 +36,7 @@
             </div>
             <div layout="row">
                 <md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)"
-                           ng-if="currentUser._id === meeting._owner._id">Удалить
+                           ng-if="currentUser._id === meeting.owner._id">Удалить
                 </md-button>
                 <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)"
                            ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение
@@ -50,7 +50,7 @@
             </div>
 
             <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)"
-                       ng-if="currentUser._id === meeting._owner._id">
+                       ng-if="currentUser._id === meeting.owner._id">
                 <i class="mdi mdi-pencil"></i>
             </md-button>
         </div>
@@ -61,7 +61,7 @@
 
     <div class="comments">
         <div layout="column" class="comment" ng-repeat="comment in meeting.comments">
-            <div class="comment-owner"><a href="users/{{comment._owner._id}}">{{ comment.ownerName}}</a></div>
+            <div class="comment-owner"><a href="users/{{comment.owner._id}}">{{ comment.owner.name}}</a></div>
             <div class="comment-content">{{ comment.content}}</div>
             <div class="comment-createdat">{{comment.created_at}}</div>
             <div class="comment-delete">

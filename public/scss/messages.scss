@@ -1,0 +1,42 @@
+
+/* =============================
+   =========== NOTIFICATIONS ============
+   ============================= */
+
+
+.message-display {
+	width: 60%;
+	margin: 0 auto;
+}
+
+.singlemessage-message {
+	width: 100%;
+	overflow: hidden;
+	margin: 10px auto;
+}
+
+.singlemessage-message > div {
+	float: left;
+}
+
+.singlemessage-userimage,
+.singlemessage-icon {
+	width: 10%;
+	min-width: 64px;
+}
+
+.singlemessage-userimage img,
+.singlemessage-icon img {
+	width: 56px;
+	height: 56px;
+}
+
+.singlemessage-text {
+	width: 80%;
+}
+
+.singlemessage-buttons > div {
+  width: 50%;
+}
+
+

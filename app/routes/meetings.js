@@ -17,24 +17,16 @@ module.exports = function (app) {
 
 // get all meetings
 	app.get('/api/meetings', isLoggedIn, function (req, res) {
-		var user = req.user;
-		// use mongoose to get all meetings in the database
-		Meeting.find(function (err, meetings) {
-
-			// if there is an error retrieving, send the error. nothing after res.send(err) will execute
+		Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
 			if (err){
 				res.send(err)
 			};
-
-			res.json(meetings); // return all meetings in JSON format
+			res.json(meetings);
 		});
 	});
 
-	// create meeting and send back all meetings after creation
 	app.post('/api/meetings', isLoggedIn, function (req, res) {
-		var user = req.user;
 
-		// create a meeting, information comes from AJAX request from Angular
 		Meeting.create({
 			title: req.body.title,
 			description: req.body.description,
@@ -47,10 +39,7 @@ module.exports = function (app) {
 			position: req.body.position,
 			location: req.body.location,
 			visibility: req.body.visibility || 'Все',
-			_owner: req.user._id,
-			ownerName: req.user.name,
-			ownerFacebook: req.user.facebook.id,
-			ownerVkontakte: req.user.vkontakte.id,
+			owner: req.user._id,
 			invitedUsers: req.body.invitedUsers
 		}, function (err, meeting) {
 			if (err) {
@@ -60,7 +49,7 @@ module.exports = function (app) {
 			app.io.broadcast('meeting added', {msg: meeting});
 			
 			// get and return all the meetins after you create another
-			Meeting.find(function (err, meetings) {
+			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
 				if (err) {
 					res.send(err);
 				};
@@ -74,7 +63,7 @@ module.exports = function (app) {
 	//meeting by id middleware
 
 	var meetingByID = function (req, res, next, id) {
-		Meeting.findById(id).populate('_owner', 'ownerName').exec(function (err, meeting) {
+		Meeting.findById(id).populate('owner comments.owner').exec(function (err, meeting) {
 			if (err) return next(err);
 			if (!meeting) return next(new Error('Failed to load meeting ' + id));
 			req.meeting = meeting;
@@ -98,7 +87,7 @@ module.exports = function (app) {
 			};
 
 			log.info("meeting joined");
-			Meeting.find(function (err, meetings) {
+			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
 				if (err) {
 					res.send(err);
 				};
@@ -117,7 +106,7 @@ module.exports = function (app) {
 				res.send(err);
 			};
 			log.info("meeting joined");
-			Meeting.find(function (err, meetings) {
+			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
 				if (err) {
 					res.send(err);
 				};
@@ -138,7 +127,7 @@ module.exports = function (app) {
 			};
 
 			log.info("meeting updated");
-			Meeting.find(function (err, meetings) {
+			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
 				if (err) {
 					res.send(err);
 				};
@@ -174,7 +163,7 @@ module.exports = function (app) {
 				res.send(err);
 			};
 			log.info("meeting updated");
-			Meeting.find(function (err, meetings) {
+			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
 				if (err) {
 					res.send(err);
 				};
@@ -211,7 +200,7 @@ module.exports = function (app) {
 			};
 
 			// get and return all the meetings after you create another
-			Meeting.find(function (err, meetings) {
+			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
 				if (err){
 					res.send(err)
 				};
@@ -235,38 +224,6 @@ module.exports = function (app) {
 	});
 
 	// =============================================================================
-	// ROUTES FOR MEETING USERS==================================================
-	// =============================================================================
-
-	// store user in meetings.joined
-	/*app.put('/join/meetings/:id', isLoggedIn, function (req, res){
-	 var update = { $push: {
-	 users: {
-	 userId: req.user._id,
-	 firstName: req.user.firstName,
-	 lastName: req.user.lastName,
-	 name:  req.user.name,
-	 image: req.user.image,
-	 email: req.user.email,
-	 status: 'joined'
-	 }
-	 }};
-
-	 Meeting.findByIdAndUpdate(req.params.id, update, {safe: true, upsert: true}, function (err, meeting) {
-	 if(err)
-	 res.send (err)
-
-	 log.info("meeting joined");
-	 Meeting.find(function(err, meetings) {
-	 if (err)
-	 res.send(err)
-	 res.json(meetings);
-	 });
-	 //res.json(meeting);
-	 });
-	 });*/
-
-	// =============================================================================
 	// ROUTES FOR COMMENTS==================================================
 	// =============================================================================
 
@@ -279,10 +236,7 @@ module.exports = function (app) {
 					_id: mongoose.Types.ObjectId(),
 					content: req.body.content,
 					created_at: new Date(),
-					_owner: req.user._id,
-					ownerName: req.user.name,
-					ownerFacebook: req.user.facebook.id,
-					ownerVkontakte: req.user.vkontakte.id
+					owner: req.user._id
 				}
 			}
 		};
@@ -293,7 +247,7 @@ module.exports = function (app) {
 				return res.send({error: 'Not found'});
 			}
 			//log.info("comment updated");
-			Meeting.find(function (err, meetings) {
+			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
 				if (err) {
 					res.send(err);
 				};
@@ -312,7 +266,7 @@ module.exports = function (app) {
 				return res.send({error: 'Not found'});
 			}
 			log.info("comment deleted " + req.params.commentId);
-			Meeting.find(function (err, meetings) {
+			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
 				if (err) {
 					res.send(err);
 				};

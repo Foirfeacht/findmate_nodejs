@@ -57,6 +57,7 @@ if (process.env.NODE_ENV === 'development') {
 	app.use(require('connect-livereload')({
 		port: 35729
 	}));
+
 	app.use(morgan('dev')); // log every request to the console
 }
 

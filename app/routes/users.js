@@ -16,14 +16,11 @@ module.exports = function (app) {
 
 	// get all users
 	app.get('/api/users', isLoggedIn, function (req, res) {
-		var user = req.user;
-		User.find(function (err, users) {
-
+		User.find({}).populate('notifications.owner notifications.meeting').exec(function (err, users) {
 			if (err)
 				res.send(err)
-
 			res.json(users);
-		}).populate('meetings._id', 'meetings.title');
+		});
 	});
 
 	var userByID = function (req, res, next, id) {
@@ -46,8 +43,13 @@ module.exports = function (app) {
 	});
 
 	app.get('/current_user', isLoggedIn, function (req, res) {
-		var user = req.user;
-		res.json(user);
+		User.findById(req.user.id).populate('notifications.owner notifications.meeting').exec(function (err, user) {
+			if(err){
+				res.send(err);
+			};
+			res.json(user);
+		});
+		//var user = req.user;
 	});
 
 	// delete a user
@@ -60,7 +62,7 @@ module.exports = function (app) {
 			Meeting.find({'_owner._id': req.params.user_id}).remove(function (err, meetings) {
 				if (err)
 					res.send(err);
-				res.redirect('/');
+				res.redirect('/logout');
 			});
 
 
@@ -85,24 +87,17 @@ module.exports = function (app) {
 	app.put('/pushNotification/users/:id', isLoggedIn, function (req, res) {
 
 		var meeting = req.body;
+		console.log(meeting._id);
 
 		var update = {
 			$addToSet: {
 				notifications: {
 					_id: mongoose.Types.ObjectId(),
 					owner: req.user._id,
-					ownerName: req.user.name,
-					ownerImage: req.user.image,
 					created_at: new Date(),
 					status: 'Unread',
 					ifNew: true,
-					_meeting: meeting._id,
-					meetingTitle: meeting.title,
-					meetingStartDate: meeting.startDate,
-					meetingPosition: meeting.position,
-					meetingLocation: meeting.location,
-					meetingIcon: meeting.category.icon,
-					meetingCategory: meeting.category.value.ru,
+					meeting: meeting._id,
 					type: 'Notification'
 				}
 			}
@@ -114,7 +109,7 @@ module.exports = function (app) {
 				return res.send({error: 'Not found'});
 			}
 			log.info("invite sent");
-			User.find(function (err, users) {
+			User.find({}).populate('notifications.owner notifications.meeting').exec(function (err, users) {
 				if (err) {
 					res.send(err);
 				};

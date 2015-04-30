@@ -1,5 +1,5 @@
 /*
-Errno::ENOENT: No such file or directory - profile.scss
+Errno::ENOENT: No such file or directory - main.scss
 
 Backtrace:
 C:/Ruby200-x64/lib/ruby/gems/2.0.0/gems/sass-3.3.7/lib/sass/plugin/compiler.rb:405:in `read'
@@ -19,4 +19,4 @@ C:/Ruby200-x64/bin/scss:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Errno::ENOENT: No such file or directory - profile.scss"; }
+  content: "Errno::ENOENT: No such file or directory - main.scss"; }

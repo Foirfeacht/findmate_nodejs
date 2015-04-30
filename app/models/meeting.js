@@ -19,10 +19,7 @@ var meetingsSchema = new Schema({
 	startDate: Date,
 	invitedUsers: {type: Array, default: []},
 	joinedUsers: {type: Array, default: []},
-	_owner: {type: Schema.Types.ObjectId, ref: 'User'},
-	ownerFacebook: {type: String, ref: 'User'},
-	ownerVK: {type: String, ref: 'User'},
-	ownerName: {type: String, ref: 'User'},
+	owner: {type: Schema.Types.ObjectId, ref: 'User'},
 	created_at: {type: Date, default: Date.now()},
 	updated_at: {type: Date, default: null},
 	longitude: String,
@@ -38,9 +35,6 @@ var commentsSchema = new Schema({
 	_id: {type: Schema.Types.ObjectId},
 	content: {type: String, required: 'Сообщение не может быть пустым'},
 	owner: {type: Schema.Types.ObjectId, ref: 'User'},
-	ownerName: {type: String, ref: 'User'},
-	ownerFacebook: {type: String, ref: 'User'},
-	ownerVkontakte: {type: String, ref: 'User'},
 	created_at: Date
 });
 

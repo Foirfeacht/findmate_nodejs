@@ -7,7 +7,7 @@ module.exports = function (grunt) {
 		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
 		clientViews: ['views/*.*', 'public/partials/*.*'],
 		clientJS: ['public/js/**/*.js'],
-		clientCSS: ['public/css/*.css']
+		clientCSS: ['public/scss/*.scss']
 	};
 
 	// Project Configuration
@@ -42,7 +42,7 @@ module.exports = function (grunt) {
 			},
 			clientCSS: {
 				files: watchFiles.clientCSS,
-				//tasks: ['csslint'],
+				tasks: ['sass'],
 				options: {
 					livereload: true
 				}
@@ -106,6 +106,13 @@ module.exports = function (grunt) {
 			secure: {
 				NODE_ENV: 'secure'
 			}
+		},
+		sass: {                              // Task
+			dist: {
+				files: {
+					'./public/css/style.css': './public/scss/style.scss'
+				}
+			}
 		}
 	});
 
@@ -124,6 +131,8 @@ module.exports = function (grunt) {
 		grunt.config.set('applicationCSSFiles', config.assets.css);
 	});
 
+	grunt.loadNpmTasks('grunt-contrib-sass');
+
 	// Default task(s).
 	grunt.registerTask('default', ['lint', 'concurrent:default']);
 
@@ -137,7 +146,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['lint']);
+	grunt.registerTask('build', ['sass']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);

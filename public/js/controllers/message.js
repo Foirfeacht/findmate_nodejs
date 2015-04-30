@@ -16,6 +16,46 @@ findMate.controller('messageController', ['$scope', '$http', '$mdSidenav', '$mod
 				console.log('Error: ' + data);
 			});
 
+		// decline invitation
+
+		$scope.declineInvitation = function (id) {
+			$http.put('/decline/meetings/' + id)
+				.success(function (data) {
+					//$scope.meetings = data;
+					//console.log(data);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		// join meeting
+
+		$scope.joinMeeting = function (id) {
+			$http.put('/join/meetings/' + id)
+				.success(function (data) {
+					//$scope.meetings = data;
+					//console.log(data);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+
+		};
+
+		// unjoin meeting
+
+		$scope.unjoinMeeting = function (id) {
+
+			$http.put('/unjoin/meetings/' + id)
+				.success(function (data) {
+					//$scope.meetings = data;
+					//console.log(data);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				})
+		};
 		
 
 	}]);

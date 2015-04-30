@@ -30,7 +30,16 @@
         </div>
 
         <div class="singlemessage-buttons">
-            
+            <div>
+                <md-button class="md-raised join-button" ng-click="declineInvitation(notification._meeting)">
+                    Отклонить приглашение
+                </md-button>
+            </div>
+            <div>
+                <md-button class="md-raised join-button" ng-click="joinMeeting(notification._meeting)">
+                     Учавствовать
+                </md-button>
+            </div>
         </div>
     </div>
 </div>
