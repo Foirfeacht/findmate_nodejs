@@ -1,6 +1,6 @@
 {
   "name": "findmate",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "author": "Vitaly Maltsev",
   "license": "MIT",
   "main": "server.js",
