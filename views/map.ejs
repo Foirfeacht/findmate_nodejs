@@ -7,11 +7,12 @@
 <div class="content map">
 
 
-    <div class="map-container" ng-click="getCoords();showDialog('lg')">
+    <div class="map-container" ng-click="newMeeting()">
         <map zoom="{{zoom}}"
              disable-default-u-i="true"
              disable-double-click-zoom="true"
              draggable="true"
+             
              keyboard-shortcuts="false"
              max-zoom="{{maxZoom}}"
              min-zoom="{{minZoom}}"
@@ -24,6 +25,8 @@
 
         </map>
     </div>
+
+    <md-button class="md-fab md-primary create-button" ng-click="toggleCreateEvent()" target="_blank"><i class="fa fa-plus"></i></md-button>
 
 
 </div>

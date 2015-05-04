@@ -28,6 +28,32 @@
     min-width: 50%;
 }
 
+.comment {
+    margin: 5px auto;
+}
+
+.delete-comment {
+    margin-left: 20px;
+    padding: 4px 5px;
+    border-radius: 50%;
+    background: #BBC7D3;
+    font-size: 0.7em;
+    color: #fff;
+    font-weight: 700;
+    display: none;
+    text-align: center;
+
+    &:hover {
+        cursor: pointer;
+        background: none;
+        color: #D74040;
+    }
+}
+
+.comment:hover .delete-comment {
+        display: inline-block;
+    }
+
 .comment-form textarea {
     resize: vertical;
 }

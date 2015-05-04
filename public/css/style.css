@@ -448,6 +448,10 @@ map {
   -webkit-box-shadow: 0 0 8px #000;
   box-shadow: 0 0 8px #000; }
 
+.createEvent {
+  /*cursor: url('../images/cursor.ico'), move;*/
+  cursor: crosshair; }
+
 /* =============================
    =========== NOTIFICATIONS ============
    ============================= */
@@ -573,6 +577,27 @@ map {
 
 .comments {
   min-width: 50%; }
+
+.comment {
+  margin: 5px auto; }
+
+.delete-comment {
+  margin-left: 20px;
+  padding: 4px 5px;
+  border-radius: 50%;
+  background: #BBC7D3;
+  font-size: 0.7em;
+  color: #fff;
+  font-weight: 700;
+  display: none;
+  text-align: center; }
+  .delete-comment:hover {
+    cursor: pointer;
+    background: none;
+    color: #D74040; }
+
+.comment:hover .delete-comment {
+  display: inline-block; }
 
 .comment-form textarea {
   resize: vertical; }

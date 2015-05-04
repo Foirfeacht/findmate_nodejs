@@ -19,10 +19,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		//map
 
-		$scope.markers = [];
-
-		$scope.formData.marker = '';
-
 		//
 		$scope.$on('mapInitialized', function (event, map) {
 			$scope.defaultPos = new google.maps.LatLng(53.902407, 27.561621);
@@ -48,12 +44,18 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				}
 			};
 			$scope.map.setCenter($scope.pos || $scope.defaultPos);
+			$scope.cursor = 'pointer'; 
+			$scope.map.setOptions({ draggableCursor: $scope.cursor });
+
+			$scope.$watch('cursor', function () {
+				console.log($scope.cursor);
+				$scope.map.setOptions({ draggableCursor: $scope.cursor });
+			});
 
 			google.maps.event.addListener($scope.map, "click", function (event) {
 				$scope.latitude = event.latLng.lat();
 				$scope.longitude = event.latLng.lng();
-
-
+				console.log($scope.toggleCreate);
 				// get address from coords
 				$scope.geocoder = new google.maps.Geocoder();
 
@@ -117,6 +119,10 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			});
 			infobox.open($scope.map, this)
 		};
+
+		//toggle add marker button
+		$scope.toggleCreate = false;
+
 
 		// when landing on the page, get all events and show them
 		$http.get('../api/meetings')
@@ -273,9 +279,9 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				.error(function (data) {
 					console.log('Error: ' + data);
 				});
-		}
+		};
 
-		$scope.showDialog = function (size) {
+		$scope.showDialog = function (size) {	
 			$scope.$modalInstance = $modal.open({
 				templateUrl: './public/partials/dialog.tmpl.ejs',
 				controller: 'DialogController',
@@ -283,6 +289,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				scope: $scope
 			});
 		};
+
+		$scope.newMeeting = function(){
+			if($scope.toggleCreate === true){
+				$scope.showDialog('lg');
+			}
+		}
 
 		$scope.ok = function () {
 			$scope.$modalInstance.close();
@@ -302,6 +314,17 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		$scope.zoom = 15;
 		$scope.maxZoom = 16;
 		$scope.minZoom = 12;
+		
+		$scope.toggleCreateEvent = function () {
+			$scope.toggleCreate = ($scope.toggleCreate === false) ? true : false;
+			console.log($scope.toggleCreate);
+			if($scope.toggleCreate === true){
+				$scope.cursor = 'crosshair';
+				console.log($scope.cursor);
+			} else {
+				$scope.cursor = 'pointer';
+			}
+		}
 
 		$scope.mapStyles = {
 			mapbox: [
