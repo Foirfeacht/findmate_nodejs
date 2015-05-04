@@ -11,13 +11,24 @@
                 <div><span class="mark-as-read">Пометить как прочитанное</a></div>
                 <div class="messagebox-message" ng-repeat="notification in currentUser.notifications | limitTo: 3">
                     <div class="messagebox-icon">
-                        <img src="./public/images/{{notification.meetingIcon}}.png">
+                        <img src="./public/images/{{notification.meeting.category.icon}}.png">
                     </div><!-- end icon -->
                     <div class="messagebox-content">
                         <div>{{ notification.created_at | date: 'yyyy-MM-dd,
                             HH:mm'}}</div>
-                        <div>Ваш друг {{ notification.ownerName }} приглашает вас принять участие в {{notification.meetingTitle}}</div>
-                        <div><a href="meetings/{{notification._meeting}}">Показать на карте</a></div>
+                        <div>Ваш друг {{ notification.owner.name }} приглашает вас принять участие в {{notification.meeting.title}}</div>
+                        <div><a href="meetings/{{notification.meeting._id}}">Показать на карте</a></div>
+                        <div>
+                            <md-button class="md-raised join-button" ng-click="declineInvitation(notification.meeting._id)"
+                                   ng-show="showButton(notification.meeting.invitedUsers)">Отклонить приглашение
+                            </md-button>
+                            <md-button class="md-raised join-button" ng-click="joinMeeting(notification.meeting._id)"
+                                       ng-show="!showButton(notification.meeting.joinedUsers)">Учавствовать
+                            </md-button>
+                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(notification.meeting._id)"
+                                       ng-show="showButton(notification.meeting.joinedUsers)">Не учавствовать
+                            </md-button>
+                        </div>
                     </div><!-- end messagebox content -->
                 </div><!-- end message -->
                 <div><a href="/notifications">Показать все</a></div>

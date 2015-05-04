@@ -8,8 +8,9 @@ findMate.controller('meetingsController', ['$scope',
 	'$filter',
 	'dateFilter',
 	'editService',
+	'restService',
 	'$modal',
-	function ($scope, $http, $routeParams, $mdSidenav, $filter, date, editService, $modal) {
+	function ($scope, $http, $routeParams, $mdSidenav, $filter, date, editService, $modal, restService) {
 
 		//expose lodash to scope
 		$scope._ = _;
@@ -88,9 +89,8 @@ findMate.controller('meetingsController', ['$scope',
 				obj = array[i];
 				if (obj._id == id) {
 					return true;
-				}
-			}
-			;
+				};
+			};
 			return false;
 		};
 
@@ -146,12 +146,9 @@ findMate.controller('meetingsController', ['$scope',
 		};
 
 		// decline invitation
-
 		$scope.declineInvitation = function (id) {
 			$http.put('/decline/meetings/' + id)
 				.success(function (data) {
-					//$scope.meetings = data;
-					//console.log(data);
 				})
 				.error(function (data) {
 					console.log('Error: ' + data);
@@ -159,12 +156,9 @@ findMate.controller('meetingsController', ['$scope',
 		};
 
 		// join meeting
-
 		$scope.joinMeeting = function (id) {
 			$http.put('/join/meetings/' + id)
 				.success(function (data) {
-					//$scope.meetings = data;
-					//console.log(data);
 				})
 				.error(function (data) {
 					console.log('Error: ' + data);
@@ -173,13 +167,10 @@ findMate.controller('meetingsController', ['$scope',
 		};
 
 		// unjoin meeting
-
 		$scope.unjoinMeeting = function (id) {
 
 			$http.put('/unjoin/meetings/' + id)
 				.success(function (data) {
-					//$scope.meetings = data;
-					//console.log(data);
 				})
 				.error(function (data) {
 					console.log('Error: ' + data);

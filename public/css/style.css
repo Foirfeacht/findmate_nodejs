@@ -294,12 +294,10 @@ md-option {
   top: 20px;
   left: 40px;
   z-index: 300; }
-
-.menu-button:hover {
-  cursor: pointer; }
-
-.menu-button i {
-  font-size: 2em; }
+  .menu-button:hover {
+    cursor: pointer; }
+  .menu-button i {
+    font-size: 2em; }
 
 .menu {
   height: 100%;
@@ -314,28 +312,24 @@ md-option {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   color: #2c3e50;
   font-weight: 700; }
-
-.menu ul {
-  width: 100%;
-  list-style: none;
-  padding: 0; }
-
-.menu ul li {
-  width: 100%; }
-
-.menu ul li a {
-  display: block;
-  padding: 10px 0;
-  font-size: 1.6em;
-  color: #211400;
-  font-weight: 700;
-  width: 100%;
-  padding-left: 20%;
-  text-align: left;
-  line-height: auto; }
-
-.menu ul li a i {
-  margin-right: 20px; }
+  .menu ul {
+    width: 100%;
+    list-style: none;
+    padding: 0; }
+  .menu li {
+    width: 100%; }
+  .menu a {
+    display: block;
+    padding: 10px 0;
+    font-size: 1.6em;
+    color: #211400;
+    font-weight: 700;
+    width: 100%;
+    padding-left: 20%;
+    text-align: left;
+    line-height: auto; }
+  .menu i {
+    margin-right: 20px; }
 
 .menu ul li:hover {
   background: #2c3e50;
@@ -363,6 +357,16 @@ md-option {
   text-align: center;
   font-size: 1.1em;
   margin-bottom: 30px; }
+
+.notifications {
+  padding: 5px;
+  border-radius: 50%;
+  background: #D74040;
+  font-size: 0.6em;
+  color: #fff;
+  margin-left: 3px;
+  position: relative;
+  top: -2px; }
 
 .display {
   width: 100%;

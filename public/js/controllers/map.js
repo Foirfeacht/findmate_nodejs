@@ -164,16 +164,48 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			});
 		};
 
-		$scope.joinMeeting = function (id) {
+		// decline invitation
+		$scope.declineInvitation = function (id) {
+			$http.put('/decline/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
 
+		// join meeting
+		$scope.joinMeeting = function (id) {
 			$http.put('/join/meetings/' + id)
 				.success(function (data) {
-					$scope.meetings = data;
-					console.log(data);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+
+		};
+
+		// unjoin meeting
+		$scope.unjoinMeeting = function (id) {
+			$http.put('/unjoin/meetings/' + id)
+				.success(function (data) {
 				})
 				.error(function (data) {
 					console.log('Error: ' + data);
 				})
+		};
+
+		// ng show for buttons
+		$scope.showButton = function (array) {
+			var id = $scope.currentUser._id;
+			var i, obj;
+			for (i = 0; i < array.length; ++i) {
+				obj = array[i];
+				if (obj._id == id) {
+					return true;
+				};
+			};
+			return false;
 		};
 
 		// when submitting the add form, send the text to the node API

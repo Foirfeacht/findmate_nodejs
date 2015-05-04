@@ -17,11 +17,14 @@ module.exports = function (app) {
 
 	// get all users
 	app.get('/api/users', isLoggedIn, function (req, res) {
-		User.find({}).populate('notifications.owner notifications.meeting').exec(function (err, users) {
-			if (err)
-				res.send(err)
-			res.json(users);
-		});
+		User.find({})
+			.populate('notifications.owner')
+			.populate({path: 'notifications.meeting', model: 'Meeting' })
+			.exec(function (err, users) {
+				if (err)
+					res.send(err)
+				res.json(users);
+			});
 	});
 
 	var userByID = function (req, res, next, id) {
@@ -44,13 +47,15 @@ module.exports = function (app) {
 	});
 
 	app.get('/current_user', isLoggedIn, function (req, res) {
-		User.findById(req.user.id).populate('notifications.owner notifications.meeting').exec(function (err, user) {
-			if(err){
-				res.send(err);
-			};
-			res.json(user);
-		});
-		//var user = req.user;
+		User.findById(req.user.id)
+			.populate('notifications.owner')
+			.populate({path: 'notifications.meeting', model: 'Meeting' })
+			.exec(function (err, user) {
+				if(err){
+					res.send(err);
+				};
+				res.json(user);
+			});
 	});
 
 	// delete a user
@@ -107,12 +112,12 @@ module.exports = function (app) {
 			log.info(user._id);
 			User.findByIdAndUpdate(user._id, update, {safe: true, upsert: true})
 				.populate('notifications.owner')
-				.populate('notifications.meeting', {model: 'Meeting'})
+				.populate({path: 'notifications.meeting', model: 'Meeting' })
 				.exec(function (err, user) {
 					if (!user) {
 						res.statusCode = 404;
 						return res.send({error: 'Not found'});
-					}
+					};
 					log.info("invite sent");
 					app.io.broadcast('push notification added', {msg: user});
 					callback();
@@ -123,14 +128,6 @@ module.exports = function (app) {
 				res.send(err)
 				};
 			res.send('notification sent');
-
-				/*User.find({}).populate('notifications.owner notifications.meeting').exec(function (err, users) {
-					if (err) {
-						res.send(err);
-					};
-					app.io.broadcast('push notification added', {msg: users});
-					res.send('notification sent');
-				});*/
 		});
 	});
 

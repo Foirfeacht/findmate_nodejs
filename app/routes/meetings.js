@@ -18,11 +18,14 @@ module.exports = function (app) {
 
 // get all meetings
 	app.get('/api/meetings', isLoggedIn, function (req, res) {
-		Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
-			if (err){
-				res.send(err)
-			};
-			res.json(meetings);
+		Meeting.find({})
+			.populate('owner')
+			.populate({path: 'comments.owner', model: 'User'})
+			.exec(function (err, meetings) {
+				if (err){
+					res.send(err)
+				};
+				res.json(meetings);
 		});
 	});
 
@@ -51,15 +54,18 @@ module.exports = function (app) {
 			log.info('meeting added');
 			
 			// get and return all the meetins after you create another
-			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
-				if (err) {
-					res.send(err);
-				};
-				//res.json(meetings);
-				log.info('added');
-				app.io.broadcast('meetings changed', {msg: meetings});
-				res.send('meeting added');
-			});
+			Meeting.find({})
+				.populate('owner')
+				.populate({path: 'comments.owner', model: 'User'})
+				.exec(function (err, meetings) {
+					if (err) {
+						res.send(err);
+					};
+					//res.json(meetings);
+					log.info('added');
+					app.io.broadcast('meetings changed', {msg: meetings});
+					res.send('meeting added');
+				});
 		});
 
 	});
@@ -67,12 +73,15 @@ module.exports = function (app) {
 	//meeting by id middleware
 
 	var meetingByID = function (req, res, next, id) {
-		Meeting.findById(id).populate('owner comments.owner').exec(function (err, meeting) {
-			if (err) return next(err);
-			if (!meeting) return next(new Error('Failed to load meeting ' + id));
-			req.meeting = meeting;
-			next();
-		});
+		Meeting.findById(id)
+			.populate('owner')
+			.populate({path: 'comments.owner', model: 'User'})
+			.exec(function (err, meeting) {
+				if (err) return next(err);
+				if (!meeting) return next(new Error('Failed to load meeting ' + id));
+				req.meeting = meeting;
+				next();
+			});
 	};
 
 	app.param('meetingId', meetingByID);
@@ -91,12 +100,15 @@ module.exports = function (app) {
 			};
 
 			log.info("meeting joined");
-			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
-				if (err) {
-					res.send(err);
-				};
-				app.io.broadcast('meetings changed', {msg: meetings});
-			});
+			Meeting.find({})
+				.populate('owner')
+				.populate({path: 'comments.owner', model: 'User'})
+				.exec(function (err, meetings) {
+					if (err) {
+						res.send(err);
+					};
+					app.io.broadcast('meetings changed', {msg: meetings});
+				});
 		});
 	});
 
@@ -110,13 +122,15 @@ module.exports = function (app) {
 				res.send(err);
 			};
 			log.info("meeting joined");
-			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
-				if (err) {
-					res.send(err);
-				};
-				app.io.broadcast('meetings changed', {msg: meetings});
-			});
-
+			Meeting.find({})
+				.populate('owner')
+				.populate({path: 'comments.owner', model: 'User'})
+				.exec(function (err, meetings) {
+					if (err) {
+						res.send(err);
+					};
+					app.io.broadcast('meetings changed', {msg: meetings});
+				});
 		});
 	});
 
@@ -131,12 +145,15 @@ module.exports = function (app) {
 			};
 
 			log.info("meeting updated");
-			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
-				if (err) {
-					res.send(err);
-				};
-				app.io.broadcast('meetings changed', {msg: meetings});
-			});
+			Meeting.find({})
+				.populate('owner')
+				.populate({path: 'comments.owner', model: 'User'})
+				.exec(function (err, meetings) {
+					if (err) {
+						res.send(err);
+					};
+					app.io.broadcast('meetings changed', {msg: meetings});
+				});
 		});
 	});
 
@@ -167,12 +184,15 @@ module.exports = function (app) {
 				res.send(err);
 			};
 			log.info("meeting updated");
-			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
-				if (err) {
-					res.send(err);
-				};
-				app.io.broadcast('meetings changed', {msg: meetings});
-			});
+			Meeting.find({})
+				.populate('owner')
+				.populate({path: 'comments.owner', model: 'User'})
+				.exec(function (err, meetings) {
+					if (err) {
+						res.send(err);
+					};
+					app.io.broadcast('meetings changed', {msg: meetings});
+				});
 		});
 	});
 
@@ -204,12 +224,15 @@ module.exports = function (app) {
 			};
 
 			// get and return all the meetings after you create another
-			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
-				if (err){
-					res.send(err)
-				};
-				app.io.broadcast('meetings changed', {msg: meetings});
-			});
+			Meeting.find({})
+				.populate('owner')
+				.populate({path: 'comments.owner', model: 'User'})
+				.exec(function (err, meetings) {
+					if (err){
+						res.send(err)
+					};
+					app.io.broadcast('meetings changed', {msg: meetings});
+				});
 		});
 	});
 
@@ -251,7 +274,10 @@ module.exports = function (app) {
 				return res.send({error: 'Not found'});
 			}
 			//log.info("comment updated");
-			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
+			Meeting.find({})
+				.populate('owner')
+				.populate({path: 'comments.owner', model: 'User'})
+				.exec(function (err, meetings) {
 				if (err) {
 					res.send(err);
 				};
@@ -270,13 +296,16 @@ module.exports = function (app) {
 				return res.send({error: 'Not found'});
 			}
 			log.info("comment deleted " + req.params.commentId);
-			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
-				if (err) {
-					res.send(err);
-				};
-				app.io.broadcast('comment added', {msg: meetings});
-				res.send('comment added');
-			});
+			Meeting.find({})
+				.populate('owner')
+				.populate({path: 'comments.owner', model: 'User'})
+				.exec(function (err, meetings) {
+					if (err) {
+						res.send(err);
+					};
+					app.io.broadcast('comment added', {msg: meetings});
+					res.send('comment added');
+				});
 		});
 	});
 

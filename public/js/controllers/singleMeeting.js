@@ -67,30 +67,6 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 			return false;
 		};
 
-		// join meeting
-
-		$scope.joinMeeting = function (id) {
-
-			$http.put('/join/meetings/' + id)
-				.success(function (data) {
-
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				})
-		};
-
-		$scope.unjoinMeeting = function (id) {
-
-			$http.put('/unjoin/meetings/' + id)
-				.success(function (data) {
-
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				})
-		};
-
 		$scope.loadFriends = function () {
 			var friendsRequest = 'https://graph.facebook.com/' + $scope.currentUser.facebook.id + '/friends' + '?access_token=' + $scope.currentUser.facebook.token;
 			$http.get(friendsRequest)
@@ -100,17 +76,6 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 				.error(function (data) {
 					console.log('Error: ' + data);
 				});
-		};
-
-		$scope.declineInvitation = function (id) {
-
-			$http.put('/decline/meetings/' + id)
-				.success(function (data) {
-
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				})
 		};
 
 		// side nav
@@ -215,28 +180,63 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 		//push notifications
 
 	    socket.on('push notification added', function (data) {
-	      console.log(data.msg);
-	      $http.get('/current_user')
-	        .success(function (data) {
-	          $scope.currentUser = data;
-	          $scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
-	          $scope.showNotification();
-	        })
-	        .error(function (data) {
-	          console.log('Error: ' + data);
-	        });
-	    });
+			console.log(data.msg);
 
-	    //notification
-	    $scope.showNotification = function() {
-	      $mdToast.show({
-	        controller: 'notificationController',
-	        templateUrl: './public/partials/invite-notification.ejs',
-	          hideDelay: 0,
-	        position: 'bottom right',
-	        scope: $scope
-	      });
-	    };
+			if(data.msg._id === $scope.currentUser._id){
+				$http.get('/current_user')
+					.success(function (data) {
+						$scope.currentUser = data;
+						$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+						console.log($scope.addedNotification);
+						$scope.showNotification();
+					})
+					.error(function (data) {
+						console.log('Error: ' + data);
+					});
+			}
+		});
+
+		//notification
+		$scope.showNotification = function() {
+			$mdToast.show({
+				controller: 'notificationController',
+				templateUrl: './public/partials/invite-notification.ejs',
+				hideDelay: 6000,
+				position: 'bottom left',
+				scope: $scope
+			});
+		};
+
+		// decline invitation
+		$scope.declineInvitation = function (id) {
+			$http.put('/decline/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		// join meeting
+		$scope.joinMeeting = function (id) {
+			$http.put('/join/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+
+		};
+
+		// unjoin meeting
+		$scope.unjoinMeeting = function (id) {
+			$http.put('/unjoin/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				})
+		};
 
 
 	}]);
