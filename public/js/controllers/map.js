@@ -130,7 +130,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		//refresh data with socket
 		socket.on('meetings changed', function (data) {
-			console.log(data);
 			$scope.$apply(function () {
 				$scope.meetings = data.msg;
 			});
@@ -139,16 +138,19 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		socket.on('push notification added', function (data) {
 			console.log(data.msg);
-			$http.get('/current_user')
-				.success(function (data) {
-					$scope.currentUser = data;
-					$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
-					console.log($scope.addedNotification);
-					$scope.showNotification();
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
+
+			if(data.msg._id === $scope.currentUser._id){
+				$http.get('/current_user')
+					.success(function (data) {
+						$scope.currentUser = data;
+						$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+						console.log($scope.addedNotification);
+						$scope.showNotification();
+					})
+					.error(function (data) {
+						console.log('Error: ' + data);
+					});
+			}
 		});
 
 		//notification
@@ -157,7 +159,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				controller: 'notificationController',
 				templateUrl: './public/partials/invite-notification.ejs',
 				hideDelay: 6000,
-				position: 'bottom left'
+				position: 'bottom left',
+				scope: $scope
 			});
 		};
 
@@ -200,23 +203,25 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		//send notification
 		socket.on('meeting added', function (data) {
 			$scope.newMeeting = data.msg;
-			if($scope.newMeeting._owner === $scope.currentUser._id){
+			console.log($scope.newMeeting);
+			if($scope.newMeeting.owner === $scope.currentUser._id){
 
 				console.log($scope.newMeeting);
 				if($scope.newMeeting.invitedUsers.length > 0){
-					var invited = $scope.newMeeting.invitedUsers;
+					/*var invited = $scope.newMeeting.invitedUsers;
 					var l = invited.length;
 					for (var i = 0; i < l; i++){
 						var user = invited[i];
 						console.log(user);
 						$scope.sendInvitation($scope.newMeeting, user._id);
-					}
+					}*/
+					$scope.sendInvitation($scope.newMeeting);
 				}
 			};
 		});
 
-		$scope.sendInvitation = function (meeting, userId) {
-			$http.put('/pushNotification/users/' + userId, meeting)
+		$scope.sendInvitation = function (meeting) {
+			$http.put('/pushNotification/users/', meeting)
 				.success(function (data) {
 
 				})

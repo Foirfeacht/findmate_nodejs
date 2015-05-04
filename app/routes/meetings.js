@@ -5,6 +5,7 @@
 var Meeting = require('../models/meeting');
 var User = require('../models/user');
 var mongoose = require('mongoose');
+var async = require('async');
 
 //logger
 var log = require('winston');
@@ -47,6 +48,7 @@ module.exports = function (app) {
 			};
 
 			app.io.broadcast('meeting added', {msg: meeting});
+			log.info('meeting added');
 			
 			// get and return all the meetins after you create another
 			Meeting.find({}).populate('owner comments.owner').exec(function (err, meetings) {
@@ -54,7 +56,9 @@ module.exports = function (app) {
 					res.send(err);
 				};
 				//res.json(meetings);
+				log.info('added');
 				app.io.broadcast('meetings changed', {msg: meetings});
+				res.send('meeting added');
 			});
 		});
 

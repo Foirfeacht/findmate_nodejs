@@ -207,12 +207,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 				console.log('Error: ' + data);
 			});
 
-		socket.on('meeting added', function (data) {
-			$scope.newMeeting = data;
-			console.log($scope.newMeeting);
-
-		});
-
 		$scope.createMeeting = function () {
 			$scope.defineCategory($scope.formData.category);
 			$http.post('../api/meetings', $scope.formData)

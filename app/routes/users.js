@@ -5,6 +5,7 @@
 var Meeting = require('../models/meeting');
 var User = require('../models/user');
 var mongoose = require('mongoose');
+var async = require('async');
 
 //logger
 var log = require('winston');
@@ -84,11 +85,9 @@ module.exports = function (app) {
 	});
 
 	//send a ntoification to user
-	app.put('/pushNotification/users/:id', isLoggedIn, function (req, res) {
+	app.put('/pushNotification/users/', isLoggedIn, function (req, res) {
 
 		var meeting = req.body;
-		console.log(meeting._id);
-
 		var update = {
 			$addToSet: {
 				notifications: {
@@ -102,20 +101,36 @@ module.exports = function (app) {
 				}
 			}
 		};
-
-		User.findByIdAndUpdate(req.params.id, update, {safe: true, upsert: true}, function (err, user) {
-			if (!user) {
-				res.statusCode = 404;
-				return res.send({error: 'Not found'});
-			}
-			log.info("invite sent");
-			User.find({}).populate('notifications.owner notifications.meeting').exec(function (err, users) {
-				if (err) {
-					res.send(err);
+		log.info(meeting._id);
+		var invited = meeting.invitedUsers;
+		async.each(invited, function(user, callback){
+			log.info(user._id);
+			User.findByIdAndUpdate(user._id, update, {safe: true, upsert: true})
+				.populate('notifications.owner')
+				.populate('notifications.meeting', {model: 'Meeting'})
+				.exec(function (err, user) {
+					if (!user) {
+						res.statusCode = 404;
+						return res.send({error: 'Not found'});
+					}
+					log.info("invite sent");
+					app.io.broadcast('push notification added', {msg: user});
+					callback();
+				});
+		}, function(err){
+			// All tasks are done now
+				if(err){
+				res.send(err)
 				};
-				app.io.broadcast('push notification added', {msg: users});
-				res.send('notification sent');
-			});
+			res.send('notification sent');
+
+				/*User.find({}).populate('notifications.owner notifications.meeting').exec(function (err, users) {
+					if (err) {
+						res.send(err);
+					};
+					app.io.broadcast('push notification added', {msg: users});
+					res.send('notification sent');
+				});*/
 		});
 	});
 
