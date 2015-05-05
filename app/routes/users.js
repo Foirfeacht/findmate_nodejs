@@ -131,6 +131,28 @@ module.exports = function (app) {
 		});
 	});
 
+	//delete notification
+	app.put('/deleteNotification/users/:userId/notifications/:id', isLoggedIn, function (req, res) {
+		var update = {$pull: {notifications: {_id: mongoose.Types.ObjectId(req.params.id)}}};
+		User.findByIdAndUpdate(req.params.userId, update, {safe: true, upsert: true}, function (err, user) {
+			if (!user) {
+				res.statusCode = 404;
+				return res.send({error: 'Not found'});
+			}
+			log.info("notification deleted " + req.params.id);
+			User.find({id: req.params.userId})
+				.populate('notifications.owner')
+				.populate({path: 'notifications.meeting', model: 'Meeting' })
+				.exec(function (err, user) {
+					if (err) {
+						res.send(err);
+					};
+					app.io.broadcast('push notification added', {msg: user});
+					res.send('notification removed');
+				});
+		});
+	});
+
 
 };
 

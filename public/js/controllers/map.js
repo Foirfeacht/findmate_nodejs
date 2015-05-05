@@ -210,8 +210,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				hideDelay: 6000,
 				position: 'bottom left'
 			});*/
-			toastr.info('{{$scope.addedNotification.meeting.title}}',
-					'Приглашение от {{$scope.addedNotification.owner.name}}!', {
+			toastr.info('{{addedNotification.meeting.title}}',
+					'Приглашение от {{addedNotification.owner.name}}!', {
 					allowHtml: true
 					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
 				});

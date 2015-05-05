@@ -4,7 +4,8 @@ var VKontakteStrategy = require('passport-vkontakte').Strategy;
 
 // load up the user model
 var User = require('../app/models/user');
-
+//logger
+var log = require('winston');
 
 // load the auth variables
 var config = require('./config'); // use this one for testing
@@ -167,6 +168,10 @@ module.exports = function (passport) {
 							newUser.vkontakte.email = params.email.toLowerCase();
 							//newUser.vkontakte.image = params.photo_200;
 							newUser.vkontakte.image = profile.photos[0].value;
+							newUser.vkontakte.image1 = params.photo_200;
+							newUser.vkontakte.image4 = profile.photos_200[0].value;
+							newUser.vkontakte.image5 = profile.photos_big[0].value;
+							newUser.vkontakte.image6 = profile;
 							newUser.firstName = profile.name.givenName;
 							newUser.secondName = profile.name.familyName;
 							newUser.email = params.email.toLowerCase();
