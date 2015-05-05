@@ -35,13 +35,13 @@ module.exports = function (app, passport) {
 	// vk -------------------------------
 
 	// send to vk to do the authentication
-	app.get('/auth/vk', passport.authenticate('vkontakte', {scope: ['friends, photos, email, photo_200']}));
+	app.get('/auth/vk', passport.authenticate('vkontakte', {scope: ['friends, photos, email, photo_big']}));
 
 	// handle the callback after vk has authenticated the user
 	app.get('/auth/vk/callback',
 		passport.authenticate('vkontakte', {
-			scope: ['friends, photos, email, photo_200'],
-			successRedirect: '/map',
+			scope: ['friends, photos, email, photo_big'],
+			successRedirect: '/map',o
 			failureRedirect: '/'
 		}));
 
