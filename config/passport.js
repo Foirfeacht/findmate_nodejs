@@ -169,7 +169,8 @@ module.exports = function (passport) {
 							//newUser.vkontakte.image = params.photo_200;
 							newUser.vkontakte.image = profile.photos[0].value;
 							newUser.vkontakte.image1 = params.photo_200;
-							newUser.vkontakte.image4 = profile.photos_200[0].value;
+							newUser.vkontakte.image1 = params.photo_big;
+	
 							newUser.vkontakte.image5 = profile.photos_big[0].value;
 							newUser.vkontakte.image6 = profile;
 							newUser.firstName = profile.name.givenName;
