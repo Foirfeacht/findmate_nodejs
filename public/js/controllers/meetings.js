@@ -10,20 +10,59 @@ findMate.controller('meetingsController', ['$scope',
 	'editService',
 	'restService',
 	'$modal',
-	function ($scope, $http, $routeParams, $mdSidenav, $filter, date, editService, $modal, restService) {
+	'toastr',
+	'$animate',
+	function ($scope, $http, $routeParams, $mdSidenav, $filter, date, editService, $modal, restService, toastr, $animate) {
 
 		//expose lodash to scope
 		$scope._ = _;
 
-		$http.get('/current_user')
-			.success(function (data) {
-				$scope.currentUser = data;
-				$scope.loadFriends();
-				$scope.refresh();
-			})
-			.error(function (data) {
-				console.log('Error: ' + data);
-			});
+		$scope.getCurrentUser = function () {
+			$http.get('/current_user')
+				.success(function (data) {
+					$scope.currentUser = data;
+					console.log($scope.currentUser);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		$scope.getCurrentUser();
+
+		// decline invitation
+		$scope.declineInvitation = function (id) {
+			$http.put('/decline/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+			$scope.getCurrentUser();
+		};
+
+		// join meeting
+		$scope.joinMeeting = function (id) {
+			$http.put('/join/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+			$scope.getCurrentUser();
+
+		};
+
+		// unjoin meeting
+		$scope.unjoinMeeting = function (id) {
+			$http.put('/unjoin/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+			$scope.getCurrentUser();
+		};
 
 
 		//get users
@@ -243,16 +282,22 @@ findMate.controller('meetingsController', ['$scope',
         });
     });
 
-    //notification
-    $scope.showNotification = function() {
-      $mdToast.show({
-        controller: 'notificationController',
-        templateUrl: './public/partials/invite-notification.ejs',
-          hideDelay: 0,
-        position: 'bottom right',
-        scope: $scope
-      });
-    };
+		//notification
+		$scope.showNotification = function() {
+			$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+			console.log($scope.addedNotification);
+			/*$mdToast.show({
+			 controller: 'notificationController',
+			 templateUrl: './public/partials/invite-notification.ejs',
+			 hideDelay: 6000,
+			 position: 'bottom left'
+			 });*/
+			toastr.info('{{$scope.addedNotification.meeting.title}}',
+				'Приглашение от {{$scope.addedNotification.owner.name}}!', {
+					allowHtml: true
+					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
+				});
+		};
 
 		// edit meeting dialog
 		$scope.editMeeting = function (id) {

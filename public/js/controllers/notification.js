@@ -1,10 +1,11 @@
 /**
  * Created by vmaltsev on 4/29/2015.
  */
-findMate.controller('notificationController', ['$scope', '$http', '$mdToast',
-	function ($scope, $http, $mdToast) {
+findMate.controller('notificationController', ['$scope', '$http', '$mdToast', 'notificationService',
+	function ($scope, $http, $mdToast, notificationService) {
 
-		console.log($scope.addedNotification);
+		$scope.notification = notificationService.notification;
+		console.log(notificationService.notification);
 
 		$scope.closeToast = function() {
 			$mdToast.hide();

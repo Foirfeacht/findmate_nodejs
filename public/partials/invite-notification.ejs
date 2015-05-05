@@ -1,6 +1,6 @@
 <md-toast>
-   <!-- <a href="meetings/{{addedNotification._meeting}}" target="_blank"><span flex>Приглашение от <a href="users/{{addedNotification._owner}}" target="_blank">{{addedNotification.ownerName}}</a> !</span></a>-->
-    У вас новое приглашение!
+    <a href="meetings/{{notification.meeting._id}}" target="_blank"><span flex>Приглашение от <a href="users/{{notification.owner._id}}" target="_blank">{{notification.owner.name}}</a> !</span></a>
+    <!--У вас новое приглашение!-->
     <md-button ng-click="closeToast()">
         X
     </md-button>

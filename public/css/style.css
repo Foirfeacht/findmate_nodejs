@@ -449,8 +449,7 @@ map {
   box-shadow: 0 0 8px #000; }
 
 .createEvent {
-  /*cursor: url('../images/cursor.ico'), move;*/
-  cursor: crosshair; }
+  cursor: url("../images/marker.ico"), crosshair; }
 
 /* =============================
    =========== NOTIFICATIONS ============

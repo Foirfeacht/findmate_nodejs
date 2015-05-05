@@ -6,7 +6,10 @@ var findMate = angular.module('findMate', ['ui.bootstrap',
 	'angularjs-dropdown-multiselect',
 	'ui.bootstrap.datetimepicker',
 	'leaflet-directive',
-	'sticky'
+	'sticky',
+	'ngAnimate',
+	'toastr',
+	'ui.utils'
 ]);
 
 findMate.run(function (amMoment) {
@@ -27,10 +30,19 @@ findMate.filter('filterByFriends', function () {
 });
 
 //config material
-findMate.config(function($mdThemingProvider) {
+findMate.config(function($mdThemingProvider, toastrConfig) {
 	$mdThemingProvider.theme('default')
 		.primaryPalette('orange')
 		.accentPalette('deep-orange');
+
+	angular.extend(toastrConfig, {
+		closeButton: true,
+		allowHtml: true,
+		maxOpened: true,
+		timeOut: 5000,
+		newestOnTop: true,
+		positionClass: 'toast-bottom-left'
+	});
 });
 
 /*findMate.config(function($routeProvider) {

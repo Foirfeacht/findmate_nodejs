@@ -4,15 +4,14 @@
 <% include partials/header %>
 <% include partials/menu %>
 <!--=============================== main content ===============================-->
-<div class="content map">
+<div class="content map" ui-keydown="{esc: 'keyCallback($event)'}">
 
 
-    <div class="map-container" ng-click="newMeeting()">
+    <div class="map-container" ng-click="createMeeting()" ng-dblclick="showDialog('lg')">>
         <map zoom="{{zoom}}"
              disable-default-u-i="true"
              disable-double-click-zoom="true"
              draggable="true"
-             
              keyboard-shortcuts="false"
              max-zoom="{{maxZoom}}"
              min-zoom="{{minZoom}}"

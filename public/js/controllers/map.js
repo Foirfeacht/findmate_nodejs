@@ -1,17 +1,56 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate',
-	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate) {
+findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr',
+	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr) {
 
-		$http.get('/current_user')
-			.success(function (data) {
-				$scope.currentUser = data;
-				console.log($scope.currentUser);
-			})
-			.error(function (data) {
-				console.log('Error: ' + data);
-			});
+		$scope.getCurrentUser = function () {
+			$http.get('/current_user')
+				.success(function (data) {
+					$scope.currentUser = data;
+					console.log($scope.currentUser);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		$scope.getCurrentUser();
+
+		// decline invitation
+		$scope.declineInvitation = function (id) {
+			$http.put('/decline/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+			$scope.getCurrentUser();
+		};
+
+		// join meeting
+		$scope.joinMeeting = function (id) {
+			$http.put('/join/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+			$scope.getCurrentUser();
+
+		};
+
+		// unjoin meeting
+		$scope.unjoinMeeting = function (id) {
+			$http.put('/unjoin/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+			$scope.getCurrentUser();
+		};
+
 
 		//load input data
 
@@ -149,8 +188,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				$http.get('/current_user')
 					.success(function (data) {
 						$scope.currentUser = data;
-						$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
-						console.log($scope.addedNotification);
 						$scope.showNotification();
 					})
 					.error(function (data) {
@@ -159,47 +196,36 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			}
 		});
 
+		$scope.redirectToMeeting = function (location) {
+			window.location.href = "meetings/" + location;
+		}
+
 		//notification
 		$scope.showNotification = function() {
-			$mdToast.show({
+			$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+			console.log($scope.addedNotification);
+			/*$mdToast.show({
 				controller: 'notificationController',
 				templateUrl: './public/partials/invite-notification.ejs',
 				hideDelay: 6000,
-				position: 'bottom left',
-				scope: $scope
-			});
-		};
-
-		// decline invitation
-		$scope.declineInvitation = function (id) {
-			$http.put('/decline/meetings/' + id)
-				.success(function (data) {
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
+				position: 'bottom left'
+			});*/
+			toastr.info('{{$scope.addedNotification.meeting.title}}',
+					'Приглашение от {{$scope.addedNotification.owner.name}}!', {
+					allowHtml: true
+					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
 				});
 		};
 
-		// join meeting
-		$scope.joinMeeting = function (id) {
-			$http.put('/join/meetings/' + id)
-				.success(function (data) {
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
+		//notification service update
+		$scope.$watch('addedNotification', function () {
+			console.log($scope.addedNotification);
+			notificationService.getNotification($scope.addedNotification);
+		});
 
-		};
-
-		// unjoin meeting
-		$scope.unjoinMeeting = function (id) {
-			$http.put('/unjoin/meetings/' + id)
-				.success(function (data) {
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				})
-		};
+		$scope.$on('notificationUpdated', function () {
+			$scope.addedNotification = notificationService.notification;
+		});
 
 		// ng show for buttons
 		$scope.showButton = function (array) {
@@ -246,13 +272,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 				console.log($scope.newMeeting);
 				if($scope.newMeeting.invitedUsers.length > 0){
-					/*var invited = $scope.newMeeting.invitedUsers;
-					var l = invited.length;
-					for (var i = 0; i < l; i++){
-						var user = invited[i];
-						console.log(user);
-						$scope.sendInvitation($scope.newMeeting, user._id);
-					}*/
 					$scope.sendInvitation($scope.newMeeting);
 				}
 			};
@@ -290,7 +309,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			});
 		};
 
-		$scope.newMeeting = function(){
+		$scope.createMeeting = function(){
 			if($scope.toggleCreate === true){
 				$scope.showDialog('lg');
 			}
@@ -320,11 +339,19 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			console.log($scope.toggleCreate);
 			if($scope.toggleCreate === true){
 				$scope.cursor = 'crosshair';
+				//$scope.cursor = 'url:(../public/images/marker.png), crosshair';
 				console.log($scope.cursor);
 			} else {
 				$scope.cursor = 'pointer';
 			}
-		}
+		};
+
+		$scope.keyCallback = function($event) {
+			$event.preventDefault();
+			console.log('pressed');
+			$scope.toggleCreate = false;
+			$scope.cursor = 'pointer';
+		};
 
 		$scope.mapStyles = {
 			mapbox: [

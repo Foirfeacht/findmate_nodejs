@@ -12,32 +12,33 @@
         <div class="singlemessage-message">
 
             <div class="singlemessage-userimage">
-                <img src="{{notification.ownerImage}}" >
+                <img src="{{notification.owner.image}}" >
             </div>
 
             <div class="singlemessage-text">
                 <div>{{ notification.created_at | date: 'yyyy-MM-dd, HH:mm'}}</div>
-                <div>Ваш друг приглашает вас принять участие в {{notification.meetingTitle}}</div>
-                <div>Когда? {{ notification.meetingStartDate }}</div>
-                <div>Где? {{ notification.meetingLocation }}</div>
-                <div><a href="meetings/{{notification._meeting}}">Показать на карте</a></div>
+                <div>Ваш друг {{notification.owner.name}} приглашает вас принять участие в {{notification.meeting.title}}</div>
+                <div>Когда? {{ notification.meeting.startDate }}</div>
+                <div>Где? {{ notification.meeting.location }}</div>
+                <div><a href="meetings/{{notification.meeting}}">Показать на карте</a></div>
             </div>
 
             <div class="singlemessage-icon">
-                <img src="./public/images/{{notification.meetingIcon}}.png">
+                <img src="./public/images/{{notification.meeting.category.icon}}.png">
             </div>
 
         </div>
 
         <div class="singlemessage-buttons">
             <div>
-                <md-button class="md-raised join-button" ng-click="declineInvitation(notification._meeting)">
-                    Отклонить приглашение
+                <md-button class="md-raised join-button" ng-click="declineInvitation(notification.meeting._id)"
+                           ng-show="showButton(notification.meeting.invitedUsers)">Отклонить приглашение
                 </md-button>
-            </div>
-            <div>
-                <md-button class="md-raised join-button" ng-click="joinMeeting(notification._meeting)">
-                     Учавствовать
+                <md-button class="md-raised join-button" ng-click="joinMeeting(notification.meeting._id)"
+                           ng-show="!showButton(notification.meeting.joinedUsers)">Учавствовать
+                </md-button>
+                <md-button class="md-raised join-button" ng-click="unjoinMeeting(notification.meeting._id)"
+                           ng-show="showButton(notification.meeting.joinedUsers)">Не учавствовать
                 </md-button>
             </div>
         </div>
