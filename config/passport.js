@@ -136,7 +136,7 @@ module.exports = function (passport) {
 				// check if the user is already logged in
 				if (!req.user) {
 
-					User.findOne({'vkontakte.id': params.email.toLowerCase()}, function (err, user) {
+					User.findOne({'email': params.email.toLowerCase()}, function (err, user) {
 						if (err)
 							return done(err);
 
