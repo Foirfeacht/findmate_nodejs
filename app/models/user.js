@@ -22,9 +22,10 @@ var userSchema = new Schema({
 		email: String,
 		name: String,
 		image: String,
-		image2: String
-		image3: String
-		image1: String
+		image2: String,
+		image3: String,
+		image1: String,
+		image4: String
 	},
 
 	firstName: {type: String, trim: true},
