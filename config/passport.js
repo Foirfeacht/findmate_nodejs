@@ -167,7 +167,7 @@ module.exports = function (passport) {
 							newUser.vkontakte.token = token;
 							newUser.vkontakte.name = profile.displayName;
 							newUser.vkontakte.email = params.email.toLowerCase();
-							newUser.vkontakte.image = profile.photos[0].value;
+							newUser.vkontakte.image = profile.photos[1].value;
 							newUser.vkontakte.image1 = profile.photo_big;
 							newUser.vkontakte.image2 = JSON.stringify('https://api.vkontakte.ru/method/getProfiles?uid=' + profile.id + '&fields=photo_big');
 							newUser.vkontakte.image3 = JSON.stringify(profile);
