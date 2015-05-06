@@ -4,7 +4,7 @@
 <% include partials/header %>
 <% include partials/menu %>
 <!--=============================== main content ===============================-->
-<div class="content map" ui-keydown="{esc: 'keyCallback($event)'}">
+<div class="content map" ui-keydown="{esc: 'disableCreateMode($event)'}">
 
 
     <div class="map-container" ng-click="createMeeting()" ng-dblclick="showDialog('lg')">>

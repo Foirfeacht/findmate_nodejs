@@ -208,8 +208,6 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 		//delete comments
 		// delete a meeting
 		$scope.deleteComment = function (id) {
-			console.log(id);
-			///api/meetings/:id/comments/:commentId
 			$http.put('/delete/meetings/' + $scope.currentMeetingId + '/comments/' + id)
 				.success(function (data) {
 
@@ -253,6 +251,20 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 					allowHtml: true
 					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
 				});
+		};
+
+		$scope.deleteNotification = function(id){
+			console.log(id);
+			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		socket.on('push notification removed', function (data) {
+			$scope.currentUser = data.msg;
 		};
 
 		//notification service update

@@ -1,8 +1,8 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr',
-	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr) {
+findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr', '$sce',
+	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce) {
 
 		$scope.getCurrentUser = function () {
 			$http.get('/current_user')
@@ -204,17 +204,33 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		$scope.showNotification = function() {
 			$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
 			console.log($scope.addedNotification);
+			$scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml('<h1>' + $scope.addedNotification.meeting.title + '</h1>');
 			/*$mdToast.show({
 				controller: 'notificationController',
 				templateUrl: './public/partials/invite-notification.ejs',
 				hideDelay: 6000,
-				position: 'bottom left'
+				position: 'bottom left',
+				scope: $scope
 			});*/
-			toastr.info('{{addedNotification.meeting.title}}',
-					'Приглашение от {{addedNotification.owner.name}}!', {
+			toastr.info( 'У вас новое приглашение!',
+					'<div ng-bind-html="thisCanBeusedInsideNgBindHtml"></div>', {
 					allowHtml: true
 					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
 				});
+		};
+
+		$scope.deleteNotification = function(id){
+			console.log(id);
+			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		socket.on('push notification removed', function (data) {
+			$scope.currentUser = data.msg;
 		};
 
 		//notification service update
@@ -346,9 +362,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			}
 		};
 
-		$scope.keyCallback = function($event) {
+		$scope.disableCreateMode = function($event) {
 			$event.preventDefault();
-			console.log('pressed');
 			$scope.toggleCreate = false;
 			$scope.cursor = 'pointer';
 		};

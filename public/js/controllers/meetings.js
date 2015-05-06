@@ -107,6 +107,20 @@ findMate.controller('meetingsController', ['$scope',
 				});
 		});
 
+		$scope.deleteNotification = function(id){
+			console.log(id);
+			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		socket.on('push notification removed', function (data) {
+			$scope.currentUser = data.msg;
+		};
+
 		$scope.refresh = function () {
 			$http.get('../api/meetings')
 				.success(function (data) {

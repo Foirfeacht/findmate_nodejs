@@ -67,6 +67,7 @@
     border-bottom: 1px solid #000;
     overflow: hidden;
     padding: 5px 0;
+    position: relative;
 }
 
 .messagebox-message > div {
@@ -86,6 +87,16 @@
 
 .messagebox-content {
     width: 404px;
+}
+
+.messagebox-delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 

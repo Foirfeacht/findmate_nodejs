@@ -29,10 +29,16 @@
                                        ng-show="showButton(notification.meeting.joinedUsers)">Не учавствовать
                             </md-button>
                         </div>
+                        <div class="messagebox-delete" ng-click="deleteNotification(notification._id)">
+                            <span>X</span>
+                        </div>
                     </div><!-- end messagebox content -->
+
                 </div><!-- end message -->
                 <div><a href="/notifications">Показать все</a></div>
             </div>
 
     </div>
+
+
 </md-toolbar>

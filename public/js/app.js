@@ -30,7 +30,7 @@ findMate.filter('filterByFriends', function () {
 });
 
 //config material
-findMate.config(function($mdThemingProvider, toastrConfig) {
+findMate.config(function ($mdThemingProvider, toastrConfig) {
 	$mdThemingProvider.theme('default')
 		.primaryPalette('orange')
 		.accentPalette('deep-orange');

@@ -89,6 +89,20 @@ findMate.controller('messageController', ['$scope', '$http', '$mdSidenav', '$mod
 				});
 		};
 
+		$scope.deleteNotification = function(id){
+			console.log(id);
+			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		socket.on('push notification removed', function (data) {
+			$scope.currentUser = data.msg;
+		};
+
 		// ng show for buttons
 		$scope.showButton = function (array) {
 			var id = $scope.currentUser._id;

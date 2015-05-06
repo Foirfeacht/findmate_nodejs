@@ -139,15 +139,16 @@ module.exports = function (app) {
 				res.statusCode = 404;
 				return res.send({error: 'Not found'});
 			}
-			log.info("notification deleted " + req.params.id);
-			User.find({id: req.params.userId})
+			log.info("notification deleted " + req.params.id)
+			log.info(req.params.userId);
+			User.findById(req.params.userId)
 				.populate('notifications.owner')
 				.populate({path: 'notifications.meeting', model: 'Meeting' })
 				.exec(function (err, user) {
 					if (err) {
 						res.send(err);
 					};
-					app.io.broadcast('push notification added', {msg: user});
+					app.io.broadcast('push notification removed', {msg: user});
 					res.send('notification removed');
 				});
 		});

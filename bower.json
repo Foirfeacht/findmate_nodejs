@@ -43,6 +43,7 @@
     "angular-leaflet-directive": "~0.7.15",
     "ngSticky": "~1.7.9",
     "angular-toastr": "~1.3.0",
-    "angular-ui-utils": "bower"
+    "angular-ui-utils": "bower",
+    "ngtoast": "~1.5.2"
   }
 }
