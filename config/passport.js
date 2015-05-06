@@ -125,6 +125,7 @@ module.exports = function (passport) {
 			clientID: config.auth.vkontakte.clientID,
 			clientSecret: config.auth.vkontakte.clientSecret,
 			callbackURL: config.auth.vkontakte.callbackURL,
+			profileFields: ['photo_big'],
 			passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
 
 		},
@@ -166,9 +167,8 @@ module.exports = function (passport) {
 							newUser.vkontakte.token = token;
 							newUser.vkontakte.name = profile.displayName;
 							newUser.vkontakte.email = params.email.toLowerCase();
-							//newUser.vkontakte.image = params.photo_200;
 							newUser.vkontakte.image = profile.photos[0].value;
-							newUser.vkontakte.image1 = params.photo_big;
+							newUser.vkontakte.image1 = profile.photo_big;
 							newUser.vkontakte.image2 = JSON.stringify('https://api.vkontakte.ru/method/getProfiles?uid=' + profile.id + '&fields=photo_big');
 							newUser.vkontakte.image3 = JSON.stringify(profile);
 							newUser.vkontakte.image4 = 'https://api.vkontakte.ru/method/getProfiles?uid=' + profile.id + '&fields=photo_big';
