@@ -148,8 +148,7 @@ module.exports = function (passport) {
 								user.vkontakte.token = token;
 								user.vkontakte.name = profile.displayName;
 								user.vkontakte.email = params.email.toLowerCase();
-								//user.vkontakte.image = params.photo_200;
-								user.vkontakte.image = profile.photos[0].value;
+								user.vkontakte.image = profile.photos[1].value;
 								user.save(function (err) {
 									if (err)
 										return done(err);
@@ -168,15 +167,11 @@ module.exports = function (passport) {
 							newUser.vkontakte.name = profile.displayName;
 							newUser.vkontakte.email = params.email.toLowerCase();
 							newUser.vkontakte.image = profile.photos[1].value;
-							newUser.vkontakte.image1 = profile.photo_big;
-							newUser.vkontakte.image2 = JSON.stringify('https://api.vkontakte.ru/method/getProfiles?uid=' + profile.id + '&fields=photo_big');
-							newUser.vkontakte.image3 = JSON.stringify(profile);
-							newUser.vkontakte.image4 = 'https://api.vkontakte.ru/method/getProfiles?uid=' + profile.id + '&fields=photo_big';
 							newUser.firstName = profile.name.givenName;
 							newUser.secondName = profile.name.familyName;
 							newUser.email = params.email.toLowerCase();
 							newUser.name = profile.displayName;
-							newUser.image = profile.photos[0].value;
+							newUser.image = profile.photos[1].value;
 
 							newUser.save(function (err) {
 								if (err)
@@ -195,8 +190,7 @@ module.exports = function (passport) {
 					user.vkontakte.token = token;
 					user.vkontakte.name = profile.displayName;
 					user.vkontakte.email = params.email.toLowerCase();
-					//user.vkontakte.image = params.photo_200;
-					user.vkontakte.image = profile.photos[0].value;
+					user.vkontakte.image = profile.photos[1].value;
 
 
 					user.save(function (err) {
