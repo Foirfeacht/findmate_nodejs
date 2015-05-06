@@ -154,6 +154,59 @@ module.exports = function (app) {
 		});
 	});
 
+	//decline notification
+	app.put('/declineNotification/users/:userId/notifications/:id/:meetingId', isLoggedIn, function (req, res) {
+
+		var userUpdate = {$pull: {notifications: {_id: mongoose.Types.ObjectId(req.params.id)}}};
+		var meetingUpdate = {$pull: {invitedUsers: {_id: req.params.userId}}};
+
+		tasksIndex = [
+
+			function (callback) {
+				Meeting.findByIdAndUpdate(req.params.meetingId, meetingUpdate, {safe: true, upsert: true}, function (err, meeting) {
+					if (err) {
+						res.send(err);
+					};
+
+					log.info("meeting declined");
+					Meeting.find({})
+						.populate('owner')
+						.populate({path: 'comments.owner', model: 'User'})
+						.exec(function (err, meetings) {
+							if (err) {
+								res.send(err);
+							};
+							app.io.broadcast('meetings changed', {msg: meetings});
+						});
+				});
+			},
+
+			function (callback) {
+				User.findByIdAndUpdate(req.params.userId, userUpdate, {safe: true, upsert: true}, function (err, user) {
+					if (!user) {
+						res.statusCode = 404;
+						return res.send({error: 'Not found'});
+					}
+					log.info("notification deleted " + req.params.id)
+					log.info(req.params.userId);
+					User.findById(req.params.userId)
+						.populate('notifications.owner')
+						.populate({path: 'notifications.meeting', model: 'Meeting' })
+						.exec(function (err, user) {
+							if (err) {
+								res.send(err);
+							};
+							app.io.broadcast('push notification removed', {msg: user});
+						});
+				});
+			}
+		];
+
+		async.series(tasksIndex, function (err, results) {
+		    res.send('notification declined');
+		});
+	});
+
 
 };
 

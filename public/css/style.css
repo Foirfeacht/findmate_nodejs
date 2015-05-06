@@ -459,12 +459,29 @@ map {
 .createEvent {
   cursor: url("../images/marker.ico"), crosshair; }
 
+/* filter section */
+.map-filters {
+  width: 50%;
+  margin: 0 auto;
+  height: 50px;
+  position: relative;
+  top: -20px; }
+  .map-filters i {
+    font-size: 2em; }
+  .map-filters .map-filter {
+    width: 20%; }
+  .map-filters .md-fab {
+    margin: 0 auto; }
+
 /* =============================
    =========== NOTIFICATIONS ============
    ============================= */
 .message-display {
   width: 60%;
   margin: 0 auto; }
+
+.single-message {
+  position: relative; }
 
 .singlemessage-message {
   width: 100%;
@@ -489,6 +506,13 @@ map {
 
 .singlemessage-buttons > div {
   width: 50%; }
+
+.singlemessage-delete {
+  position: absolute;
+  top: 5px;
+  right: 5px; }
+  .singlemessage-delete:hover {
+    cursor: pointer; }
 
 .profile-container {
   overflow: hidden;

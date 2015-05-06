@@ -48,3 +48,25 @@ map {
 .createEvent {
     cursor: url('../images/marker.ico'), crosshair;
 }
+
+/* filter section */
+
+.map-filters {
+    width: 50%;
+    margin: 0 auto;
+    height: 50px;
+    position: relative;
+    top: -20px;
+
+    i {
+        font-size: 2em;
+    }
+
+    .map-filter {
+        width: 20%;
+    }
+
+    .md-fab {
+        margin: 0 auto;
+    }
+}

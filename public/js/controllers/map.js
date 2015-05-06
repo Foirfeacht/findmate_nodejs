@@ -220,8 +220,16 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		};
 
 		$scope.deleteNotification = function(id){
-			console.log(id);
 			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		$scope.declineNotification = function(id, meetingId){
+			$http.put('/declineNotification/users/' + $scope.currentUser._id + '/notifications/' + id + '/' + meetingId)
 				.success(function (data) {
 				})
 				.error(function (data) {
@@ -231,7 +239,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		socket.on('push notification removed', function (data) {
 			$scope.currentUser = data.msg;
-		};
+		});
 
 		//notification service update
 		$scope.$watch('addedNotification', function () {
@@ -367,6 +375,25 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			$scope.toggleCreate = false;
 			$scope.cursor = 'pointer';
 		};
+
+		//filters
+		$scope.filterCurrentUser = function(meeting){
+			if(meeting.owner._id === $scope.currentUser._id){
+				return true
+			};
+			return false;
+		};
+
+		$scope.filterByDistance = function (meeting) {
+			var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
+			if($scope.pos){
+				var distance = google.maps.geometry.spherical.computeDistanceBetween($scope.pos, position);
+			} else {
+				var distance = google.maps.geometry.spherical.computeDistanceBetween($scope.defaultPos, position);
+			}
+			
+			console.log(distance);
+		}
 
 		$scope.mapStyles = {
 			mapbox: [

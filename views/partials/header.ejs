@@ -19,7 +19,7 @@
                         <div>Ваш друг {{ notification.owner.name }} приглашает вас принять участие в {{notification.meeting.title}}</div>
                         <div><a href="meetings/{{notification.meeting._id}}">Показать на карте</a></div>
                         <div>
-                            <md-button class="md-raised join-button" ng-click="declineInvitation(notification.meeting._id)"
+                            <md-button class="md-raised join-button" ng-click="declineNotification(notification._id, notification.meeting._id)"
                                    ng-show="showButton(notification.meeting.invitedUsers)">Отклонить приглашение
                             </md-button>
                             <md-button class="md-raised join-button" ng-click="joinMeeting(notification.meeting._id)"

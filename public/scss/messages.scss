@@ -9,6 +9,10 @@
 	margin: 0 auto;
 }
 
+.single-message {
+	position: relative;
+}
+
 .singlemessage-message {
 	width: 100%;
 	overflow: hidden;
@@ -37,6 +41,16 @@
 
 .singlemessage-buttons > div {
   width: 50%;
+}
+
+.singlemessage-delete {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+
+	&:hover {
+	  cursor: pointer;
+	}
 }
 
 

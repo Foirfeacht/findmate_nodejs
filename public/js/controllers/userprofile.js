@@ -95,8 +95,16 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
 		};
 
 		$scope.deleteNotification = function(id){
-			console.log(id);
 			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		$scope.declineNotification = function(id, meetingId){
+			$http.put('/declineNotification/users/' + $scope.currentUser._id + '/notifications/' + id + '/' + meetingId)
 				.success(function (data) {
 				})
 				.error(function (data) {

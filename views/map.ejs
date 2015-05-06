@@ -6,6 +6,11 @@
 <!--=============================== main content ===============================-->
 <div class="content map" ui-keydown="{esc: 'disableCreateMode($event)'}">
 
+    <div class="map-filters">
+        <div class="map-filter">
+            <md-button class="md-fab friends-filter"><i class="mdi mdi-account"></i></md-button>  
+        </div>
+    </div>
 
     <div class="map-container" ng-click="createMeeting()" ng-dblclick="showDialog('lg')">>
         <map zoom="{{zoom}}"
@@ -18,7 +23,7 @@
              tilt="45"
              styles="{{mapStyles.papuportal}}"
              map-type-id="TERRAIN">
-            <marker position="{{meeting.position}}" ng-repeat="meeting in meetings"
+            <marker position="{{meeting.position}}" ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByDistance"
                     icon="../public/images/{{meeting.category.icon}}.png"
                     on-click="showInfoWindow(event, meeting)"></marker>
 
@@ -34,7 +39,7 @@
 <% include partials/footer %>
 
 <script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&sensor=FALSE">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&libraries=geometry&sensor=FALSE">
 </script>
 <script type="text/javascript"
         src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
