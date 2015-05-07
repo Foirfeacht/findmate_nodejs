@@ -463,13 +463,14 @@ map {
 .map-filters {
   width: 50%;
   margin: 0 auto;
-  height: 50px;
   position: relative;
-  top: -20px; }
+  top: -20px;
+  overflow: hidden; }
   .map-filters i {
     font-size: 2em; }
   .map-filters .map-filter {
-    width: 20%; }
+    width: 20%;
+    float: left; }
   .map-filters .md-fab {
     margin: 0 auto; }
 

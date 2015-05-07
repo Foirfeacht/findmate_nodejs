@@ -8,7 +8,7 @@
 
     <div class="map-filters">
         <div class="map-filter">
-            <md-button class="md-fab friends-filter"><i class="mdi mdi-account"></i></md-button>  
+            <md-button class="md-fab friends-filter" ng-click="toggleCurrentUserFilter = !toggleCurrentUserFilter" ng-class="{ 'md-raised' : !toggleCurrentUserFilter }"><i class="mdi mdi-account"></i></md-button>
         </div>
     </div>
 

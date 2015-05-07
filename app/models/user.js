@@ -47,6 +47,10 @@ var userSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	settings: {
+		distance: {type: Number, default: 20000},
+		sendEmailNotifications: {type: Boolean, default: false}
+	},
 	notifications: [notificationSchema]
 
 });
@@ -56,7 +60,7 @@ var notificationSchema = new Schema({
 	content: {type: String},
 	owner: {type: Schema.Types.ObjectId, ref: 'User'},
 	created_at: Date,
-	status: {type: String, enum: ['Read', 'Unread'], default: 'Unread'},
+	status: {type: String, enum: ['Read', 'Unread', 'Joined', 'Declined'], default: 'Unread'},
 	ifNew: Boolean,
 	meeting: {type: Schema.Types.ObjectId, ref: 'Meeting'},
 	messageType: {type: String, enum: ['Message', 'Notification'], default: 'Message'}

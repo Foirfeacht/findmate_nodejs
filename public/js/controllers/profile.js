@@ -149,6 +149,19 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 				});
 		};
 
+		$scope.invited = function (notification) {
+			var array = notification.meeting.invitedUsers;
+			var id = $scope.currentUser._id;
+			var i, obj;
+			for (i = 0; i < array.length; ++i) {
+				obj = array[i];
+				if (obj._id == id) {
+					return true;
+				};
+			};
+			return false;
+		}
+
 		$scope.deleteNotification = function(id){
 			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
 				.success(function (data) {
@@ -157,6 +170,7 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 					console.log('Error: ' + data);
 				});
 		};
+
 
 		$scope.declineNotification = function(id, meetingId){
 			$http.put('/declineNotification/users/' + $scope.currentUser._id + '/notifications/' + id + '/' + meetingId)

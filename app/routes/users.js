@@ -182,7 +182,7 @@ module.exports = function (app) {
 			},
 
 			function (callback) {
-				User.findByIdAndUpdate(req.params.userId, userUpdate, {safe: true, upsert: true}, function (err, user) {
+				/*User.findByIdAndUpdate(req.params.userId, userUpdate, {safe: true, upsert: true}, function (err, user) {
 					if (!user) {
 						res.statusCode = 404;
 						return res.send({error: 'Not found'});
@@ -198,6 +198,26 @@ module.exports = function (app) {
 							};
 							app.io.broadcast('push notification removed', {msg: user});
 						});
+				});*/
+				User.findById(req.params.userId, function(err, user){
+					var notification = user.notifications.id(mongoose.Types.ObjectId(req.params.id));
+					log.info(notification);
+					notification.status = 'Declined';
+
+					user.save(function(err){
+						if(err){
+							res.send(err);
+						};
+						User.findById(req.params.userId)
+							.populate('notifications.owner')
+							.populate({path: 'notifications.meeting', model: 'Meeting' })
+							.exec(function (err, user) {
+								if (err) {
+									res.send(err);
+								};
+								app.io.broadcast('push notification removed', {msg: user});
+							});
+					});
 				});
 			}
 		];

@@ -54,9 +54,9 @@ map {
 .map-filters {
     width: 50%;
     margin: 0 auto;
-    height: 50px;
     position: relative;
     top: -20px;
+    overflow: hidden;
 
     i {
         font-size: 2em;
@@ -64,6 +64,7 @@ map {
 
     .map-filter {
         width: 20%;
+        float: left;
     }
 
     .md-fab {

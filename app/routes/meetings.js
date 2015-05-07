@@ -92,14 +92,16 @@ module.exports = function (app) {
 
 	app.put('/decline/meetings/:id', isLoggedIn, function (req, res) {
 
-		var update = {$pull: {invitedUsers: {_id: req.user._id}}};
+		var userid = req.user.id.toString();
+		var update = {$pull: {invitedUsers: {_id: userid}}};
+		console.log(req.user._id);
 
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 			if (err) {
 				res.send(err);
 			};
 
-			log.info("meeting joined");
+			log.info("meeting declined");
 			Meeting.find({})
 				.populate('owner')
 				.populate({path: 'comments.owner', model: 'User'})
@@ -115,12 +117,15 @@ module.exports = function (app) {
 
 	// store user in meetings.joined
 	app.put('/join/meetings/:id', isLoggedIn, function (req, res) {
-		var update = {$addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: {_id: req.user._id}}};
+
+		var userid = req.user.id.toString();
+		var update = {$addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: {_id: userid}}};
 
 		Meeting.findByIdAndUpdate(req.params.id, update, function (err, meeting) {
 			if (err) {
 				res.send(err);
 			};
+
 			log.info("meeting joined");
 			Meeting.find({})
 				.populate('owner')
@@ -144,7 +149,7 @@ module.exports = function (app) {
 				res.send(err)
 			};
 
-			log.info("meeting updated");
+			log.info("meeting unjoined");
 			Meeting.find({})
 				.populate('owner')
 				.populate({path: 'comments.owner', model: 'User'})
@@ -243,11 +248,8 @@ module.exports = function (app) {
 		}, function (err, meeting) {
 			if (err)
 				res.send(err);
-		}).then(function (err) {
-			if (err)
-				res.send(err);
 			res.redirect('/meetings');
-		})
+		});
 	});
 
 	// =============================================================================
