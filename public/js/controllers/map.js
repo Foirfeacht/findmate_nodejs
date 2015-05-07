@@ -219,17 +219,21 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				});
 		};
 
+		$scope.invited = function (notification) {
+			var array = notification.meeting.invitedUsers;
+			var id = $scope.currentUser._id;
+			var i, obj;
+			for (i = 0; i < array.length; ++i) {
+				obj = array[i];
+				if (obj._id == id) {
+					return true;
+				};
+			};
+			return false;
+		}
+
 		$scope.deleteNotification = function(id){
 			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
-				.success(function (data) {
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
-		};
-
-		$scope.declineNotification = function(id, meetingId){
-			$http.put('/declineNotification/users/' + $scope.currentUser._id + '/notifications/' + id + '/' + meetingId)
 				.success(function (data) {
 				})
 				.error(function (data) {
@@ -377,11 +381,16 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		};
 
 		//filters
+		$scope.toggleCurrentUserFilter = false;
+
 		$scope.filterCurrentUser = function(meeting){
-			if(meeting.owner._id === $scope.currentUser._id){
-				return true
-			};
-			return false;
+			if($scope.toggleCurrentUserFilter === true){
+				if(meeting.owner._id === $scope.currentUser._id){
+					return true
+				};
+				return false;
+			}
+			return true;
 		};
 
 		$scope.filterByDistance = function (meeting) {
@@ -390,9 +399,11 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				var distance = google.maps.geometry.spherical.computeDistanceBetween($scope.pos, position);
 			} else {
 				var distance = google.maps.geometry.spherical.computeDistanceBetween($scope.defaultPos, position);
-			}
-			
-			console.log(distance);
+			};
+			if (distance < $scope.currentUser.settings.distance){
+				return true
+			};
+			return false;
 		}
 
 		$scope.mapStyles = {

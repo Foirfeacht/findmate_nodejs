@@ -30,6 +30,21 @@ findMate.controller('meetingsController', ['$scope',
 
 		$scope.getCurrentUser();
 
+		$scope.refresh = function () {
+			$http.get('../api/meetings')
+				.success(function (data) {
+					$scope.meetings = data;
+					var meetings = $scope.meetings;
+					console.log(data);
+					$scope.loopMeetings(meetings);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		$scope.refresh();
+
 		// decline invitation
 		$scope.declineInvitation = function (id) {
 			$http.put('/decline/meetings/' + id)
@@ -127,20 +142,7 @@ findMate.controller('meetingsController', ['$scope',
 
 		socket.on('push notification removed', function (data) {
 			$scope.currentUser = data.msg;
-		};
-
-		$scope.refresh = function () {
-			$http.get('../api/meetings')
-				.success(function (data) {
-					$scope.meetings = data;
-					var meetings = $scope.meetings;
-					console.log(data);
-					$scope.loopMeetings(meetings);
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
-		};
+		});
 
 		// ng show for buttons
 		$scope.showButton = function (array) {
