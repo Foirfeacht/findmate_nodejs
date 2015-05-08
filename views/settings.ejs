@@ -1,18 +1,35 @@
 <% include partials/head %>
-<body ng-cloak ng-controller="profileController">
+<body ng-cloak ng-controller="settingsController">
 <% include partials/header %>
 <% include partials/menu %>
 <!--=============================== main content ===============================-->
-<div class="container">
+<div class="content">
+	
+	<div class="settings">
+		<h1>Настройки пользователя</h1>
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Under Construction</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Выйти</a>
-    </div>
+		<p>Область видимости</p>
+		<div class="distance-slider" layout="row">
+			<div flex="10" layout layout-align="center center">m</div>
+		    <div flex>
+		    	<md-slider flex ng-model="settingsData.distance" min="0" max="40" aria-label="distance" id="distance-slider" class="md-accent"></md-slider>
+		    </div>
+		    <div flex="10" layout layout-align="center center">
+		    	<input type="number" ng-model="settingsData.distance" aria-label="distance" aria-controls="distance-slider">
+		    </div>
+		</div>
+
+	    <div class="settings-save">
+	    	<md-button class="md-primary savesettings-button" ng-click="saveSettings()">Сохранить изменения</md-button>
+	    </div>
+
+	</div>
 
 
     <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i>
     </md-button>
+</div>
     <% include partials/footer %>
+    <script src="../../public/js/controllers/settings.js"></script>
 </body>
 </html>

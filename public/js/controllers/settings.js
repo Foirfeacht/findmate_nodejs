@@ -1,5 +1,4 @@
-
-findMate.controller('messageController', ['$scope', '$http', '$mdSidenav', '$modal', 'toastr', 'animate',
+findMate.controller('settingsController', ['$scope', '$http', '$mdSidenav', '$modal', 'toastr', '$animate',
 	function ($scope, $http, $mdSidenav, $modal, $animate, toastr) {
 		// side nav
 		$scope.toggleNav = function () {
@@ -120,7 +119,7 @@ findMate.controller('messageController', ['$scope', '$http', '$mdSidenav', '$mod
 
 		socket.on('push notification removed', function (data) {
 			$scope.currentUser = data.msg;
-		};
+		});
 
 		// ng show for buttons
 		$scope.showButton = function (array) {
@@ -134,6 +133,24 @@ findMate.controller('messageController', ['$scope', '$http', '$mdSidenav', '$mod
 			};
 			return false;
 		};
-		
 
-	}]);
+		$scope.settingsData = {
+			distance: 10 || $scope.currentUser.settings.distance / 1000
+		};
+
+		$scope.$watch('currentUser', function () {
+				$scope.settingsData.distance = $scope.currentUser.settings.distance / 1000;
+		});
+
+		$scope.saveSettings = function () {
+			$scope.settingsData.distance = 	$scope.settingsData.distance * 1000;		
+			$http.put('/update_settings/users/' + $scope.currentUser._id, $scope.settingsData)
+				.success(function (data) {
+					$scope.currentUser = data;
+					console.log(data);
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+}]);

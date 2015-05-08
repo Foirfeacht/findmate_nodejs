@@ -465,7 +465,8 @@ map {
   margin: 0 auto;
   position: relative;
   top: -20px;
-  overflow: hidden; }
+  overflow: hidden;
+  padding-top: 10px; }
   .map-filters i {
     font-size: 2em; }
   .map-filters .map-filter {
@@ -479,7 +480,7 @@ map {
 .filter-title {
   width: 100%;
   text-align: center;
-  color: #fff;
+  color: #211400;
   position: relative;
   z-index: 10;
   margin-top: 10px; }
@@ -643,3 +644,19 @@ map {
 
 .comment-form textarea {
   resize: vertical; }
+
+.settings {
+  width: 80%;
+  margin: 0 auto; }
+  .settings input[type="number"] {
+    text-align: center; }
+  .settings h1 {
+    text-align: center; }
+
+.settings-save {
+  width: 100%; }
+
+.savesettings-button {
+  width: 250px;
+  margin: 0 auto;
+  display: block; }

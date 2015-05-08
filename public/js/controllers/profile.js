@@ -71,7 +71,7 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 			$scope.selectImageButton = true;
 			$scope.facebookImage = $scope.currentUser.facebook ? true : false;
 			$scope.vkontakteImage = $scope.currentUser.vkontakte ? true : false;
-		}
+		};
 
 		$scope.selectImage = function (image, provider) {
 			var user = $scope.currentUser;
@@ -79,11 +79,11 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 			console.log($scope.selectedImage);
 			if (user.facebook && image === user.facebook.image) {
 				$scope.facebookSelected = true;
-			}
+			};
 			if (user.vk && image === user.vk.image) {
 				$scope.vkSelected = true;
-			}
-		}
+			};
+		};
 
 		$scope.changeProfileImage = function () {
 			$scope.toggleSelectorButton = true;
@@ -102,9 +102,8 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 					.error(function (data) {
 						console.log('Error: ' + data);
 					});
-			}
-			;
-		}
+			};
+		};
 
 		$scope.showConfirm = function (size) {
 			var modalInstance = $modal.open({
@@ -160,7 +159,7 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 				};
 			};
 			return false;
-		}
+		};
 
 		$scope.deleteNotification = function(id){
 			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)

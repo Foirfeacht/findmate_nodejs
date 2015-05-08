@@ -34,9 +34,9 @@
              max-zoom="{{maxZoom}}"
              min-zoom="{{minZoom}}"
              tilt="45"
-             styles="{{mapStyles.papuportal}}"
+             styles="{{mapStyles.bright}}"
              map-type-id="TERRAIN">
-            <marker position="{{meeting.position}}" ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterByDistance | filter: filterByActive"
+            <marker position="{{meeting.position}}" ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive"
                     icon="../public/images/{{meeting.category.icon}}.png"
                     on-click="showInfoWindow(event, meeting)"></marker>
 

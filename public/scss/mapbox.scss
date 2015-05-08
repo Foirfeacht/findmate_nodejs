@@ -57,6 +57,7 @@ map {
     position: relative;
     top: -20px;
     overflow: hidden;
+    padding-top: 10px;
 
     i {
         font-size: 2em;
@@ -77,7 +78,7 @@ map {
 .filter-title {
     width: 100%;
     text-align: center;
-    color: #fff;
+    color: #211400;
     position: relative;
     z-index: 10;
     margin-top: 10px;
