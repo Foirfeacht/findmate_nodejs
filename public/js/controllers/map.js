@@ -1,21 +1,21 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr', '$sce',
-	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce) {
+findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr', '$sce', 'fetchData', 'fetchUser',
+	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce, fetchData, fetchUser) {
 
-		$scope.getCurrentUser = function () {
-			$http.get('/current_user')
-				.success(function (data) {
-					$scope.currentUser = data;
-					console.log($scope.currentUser);
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
-		};
 
+		/*fetchData.getCurrentUser().then(function(data){
+			$scope.currentUser = fetchData.data;
+			console.log($scope.currentUser);
+		});
 		// when landing on the page, get all events and show them
+		fetchUser.getMeetings().then(function(data){
+			$scope.meetings = fetchData.data;
+			console.log($scope.currentUser);
+		});*/
+
+		// get userfriends
 		$http.get('../api/meetings')
 			.success(function (data) {
 				$scope.meetings = data;
@@ -25,7 +25,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				console.log('Error: ' + data);
 			});
 
-		// get userfriends
+		$scope.userLoaded = false;
 
 		$scope.friendUsers = [];
 
@@ -74,6 +74,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 					console.log($scope.currentUser);
 					$scope.loadVkFriends();
 					$scope.loadFbFriends();
+					$scope.userLoaded = true;
 				})
 				.error(function (data) {
 					console.log('Error: ' + data);
@@ -270,18 +271,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				});
 		};
 
-		$scope.invited = function (notification) {
-			var array = notification.meeting.invitedUsers;
-			var id = $scope.currentUser._id;
-			var i, obj;
-			for (i = 0; i < array.length; ++i) {
-				obj = array[i];
-				if (obj._id == id) {
-					return true;
-				};
-			};
-			return false;
-		};
+
 
 		$scope.deleteNotification = function(id){
 			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
@@ -298,7 +288,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		//notification service update
 		$scope.$watch('addedNotification', function () {
-			console.log($scope.addedNotification);
 			notificationService.getNotification($scope.addedNotification);
 		});
 
@@ -308,14 +297,17 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		// ng show for buttons
 		$scope.showButton = function (array) {
-			var id = $scope.currentUser._id;
-			var i, obj;
-			for (i = 0; i < array.length; ++i) {
-				obj = array[i];
-				if (obj._id == id) {
-					return true;
+			if($scope.userLoaded === true){
+				var id = $scope.currentUser._id;
+				var i, obj;
+				for (i = 0; i < array.length; ++i) {
+					obj = array[i];
+					if (obj._id == id) {
+						return true;
+					};
 				};
-			};
+				return false;
+			}
 			return false;
 		};
 
@@ -452,7 +444,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		$scope.filterByFriends = function(meeting){
 			if($scope.toggleFriendsFilter === true){
-				var arrayLength = friendUsers.length;
+				var array = $scope.friendUsers
+				var arrayLength = $scope.friendUsers.length;
 				var userId = meeting.owner._id;
 
 				for (var i = 0; i < arrayLength; ++i) {
@@ -472,7 +465,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				var arrayLength = meeting.invitedUsers.length;
 
 				for (var i = 0; i < arrayLength; ++i) {
-					var obj = array[i];
+					var obj = meeting.invitedUsers[i];
 					if (obj._id == id) {
 						return true;
 					};
@@ -488,7 +481,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				var arrayLength = meeting.joinedUsers.length;
 
 				for (var i = 0; i < arrayLength; ++i) {
-					var obj = array[i];
+					var obj = meeting.joinedUsers[i];
 					if (obj._id == id) {
 						return true;
 					};
