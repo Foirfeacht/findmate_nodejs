@@ -8,7 +8,20 @@
 
     <div class="map-filters">
         <div class="map-filter">
-            <md-button class="md-fab friends-filter" ng-click="toggleCurrentUserFilter = !toggleCurrentUserFilter" ng-class="{ 'md-raised' : !toggleCurrentUserFilter }"><i class="mdi mdi-account"></i></md-button>
+            <md-button class="md-fab currentuser-filter" ng-click="toggleCurrentUserFilter = !toggleCurrentUserFilter" ng-class="{ 'md-raised' : !toggleCurrentUserFilter }"><i class="mdi mdi-account"></i></md-button>
+            <div class="filter-title">Мои</div>
+        </div>
+        <div class="map-filter">
+            <md-button class="md-fab friends-filter" ng-click="toggleFriendsFilter = !toggleFriendsFilter" ng-class="{ 'md-raised' : !toggleFriendsFilter }"><i class="mdi mdi-account-multiple"></i></md-button>
+            <div class="filter-title">Друзья</div>
+        </div>
+        <div class="map-filter">
+            <md-button class="md-fab invited-filter" ng-click="toggleInvited = !toggleInvited" ng-class="{ 'md-raised' : !toggleInvited }"><i class="mdi mdi-account-plus"></i></md-button>
+            <div class="filter-title">Приглашения</div>
+        </div>
+        <div class="map-filter">
+            <md-button class="md-fab joined-filter" ng-click="toggleJoined = !toggleJoined" ng-class="{ 'md-raised' : !toggleJoined }"><i class="mdi mdi-account-check"></i></md-button>
+            <div class="filter-title">Учавствую</div>
         </div>
     </div>
 
@@ -23,7 +36,7 @@
              tilt="45"
              styles="{{mapStyles.papuportal}}"
              map-type-id="TERRAIN">
-            <marker position="{{meeting.position}}" ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByDistance"
+            <marker position="{{meeting.position}}" ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterByDistance | filter: filterByActive"
                     icon="../public/images/{{meeting.category.icon}}.png"
                     on-click="showInfoWindow(event, meeting)"></marker>
 

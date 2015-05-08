@@ -161,7 +161,7 @@ findMate.controller('meetingsController', ['$scope',
 			var currentUserId = $scope.currentUser._id;
 			if (id === currentUserId) {
 				return true;
-			}
+			};
 			return false;
 		};
 
@@ -171,8 +171,7 @@ findMate.controller('meetingsController', ['$scope',
 				return true;
 			} else {
 				return false;
-			}
-			;
+			};
 		};
 
 		// check active status and format date

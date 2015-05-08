@@ -21,14 +21,10 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 									if (id === friend.id) {
 										fbUser.friend = "Facebook"
 										$scope.friendUsers.push(fbUser);
-									}
-									;
-								}
-								;
-							}
-							;
-						}
-						;
+									};
+								};
+							};
+						};
 					})
 					.error(function (data) {
 						console.log('Error: ' + data);
@@ -57,20 +53,15 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 									if (friend == id) {
 										vkUser.friend = "Вконтакте";
 										$scope.friendUsers.push(vkUser);
-									}
-									;
-								}
-								;
-							}
-							;
-						}
-						;
+									};
+								};
+							};
+						};
 					})
 					.error(function (data) {
 						console.log('Error: ' + data);
 					});
-			}
-			;
+			};
 		};
 
 		// deal with users service
@@ -104,8 +95,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					return 'Facebook';
 				} else {
 					return 'Вконтакте';
-				}
-				;
+				};
 			}
 		};
 
@@ -136,9 +126,8 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 						en: 'Entertainment'
 					},
 					icon: 'entertainment'
-				}
-			}
-			;
+				};
+			};
 			if (category === 'Sport') {
 				$scope.formData.category = {
 					value: {
@@ -146,9 +135,9 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 						en: 'Sport'
 					},
 					icon: 'sport'
-				}
-			}
-		}
+				};
+			};
+		};
 
 
 		$scope.categories = {
@@ -166,7 +155,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 				},
 				icon: 'entertainment'
 			}
-		}
+		};
 
 		Date.prototype.timeNow = function () {
 			return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();

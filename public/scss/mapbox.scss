@@ -52,7 +52,7 @@ map {
 /* filter section */
 
 .map-filters {
-    width: 50%;
+    width: 400px;
     margin: 0 auto;
     position: relative;
     top: -20px;
@@ -63,11 +63,22 @@ map {
     }
 
     .map-filter {
-        width: 20%;
+        width: 100px;
         float: left;
     }
 
     .md-fab {
+        display: block;
+        width: 56px;
         margin: 0 auto;
     }
+}
+
+.filter-title {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    z-index: 10;
+    margin-top: 10px;
 }

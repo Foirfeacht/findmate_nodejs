@@ -15,50 +15,82 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				});
 		};
 
-		$scope.getCurrentUser();
+		// when landing on the page, get all events and show them
+		$http.get('../api/meetings')
+			.success(function (data) {
+				$scope.meetings = data;
+				console.log(data);
+			})
+			.error(function (data) {
+				console.log('Error: ' + data);
+			});
 
-		// decline invitation
-		$scope.declineInvitation = function (id) {
-			$http.put('/decline/meetings/' + id)
+		// get userfriends
+
+		$scope.friendUsers = [];
+
+		$scope.loadFbFriends = function () {
+			var user = $scope.currentUser;
+			if (user.facebook) {
+				var fbFriendsRequest = 'https://graph.facebook.com/' + user.facebook.id + '/friends' + '?access_token=' + user.facebook.token;
+				$http.get(fbFriendsRequest)
+					.success(function (data) {
+						var friends = data.data;
+						var friendsLength = friends.length;
+						for (var i = 0; i < friendsLength; i++) {
+							var friend = friends[i];
+							$scope.friendUsers.push(friend);
+						};
+					})
+					.error(function (data) {
+						console.log('Error: ' + data);
+					});
+			};
+		};
+
+		$scope.loadVkFriends = function () {
+			var user = $scope.currentUser;
+			if (user.vkontakte) {
+				var vkfriendsRequest = 'https://api.vk.com/method/friends.get?user_id=' + user.vkontakte.id + '&callback=JSON_CALLBACK';
+				$http.jsonp(vkfriendsRequest)
+					.success(function (data) {
+						var friends = data.response;
+						var friendsLength = friends.length;
+						for (var i = 0; i < friendsLength; i++) {
+							var friend = friends[i];
+							$scope.friendUsers.push(friend);
+						};
+					})
+					.error(function (data) {
+						console.log('Error: ' + data);
+					});
+			};
+		};
+
+		$scope.getUserAndFriends = function(){
+			$http.get('/current_user')
 				.success(function (data) {
+					$scope.currentUser = data;
+					console.log($scope.currentUser);
+					$scope.loadVkFriends();
+					$scope.loadFbFriends();
 				})
 				.error(function (data) {
 					console.log('Error: ' + data);
 				});
-			$scope.getCurrentUser();
 		};
 
-		// join meeting
-		$scope.joinMeeting = function (id) {
-			$http.put('/join/meetings/' + id)
-				.success(function (data) {
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
-			$scope.getCurrentUser();
+		$scope.getUserAndFriends();
 
-		};
-
-		// unjoin meeting
-		$scope.unjoinMeeting = function (id) {
-			$http.put('/unjoin/meetings/' + id)
-				.success(function (data) {
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
-			$scope.getCurrentUser();
-		};
-
-
-		//load input data
-
-		$scope.formData = {};
+		//refresh data with socket
+		socket.on('meetings changed', function (data) {
+			$scope.$apply(function () {
+				$scope.meetings = data.msg;
+			});
+			console.log($scope.meetings);
+		});
 
 		//map
-
-		//
 		$scope.$on('mapInitialized', function (event, map) {
 			$scope.defaultPos = new google.maps.LatLng(53.902407, 27.561621);
 			if (navigator.geolocation) {
@@ -115,11 +147,49 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 							console.log('Geocoder failed due to: ' + status);
 						}
 					});
-				}
+				};
 
 				$scope.codeLatLng();
 			}); //end addListener
 		});
+
+		// decline invitation
+		$scope.declineInvitation = function (id) {
+			$http.put('/decline/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+			$scope.getCurrentUser();
+		};
+
+		// join meeting
+		$scope.joinMeeting = function (id) {
+			$http.put('/join/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+			$scope.getCurrentUser();
+
+		};
+
+		// unjoin meeting
+		$scope.unjoinMeeting = function (id) {
+			$http.put('/unjoin/meetings/' + id)
+				.success(function (data) {
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+			$scope.getCurrentUser();
+		};
+
+
+		//load input data
+		$scope.formData = {};
 
 		$scope.showInfoWindow = function (event, meeting) {
 			console.log(meeting);
@@ -162,25 +232,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		//toggle add marker button
 		$scope.toggleCreate = false;
 
-
-		// when landing on the page, get all events and show them
-		$http.get('../api/meetings')
-			.success(function (data) {
-				$scope.meetings = data;
-				console.log(data);
-			})
-			.error(function (data) {
-				console.log('Error: ' + data);
-			});
-
-		//refresh data with socket
-		socket.on('meetings changed', function (data) {
-			$scope.$apply(function () {
-				$scope.meetings = data.msg;
-			});
-			console.log($scope.meetings);
-		});
-
 		socket.on('push notification added', function (data) {
 			console.log(data.msg);
 
@@ -198,7 +249,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		$scope.redirectToMeeting = function (location) {
 			window.location.href = "meetings/" + location;
-		}
+		};
 
 		//notification
 		$scope.showNotification = function() {
@@ -230,7 +281,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				};
 			};
 			return false;
-		}
+		};
 
 		$scope.deleteNotification = function(id){
 			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
@@ -268,19 +319,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			return false;
 		};
 
-		// when submitting the add form, send the text to the node API
-		$scope.createMeeting = function () {
-			$http.post('../api/meetings', $scope.formData)
-				.success(function (data) {
-					console.log($scope.formData);
-					$scope.meetings = data;
-					console.log(data);
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				})
-		};
-
 		// delete a todo after checking it
 		$scope.deleteMeeting = function (id) {
 			$http.delete('../api/meetings/' + id)
@@ -292,6 +330,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 					console.log('Error: ' + data);
 				});
 		};
+
 		//send notification
 		socket.on('meeting added', function (data) {
 			$scope.newMeeting = data.msg;
@@ -313,20 +352,9 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				.error(function (data) {
 					console.log('Error: ', data);
 				})
-		}
+		};
 
 		// get function to refresh on modal closing
-
-		$scope.refresh = function () {
-			$http.get('../api/meetings')
-				.success(function (data) {
-					$scope.meetings = data;
-					console.log(data);
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
-		};
 
 		$scope.showDialog = function (size) {	
 			$scope.$modalInstance = $modal.open({
@@ -340,8 +368,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		$scope.createMeeting = function(){
 			if($scope.toggleCreate === true){
 				$scope.showDialog('lg');
-			}
-		}
+			};
+		};
 
 		$scope.ok = function () {
 			$scope.$modalInstance.close();
@@ -356,12 +384,14 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			$mdSidenav('nav').toggle();
 		};
 
+		//top message box
 		$scope.showMessageBox = false;
 
 		$scope.zoom = 15;
 		$scope.maxZoom = 16;
 		$scope.minZoom = 12;
 		
+		//toggle create mode
 		$scope.toggleCreateEvent = function () {
 			$scope.toggleCreate = ($scope.toggleCreate === false) ? true : false;
 			console.log($scope.toggleCreate);
@@ -371,28 +401,17 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				console.log($scope.cursor);
 			} else {
 				$scope.cursor = 'pointer';
-			}
+			};
 		};
 
+		//exit create mode when pressing esc button
 		$scope.disableCreateMode = function($event) {
 			$event.preventDefault();
 			$scope.toggleCreate = false;
 			$scope.cursor = 'pointer';
 		};
 
-		//filters
-		$scope.toggleCurrentUserFilter = false;
-
-		$scope.filterCurrentUser = function(meeting){
-			if($scope.toggleCurrentUserFilter === true){
-				if(meeting.owner._id === $scope.currentUser._id){
-					return true
-				};
-				return false;
-			}
-			return true;
-		};
-
+		//default filters
 		$scope.filterByDistance = function (meeting) {
 			var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
 			if($scope.pos){
@@ -404,7 +423,80 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				return true
 			};
 			return false;
-		}
+		};
+
+		$scope.filterByActive = function(meeting){
+			var dateNow = new Date().toJSON();
+			if (meeting.startDate > dateNow) {
+				return true;
+			};
+			return false; 
+		};
+
+		//switchable filters
+		$scope.toggleCurrentUserFilter = false;
+		$scope.toggleFriendsFilter = false;
+		$scope.toggleInvited = false;
+		$scope.toggleJoined = false;
+
+		$scope.filterCurrentUser = function(meeting){
+			if($scope.toggleCurrentUserFilter === true){
+				var userId = $scope.currentUser._id;
+				if(meeting.owner._id === userId){
+					return true
+				};
+				return false;
+			}
+			return true;
+		};
+
+		$scope.filterByFriends = function(meeting){
+			if($scope.toggleFriendsFilter === true){
+				var arrayLength = friendUsers.length;
+				var userId = meeting.owner._id;
+
+				for (var i = 0; i < arrayLength; ++i) {
+					var obj = array[i];
+					if (obj._id == meeting.owner._id) {
+						return true;
+					};
+					return false;
+				};
+			};
+			return true;
+		};
+
+		$scope.filterInvited = function(meeting){
+			if($scope.toggleJoined === true){
+				var id = $scope.currentUser._id;
+				var arrayLength = meeting.invitedUsers.length;
+
+				for (var i = 0; i < arrayLength; ++i) {
+					var obj = array[i];
+					if (obj._id == id) {
+						return true;
+					};
+				};
+				return false;
+			};
+			return true;
+		};
+
+		$scope.filterJoined = function(meeting){
+			if($scope.toggleInvited === true){
+				var id = $scope.currentUser._id;
+				var arrayLength = meeting.joinedUsers.length;
+
+				for (var i = 0; i < arrayLength; ++i) {
+					var obj = array[i];
+					if (obj._id == id) {
+						return true;
+					};
+				};
+				return false;
+			};
+			return true;
+		};
 
 		$scope.mapStyles = {
 			mapbox: [

@@ -21,7 +21,7 @@
             </li>
             <li>
                 <a href="/messages">
-                    <i class="mdi mdi-email"></i>Уведомления <span class="notifications">{{currentUser.notifications.length}}</span>
+                    <i class="mdi mdi-email"></i>Уведомления <span class="notifications">{{currentUser.notifications.length | filter: invited }}</span>
                 </a>
             </li>
             <li>
