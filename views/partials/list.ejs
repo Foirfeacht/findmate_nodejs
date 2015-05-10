@@ -10,7 +10,7 @@
                 <div class="meeting-time"><i class="mdi mdi-clock"></i> {{ meeting.startDate | date: 'HH:mm'}}</div>
             </div>
 
-            <div class="meeting-icon"><img src="../public/images/{{meeting.category.icon}}.png"></div>
+            <div class="meeting-icon"><img src="../public/images/{{meeting.category.icon}}.png" alt="{{meeting.category.value.ru }}></div>
         </div>
 
         <div class="meeting-content">
@@ -28,16 +28,17 @@
             <div class="meeting-text">
                 <div class="meeting-description">{{ meeting.description }}</div>
             </div>
-            <!--
-            <div layout="row" class="meeting-title"><strong>Название: &nbsp;</strong> <a
-                    href="meetings/{{meeting._id}}"> {{ meeting.title}}</a></div>
-            <div layout="row"><strong>Описание:&nbsp; </strong> {{ meeting.description }}</div>
-            <div layout="row"><strong>Организатор: </strong>&nbsp;<a href="users/{{meeting.owner._id}}">{{ meeting.owner.name }}</a></div>
-   <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
-            <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong>
-                {{meeting.updated}}
-            </div>-->
+
         </div>
+            <!--
+<div layout="row" class="meeting-title"><strong>Название: &nbsp;</strong> <a
+        href="meetings/{{meeting._id}}"> {{ meeting.title}}</a></div>
+<div layout="row"><strong>Описание:&nbsp; </strong> {{ meeting.description }}</div>
+<div layout="row"><strong>Организатор: </strong>&nbsp;<a href="users/{{meeting.owner._id}}">{{ meeting.owner.name }}</a></div>
+<div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+<div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong>
+    {{meeting.updated}}
+</div>-->
 
         <div class="meeting-userlist" ng-if="meeting.joinedUsers.length > 0">
 

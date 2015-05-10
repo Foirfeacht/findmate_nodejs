@@ -1,6 +1,6 @@
 .view-switcher {
     position: absolute;
-    top: 120px;
+    top: 110px;
     right: 50px;
     overflow: hidden;
     z-index: 99;
@@ -88,6 +88,42 @@ map {
     text-shadow: 0 -1px #000000;
     -webkit-box-shadow: 0 0 8px #000;
     box-shadow: 0 0 8px #000;
+}
+
+.infobox-title {
+  width: 100%;
+  text-align: center;
+
+  a {
+    color: #fff;
+  }
+}
+
+.infobox-content {
+  overflow: hidden;
+}
+
+.infobox-owner {
+  float: left;
+  min-width: 100px;
+
+  img {
+    border: 1px thin #fff;
+    border-radius: 50%;
+    margin: 0 auto;
+    height: 40px;
+    width: 40px;
+    display: block;
+  }
+
+  a {
+    color: #fff;
+  }
+}
+
+.infobox-text {
+  width: 150px;
+  float: left;
 }
 
 /* filter section */

@@ -153,8 +153,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				$scope.codeLatLng();
 			}); //end addListener
 
-            $scope.infoboxOptions = {
-                content: "infobox",
+            var infoboxOptions = {
+                content: document.getElementById("infobox"),
                 disableAutoPan: false,
                 maxWidth: 150,
                 pixelOffset: new google.maps.Size(-140, 0),
@@ -169,10 +169,13 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
                 infoBoxClearance: new google.maps.Size(1, 1)
             };
 
+            var infobox = new InfoBox(infoboxOptions);
+
             $scope.openInfoBox = function(event, meeting){
                 var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
-                var infobox = new google.maps.Infobox($scope.infoboxOptions);
+                //var infobox = new Infobox($scope.infoboxOptions);
                 console.log(position);
+                $scope.infoboxMeeting = meeting
                 infobox.setPosition(position);
                 infobox.open($scope.map);
                 console.log('triggered');
@@ -452,14 +455,16 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		$scope.filterByFriends = function(meeting){
 			if($scope.toggleFriendsFilter === true){
 				var array = $scope.friendUsers;
-				console.log(array);
 				var arrayLength = $scope.friendUsers.length;
 
 				for (var i = 0; i < arrayLength; ++i) {
 					var obj = array[i];
-					if (obj.id == meeting.owner.facebook.id || obj.id == meeting.owner.vkontakte.id ) {
-						return true;
-					};
+                    if (meeting.owner.facebook && obj.id === meeting.owner.facebook.id){
+                        return true;
+                    }
+                    if (meeting.owner.vkontakte && obj.id === meeting.owner.vkontakte.id){
+                        return true;
+                    }
 					return false;
 				};
 			};
@@ -474,7 +479,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				for (var i = 0; i < arrayLength; ++i) {
 					var obj = meeting.invitedUsers[i];
 					console.log(obj);
-					if (obj._id == id) {
+					if (obj._id === id) {
 						return true;
 					};
 				};
@@ -490,7 +495,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 				for (var i = 0; i < arrayLength; ++i) {
 					var obj = meeting.joinedUsers[i];
-					if (obj._id == id) {
+					if (obj._id === id) {
 						return true;
 					};
 				};

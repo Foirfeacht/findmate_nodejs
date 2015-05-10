@@ -18,6 +18,24 @@
             <!-- on-click="showInfoWindow(event, meeting)" -->
 
         </map>
+        <div class="infobox-wrapper">
+            <div id="infobox">
+                <div class="infobox-title"><a href="meetings/{{infoboxMeeting._id}}"> {{ infoboxMeeting.title}}</a></div>
+                <div class="infobox-content">
+                    <a href="users/{{infoboxMeeting.owner._id}}">
+
+                        <div class="infobox-owner">
+                            <div class="infobox-owner_image">
+                                <img src="{{infoboxMeeting.owner.image}}" alt="{{infoboxMeeting.owner.name }}">
+                            </div>
+                        </div>
+                    </a>
+                    <div class="infobox-text">
+                        <div class="meeting-description">{{ infoboxMeeting.description }}</div>
+                    </div>
+                </div><!-- end content -->
+            </div>
+        </div>
     </div>
 
     <md-button class="md-fab md-primary create-button" ng-click="toggleCreateEvent()"><i class="fa fa-plus"></i></md-button>
