@@ -6,12 +6,12 @@ module.exports = {
 		facebook: {
 			clientID: '1556663711272087',
 			clientSecret: '6b16723e16c35fa758f97baa92dcb720',
-			callbackURL: 'https://findmates-demo.herokuapp.com/auth/facebook/callback'
+			callbackURL: 'https://cityvibe.herokuapp.com/auth/facebook/callback'
 		},
 		vkontakte: {
 			clientID: '4862983',
 			clientSecret: 'ToCVIhFVKa96FLPgLyJm',
-			callbackURL: 'https://findmates-demo.herokuapp.com/auth/vk/callback'
+			callbackURL: 'https://cityvibe.herokuapp.com/auth/vk/callback'
 		}
 	}
 };
