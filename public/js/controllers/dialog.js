@@ -148,12 +148,47 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 				},
 				icon: 'sport'
 			},
-			"entertainment": {
+			"active": {
 				value: {
-					ru: 'Развлечения',
-					en: 'Entertainment'
+					ru: 'Активный отдых',
+					en: '?'
+				},
+				icon: 'active'
+			},
+			"party": {
+				value: {
+					ru: 'Вечеринка',
+					en: 'Party'
 				},
 				icon: 'entertainment'
+			},
+			"cinema": {
+				value: {
+					ru: 'Кино',
+					en: 'Movies'
+				},
+				icon: 'movies'
+			},
+			"exhibition": {
+				value: {
+					ru: 'Выставка',
+					en: 'Exhibition'
+				},
+				icon: 'exhibition'
+			},
+			"concert": {
+				value: {
+					ru: 'Концерт',
+					en: 'Concert'
+				},
+				icon: 'concert'
+			},
+			"theater": {
+				value: {
+					ru: 'Театр',
+					en: 'Theater'
+				},
+				icon: 'theater'
 			}
 		};
 

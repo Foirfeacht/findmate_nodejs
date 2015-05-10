@@ -4,9 +4,22 @@
 <% include partials/header %>
 <% include partials/menu %>
 <!--=============================== main content ===============================-->
-<div class="content map" ui-keydown="{esc: 'disableCreateMode($event)'}">
+<div class="content" >  
+
+    <div class="view-switcher">
+        <div class="view-switch" ng-click="selectMode('map')" ng-class="{'switch-active': viewMode === 'map'}">
+            <i class="mdi mdi-google-maps"></i>
+        </div>
+        <div class="view-switch" ng-click="selectMode('list')" ng-class="{'switch-active': viewMode === 'list'}">
+            <i class="mdi mdi-view-list"></i>
+        </div>
+    </div> 
 
     <div class="map-filters">
+        <div class="map-filter">
+            <md-button class="md-fab featured-filter" ng-click="toggleFeatured = !toggleFeatured" ng-class="{ 'md-raised' : !toggleFeatured }"><i class="mdi mdi-star"></i></md-button>
+            <div class="filter-title">Featured</div>
+        </div>
         <div class="map-filter">
             <md-button class="md-fab currentuser-filter" ng-click="toggleCurrentUserFilter = !toggleCurrentUserFilter" ng-class="{ 'md-raised' : !toggleCurrentUserFilter }"><i class="mdi mdi-account"></i></md-button>
             <div class="filter-title">Мои</div>
@@ -25,28 +38,11 @@
         </div>
     </div>
 
-    <div class="map-container" ng-click="createMeeting()" ng-dblclick="showDialog('lg')">>
-        <map zoom="{{zoom}}"
-             disable-default-u-i="true"
-             disable-double-click-zoom="true"
-             draggable="true"
-             keyboard-shortcuts="false"
-             max-zoom="{{maxZoom}}"
-             min-zoom="{{minZoom}}"
-             tilt="45"
-             styles="{{mapStyles.bright}}"
-             map-type-id="TERRAIN">
-            <marker position="{{meeting.position}}" ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive"
-                    icon="../public/images/{{meeting.category.icon}}.png"
-                    on-click="showInfoWindow(event, meeting)"></marker>
-
-        </map>
-    </div>
-
-    <md-button class="md-fab md-primary create-button" ng-click="toggleCreateEvent()" target="_blank"><i class="fa fa-plus"></i></md-button>
+    <% include partials/map %>
+    <% include partials/list %>
 
 
-</div>
+</div>  
 <!-- end content -->
 
 <% include partials/footer %>
@@ -55,7 +51,7 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwS3KmONVi8WALQdRFAt0QWjyBqB8i1F4&libraries=geometry&sensor=FALSE">
 </script>
 <script type="text/javascript"
-        src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
+        src="../../public/js/infobox.js"></script>
 <script src="../../public/js/controllers/map.js"></script>
 <script src="../../public/js/controllers/dialog.js"></script>
 

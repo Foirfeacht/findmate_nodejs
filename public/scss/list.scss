@@ -1,0 +1,191 @@
+/* =============================
+   ========== MEETING ==========
+   ============================= */
+
+.meeting-display {
+  width: 100%;
+  overflow: hidden;
+  padding: 0 20px;
+}
+
+.meeting {
+  width: 30%;
+  margin: 30px 15px;
+  border: 1px thin rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  height: 390px;
+  position: relative;
+  float: left;
+}
+
+.meeting-header {
+  width: 100%;
+  overflow: hidden;
+}
+
+.meeting-date-container {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+.meeting-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.meeting-icon img {
+  width: 48px;
+  height: 48px;
+}
+
+.meeting-content {
+  padding: 20px 20px 10px;
+  margin-top: 50px;
+  overflow: hidden;
+}
+
+.meeting-owner {
+  float: left;
+  width: 30%;
+
+  img {
+    border: 1px thin #fff;
+    border-radius: 50%;
+    margin: 0 auto;
+    height: 56px;
+    width: 56px;
+    display: block;
+  }
+}
+
+.meeting-owner_name {
+  text-align: center;
+  font-size: .75em;
+}
+
+.meeting-text {
+  float: left;
+  width: 70%;
+}
+
+.meeting-title {
+  font-weight: 700;
+  text-align: center;
+
+  a {
+    color: #000;
+  }
+}
+
+.meeting-description {
+  font-style: italic;
+}
+
+.meeting-userlist {
+  padding: 0 20px;
+}
+
+.meeting .userlist img {
+  border: 1px thin #fff;
+  border-radius: 50%;
+  margin-right: 8px;
+  height: 56px;
+  width: 56px;
+}
+
+.meeting .join-button,
+.delete-button {
+  width: auto;
+  padding: 10px 15px;
+  display: block;
+  margin: 10px auto;
+}
+
+.edit-button {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  height: 36px;
+  width: 36px;
+}
+
+.edit-button i {
+  font-size: 1.2em;
+}
+
+.meeting-footer {
+  padding: 5px 0;
+  background: #0091EA;
+  color: #fff;
+  font-size: 1.1em;
+  overflow: hidden;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.meeting-footer > div {
+  float: right;
+  margin-right: 20px;
+}
+
+.meeting-footer i {
+  font-size: 1.2em;
+}
+
+/********* SEARCH AND FILTERS ********/
+
+.search {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.search md-icon {
+  position: relative;
+  top: 3px;
+  font-size: 1.3em;
+}
+
+.search input {
+  width: 90%;
+}
+
+.select-filters {
+  width: 100%;
+}
+
+.select-filter {
+  width: 50%;
+}
+
+.create-button {
+  width: 36px;
+  height: 36px;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
+
+.create-button i {
+  color: #211F00;
+  font-size: 2em;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}
+
+.datepicker-wrapper {
+  margin-top: 35px;
+}
+
+.input-group .form-control {
+  width: 100%;
+}
+
+.input-group-btn > .btn {
+  position: absolute;
+  top: 10px;
+}

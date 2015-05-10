@@ -1,5 +1,5 @@
 
-findMate.controller('messageController', ['$scope', '$http', '$mdSidenav', '$modal', 'toastr', 'animate',
+findMate.controller('messageController', ['$scope', '$http', '$mdSidenav', '$modal', 'toastr', '$animate',
 	function ($scope, $http, $mdSidenav, $modal, $animate, toastr) {
 		// side nav
 		$scope.toggleNav = function () {
@@ -120,7 +120,7 @@ findMate.controller('messageController', ['$scope', '$http', '$mdSidenav', '$mod
 
 		socket.on('push notification removed', function (data) {
 			$scope.currentUser = data.msg;
-		};
+		});
 
 		// ng show for buttons
 		$scope.showButton = function (array) {

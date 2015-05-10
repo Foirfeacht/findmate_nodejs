@@ -1,0 +1,25 @@
+<div class="map animate-show" ui-keydown="{esc: 'disableCreateMode($event)'}" ng-show='viewMode ==="map"'>
+
+    
+
+    <div class="map-container" ng-click="createMeeting()" ng-dblclick="showDialog('lg')">>
+        <map zoom="{{zoom}}"
+             disable-default-u-i="true"
+             disable-double-click-zoom="true"
+             draggable="true"
+             keyboard-shortcuts="false"
+             max-zoom="{{maxZoom}}"
+             min-zoom="{{minZoom}}"
+             tilt="45"
+             styles="{{mapStyles.bright}}"
+             map-type-id="ROADMAP">
+            <marker position="{{meeting.position}}" ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive"
+                    icon="../public/images/{{meeting.category.icon}}.png" on-click="openInfoBox(event, meeting)"></marker>
+            <!-- on-click="showInfoWindow(event, meeting)" -->
+
+        </map>
+    </div>
+
+    <md-button class="md-fab md-primary create-button" ng-click="toggleCreateEvent()"><i class="fa fa-plus"></i></md-button>
+</div>
+

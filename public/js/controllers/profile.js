@@ -182,7 +182,7 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 
 		socket.on('push notification removed', function (data) {
 			$scope.currentUser = data.msg;
-		};
+		});
 
 
 		// ng show for buttons

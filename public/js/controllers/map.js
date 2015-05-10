@@ -4,17 +4,6 @@
 findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr', '$sce', 'fetchData', 'fetchUser',
 	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce, fetchData, fetchUser) {
 
-
-		/*fetchData.getCurrentUser().then(function(data){
-			$scope.currentUser = fetchData.data;
-			console.log($scope.currentUser);
-		});
-		// when landing on the page, get all events and show them
-		fetchUser.getMeetings().then(function(data){
-			$scope.meetings = fetchData.data;
-			console.log($scope.currentUser);
-		});*/
-
 		// get userfriends
 		$http.get('../api/meetings')
 			.success(function (data) {
@@ -139,7 +128,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			google.maps.event.addListener($scope.map, "click", function (event) {
 				$scope.latitude = event.latLng.lat();
 				$scope.longitude = event.latLng.lng();
-				console.log($scope.toggleCreate);
 				// get address from coords
 				$scope.geocoder = new google.maps.Geocoder();
 
@@ -164,7 +152,37 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 				$scope.codeLatLng();
 			}); //end addListener
+
+            $scope.infoboxOptions = {
+                content: "infobox",
+                disableAutoPan: false,
+                maxWidth: 150,
+                pixelOffset: new google.maps.Size(-140, 0),
+                zIndex: null,
+                boxStyle: {
+                    background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
+                    opacity: 0.75,
+                    width: "280px"
+                },
+                closeBoxMargin: "12px 4px 2px 2px",
+                closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+                infoBoxClearance: new google.maps.Size(1, 1)
+            };
+
+            $scope.openInfoBox = function(event, meeting){
+                var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
+                var infobox = new google.maps.Infobox($scope.infoboxOptions);
+                console.log(position);
+                infobox.setPosition(position);
+                infobox.open($scope.map);
+                console.log('triggered');
+            }
+
 		});
+
+		$scope.zoom = 15;
+		$scope.maxZoom = 16;
+		$scope.minZoom = 12;
 
 		// decline invitation
 		$scope.declineInvitation = function (id) {
@@ -200,9 +218,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			$scope.getCurrentUser();
 		};
 
+		$scope.viewMode = "map";
+		console.log($scope.viewMode)
 
-		//load input data
-		$scope.formData = {};
+		$scope.selectMode = function(mode){
+			$scope.viewMode = mode;
+		}
 
 		$scope.showInfoWindow = function (event, meeting) {
 			console.log(meeting);
@@ -220,27 +241,9 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			infowindow.open($scope.map);
 		};
 
-		$scope.showInfobox = function (event, meeting) {
-			console.log(meeting);
-			var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
 
-			var infobox = new InfoBox({
-				content: '<h3>' + meeting.title + '</h3>',
-				disableAutoPan: false,
-				maxWidth: 150,
-				pixelOffset: new google.maps.Size(-140, 0),
-				zIndex: null,
-				boxStyle: {
-					background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
-					opacity: 0.75,
-					width: "280px"
-				},
-				closeBoxMargin: "12px 4px 2px 2px",
-				closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
-				infoBoxClearance: new google.maps.Size(1, 1)
-			});
-			infobox.open($scope.map, this)
-		};
+
+
 
 		//toggle add marker button
 		$scope.toggleCreate = false;
@@ -269,21 +272,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
 			console.log($scope.addedNotification);
 			$scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml('<h1>' + $scope.addedNotification.meeting.title + '</h1>');
-			/*$mdToast.show({
-				controller: 'notificationController',
-				templateUrl: './public/partials/invite-notification.ejs',
-				hideDelay: 6000,
-				position: 'bottom left',
-				scope: $scope
-			});*/
 			toastr.info( 'У вас новое приглашение!',
 					'<div ng-bind-html="thisCanBeusedInsideNgBindHtml"></div>', {
 					allowHtml: true
 					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
 				});
 		};
-
-
 
 		$scope.deleteNotification = function(id){
 			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
@@ -358,7 +352,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				})
 		};
 
-		// get function to refresh on modal closing
+		// show dialog
 
 		$scope.showDialog = function (size) {	
 			$scope.$modalInstance = $modal.open({
@@ -367,6 +361,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				size: size,
 				scope: $scope
 			});
+			$scope.$modalInstance.result.then(function (selectedItem) {
+		      $scope.toggleCreate = false;
+		      $scope.cursor = 'pointer';
+		    }, function () {
+		      console.log('Modal dismissed at: ' + new Date());
+		    })
 		};
 
 		$scope.createMeeting = function(){
@@ -391,18 +391,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		//top message box
 		$scope.showMessageBox = false;
 
-		$scope.zoom = 15;
-		$scope.maxZoom = 16;
-		$scope.minZoom = 12;
-		
 		//toggle create mode
 		$scope.toggleCreateEvent = function () {
 			$scope.toggleCreate = ($scope.toggleCreate === false) ? true : false;
 			console.log($scope.toggleCreate);
 			if($scope.toggleCreate === true){
-				$scope.cursor = 'crosshair';
-				//$scope.cursor = 'url:(../public/images/marker.png), crosshair';
-				console.log($scope.cursor);
+				$scope.cursor = 'url(../public/images/marker.ico), crosshair';
 			} else {
 				$scope.cursor = 'pointer';
 			};
@@ -438,6 +432,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		};
 
 		//switchable filters
+		$scope.toggleFeatured = false;
 		$scope.toggleCurrentUserFilter = false;
 		$scope.toggleFriendsFilter = false;
 		$scope.toggleInvited = false;
@@ -1195,7 +1190,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			        "elementType": "geometry.stroke",
 			        "stylers": [
 			            {
-			                "color": "#efe9e4"
+			                "color": "#FFEA00"
 			            },
 			            {
 			                "lightness": -40
@@ -1329,7 +1324,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			        "elementType": "geometry.fill",
 			        "stylers": [
 			            {
-			                "color": "#efe9e4"
+			                "color": "#EBD700"
 			            },
 			            {
 			                "lightness": -25
@@ -1341,7 +1336,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			        "elementType": "geometry.fill",
 			        "stylers": [
 			            {
-			                "color": "#efe9e4"
+			                "color": "#FFE92C"
 			            },
 			            {
 			                "lightness": -10

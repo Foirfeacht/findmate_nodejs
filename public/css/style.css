@@ -110,113 +110,11 @@ md-option {
   width: 100%; }
 
 /* =============================
-   ========== MEETING ==========
-   ============================= */
-.meeting-display {
-  width: 100%;
-  overflow: hidden; }
-
-.meeting {
-  width: 30%;
-  margin: 30px 15px;
-  border: 1px thin rgba(0, 0, 0, 0.8);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  padding: 20px 20px 0;
-  min-height: 520px;
-  position: relative; }
-
-.meeting div {
-  padding: 4px 0; }
-
-.meeting-title {
-  font-weight: 700; }
-
-.meeting .userlist img {
-  border: 1px thin #fff;
-  border-radius: 50%;
-  margin-right: 8px;
-  height: 56px;
-  width: 56px; }
-
-.meeting .join-button,
-.delete-button {
-  width: auto;
-  padding: 10px 15px;
-  display: block;
-  margin: 10px auto; }
-
-.edit-button {
-  position: absolute;
-  right: 30px;
-  top: 20px;
-  height: 36px;
-  width: 36px; }
-
-.edit-button i {
-  font-size: 1.2em; }
-
-.meeting-footer {
-  padding: 5px 0;
-  background: #0091EA;
-  color: #fff;
-  font-size: 1.1em;
-  overflow: hidden; }
-
-.meeting-footer > div {
-  float: right;
-  margin-right: 20px; }
-
-.meeting-footer i {
-  font-size: 1.2em; }
-
-/********* SEARCH AND FILTERS ********/
-.search {
-  width: 80%;
-  margin: 0 auto; }
-
-.search md-icon {
-  position: relative;
-  top: 3px;
-  font-size: 1.3em; }
-
-.search input {
-  width: 90%; }
-
-.select-filters {
-  width: 100%; }
-
-.select-filter {
-  width: 50%; }
-
-.create-button {
-  width: 36px;
-  height: 36px;
-  position: fixed;
-  bottom: 50px;
-  right: 50px; }
-
-.create-button i {
-  color: #fff;
-  font-size: 2em;
-  position: absolute;
-  top: 30%;
-  left: 30%; }
-
-.datepicker-wrapper {
-  margin-top: 35px; }
-
-.input-group .form-control {
-  width: 100%; }
-
-.input-group-btn > .btn {
-  position: absolute;
-  top: 10px; }
-
-/* =============================
    =========== HEADER ============
    ============================= */
 .header {
-  z-index: 999; }
+  z-index: 999;
+  height: 64px; }
 
 .inbox-button {
   display: block;
@@ -415,6 +313,44 @@ md-option {
   height: 50px;
   width: 50px; }
 
+.view-switcher {
+  position: absolute;
+  top: 120px;
+  right: 50px;
+  overflow: hidden;
+  z-index: 99;
+  background: #fff; }
+
+.view-switch {
+  float: left;
+  padding: 5px 10px;
+  -webkit-box-shadow: inset 0px 2px 10px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0px 2px 10px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 2px 10px 2px rgba(0, 0, 0, 0.2); }
+  .view-switch:hover {
+    cursor: pointer; }
+  .view-switch i {
+    font-size: 1.6em; }
+
+.switch-active {
+  background: #FFEA00;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }
+
+.animate-show {
+  -webkit-transition: 1s linear all;
+  /* Chrome */
+  transition: 1s linear all; }
+
+.content {
+  position: relative;
+  padding: 100px 0 0; }
+
+.content-wrapper {
+  width: 100%;
+  height: 100%; }
+
 #map {
   height: 100%;
   width: 100%;
@@ -422,14 +358,12 @@ md-option {
   top: 0;
   left: 0; }
 
-.content.map {
-  padding: 100px 0 0; }
-
 .map-container {
   width: 100%;
-  height: 800px;
+  min-height: 800px;
   height: 100vh;
-  position: relative; }
+  position: relative;
+  top: -64px; }
 
 map {
   width: 100%;
@@ -456,12 +390,9 @@ map {
   -webkit-box-shadow: 0 0 8px #000;
   box-shadow: 0 0 8px #000; }
 
-.createEvent {
-  cursor: url("../images/marker.ico"), crosshair; }
-
 /* filter section */
 .map-filters {
-  width: 400px;
+  width: 500px;
   margin: 0 auto;
   position: relative;
   top: -20px;
@@ -484,6 +415,162 @@ map {
   position: relative;
   z-index: 10;
   margin-top: 10px; }
+
+/* =============================
+   ========== MEETING ==========
+   ============================= */
+.meeting-display {
+  width: 100%;
+  overflow: hidden;
+  padding: 0 20px; }
+
+.meeting {
+  width: 30%;
+  margin: 30px 15px;
+  border: 1px thin rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  height: 390px;
+  position: relative;
+  float: left; }
+
+.meeting-header {
+  width: 100%;
+  overflow: hidden; }
+
+.meeting-date-container {
+  position: absolute;
+  top: 10px;
+  left: 20px; }
+
+.meeting-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px; }
+
+.meeting-icon img {
+  width: 48px;
+  height: 48px; }
+
+.meeting-content {
+  padding: 20px 20px 10px;
+  margin-top: 50px;
+  overflow: hidden; }
+
+.meeting-owner {
+  float: left;
+  width: 30%; }
+  .meeting-owner img {
+    border: 1px thin #fff;
+    border-radius: 50%;
+    margin: 0 auto;
+    height: 56px;
+    width: 56px;
+    display: block; }
+
+.meeting-owner_name {
+  text-align: center;
+  font-size: .75em; }
+
+.meeting-text {
+  float: left;
+  width: 70%; }
+
+.meeting-title {
+  font-weight: 700;
+  text-align: center; }
+  .meeting-title a {
+    color: #000; }
+
+.meeting-description {
+  font-style: italic; }
+
+.meeting-userlist {
+  padding: 0 20px; }
+
+.meeting .userlist img {
+  border: 1px thin #fff;
+  border-radius: 50%;
+  margin-right: 8px;
+  height: 56px;
+  width: 56px; }
+
+.meeting .join-button,
+.delete-button {
+  width: auto;
+  padding: 10px 15px;
+  display: block;
+  margin: 10px auto; }
+
+.edit-button {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  height: 36px;
+  width: 36px; }
+
+.edit-button i {
+  font-size: 1.2em; }
+
+.meeting-footer {
+  padding: 5px 0;
+  background: #0091EA;
+  color: #fff;
+  font-size: 1.1em;
+  overflow: hidden;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0; }
+
+.meeting-footer > div {
+  float: right;
+  margin-right: 20px; }
+
+.meeting-footer i {
+  font-size: 1.2em; }
+
+/********* SEARCH AND FILTERS ********/
+.search {
+  width: 80%;
+  margin: 0 auto; }
+
+.search md-icon {
+  position: relative;
+  top: 3px;
+  font-size: 1.3em; }
+
+.search input {
+  width: 90%; }
+
+.select-filters {
+  width: 100%; }
+
+.select-filter {
+  width: 50%; }
+
+.create-button {
+  width: 36px;
+  height: 36px;
+  position: fixed;
+  bottom: 50px;
+  right: 50px; }
+
+.create-button i {
+  color: #211F00;
+  font-size: 2em;
+  position: absolute;
+  top: 30%;
+  left: 30%; }
+
+.datepicker-wrapper {
+  margin-top: 35px; }
+
+.input-group .form-control {
+  width: 100%; }
+
+.input-group-btn > .btn {
+  position: absolute;
+  top: 10px; }
 
 /* =============================
    =========== NOTIFICATIONS ============
@@ -601,10 +688,10 @@ map {
 .content {
   width: 100%; }
 
-.meetings-display {
+.singlemeeting-display {
   width: 50%; }
 
-.meeting {
+.single-meeting {
   width: 80%;
   margin: 0 auto;
   min-width: 400px; }
