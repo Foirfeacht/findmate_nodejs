@@ -81,7 +81,7 @@ module.exports = function (app) {
 	app.get('/main', isLoggedIn, function (req, res) {
 		res.render('main.ejs', {
 			user: req.user,
-			title: "Главная"
+			title: "Cityvibe"
 		});
 	});
 }

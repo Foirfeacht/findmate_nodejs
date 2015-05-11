@@ -1,3 +1,50 @@
+.view-switcher {
+    position: absolute;
+    top: 110px;
+    right: 50px;
+    overflow: hidden;
+    z-index: 99;
+    background: #fff;
+}
+
+.view-switch{
+    float: left;
+    padding: 5px 10px;
+    -webkit-box-shadow: inset 0px 2px 10px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0px 2px 10px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0px 2px 10px 2px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    i {
+        font-size: 1.6em;
+    }
+}
+
+.switch-active {
+    background: #FFEA00;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.animate-show {
+    -webkit-transition: 1s linear all; /* Chrome */
+    transition: 1s linear all;
+}
+
+.content {
+    position: relative;
+    padding: 100px 0 0;
+}
+
+.content-wrapper {
+    width: 100%;
+    height: 100%;
+} 
+
 #map {
     height: 100%;
     width: 100%;
@@ -6,15 +53,13 @@
     left: 0;
 }
 
-.content.map {
-    padding: 100px 0 0;
-}
 
 .map-container {
     width: 100%;
-    height: 800px;
+    min-height: 800px;
     height: 100vh;
     position: relative;
+    top: -64px;
 }
 
 map {
@@ -45,18 +90,51 @@ map {
     box-shadow: 0 0 8px #000;
 }
 
-.createEvent {
-    cursor: url('../images/marker.ico'), crosshair;
+.infobox-title {
+  width: 100%;
+  text-align: center;
+
+  a {
+    color: #fff;
+  }
+}
+
+.infobox-content {
+  overflow: hidden;
+}
+
+.infobox-owner {
+  float: left;
+  min-width: 100px;
+
+  img {
+    border: 1px thin #fff;
+    border-radius: 50%;
+    margin: 0 auto;
+    height: 40px;
+    width: 40px;
+    display: block;
+  }
+
+  a {
+    color: #fff;
+  }
+}
+
+.infobox-text {
+  width: 150px;
+  float: left;
 }
 
 /* filter section */
 
 .map-filters {
-    width: 400px;
+    width: 500px;
     margin: 0 auto;
     position: relative;
     top: -20px;
     overflow: hidden;
+    padding-top: 10px;
 
     i {
         font-size: 2em;
@@ -77,7 +155,7 @@ map {
 .filter-title {
     width: 100%;
     text-align: center;
-    color: #fff;
+    color: #211400;
     position: relative;
     z-index: 10;
     margin-top: 10px;

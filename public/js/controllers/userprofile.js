@@ -127,7 +127,7 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
 
 		socket.on('push notification removed', function (data) {
 			$scope.currentUser = data.msg;
-		};
+		});
 
 		// ng show for buttons
 		$scope.showButton = function (array) {

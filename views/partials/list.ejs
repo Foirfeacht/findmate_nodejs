@@ -1,0 +1,95 @@
+<div class="meetings-display animate-show" ng-show='viewMode ==="list"'>
+
+
+    <div class="meeting"
+         ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive | orderBy: 'startDate'">
+
+        <div class="meeting-header">
+            <div class="meeting-date-container">
+                <div class="meeting-date"><i class="mdi mdi-calendar-text"></i> {{ meeting.startDate | date: 'd MMMM yyyy'}}</div>
+                <div class="meeting-time"><i class="mdi mdi-clock"></i> {{ meeting.startDate | date: 'HH:mm'}}</div>
+            </div>
+
+            <div class="meeting-icon"><img src="../public/images/{{meeting.category.icon}}.png" alt="{{meeting.category.value.ru }}></div>
+        </div>
+
+        <div class="meeting-content">
+            <div class="meeting-title"><a href="meetings/{{meeting._id}}"> {{ meeting.title}}</a></div>
+            <a href="users/{{meeting.owner._id}}">
+                <div class="meeting-owner">
+                    <div class="meeting-owner_image">
+                        <img src="{{meeting.owner.image}}" alt="{{meeting.owner.name }}">
+                    </div>
+                    <div class="meeting-owner_name">
+                        {{meeting.owner.name }}
+                    </div>
+                </div>
+            </a>
+            <div class="meeting-text">
+                <div class="meeting-description">{{ meeting.description }}</div>
+            </div>
+
+        </div>
+            <!--
+<div layout="row" class="meeting-title"><strong>Название: &nbsp;</strong> <a
+        href="meetings/{{meeting._id}}"> {{ meeting.title}}</a></div>
+<div layout="row"><strong>Описание:&nbsp; </strong> {{ meeting.description }}</div>
+<div layout="row"><strong>Организатор: </strong>&nbsp;<a href="users/{{meeting.owner._id}}">{{ meeting.owner.name }}</a></div>
+<div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
+<div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong>
+    {{meeting.updated}}
+</div>-->
+
+        <div class="meeting-userlist" ng-if="meeting.joinedUsers.length > 0">
+
+            <h6>Участники</h6>
+
+            <div layout="row" class="userlist">
+                <div ng-repeat="user in meeting.joinedUsers | limitTo: 5" >
+                    <a href="users/{{user._id}}">
+                        <img src="{{user.image}}" alt="{{user.name }}">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        
+        <div layout="row">
+            <md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)"
+                       ng-show="checkOwner(meeting.owner._id)">Удалить
+            </md-button>
+            <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)"
+                       ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение
+            </md-button>
+            <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)"
+                       ng-show="!showButton(meeting.joinedUsers)" ng-if="meeting.owner._id != currentUser._id">Учавствовать
+            </md-button>
+            <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)"
+                       ng-show="showButton(meeting.joinedUsers)">Не учавствовать
+            </md-button>
+        </div>
+
+        <div class="meeting-footer">
+            <div>
+                <i class="mdi mdi-account-multiple"></i> {{ meeting.joinedUsers.length }}
+            </div>
+            <div>
+                <i class="mdi mdi-comment"></i> {{ meeting.comments.length }}
+            </div>
+        </div>
+
+        <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)"
+                   ng-show="checkOwner(meeting.owner._id)">
+            <i class="mdi mdi-pencil"></i>
+        </md-button>
+    </div>
+    <!-- end meeting -->
+
+    <div class="alert alert-danger" role="alert" ng-if="!meetings.length">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only"></span>
+        Встреч пока нет
+    </div>
+</div>
+            <!-- end display -->

@@ -286,7 +286,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 
 		socket.on('push notification removed', function (data) {
 			$scope.currentUser = data.msg;
-		};
+		});
 
 		//notification service update
 		$scope.$watch('addedNotification', function () {
