@@ -1,23 +1,13 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr', '$sce', 'fetchData', 'fetchUser',
-	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce, fetchData, fetchUser) {
+findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr', '$sce',
+	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce) {
 
-		// get userfriends
-		$http.get('../api/meetings')
-			.success(function (data) {
-				$scope.meetings = data;
-				console.log(data);
-			})
-			.error(function (data) {
-				console.log('Error: ' + data);
-			});
-
-		$scope.userLoaded = false;
 
 		$scope.friendUsers = [];
 
+		// get userfriends
 		$scope.loadFbFriends = function () {
 			var user = $scope.currentUser;
 			if (user.facebook) {
@@ -82,7 +72,15 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				});
 		};
 
-		$scope.getUserAndFriends();
+		$http.get('../api/meetings')
+			.success(function (data) {
+				$scope.meetings = data;
+				console.log(data);
+				$scope.getUserAndFriends();
+			})
+			.error(function (data) {
+				console.log('Error: ' + data);
+			});
 
 		//refresh data with socket
 		socket.on('meetings changed', function (data) {
@@ -175,7 +173,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
                 var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
                 //var infobox = new Infobox($scope.infoboxOptions);
                 console.log(position);
-                $scope.infoboxMeeting = meeting
+                $scope.infoboxMeeting = meeting;
+				$scope.getInfoBoxDistance = function (meeting){
+					var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
+					var distance = google.maps.geometry.spherical.computeDistanceBetween($scope.pos, position);
+					return (distance / 1000).toFixed(2);
+				};
                 infobox.setPosition(position);
                 infobox.open($scope.map);
                 console.log('triggered');
@@ -226,27 +229,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		$scope.selectMode = function(mode){
 			$scope.viewMode = mode;
-		}
-
-		$scope.showInfoWindow = function (event, meeting) {
-			console.log(meeting);
-			var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
-			var infowindow = new google.maps.InfoWindow();
-
-
-			infowindow.setContent(
-				'<h3>' + meeting.title + '</h3>' +
-				'<p>' + meeting.description + '</p>' +
-				'<p><strong>' + meeting.location + '</strong></p>'
-			);
-
-			infowindow.setPosition(position);
-			infowindow.open($scope.map);
 		};
-
-
-
-
 
 		//toggle add marker button
 		$scope.toggleCreate = false;
@@ -306,7 +289,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		// ng show for buttons
 		$scope.showButton = function (array) {
-			if($scope.userLoaded === true){
 				var id = $scope.currentUser._id;
 				var i, obj;
 				for (i = 0; i < array.length; ++i) {
@@ -316,8 +298,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 					};
 				};
 				return false;
-			}
-			return false;
 		};
 
 		// delete a todo after checking it
@@ -503,6 +483,65 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			};
 			return true;
 		};
+
+		//category filters
+		$scope.toggleSports = true;
+		$scope.toggleOutdoor = true;
+		$scope.toggleOpenair = true;
+		$scope.toggleMovies = true;
+		$scope.toggleExhibition = true;
+		$scope.toggleTheater = true;
+		$scope.toggleMusic = true;
+		$scope.toggleFood = true;
+		$scope.toggleParty = true;
+
+		/*$scope.filterByCategory = function(category, meeting){
+			if(meeting.category.value.en === category){
+				return true;
+			}
+			return false;
+		};*/
+
+		$scope.filterByCategory = function(meeting){
+			var categories = [];
+			if($scope.toggleSports === true){
+				categories.push('Sport');
+			};
+			if($scope.toggleOutdoor === true){
+				categories.push('Outdoor');
+			};
+			if($scope.toggleOpenair === true){
+				categories.push('Open Air Activity');
+			};
+			if($scope.toggleMovies === true){
+				categories.push('Movies');
+			};
+			if($scope.toggleExhibition === true){
+				categories.push('Exhibition');
+			};
+			if($scope.toggleTheater === true){
+				categories.push('Theater');
+			};
+			if($scope.toggleMusic === true){
+				categories.push('Music');
+			};
+			if($scope.toggleParty === true){
+				categories.push('Party');
+			};
+			if($scope.toggleFood === true){
+				categories.push('Restaurant/Cafe');
+			};
+			if(categories.length > 0){
+				for(var i = 0; i < categories.length; i++){
+					if(categories[i] === meeting.category.value.en){
+						return true;
+					};
+				};
+				return false;
+			};
+			return true;
+		};
+
 
 		$scope.mapStyles = {
 			flatmap: [

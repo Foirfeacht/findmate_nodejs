@@ -106,26 +106,27 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 
 		$scope.formData = {
 			latLng: $scope.latLng,
-			visibility: "Общие",
+			visibility: 'all',
 			startDate: new Date(),
 			startTime: new Date(),
 			invitedUsers: $scope.invitedUsers,
 			latitude: $scope.latLng.lat(),
 			longitude: $scope.latLng.lng(),
 			position: $scope.latLng.lat() + ', ' + $scope.latLng.lng(),
-			location: $scope.location
+			location: $scope.location,
+			category: 'Sport'
 		};
 
 		//$scope.initCategory = "entertainment";
 
 		$scope.defineCategory = function (category) {
-			if (category === 'Entertainment') {
+			if (category === 'Outdoor') {
 				$scope.formData.category = {
 					value: {
 						ru: 'Развлечения',
-						en: 'Entertainment'
+						en: 'Outdoor'
 					},
-					icon: 'entertainment'
+					icon: 'outdoor'
 				};
 			};
 			if (category === 'Sport') {
@@ -137,58 +138,135 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					icon: 'sport'
 				};
 			};
+			if (category === 'Party') {
+				$scope.formData.category = {
+					value: {
+						ru: 'Вечеринка',
+						en: 'Party'
+					},
+					icon: 'party'
+				};
+			};
+			if (category === 'Movies') {
+				$scope.formData.category = {
+					value: {
+						ru: 'Кино',
+						en: 'Movies'
+					},
+					icon: 'cinema'
+				};
+			};
+			if (category === 'Exhibition') {
+				$scope.formData.category = {
+					value: {
+						ru: 'Выставка',
+						en: 'Exhibition'
+					},
+					icon: 'exhibition'
+				};
+			};
+			if (category === 'Music') {
+				$scope.formData.category = {
+					value: {
+						ru: 'Музыка',
+						en: 'Music'
+					},
+					icon: 'music'
+				};
+			};
+			if (category === 'Theater') {
+				$scope.formData.category = {
+					value: {
+						ru: 'Театр',
+						en: 'Theater'
+					},
+					icon: 'theater'
+				};
+			};
+			if (category === 'Open Air Activity') {
+				$scope.formData.category = {
+					value: {
+						ru: 'Мероприятие на открытом воздухе',
+						en: 'Open Air Activity'
+					},
+					icon: 'openair'
+				};
+			};
+			if (category === 'Restaurant/Cafe') {
+				$scope.formData.category = {
+					value: {
+						ru: 'Ресторан/Кафе',
+						en: 'Restaurant/Cafe'
+					},
+					icon: 'food'
+				};
+			};
 		};
 
 
 		$scope.categories = {
-			"sport": {
+			"Sport": {
 				value: {
 					ru: 'Спорт',
 					en: 'Sport'
 				},
 				icon: 'sport'
 			},
-			"active": {
+			"Outdoor": {
 				value: {
 					ru: 'Активный отдых',
-					en: '?'
+					en: 'Outdoor'
 				},
-				icon: 'active'
+				icon: 'outdoor'
 			},
-			"party": {
+			"Party": {
 				value: {
 					ru: 'Вечеринка',
 					en: 'Party'
 				},
-				icon: 'entertainment'
+				icon: 'party'
 			},
-			"cinema": {
+			"Movies": {
 				value: {
 					ru: 'Кино',
 					en: 'Movies'
 				},
-				icon: 'movies'
+				icon: 'cinema'
 			},
-			"exhibition": {
+			"Exhibition": {
 				value: {
 					ru: 'Выставка',
 					en: 'Exhibition'
 				},
 				icon: 'exhibition'
 			},
-			"concert": {
+			"Music": {
 				value: {
-					ru: 'Концерт',
-					en: 'Concert'
+					ru: 'Музыка',
+					en: 'Music'
 				},
-				icon: 'concert'
+				icon: 'music'
 			},
-			"theater": {
+			"Theater": {
 				value: {
 					ru: 'Театр',
 					en: 'Theater'
 				},
 				icon: 'theater'
+			},
+			"Open Air": {
+				value: {
+					ru: 'Мероприятие на открытом воздухе',
+					en: 'Open Air Activity'
+				},
+				icon: 'openair'
+			},
+			"Restaurant/Cafe": {
+				value: {
+					ru: 'Ресторан/Кафе',
+					en: 'Restaurant/Cafe'
+				},
+				icon: 'food'
 			}
 		};
 
