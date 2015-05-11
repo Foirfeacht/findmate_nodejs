@@ -2,7 +2,7 @@
 
 
     <div class="meeting"
-         ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive | orderBy: 'startDate'">
+         ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive | filter: filterByCategory | orderBy: 'startDate'">
 
         <div class="meeting-header">
             <div class="meeting-date-container">

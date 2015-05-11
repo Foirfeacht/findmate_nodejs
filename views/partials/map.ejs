@@ -13,7 +13,8 @@
              tilt="45"
              styles="{{mapStyles.bright}}"
              map-type-id="ROADMAP">
-            <marker position="{{meeting.position}}" ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive"
+            <marker position="{{meeting.position}}"
+                    ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive | filter: filterByCategory "
                     icon="../public/images/{{meeting.category.icon}}.png" on-click="openInfoBox(event, meeting)"></marker>
             <!-- on-click="showInfoWindow(event, meeting)" -->
 
@@ -21,19 +22,13 @@
         <div class="infobox-wrapper">
             <div id="infobox">
                 <div class="infobox-title"><a href="meetings/{{infoboxMeeting._id}}"> {{ infoboxMeeting.title}}</a></div>
-                <div class="infobox-content">
-                    <a href="users/{{infoboxMeeting.owner._id}}">
-
-                        <div class="infobox-owner">
-                            <div class="infobox-owner_image">
-                                <img src="{{infoboxMeeting.owner.image}}" alt="{{infoboxMeeting.owner.name }}">
-                            </div>
-                        </div>
-                    </a>
-                    <div class="infobox-text">
-                        <div class="meeting-description">{{ infoboxMeeting.description }}</div>
-                    </div>
+                <div class="infobox-text">
+                   {{ infoboxMeeting.description }}
                 </div><!-- end content -->
+                <div class="infobox-footer">
+                    <div class="infobox-time">{{infoboxMeeting.startDate | date: 'd MMMM yyyy' }} в {{ infoboxMeeting.startDate | date: 'HH:mm'}}</div>
+                    <div class="infobox-distance"> {{ getInfoBoxDistance(infoboxMeeting) }} км от вас</div>
+                </div>
             </div>
         </div>
     </div>
