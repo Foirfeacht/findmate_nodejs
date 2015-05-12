@@ -1,3 +1,10 @@
+/*$primary-color: #FFEA00;*/
+/* yellow A400 */
+/*$primary-color: #FFFF00;*/
+/* yellow A200 */
+/*$primary-color: #7B1FA2 /* purple 700 */
+/*$primary-color: #00E5FF /* cyan */
+/*$primary-color: #EF6C00 */
 /* =============================
    ========== GENERAL ==========
    ============================= */
@@ -122,16 +129,14 @@ md-option {
   position: fixed;
   top: 15px;
   right: 40px; }
-
-.inbox-button:hover {
-  cursor: pointer; }
-
-.inbox-button i {
-  font-size: 2em;
-  display: block;
-  margin: 0 auto;
-  width: auto;
-  height: auto; }
+  .inbox-button:hover {
+    cursor: pointer; }
+  .inbox-button i {
+    font-size: 2em;
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    height: auto; }
 
 .message-alert {
   position: absolute;
@@ -216,7 +221,7 @@ md-option {
   background: #fff;
   border: 1px thin rgba(0, 0, 0, 0.8);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  color: #2c3e50;
+  color: #fff;
   font-weight: 700; }
   .menu ul {
     width: 100%;
@@ -315,8 +320,8 @@ md-option {
 
 .view-switcher {
   position: fixed;
-  top: 135px;
-  right: 50px;
+  top: 80px;
+  right: 25px;
   overflow: hidden;
   z-index: 99;
   background: #fff; }
@@ -333,10 +338,12 @@ md-option {
     font-size: 1.6em; }
 
 .switch-active {
-  background: #ffea00;
+  background: #7e57c2;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none; }
+  .switch-active i {
+    color: #fff; }
 
 .animate-show {
   -webkit-transition: 1s linear all;
@@ -469,7 +476,7 @@ map {
   border-style: solid;
   height: 0;
   width: 600px;
-  border-color: #ffea00 transparent transparent transparent;
+  border-color: #7e57c2 transparent transparent transparent;
   border-width: 25px 100px 0 100px;
   margin-left: -300px;
   -webkit-filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
@@ -489,7 +496,7 @@ map {
     display: block;
     text-align: center;
     z-index: 1010;
-    color: #211F00;
+    color: #fff;
     position: relative;
     top: -3px; }
 
@@ -498,7 +505,7 @@ map {
 
 .slider-outer {
   width: 600px;
-  background: #ffea00;
+  background: #7e57c2;
   height: 64px;
   position: fixed;
   top: 0;
@@ -510,7 +517,7 @@ map {
   width: 600px;
   margin-left: -300px;
   height: 164px;
-  border: #ffea00 solid 1px;
+  border: #7e57c2 solid 1px;
   background: #FFF389;
   background: #fff;
   z-index: 1010;
@@ -532,7 +539,7 @@ map {
   }
 }*/
 .filter-area-search {
-  background: #ffea00;
+  background: #7e57c2;
   height: 64px; }
   .filter-area-search label {
     position: relative;
@@ -546,24 +553,64 @@ map {
     top: 3px;
     font-size: 1.3em; }
 
-.filter-area-search-panel {
+@media all and (min-width: 1700px) {
+  .filter-area-search md-input-container {
+    display: none; } }
+.search-button {
   position: fixed;
-  top: 10px;
-  right: 140px;
-  background: #ffea00;
-  height: 64px; }
-  .filter-area-search-panel label {
+  top: 18px;
+  right: 110px;
+  z-index: 1000; }
+  .search-button:hover {
+    cursor: pointer; }
+  .search-button i {
+    margin: 0 auto;
+    width: auto;
+    height: auto;
+    font-size: 2.2em;
+    color: #fff; }
+
+@media all and (max-width: 1700px) {
+  .search-button {
+    display: none; } }
+.searchpanel {
+  position: fixed;
+  top: 0;
+  right: 155px;
+  background: #7e57c2;
+  height: 64px;
+  z-index: 1000; }
+  .searchpanel md-input-container {
+    height: 75px; }
+  .searchpanel md-input-container.md-default-theme label,
+  .searchpanel md-input-container.md-default-theme .md-placeholder {
+    color: #fff; }
+  .searchpanel md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused label {
+    color: #fff; }
+  .searchpanel md-input-container.md-default-theme .md-input {
+    border-color: #fff; }
+  .searchpanel md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-input {
+    border-color: #fff; }
+  .searchpanel label {
     position: relative;
-    left: 120px; }
-  .filter-area-search-panel input {
-    width: 60%;
+    left: -2px;
+    top: -10px;
+    color: #fff; }
+  .searchpanel input {
+    width: 100%;
     height: 25px;
     margin: 0 auto; }
-  .filter-area-search-panel md-icon {
+  .searchpanel md-icon {
     position: relative;
     top: 3px;
     font-size: 1.3em; }
 
+@media all and (max-width: 1700px) {
+  .searchpanel {
+    display: none; } }
+@media all and (max-width: 1700px) {
+  .category-filters-hidable {
+    display: none; } }
 /* SPORT */
 .md-button.md-default-theme.md-fab.sports-filter,
 .md-button.md-default-theme.md-fab.sports-filter:not([disabled]):hover,
@@ -684,22 +731,26 @@ map {
 .md-button.md-default-theme.md-fab.food-filter:not([disabled]):focus .food-filter-icon {
   background: url("../images/filter icons/food.png") no-repeat 0 0; }
 
-.md-fab.food-filter {
-  background: #2173B5; }
-
 /* PARTY */
-.party-filter-icon {
+.md-button.md-default-theme.md-fab.party-filter,
+.md-button.md-default-theme.md-fab.party-filter:not([disabled]):hover,
+.md-button.md-default-theme.md-fab.party-filter:not([disabled]):focus {
+  background: #FFE60E; }
+
+.food-filter-icon {
   background: url("../images/filter icons/party-inactive.png") no-repeat 0 0;
   background-size: cover; }
 
-.md-fab.party-filter {
-  background: #2173B5; }
+.md-button.md-default-theme.md-fab.party-filter .party-filter-icon,
+.md-button.md-default-theme.md-fab.party-filter:not([disabled]):hover .party-filter-icon,
+.md-button.md-default-theme.md-fab.party-filter:not([disabled]):focus .party-filter-icon {
+  background: url("../images/filter icons/party.png") no-repeat 0 0; }
 
 /* =============================
    ========== MEETING ==========
    ============================= */
 .meeting-display {
-  width: 100%;
+  width: 95%;
   overflow: hidden;
   padding: 0 20px; }
 
@@ -717,9 +768,9 @@ map {
   overflow: hidden; }
 
 .meeting-date-container {
-  position: absolute;
-  top: 10px;
-  left: 20px; }
+  width: 50%;
+  float: left;
+  padding: 15px; }
 
 .meeting-icon {
   position: absolute;
@@ -727,23 +778,22 @@ map {
   right: 10px; }
 
 .meeting-icon img {
-  width: 48px;
-  height: 48px; }
+  width: 64px;
+  height: 64px; }
 
 .meeting-content {
   padding: 20px 20px 10px;
-  margin-top: 50px;
   overflow: hidden; }
 
 .meeting-owner {
   float: left;
-  width: 30%; }
+  padding: 0 15px; }
   .meeting-owner img {
     border: 1px thin #fff;
     border-radius: 50%;
     margin: 0 auto;
-    height: 56px;
-    width: 56px;
+    height: 64px;
+    width: 64px;
     display: block; }
 
 .meeting-owner_name {
@@ -752,7 +802,8 @@ map {
 
 .meeting-text {
   float: left;
-  width: 70%; }
+  width: 70%;
+  padding: 10px 0 0; }
 
 .meeting-title {
   font-weight: 700;
@@ -835,7 +886,7 @@ map {
   right: 50px; }
 
 .create-button i {
-  color: #211F00;
+  color: #fff;
   font-size: 2em;
   position: absolute;
   top: 30%;

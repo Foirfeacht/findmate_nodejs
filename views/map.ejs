@@ -4,6 +4,20 @@
 <% include partials/header %>
 <% include partials/menu %>
 <!--=============================== main content ===============================-->
+<div class="searchpanel" ng-show="showSearchPanel">
+    <md-input-container md-no-float id="search-container">
+        <label>
+            <md-icon class="mdi mdi-magnify search-icon"></md-icon>
+            Название, описание или имя организатора</label>
+
+        <input ng-model="searchQuery" type="text">
+    </md-input-container>
+</div>
+
+<div class="search-button">
+    <i class="mdi mdi-magnify " ng-click="showSearchPanel = !showSearchPanel" ng-mouseover="showSearchPanel"></i>
+</div>
+
 <div class="content" >
     <div class="slider-outer"></div><!-- block to hide dropshadow -->
 
@@ -56,7 +70,7 @@
         </div>
     </div>
 
-    <div class="category-filters" ng-hide="showFilterArea">
+    <div class="category-filters" ng-class="{'category-filters-hidable' : showFilterArea}">
         <div class="category-filter">
             <md-button class="md-fab" ng-click="toggleSports = !toggleSports" ng-class="{ 'md-raised' : !toggleSports, 'sports-filter': toggleSports }"><span class="sports-filter-icon"></span></md-button>
         </div>

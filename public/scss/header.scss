@@ -15,18 +15,18 @@
     position: fixed;
     top: 15px;
     right: 40px;
-}
 
-.inbox-button:hover {
+  &:hover {
     cursor: pointer;
-}
+  }
 
-.inbox-button i {
+  i {
     font-size: 2em;
     display: block;
     margin: 0 auto;
     width: auto;
     height: auto;
+  }
 }
 
 .message-alert {
@@ -131,7 +131,7 @@
     background: #fff;
     border: 1px thin rgba(0, 0, 0, 0.8);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    color: #2c3e50;
+    color: #fff;
     font-weight: 700;
 
     ul {

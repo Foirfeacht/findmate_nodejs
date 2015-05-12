@@ -377,6 +377,9 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
         // filter area
         $scope.showFilterArea = false;
 
+		//search panel
+		$scope.showSearchPanel = false;
+
 		//toggle create mode
 		$scope.toggleCreateEvent = function () {
 			$scope.toggleCreate = ($scope.toggleCreate === false) ? true : false;
@@ -694,7 +697,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 					"elementType": "geometry",
 					"stylers": [
 						{
-							"hue": "#ffcc00"
+							//"hue": "#ffcc00"
+							"hue": "7B1FA2"
 						},
 						{
 							"saturation": 100

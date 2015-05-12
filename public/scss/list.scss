@@ -3,7 +3,7 @@
    ============================= */
 
 .meeting-display {
-  width: 100%;
+  width: 95%;
   overflow: hidden;
   padding: 0 20px;
 }
@@ -24,9 +24,9 @@
 }
 
 .meeting-date-container {
-  position: absolute;
-  top: 10px;
-  left: 20px;
+  width: 50%;
+  float: left;
+  padding: 15px;
 }
 
 .meeting-icon {
@@ -36,26 +36,25 @@
 }
 
 .meeting-icon img {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
 }
 
 .meeting-content {
   padding: 20px 20px 10px;
-  margin-top: 50px;
   overflow: hidden;
 }
 
 .meeting-owner {
   float: left;
-  width: 30%;
+  padding: 0 15px;
 
   img {
     border: 1px thin #fff;
     border-radius: 50%;
     margin: 0 auto;
-    height: 56px;
-    width: 56px;
+    height: 64px;
+    width: 64px;
     display: block;
   }
 }
@@ -68,6 +67,7 @@
 .meeting-text {
   float: left;
   width: 70%;
+  padding: 10px 0 0;
 }
 
 .meeting-title {
@@ -170,7 +170,7 @@
 }
 
 .create-button i {
-  color: #211F00;
+  color: #fff;
   font-size: 2em;
   position: absolute;
   top: 30%;

@@ -31,8 +31,8 @@ findMate.constant('angularMomentConfig', {
 //config material
 findMate.config(function ($mdThemingProvider, toastrConfig) {
 	$mdThemingProvider.theme('default')
-		.primaryPalette('yellow', {
-			'default': 'A400' 
+		.primaryPalette('deep-purple', {
+			'default': '400'
 		})
 		.accentPalette('deep-orange');
 
