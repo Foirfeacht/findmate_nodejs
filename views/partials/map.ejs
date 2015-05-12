@@ -27,7 +27,7 @@
                 </div><!-- end content -->
                 <div class="infobox-footer">
                     <div class="infobox-time">{{infoboxMeeting.startDate | date: 'd MMMM yyyy' }} в {{ infoboxMeeting.startDate | date: 'HH:mm'}}</div>
-                    <div class="infobox-distance"> {{ getInfoBoxDistance(infoboxMeeting) }} км от вас</div>
+                    <div class="infobox-distance"> {{ getMeetingDistance(infoboxMeeting) }} км от вас</div>
                 </div>
             </div>
         </div>

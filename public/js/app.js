@@ -8,8 +8,7 @@ var findMate = angular.module('findMate', ['ui.bootstrap',
 	'sticky',
 	'ngAnimate',
 	'toastr',
-	'ui.utils',
-    'ng-slide-down'
+	'ui.utils'
 ]);
 
 findMate.run(function (amMoment) {

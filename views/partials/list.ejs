@@ -10,7 +10,9 @@
                 <div class="meeting-time"><i class="mdi mdi-clock"></i> {{ meeting.startDate | date: 'HH:mm'}}</div>
             </div>
 
-            <div class="meeting-icon"><img src="../public/images/{{meeting.category.icon}}.png" alt="{{meeting.category.value.ru }}"></div>
+            <div class="meeting-icon">
+                <img src="../public/images/{{meeting.category.icon}}.png" alt="{{meeting.category.value.ru }}">
+            </div>
         </div>
 
         <div class="meeting-content">
@@ -53,8 +55,6 @@
             </div>
         </div>
 
-
-        
         <div layout="row">
             <md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)"
                        ng-show="checkOwner(meeting.owner._id)">Удалить
@@ -71,10 +71,11 @@
         </div>
 
         <div class="meeting-footer">
-            <div>
+            <div class="meeting-distance">{{ getDistance(meeting) }} км от вас</div>
+            <div class="meeting-count">
                 <i class="mdi mdi-account-multiple"></i> {{ meeting.joinedUsers.length }}
             </div>
-            <div>
+            <div class="meeting-count">
                 <i class="mdi mdi-comment"></i> {{ meeting.comments.length }}
             </div>
         </div>

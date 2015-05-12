@@ -171,20 +171,23 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
             $scope.openInfoBox = function(event, meeting){
                 var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
-                //var infobox = new Infobox($scope.infoboxOptions);
-                console.log(position);
                 $scope.infoboxMeeting = meeting;
-				$scope.getInfoBoxDistance = function (meeting){
+				$scope.getMeetingDistance = function (meeting){
 					var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
 					var distance = google.maps.geometry.spherical.computeDistanceBetween($scope.pos, position);
 					return (distance / 1000).toFixed(2);
 				};
                 infobox.setPosition(position);
                 infobox.open($scope.map);
-                console.log('triggered');
             }
 
 		});
+
+        $scope.getDistance = function(meeting){
+            var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
+            var distance = google.maps.geometry.spherical.computeDistanceBetween($scope.pos, position);
+            return (distance / 1000).toFixed(2);
+        }
 
 		$scope.zoom = 15;
 		$scope.maxZoom = 16;
@@ -225,7 +228,6 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		};
 
 		$scope.viewMode = "map";
-		console.log($scope.viewMode)
 
 		$scope.selectMode = function(mode){
 			$scope.viewMode = mode;

@@ -424,8 +424,10 @@ map {
   width: 500px;
   margin: 0 auto;
   overflow: hidden;
-  padding-top: 10px;
-  transition: linear .5s all; }
+  padding: 10px 0;
+  -webkit-transition: ease-in-out .5s all;
+  transition: ease-in-out .5s all;
+  height: 106px; }
   .map-filters i {
     font-size: 2em; }
   .map-filters .map-filter {
@@ -501,7 +503,7 @@ map {
     top: -3px; }
 
 .filter-slider-active {
-  top: 162px; }
+  top: 170px; }
 
 .slider-outer {
   width: 600px;
@@ -516,28 +518,26 @@ map {
 .filter-area-dropdown {
   width: 600px;
   margin-left: -300px;
-  height: 164px;
-  border: #7e57c2 solid 1px;
+  height: 106px;
   background: #FFF389;
   background: #fff;
-  z-index: 1010;
+  z-index: 999;
   position: fixed;
-  top: 0;
+  top: 64px;
   left: 50%;
-  -webkit-transition: linear .5s all;
-  /*transition: linear .5s all;*/ }
+  -webkit-transition: ease-in-out .5s all;
+  -webkit-filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  -moz-filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  -ms-filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  -o-filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  transition: ease-in-out .5s all; }
 
-/*.filter-area-dropdown.ng-hide{
-  height: 0;
+.filter-area-dropdown.ng-hide {
+  height: 0; }
+  .filter-area-dropdown.ng-hide .map-filters {
+    height: 0; }
 
-  .map-filters {
-    height: 0;
-  }
-  
-  .filter-area-search {
-    opacity: 0;
-  }
-}*/
 .filter-area-search {
   background: #7e57c2;
   height: 64px; }
@@ -576,7 +576,8 @@ map {
   right: 155px;
   background: #7e57c2;
   height: 64px;
-  z-index: 1020; }
+  z-index: 1020;
+  widows: 340px; }
   .searchpanel md-input-container {
     height: 75px; }
   .searchpanel md-input-container.md-default-theme label,
@@ -604,8 +605,12 @@ map {
 
 @media all and (max-width: 1699px) {
   .search-active {
-    display: none; } }
-search-active
+    display: none; }
+
+  .searchpanel {
+    right: 50%;
+    margin-right: -170px; } }
+/* SPORT */
 .md-button.md-default-theme.md-fab.sports-filter,
 .md-button.md-default-theme.md-fab.sports-filter:not([disabled]):hover,
 .md-button.md-default-theme.md-fab.sports-filter:not([disabled]):focus {
@@ -756,6 +761,9 @@ search-active
   height: 390px;
   position: relative;
   float: left; }
+  .meeting h6 {
+    margin: 8px;
+    text-align: center; }
 
 .meeting-header {
   width: 100%;
@@ -764,7 +772,8 @@ search-active
 .meeting-date-container {
   width: 50%;
   float: left;
-  padding: 15px; }
+  padding: 15px;
+  font-size: 1em; }
 
 .meeting-icon {
   position: absolute;
@@ -773,15 +782,18 @@ search-active
 
 .meeting-icon img {
   width: 64px;
-  height: 64px; }
+  height: 64px;
+  display: block; }
 
 .meeting-content {
-  padding: 20px 20px 10px;
-  overflow: hidden; }
+  padding: 15px 20px 10px;
+  overflow: hidden;
+  height: 118px; }
 
 .meeting-owner {
   float: left;
-  padding: 0 15px; }
+  padding: 0 15px;
+  width: 30%; }
   .meeting-owner img {
     border: 1px thin #fff;
     border-radius: 50%;
@@ -801,7 +813,8 @@ search-active
 
 .meeting-title {
   font-weight: 700;
-  text-align: center; }
+  text-align: center;
+  font-size: 1.2em; }
   .meeting-title a {
     color: #000; }
 
@@ -837,7 +850,7 @@ search-active
 
 .meeting-footer {
   padding: 5px 0;
-  background: #0091EA;
+  background: #7e57c2;
   color: #fff;
   font-size: 1.1em;
   overflow: hidden;
@@ -846,7 +859,12 @@ search-active
   bottom: 0;
   left: 0; }
 
-.meeting-footer > div {
+.meeting-distance {
+  float: left;
+  text-align: left;
+  margin-left: 20px; }
+
+.meeting-count {
   float: right;
   margin-right: 20px; }
 
