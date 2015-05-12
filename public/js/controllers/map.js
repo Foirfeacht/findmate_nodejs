@@ -374,6 +374,9 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		//top message box
 		$scope.showMessageBox = false;
 
+        // filter area
+        $scope.showFilterArea = false;
+
 		//toggle create mode
 		$scope.toggleCreateEvent = function () {
 			$scope.toggleCreate = ($scope.toggleCreate === false) ? true : false;
@@ -483,6 +486,21 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			};
 			return true;
 		};
+
+        //query text filter
+        $scope.search = function(meeting) {
+            if($scope.searchQuery){
+                var query = $scope.searchQuery.toLowerCase();
+                var title = meeting.title.toLowerCase();
+                var description = meeting.description.toLowerCase();
+                var owner = meeting.owner.name.toLowerCase();
+                if(title.indexOf(query) != -1 || description.indexOf(query) != -1 || owner.indexOf(query) != -1){
+                    return true;
+                }
+                return false;
+            }
+           return true;
+        }
 
 		//category filters
 		$scope.toggleSports = true;

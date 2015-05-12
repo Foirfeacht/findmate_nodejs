@@ -14,7 +14,7 @@
              styles="{{mapStyles.bright}}"
              map-type-id="ROADMAP">
             <marker position="{{meeting.position}}"
-                    ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive | filter: filterByCategory "
+                    ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive | filter: filterByCategory | filter: search "
                     icon="../public/images/{{meeting.category.icon}}.png" on-click="openInfoBox(event, meeting)"></marker>
             <!-- on-click="showInfoWindow(event, meeting)" -->
 

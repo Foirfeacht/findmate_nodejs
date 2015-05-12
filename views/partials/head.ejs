@@ -13,4 +13,21 @@
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.css' rel='stylesheet'/>
     <link rel="stylesheet" href="../../bower_components/leaflet/dist/leaflet.css">
     <link rel="stylesheet" href="../../public/css/style.css">
+    <script type="text/javascript">
+        if (window.location.hash && window.location.hash == '#_=_') {
+            if (window.history && history.pushState) {
+                window.history.pushState("", document.title, window.location.pathname);
+            } else {
+                // Prevent scrolling by storing the page's current scroll offset
+                var scroll = {
+                    top: document.body.scrollTop,
+                    left: document.body.scrollLeft
+                };
+                window.location.hash = '';
+                // Restore the scroll offset, should be flicker free
+                document.body.scrollTop = scroll.top;
+                document.body.scrollLeft = scroll.left;
+            }
+        }
+    </script>
 </head>

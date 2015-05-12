@@ -5,9 +5,46 @@
 <% include partials/menu %>
 <!--=============================== main content ===============================-->
 <div class="content" >
-    <div class="slider-outer"></div>
-    <div class="filter-slider">
-        <i class="mdi mdi-chevron-down"></i>
+    <div class="slider-outer"></div><!-- block to hide dropshadow -->
+
+    <div class="filter-area-dropdown" ng-slide-down="showFilterArea" duration="0.5" lazy-render>
+        <div class="filter-area-search">
+            <md-input-container md-no-float>
+                <label>
+                    <md-icon class="mdi mdi-magnify search-icon"></md-icon>
+                    Название, описание или имя организатора</label>
+
+                <input ng-model="searchQuery" type="text">
+            </md-input-container>
+        </div>
+        <div class="map-filters">
+            <div class="map-filter">
+                <md-button class="md-fab featured-filter" ng-click="toggleFeatured = !toggleFeatured" ng-class="{ 'md-raised' : !toggleFeatured }"><i class="mdi mdi-star"></i></md-button>
+                <div class="filter-title">Featured</div>
+            </div>
+            <div class="map-filter">
+                <md-button class="md-fab currentuser-filter" ng-click="toggleCurrentUserFilter = !toggleCurrentUserFilter" ng-class="{ 'md-raised' : !toggleCurrentUserFilter }"><i class="mdi mdi-account"></i></md-button>
+                <div class="filter-title">Мои</div>
+            </div>
+            <div class="map-filter">
+                <md-button class="md-fab friends-filter" ng-click="toggleFriendsFilter = !toggleFriendsFilter" ng-class="{ 'md-raised' : !toggleFriendsFilter }"><i class="mdi mdi-account-multiple"></i></md-button>
+                <div class="filter-title">Друзья</div>
+            </div>
+            <div class="map-filter">
+                <md-button class="md-fab invited-filter" ng-click="toggleInvited = !toggleInvited" ng-class="{ 'md-raised' : !toggleInvited}"><i class="mdi mdi-account-plus"></i></md-button>
+                <div class="filter-title">Приглашения</div>
+            </div>
+            <div class="map-filter">
+                <md-button class="md-fab joined-filter" ng-click="toggleJoined = !toggleJoined" ng-class="{ 'md-raised' : !toggleJoined}"><i class="mdi mdi-account-check"></i></md-button>
+                <div class="filter-title">Учавствую</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="filter-slider" ng-click="showFilterArea = !showFilterArea" ng-class="{'filter-slider-active' : showFilterArea}">
+        <div class="open-filter-slider">
+            <i class="mdi mdi-chevron-down" ng-class="{ 'mdi-chevron-down' : !showFilterArea, 'mdi-chevron-up' : showFilterArea }"></i>
+        </div>
     </div>
 
     <div class="view-switcher">
@@ -17,32 +54,9 @@
         <div class="view-switch" ng-click="selectMode('list')" ng-class="{'switch-active': viewMode === 'list'}">
             <i class="mdi mdi-view-list"></i>
         </div>
-    </div> 
-
-    <div class="map-filters">
-        <div class="map-filter">
-            <md-button class="md-fab featured-filter" ng-click="toggleFeatured = !toggleFeatured" ng-class="{ 'md-raised' : !toggleFeatured }"><i class="mdi mdi-star"></i></md-button>
-            <div class="filter-title">Featured</div>
-        </div>
-        <div class="map-filter">
-            <md-button class="md-fab currentuser-filter" ng-click="toggleCurrentUserFilter = !toggleCurrentUserFilter" ng-class="{ 'md-raised' : !toggleCurrentUserFilter }"><i class="mdi mdi-account"></i></md-button>
-            <div class="filter-title">Мои</div>
-        </div>
-        <div class="map-filter">
-            <md-button class="md-fab friends-filter" ng-click="toggleFriendsFilter = !toggleFriendsFilter" ng-class="{ 'md-raised' : !toggleFriendsFilter }"><i class="mdi mdi-account-multiple"></i></md-button>
-            <div class="filter-title">Друзья</div>
-        </div>
-        <div class="map-filter">
-            <md-button class="md-fab invited-filter" ng-click="toggleInvited = !toggleInvited" ng-class="{ 'md-raised' : !toggleInvited}"><i class="mdi mdi-account-plus"></i></md-button>
-            <div class="filter-title">Приглашения</div>
-        </div>
-        <div class="map-filter">
-            <md-button class="md-fab joined-filter" ng-click="toggleJoined = !toggleJoined" ng-class="{ 'md-raised' : !toggleJoined}"><i class="mdi mdi-account-check"></i></md-button>
-            <div class="filter-title">Учавствую</div>
-        </div>
     </div>
 
-    <div class="category-filters">
+    <div class="category-filters" ng-hide="showFilterArea">
         <div class="category-filter">
             <md-button class="md-fab" ng-click="toggleSports = !toggleSports" ng-class="{ 'md-raised' : !toggleSports, 'sports-filter': toggleSports }"><span class="sports-filter-icon"></span></md-button>
         </div>
