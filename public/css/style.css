@@ -570,16 +570,13 @@ map {
     font-size: 2.2em;
     color: #fff; }
 
-@media all and (max-width: 1700px) {
-  .search-button {
-    display: none; } }
 .searchpanel {
   position: fixed;
   top: 0;
   right: 155px;
   background: #7e57c2;
   height: 64px;
-  z-index: 1000; }
+  z-index: 1020; }
   .searchpanel md-input-container {
     height: 75px; }
   .searchpanel md-input-container.md-default-theme label,
@@ -605,13 +602,10 @@ map {
     top: 3px;
     font-size: 1.3em; }
 
-@media all and (max-width: 1700px) {
-  .searchpanel {
+@media all and (max-width: 1699px) {
+  .search-active {
     display: none; } }
-@media all and (max-width: 1700px) {
-  .category-filters-hidable {
-    display: none; } }
-/* SPORT */
+search-active
 .md-button.md-default-theme.md-fab.sports-filter,
 .md-button.md-default-theme.md-fab.sports-filter:not([disabled]):hover,
 .md-button.md-default-theme.md-fab.sports-filter:not([disabled]):focus {

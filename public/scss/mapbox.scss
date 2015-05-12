@@ -314,19 +314,13 @@ map {
   }
 }
 
-@media all and (max-width: 1700px){
-  .search-button {
-    display: none;
-  }
-}
-
 .searchpanel {
   position: fixed;
   top: 0;
   right: 155px;
   background: $primary-color;
   height: 64px;
-  z-index: 1000;
+  z-index: 1020;
 
   md-input-container {
     height: 75px;
@@ -369,17 +363,13 @@ map {
   }
 }
 
-@media all and (max-width: 1700px){
-  .searchpanel {
+@media all and (max-width: 1699px){
+  .search-active {
     display: none;
   }
 }
 
-@media all and (max-width: 1700px){
-  .category-filters-hidable {
-    display: none;
-  }
-}
+search-active
 
 
 /* SPORT */
