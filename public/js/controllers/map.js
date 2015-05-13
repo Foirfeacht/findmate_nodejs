@@ -158,8 +158,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
                 pixelOffset: new google.maps.Size(-140, 0),
                 zIndex: null,
                 boxStyle: {
-                    background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
-                    opacity: 0.75,
+                   // background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
+                    opacity: 1,
                     width: "280px"
                 },
                 closeBoxMargin: "12px 4px 2px 2px",

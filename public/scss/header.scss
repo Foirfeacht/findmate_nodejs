@@ -1,5 +1,4 @@
-
-/* =============================
+ /*============================
    =========== HEADER ============
    ============================= */
 
@@ -8,102 +7,107 @@
     height: 64px;
 }
 
+ .logo h1 {
+   color: #fff;
+   margin: 10px 130px;
+   font-family: orator;
+ }
 
-.inbox-button {
-    display: block;
-    margin: 0 auto;
-    position: fixed;
-    top: 15px;
-    right: 40px;
+ .inbox-button {
+     display: block;
+     margin: 0 auto;
+     position: fixed;
+     top: 15px;
+     right: 40px;
 
-  &:hover {
-    cursor: pointer;
-  }
+   &:hover {
+     cursor: pointer;
+   }
 
-  i {
-    font-size: 2em;
-    display: block;
-    margin: 0 auto;
-    width: auto;
-    height: auto;
-  }
-}
+   i {
+     font-size: 2em;
+     display: block;
+     margin: 0 auto;
+     width: auto;
+     height: auto;
+   }
+ }
 
-.message-alert {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #D74040;
-}
+ .message-alert {
+     position: absolute;
+     top: 0;
+     right: 0;
+     width: 16px;
+     height: 16px;
+     border-radius: 50%;
+     background: #D74040;
+ }
 
-.message-alert span {
-    display: block;
-    width: 16px;
-    height: 16px;
-    text-align: center;
-    font-size: 0.6em;
-    color: #fff;
-}
+ .message-alert span {
+     display: block;
+     width: 16px;
+     height: 16px;
+     text-align: center;
+     font-size: 0.6em;
+     color: #fff;
+ }
 
-.message-box {
-    position: absolute;
-    width: 500px;
-    min-height: 250px;
-    background: #fff;
-    top: 40px;
-    right: 0;
-    padding: 10px;
-    font-size: 0.8em;
-}
+ .message-box {
+     position: absolute;
+     width: 500px;
+     min-height: 250px;
+     background: #fff;
+     top: 40px;
+     right: 0;
+     padding: 10px;
+     font-size: 0.8em;
+ }
 
-.inbox-button:hover .message-box {
-    display: block;
-}
+ .inbox-button:hover .message-box {
+     display: block;
+ }
 
-.messagebox-message {
-    width: 100%;
-    border-bottom: 1px solid #000;
-    overflow: hidden;
-    padding: 5px 0;
-    position: relative;
-}
+ .messagebox-message {
+     width: 100%;
+     border-bottom: 1px solid #000;
+     overflow: hidden;
+     padding: 5px 0;
+     position: relative;
+ }
 
-.messagebox-message > div {
-    float: left;
-}
+ .messagebox-message > div {
+     float: left;
+ }
 
-.messagebox-icon {
-    width: 64px;
-}
+ .messagebox-icon {
+     width: 64px;
+ }
 
-.messagebox-icon img {
-    width: 56px;
-    height: 56px;
-    display: block;
-    margin: 0 auto; 
-}
+ .messagebox-icon img {
+     width: 56px;
+     height: 56px;
+     display: block;
+     margin: 0 auto;
+ }
 
-.messagebox-content {
-    width: 404px;
-}
+ .messagebox-content {
+     width: 404px;
+ }
 
-.messagebox-delete {
-  position: absolute;
-  top: 5px;
-  right: 5px;
+ .messagebox-delete {
+   position: absolute;
+   top: 5px;
+   right: 5px;
 
-  &:hover {
-    cursor: pointer;
-  }
-}
+   &:hover {
+     cursor: pointer;
+   }
+ }
 
 
-/* =============================
-   =========== MENU ============
-   ============================= */
+ /* =============================
+    =========== MENU ============
+    ============================= */
 
 .menu-button {
     position: fixed;

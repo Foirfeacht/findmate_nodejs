@@ -5,6 +5,9 @@
 /*$primary-color: #7B1FA2 /* purple 700 */
 /*$primary-color: #00E5FF /* cyan */
 /*$primary-color: #EF6C00 */
+@font-face {
+  font-family: orator;
+  src: url(../fonts/OratorStd.otf); }
 /* =============================
    ========== GENERAL ==========
    ============================= */
@@ -116,12 +119,17 @@ md-option {
   margin: 10px auto;
   width: 100%; }
 
-/* =============================
-   =========== HEADER ============
-   ============================= */
+/*============================
+  =========== HEADER ============
+  ============================= */
 .header {
   z-index: 999;
   height: 64px; }
+
+.logo h1 {
+  color: #fff;
+  margin: 10px 130px;
+  font-family: orator; }
 
 .inbox-button {
   display: block;
@@ -397,16 +405,34 @@ map {
   -webkit-box-shadow: 0 0 8px #000;
   box-shadow: 0 0 8px #000; }
 
+/*
+#infobox {
+  border: 2px solid $primary-color;
+  margin-top: 8px;
+  background: #fff;
+  color: rgba(0, 0, 0, .87);
+  font-size: 12px;
+  padding: .5em 1em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  text-shadow: 0 -1px #000000;
+  -webkit-box-shadow: 0 0 8px #000;
+  box-shadow: 0 0 8px #000;
+}
+*/
 .infobox-title {
   width: 100%;
   text-align: center; }
   .infobox-title a {
-    color: #fff; }
+    color: #fff;
+    font-weight: 700; }
 
 .infobox-text {
   width: 100%;
   font-style: italic;
-  padding-bottom: 10px; }
+  padding-bottom: 10px;
+  font-weight: 400; }
 
 .infobox-footer {
   overflow: hidden;
