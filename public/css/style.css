@@ -1120,9 +1120,6 @@ map {
   display: block; }
 
 @media screen and (max-width: 1320px) {
-  .header {
-    height: 120px; }
-
   .logo h1 {
     margin: 0;
     position: absolute;
@@ -1141,14 +1138,15 @@ map {
     margin-left: -250px; }
 
   .category-filter {
-    width: 55px; }
+    width: 55px;
+    display: none; }
 
   .filter-slider {
-    top: 120px; }
+    /* top: 120px;*/ }
 
   .slider-outer {
-    top: 90px;
-    height: 30px; }
+    top: 54px;
+    height: 10px; }
 
   .menu-button {
     display: none; }
