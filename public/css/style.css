@@ -287,6 +287,9 @@ md-option {
   position: relative;
   top: -2px; }
 
+.menu-mobile {
+  display: none; }
+
 .display {
   width: 100%;
   overflow: hidden; }
@@ -1115,3 +1118,47 @@ map {
   width: 250px;
   margin: 0 auto;
   display: block; }
+
+@media screen and (max-width: 1320px) {
+  .header {
+    height: 120px; }
+
+  .logo h1 {
+    margin: 0;
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    margin-left: -105px; }
+
+  /*.category-filters {
+    top: 60px;
+    width: 500px;
+    margin-left: -250px;
+  }*/
+  .category-filters {
+    top: 60px;
+    width: 500px;
+    margin-left: -250px; }
+
+  .category-filter {
+    width: 55px; }
+
+  .filter-slider {
+    top: 120px; }
+
+  .slider-outer {
+    top: 90px;
+    height: 30px; }
+
+  .menu-button {
+    display: none; }
+
+  .menu-mobile {
+    position: fixed;
+    top: 15px;
+    left: 40px;
+    font-size: 2em;
+    z-index: 1020;
+    display: block; }
+    .menu-mobilehover {
+      cursor: pointer; } }

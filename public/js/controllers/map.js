@@ -346,11 +346,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				size: size,
 				scope: $scope
 			});
-			$scope.$modalInstance.result.then(function (selectedItem) {
+			$scope.$modalInstance.result.then(function () {
 		      $scope.toggleCreate = false;
 		      $scope.cursor = 'pointer';
 		    }, function () {
-		      console.log('Modal dismissed at: ' + new Date());
+				$scope.toggleCreate = false;
+				$scope.cursor = 'pointer';
 		    })
 		};
 
