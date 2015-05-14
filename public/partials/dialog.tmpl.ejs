@@ -1,6 +1,15 @@
+<div class="modal-header">
+    <div class="modal-step-back">
+        <i class="mdi mdi-keyboard-backspace" ng-click="changeScreen()" ng-show="!screenOne"></i>
+    </div>
+    <div class="modal-cancel">
+        <i class="mdi mdi-close" ng-click="cancel()"></i>
+    </div>
+</div>
 <div class="modal-body">
 
-    <div class="form">
+    <div class="modal-screen-one" ng-show="screenOne">
+
         <section layout="column" layout-align="center center">
 
             <md-input-container>
@@ -10,23 +19,46 @@
 
             <md-input-container>
                 <label>Описание встречи</label>
-                <input type="text" ng-model="formData.description">
+                <textarea ng-model="formData.description"></textarea>
             </md-input-container>
 
         </section>
 
-        <section layout="column" layout-align="center center">
+        <section layout="column" layout-align="center center" class="dialog-categories-section">
+            <p>Выберите категорию</p>
 
-            <md-input-container>
-                <label>Адрес</label>
-                <input type="text" ng-model="formData.location" ng-required ng-disabled="">
-            </md-input-container>
+            <div class="dialog-categories">
+                <div  class="dialog-category">
+                    <md-button class="md-fab" ng-click="selectCategory('Sport')" ng-class="{ 'md-raised' : category != 'Sport', 'sports-filter': category === 'Sport' }"><span class="sports-filter-icon"></span></md-button>
+                </div>
+                <div class="dialog-category">
+                    <md-button class="md-fab" ng-click="selectCategory('Outdoor')" ng-class="{ 'md-raised' : category != 'Outdoor', 'outdoor-filter': category === 'Outdoor' }"><span class="outdoor-filter-icon"></span></md-button>
+                </div>
+                <div class="dialog-category">
+                    <md-button class="md-fab" ng-click="selectCategory('Open Air Activity')" ng-class="{ 'md-raised' : category != 'Open Air Activity', 'openair-filter': category === 'Open Air Activity' }"><span class="openair-filter-icon"></span></md-button>
+                </div>
+                <div class="dialog-category">
+                    <md-button class="md-fab" ng-click="selectCategory('Movies')" ng-class="{ 'md-raised' : category != 'Movies', 'cinema-filter': category === 'Movies' }"><span class="cinema-filter-icon"></span></md-button>
+                </div>
+                <div class="dialog-category">
+                    <md-button class="md-fab" ng-click="selectCategory('Exhibition')" ng-class="{ 'md-raised' : category != 'Exhibition', 'exhibition-filter': category === 'Exhibition' }"><span class="exhibition-filter-icon"></span></md-button>
+                </div>
+                <div class="dialog-category">
+                    <md-button class="md-fab" ng-click="selectCategory('Theater')" ng-class="{ 'md-raised' : category != 'Theater', 'theater-filter': category === 'Theater' }"><span class="theater-filter-icon"></span></md-button>
+                </div>
+                <div class="dialog-category">
+                    <md-button class="md-fab" ng-click="selectCategory('Music')" ng-class="{ 'md-raised' : category != 'Music', 'music-filter': category === 'Music' }"><span class="music-filter-icon"></span></md-button>
+                </div>
+                <div class="dialog-category">
+                    <md-button class="md-fab" ng-click="selectCategory('Food')" ng-class="{ 'md-raised' : category != 'Food', 'food-filter': category === 'Food' }"><span class="food-filter-icon"></span></md-button>
+                </div>
+                <div class="dialog-category">
+                    <md-button class="md-fab" ng-click="selectCategory('Party')" ng-class="{ 'md-raised' : category != 'Party', 'party-filter': category === 'Party' }"><span class="party-filter-icon"></span></md-button>
+                </div>
 
-        </section>
+            </div>
 
-        <section layout="column" layout-align="center center">
-
-            <div class="dropdown-wrap">
+            <!--<div class="dropdown-wrap">
                 <span class="caret"></span>
                 <select class="form-control" placeholder="Выберите категорию" ng-model="formData.category">
                     <option value="{{category.value.en}}" ng-repeat="category in categories">
@@ -34,7 +66,9 @@
                         {{category.value.ru}}
                     </option>
                 </select>
-            </div>
+
+            </div>-->
+
         </section>
 
         <div class="date-header">Время и день</div>
@@ -49,47 +83,57 @@
                                 readonly-time="false"></datetimepicker>
             </div>
 
+            <div>
+
+                <md-input-container>
+                    <label>Адрес</label>
+                    <input type="text" ng-model="formData.location" ng-required ng-disabled="">
+                </md-input-container>
+            </div>
+
 
         </section>
 
+
+    </div><!-- end screen one -->
+
+    <div class="modal-screen-one" ng-show="!screenOne">
+
         <section layout="row" class="visibility">
             <div>
-
-
                 <div class="dropdown-wrap">
                     <span class="caret"></span>
                     <select class="form-control" placeholder="Эту встречу увидят..." ng-model="formData.visibility">
                         <option value="all">
                             Все
                         </option>
-                        <option value="friends" ng-selected="selected" default>Друзья</option>
+                        <option value="friends">Друзья</option>
+                        <option value="invite">По приглашению</option>
                     </select>
+                </div>
                 </div>
 
             </div>
-            <div ng-if="formData.visibility === 'friends' ">
+            <div ng-if="formData.visibility === 'invite' ">
                 <div ng-dropdown-multiselect="" options="friendUsers" selected-model="invitedUsers"
                      extra-settings="invitedUsersSettings" translation-texts="invitedUsersText" class="inviteDropdown"
                      group-by="friend"></div>
             </div>
-
-        </section>
-        <section layout="row">
-
         </section>
 
-
-    </div>
+    </div><!-- end screen two -->
     <!-- end form -->
 </div> <!-- end body -->
 
 <div class="modal-footer">
-    <section layout="row" layout-align="center center" class="buttons">
+    <section layout-align="center center" class="buttons" ng-show="screenOne">
         <div>
-            <md-button class="md-raised" ng-click="cancel()">Отмена</md-button>
+            <md-button class="md-raised md-primary" ng-click="changeScreen()" >Далее</md-button>
         </div>
+    </section>
+    <section layout-align="center center" class="buttons" ng-show="!screenOne">
         <div>
-            <md-button class="md-raised md-primary" ng-click="createMeeting();ok()">Создать</md-button>
+            <md-button class="md-raised md-primary" ng-click="createMeeting()">Создать</md-button>
         </div>
     </section>
 </div>

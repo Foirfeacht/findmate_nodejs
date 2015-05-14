@@ -8,6 +8,7 @@
 @font-face {
   font-family: orator;
   src: url(../fonts/OratorStd.otf); }
+
 /* =============================
    ========== GENERAL ==========
    ============================= */
@@ -23,101 +24,6 @@ a:hover {
   width: 100%;
   position: relative;
   padding: 100px 100px; }
-
-/* =============================
-   ========== DIALOG ==========
-   ============================= */
-.modal-dialog {
-  width: 80%; }
-
-md-dialog {
-  width: 80%; }
-
-.datepickers input {
-  width: 80%;
-  margin: 0 auto; }
-
-.buttons div {
-  width: 50%; }
-
-.dropdown-wrap {
-  position: relative;
-  width: 100%; }
-
-.form-control {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: 0; }
-
-.caret {
-  position: absolute;
-  right: 15px;
-  top: 40%;
-  border-top: 8px solid #BDBDBD;
-  border-right: 8px solid transparent;
-  border-bottom: 0 dotted;
-  border-left: 8px solid transparent; }
-
-md-select {
-  z-index: 999; }
-
-.buttons div button {
-  width: 200px;
-  display: block;
-  margin: 10px auto; }
-
-.modal-btn {
-  position: absolute;
-  z-index: 9999;
-  top: 50%;
-  left: 50%; }
-
-.form {
-  width: 80%;
-  margin: 20px auto; }
-
-md-input-container {
-  width: 100%; }
-
-md-select {
-  width: 90%;
-  margin-bottom: 30px; }
-
-md-select span {
-  width: 100%; }
-
-md-option {
-  width: 100%; }
-
-.datetime-pickers > div {
-  width: 50%; }
-
-.date-header {
-  width: 100%;
-  text-align: center; }
-
-/******* bOotstrap dropdown *******/
-.visibility > div {
-  width: 50%; }
-
-.inviteDropdown,
-.inviteDropdown > div {
-  width: 100%; }
-
-.dropdown-toggle {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #333; }
-
-.dropdown-menu {
-  width: 100%;
-  border: none; }
-
-.form input,
-.form select {
-  margin: 10px auto;
-  width: 100%; }
 
 /*============================
   =========== HEADER ============
@@ -480,18 +386,20 @@ map {
   position: fixed;
   overflow: hidden;
   padding: 5px 0;
-  width: 630px;
+  width: 540px;
   top: 5px;
   left: 50%;
-  margin-left: -300px;
+  margin-left: -270px;
   z-index: 1020; }
 
 .category-filter {
-  width: 70px;
+  width: 60px;
   float: left; }
   .category-filter .md-fab {
     height: 42px;
-    width: 42px; }
+    width: 42px;
+    display: block;
+    margin: 0 auto; }
   .category-filter span {
     width: 28px;
     height: 28px;
@@ -646,7 +554,7 @@ map {
   background: #2681BA; }
 
 .sports-filter-icon {
-  background: url("../images/filter icons/sport-inactive.png") no-repeat 0 0;
+  background: url("./images/filter icons/sport-inactive.png") no-repeat 0 0;
   background-size: cover; }
 
 .md-button.md-default-theme.md-fab.sports-filter .sports-filter-icon,
@@ -765,7 +673,7 @@ map {
 .md-button.md-default-theme.md-fab.party-filter:not([disabled]):focus {
   background: #FFE60E; }
 
-.food-filter-icon {
+.party-filter-icon {
   background: url("../images/filter icons/party-inactive.png") no-repeat 0 0;
   background-size: cover; }
 
@@ -1119,6 +1027,290 @@ map {
   margin: 0 auto;
   display: block; }
 
+/* =============================
+   ========== DIALOG ==========
+   ============================= */
+.modal-dialog {
+  width: 80%; }
+
+md-dialog {
+  width: 80%; }
+
+.modal-header {
+  background: #7e57c2;
+  overflow: hidden; }
+
+.modal-header > div {
+  color: #fff;
+  font-size: 2em; }
+  .modal-header > div:hover {
+    cursor: pointer; }
+
+.modal-step-back {
+  margin-left: 20px;
+  float: left; }
+
+.modal-cancel {
+  text-align: right;
+  margin-right: 20px;
+  float: right; }
+
+.datepickers input {
+  width: 80%;
+  margin: 0 auto; }
+
+.buttons {
+  width: 100%; }
+
+.dropdown-wrap {
+  position: relative;
+  width: 100%; }
+
+.form-control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0; }
+
+.caret {
+  position: absolute;
+  right: 15px;
+  top: 40%;
+  border-top: 8px solid #BDBDBD;
+  border-right: 8px solid transparent;
+  border-bottom: 0 dotted;
+  border-left: 8px solid transparent; }
+
+md-select {
+  z-index: 999; }
+
+.buttons div button {
+  width: 200px;
+  display: block;
+  margin: 10px auto; }
+
+.modal-btn {
+  position: absolute;
+  z-index: 9999;
+  top: 50%;
+  left: 50%; }
+
+.form {
+  width: 80%;
+  margin: 20px auto; }
+
+md-input-container {
+  width: 100%; }
+
+md-select {
+  width: 90%;
+  margin-bottom: 30px; }
+
+md-select span {
+  width: 100%; }
+
+md-option {
+  width: 100%;
+  z-index: 1000; }
+
+.dialog-categories-section {
+  width: 100%; }
+
+.dialog-categories {
+  width: 540px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 5px 0; }
+
+.dialog-category {
+  width: 60px;
+  float: left; }
+  .dialog-category .md-fab {
+    height: 42px;
+    width: 42px;
+    display: block;
+    margin: 0 auto; }
+  .dialog-category span {
+    width: 28px;
+    height: 28px;
+    display: block;
+    margin: 0 auto; }
+  .dialog-category img {
+    display: block;
+    margin: 0 auto;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%; }
+
+.date-header {
+  width: 100%;
+  text-align: center; }
+
+.datetime-pickers {
+  overflow: hidden; }
+
+.datetime-pickers > div {
+  width: 50%;
+  float: left; }
+
+/******* bOotstrap dropdown *******/
+.visibility > div {
+  width: 50%; }
+
+.inviteDropdown,
+.inviteDropdown > div {
+  width: 100%; }
+
+.dropdown-toggle {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #333; }
+
+.dropdown-menu {
+  width: 100%;
+  border: none; }
+
+.form input,
+.form select {
+  margin: 10px auto;
+  width: 100%; }
+
+/* icons */
+/* SPORT */
+.md-button.md-default-theme.md-fab.sports-filter,
+.md-button.md-default-theme.md-fab.sports-filter:not([disabled]):hover,
+.md-button.md-default-theme.md-fab.sports-filter:not([disabled]):focus {
+  background: #2681BA; }
+
+.sports-filter-icon {
+  background: url("../images/filter icons/sport-inactive.png") no-repeat 0 0;
+  background-size: cover; }
+
+.md-button.md-default-theme.md-fab.sports-filter .sports-filter-icon,
+.md-button.md-default-theme.md-fab.sports-filter:not([disabled]):hover .sports-filter-icon,
+.md-button.md-default-theme.md-fab.sports-filter:not([disabled]):focus .sports-filter-icon {
+  background: url("../images/filter icons/sport.png") no-repeat 0 0; }
+
+/* OUTDOOR */
+.md-button.md-default-theme.md-fab.outdoor-filter,
+.md-button.md-default-theme.md-fab.outdoor-filter:not([disabled]):hover,
+.md-button.md-default-theme.md-fab.outdoor-filter:not([disabled]):focus {
+  background: #629D23; }
+
+.outdoor-filter-icon {
+  background: url("../images/filter icons/outdoor-inactive.png") no-repeat 0 0;
+  background-size: cover; }
+
+.md-button.md-default-theme.md-fab.outdoor-filter .outdoor-filter-icon,
+.md-button.md-default-theme.md-fab.outdoor-filter:not([disabled]):hover .outdoor-filter-icon,
+.md-button.md-default-theme.md-fab.outdoor-filter-filter:not([disabled]):focus .outdoor-filter-icon {
+  background: url("../images/filter icons/outdoor.png") no-repeat 0 0; }
+
+/* OPEN AIR */
+.md-button.md-default-theme.md-fab.openair-filter,
+.md-button.md-default-theme.md-fab.openair-filter:not([disabled]):hover,
+.md-button.md-default-theme.md-fab.openair-filter:not([disabled]):focus {
+  background: #127F45; }
+
+.openair-filter-icon {
+  background: url("../images/filter icons/openair-inactive.png") no-repeat 0 0;
+  background-size: cover; }
+
+.md-button.md-default-theme.md-fab.openair-filter .openair-filter-icon,
+.md-button.md-default-theme.md-fab.openair-filter:not([disabled]):hover .openair-filter-icon,
+.md-button.md-default-theme.md-fab.openair-filter:not([disabled]):focus .openair-filter-icon {
+  background: url("../images/filter icons/openair.png") no-repeat 0 0; }
+
+/* CINEMA */
+.md-button.md-default-theme.md-fab.cinema-filter,
+.md-button.md-default-theme.md-fab.cinema-filter:not([disabled]):hover,
+.md-button.md-default-theme.md-fab.cinema-filter:not([disabled]):focus {
+  background: #454D52; }
+
+.cinema-filter-icon {
+  background: url("../images/filter icons/cinema-inactive.png") no-repeat 0 0;
+  background-size: cover; }
+
+.md-button.md-default-theme.md-fab.cinema-filter .cinema-filter-icon,
+.md-button.md-default-theme.md-fab.cinema-filter:not([disabled]):hover .cinema-filter-icon,
+.md-button.md-default-theme.md-fab.cinema-filter:not([disabled]):focus .cinema-filter-icon {
+  background: url("../images/filter icons/cinema.png") no-repeat 0 0; }
+
+/* EXHIBITION */
+.md-button.md-default-theme.md-fab.exhibition-filter,
+.md-button.md-default-theme.md-fab.exhibition-filter:not([disabled]):hover,
+.md-button.md-default-theme.md-fab.exhibition-filter:not([disabled]):focus {
+  background: #5E72D7; }
+
+.exhibition-filter-icon {
+  background: url("../images/filter icons/exhibition-inactive.png") no-repeat 0 0;
+  background-size: cover; }
+
+.md-button.md-default-theme.md-fab.exhibition-filter .exhibition-filter-icon,
+.md-button.md-default-theme.md-fab.exhibition-filter:not([disabled]):hover .exhibition-filter-icon,
+.md-button.md-default-theme.md-fab.exhibition-filter:not([disabled]):focus .exhibition-filter-icon {
+  background: url("../images/filter icons/exhibition.png") no-repeat 0 0; }
+
+/* THEATER */
+.md-button.md-default-theme.md-fab.theater-filter,
+.md-button.md-default-theme.md-fab.theater-filter:not([disabled]):hover,
+.md-button.md-default-theme.md-fab.theater-filter:not([disabled]):focus {
+  background: #239993; }
+
+.theater-filter-icon {
+  background: url("../images/filter icons/theater-inactive.png") no-repeat 0 0;
+  background-size: cover; }
+
+.md-button.md-default-theme.md-fab.theater-filter .theater-filter-icon,
+.md-button.md-default-theme.md-fab.theater-filter:not([disabled]):hover .theater-filter-icon,
+.md-button.md-default-theme.md-fab.theater-filter:not([disabled]):focus .theater-filter-icon {
+  background: url("../images/filter icons/theater.png") no-repeat 0 0; }
+
+/* MUSIC */
+.md-button.md-default-theme.md-fab.music-filter,
+.md-button.md-default-theme.md-fab.music-filter:not([disabled]):hover,
+.md-button.md-default-theme.md-fab.music-filter:not([disabled]):focus {
+  background: #C76B0D; }
+
+.music-filter-icon {
+  background: url("../images/filter icons/music-inactive.png") no-repeat 0 0;
+  background-size: cover; }
+
+.md-button.md-default-theme.md-fab.music-filter .music-filter-icon,
+.md-button.md-default-theme.md-fab.music-filter:not([disabled]):hover .music-filter-icon,
+.md-button.md-default-theme.md-fab.music-filter:not([disabled]):focus .music-filter-icon {
+  background: url("../images/filter icons/music.png") no-repeat 0 0; }
+
+/* FOOD */
+.md-button.md-default-theme.md-fab.food-filter,
+.md-button.md-default-theme.md-fab.food-filter:not([disabled]):hover,
+.md-button.md-default-theme.md-fab.food-filter:not([disabled]):focus {
+  background: #B93E92; }
+
+.food-filter-icon {
+  background: url("../images/filter icons/food-inactive.png") no-repeat 0 0;
+  background-size: cover; }
+
+.md-button.md-default-theme.md-fab.food-filter .food-filter-icon,
+.md-button.md-default-theme.md-fab.food-filter:not([disabled]):hover .food-filter-icon,
+.md-button.md-default-theme.md-fab.food-filter:not([disabled]):focus .food-filter-icon {
+  background: url("../images/filter icons/food.png") no-repeat 0 0; }
+
+/* PARTY */
+.md-button.md-default-theme.md-fab.party-filter,
+.md-button.md-default-theme.md-fab.party-filter:not([disabled]):hover,
+.md-button.md-default-theme.md-fab.party-filter:not([disabled]):focus {
+  background: #FFE60E; }
+
+.party-filter-icon {
+  background: url("../images/filter icons/party-inactive.png") no-repeat 0 0;
+  background-size: cover; }
+
+.md-button.md-default-theme.md-fab.party-filter .party-filter-icon,
+.md-button.md-default-theme.md-fab.party-filter:not([disabled]):hover .party-filter-icon,
+.md-button.md-default-theme.md-fab.party-filter:not([disabled]):focus .party-filter-icon {
+  background: url("../images/filter icons/party.png") no-repeat 0 0; }
+
 @media screen and (max-width: 1320px) {
   .logo h1 {
     margin: 0;
@@ -1158,5 +1350,5 @@ map {
     font-size: 2em;
     z-index: 1020;
     display: block; }
-    .menu-mobilehover {
+    .menu-mobile:hover {
       cursor: pointer; } }

@@ -29,8 +29,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					.error(function (data) {
 						console.log('Error: ' + data);
 					});
-			}
-			;
+			};
 		};
 
 		$scope.loadVkFriends = function () {
@@ -80,6 +79,12 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 
 		$scope.getUsers();
 
+        $scope.screenOne = true;
+
+        $scope.changeScreen = function(){
+            $scope.screenOne = ($scope.screenOne === true) ? false : true;
+        };
+
 
 		$scope.friendUsers = [];
 		$scope.invitedUsers = [];
@@ -109,13 +114,22 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 			visibility: 'all',
 			startDate: new Date(),
 			startTime: new Date(),
-			invitedUsers: $scope.invitedUsers,
 			latitude: $scope.latLng.lat(),
 			longitude: $scope.latLng.lng(),
 			position: $scope.latLng.lat() + ', ' + $scope.latLng.lng(),
-			location: $scope.location,
-			category: 'Sport'
+			location: $scope.location
 		};
+
+        $scope.category = 'Sport';
+
+        $scope.selectCategory = function(cat){
+            if ($scope.category === cat){
+                $scope.category = null;
+            } else {
+                $scope.category = cat;
+            };
+            console.log($scope.category);
+        }
 
 		//$scope.initCategory = "entertainment";
 
@@ -310,7 +324,15 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 			});
 
 		$scope.createMeeting = function () {
-			$scope.defineCategory($scope.formData.category);
+            // send invites if necessary
+            if($scope.invitedUsers.length > 0 && $scope.formData.visibility === 'invite'){
+                $scope.formData.invitedUsers = $scope.invitedUsers;
+            };
+            if($scope.formData.visibility === 'friends'){
+                $scope.formData.invitedUsers = $scope.friendUsers;
+            };
+
+			$scope.defineCategory($scope.category);
 			$http.post('../api/meetings', $scope.formData)
 				.success(function (data) {
 					$scope.formData = {}; // clear the form so our user is ready to enter another
