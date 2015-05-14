@@ -10,18 +10,28 @@
 
     <div class="modal-screen-one" ng-show="screenOne">
 
-        <section layout="column" layout-align="center center">
+        <section layout="row" layout-align="center center">
 
             <md-input-container>
                 <label>Название встречи</label>
                 <input type="text" ng-model="formData.title" ng-required>
             </md-input-container>
 
+            <md-input-container md-no-float class="address" >
+                <label>Адрес</label>
+                <md-icon class="mdi mdi-map-marker" style="display:inline-block;"></md-icon>
+                <input type="text" ng-model="formData.location" ng-required ng-disabled="">
+            </md-input-container>
+
+
+
+        </section>
+
+        <section>
             <md-input-container>
                 <label>Описание встречи</label>
                 <textarea ng-model="formData.description"></textarea>
             </md-input-container>
-
         </section>
 
         <section layout="column" layout-align="center center" class="dialog-categories-section">
@@ -71,25 +81,23 @@
 
         </section>
 
-        <div class="date-header">Время и день</div>
-
+       <!-- <div class="date-header">Время и день</div>-->
         <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
-
-
-            <div>
+          <!--  <div>
                 <datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hstep" minute-step="mstep"
                                 ng-model="formData.startDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy"
                                 date-options="dateOptions" date-disabled="disabled(date, mode)"
                                 readonly-time="false"></datetimepicker>
-            </div>
+            </div>-->
+            <time-date-picker ng-model="formData.startDate"></time-date-picker>
 
-            <div>
+           <!-- <div>
 
                 <md-input-container>
                     <label>Адрес</label>
                     <input type="text" ng-model="formData.location" ng-required ng-disabled="">
                 </md-input-container>
-            </div>
+            </div>-->
 
 
         </section>

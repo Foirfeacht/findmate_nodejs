@@ -8,6 +8,7 @@ var findMate = angular.module('findMate', ['ui.bootstrap',
 	'sticky',
 	'ngAnimate',
 	'toastr',
+    'mdDateTime',
 	'ui.utils'
 ]);
 

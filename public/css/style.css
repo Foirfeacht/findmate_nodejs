@@ -15,7 +15,8 @@
 body {
   margin: 0;
   height: 100%;
-  padding-top: 0; }
+  padding-top: 0;
+  font-family: RobotoDraft; }
 
 a:hover {
   text-decoration: none; }
@@ -1113,6 +1114,18 @@ md-option {
   width: 100%;
   z-index: 1000; }
 
+.address {
+  height: 83px;
+  position: relative; }
+  .address label {
+    display: none; }
+
+.modal-dialog .mdi-map-marker {
+  position: absolute;
+  top: 28px;
+  left: 30px;
+  font-size: 2em; }
+
 .dialog-categories-section {
   width: 100%; }
 
@@ -1310,6 +1323,21 @@ md-option {
 .md-button.md-default-theme.md-fab.party-filter:not([disabled]):hover .party-filter-icon,
 .md-button.md-default-theme.md-fab.party-filter:not([disabled]):focus .party-filter-icon {
   background: url("../images/filter icons/party.png") no-repeat 0 0; }
+
+/* date time picker */
+.time-date > .display > .title,
+.time-date > .display > .content,
+.time-date > .control > .full-title,
+.time-date > .control > .slider > .date-control > .days .day-cell.selected
+.time-date > .control > .slider > .date-control > .days .day-cell:hover,
+.time-date > .control > .slider > .date-control > .days .day-cell:active,
+.time-date.full-mode > .buttons {
+  background: #7e57c2; }
+
+.time-date > .control > .slider > .date-control > .days .day-cell.today,
+.time-date button,
+.time-date .button {
+  color: #7e57c2; }
 
 @media screen and (max-width: 1320px) {
   .logo h1 {
