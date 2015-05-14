@@ -8,7 +8,6 @@
 @font-face {
   font-family: orator;
   src: url(../fonts/OratorStd.otf); }
-
 /* =============================
    ========== GENERAL ==========
    ============================= */
@@ -16,7 +15,7 @@ body {
   margin: 0;
   height: 100%;
   padding-top: 0;
-  font-family: RobotoDraft; }
+  /*font-family: RobotoDraft;*/ }
 
 a:hover {
   text-decoration: none; }
@@ -25,6 +24,72 @@ a:hover {
   width: 100%;
   position: relative;
   padding: 100px 100px; }
+
+/* =============================
+   ========== MAIN PAGE ==========
+   ============================= */
+.container.main-page {
+  background: url("../images/bg.png") no-repeat;
+  background-size: cover;
+  height: 100vh;
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative; }
+  .container.main-page .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-filter: blur(120px);
+    filter: blur(120px); }
+
+.logo-main h1 {
+  color: #fff;
+  margin: 10px 130px;
+  font-family: orator;
+  position: absolute;
+  z-index: 999;
+  left: 50%;
+  top: 230px;
+  width: 300px;
+  margin-left: -150px;
+  font-size: 4em;
+  text-align: center; }
+
+.jumbotron {
+  background: none;
+  background-color: transparent;
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  margin-left: -230px;
+  width: 460px;
+  color: #fff; }
+  .jumbotron a {
+    display: block; }
+
+.btn-social {
+  width: 336px;
+  display: block;
+  margin: 10px auto;
+  height: 40px;
+  line-height: 28px;
+  font-size: 18px;
+  text-align: center; }
+  .btn-social i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 38px;
+    line-height: 38px;
+    font-size: 1.5em;
+    text-align: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.2); }
 
 /*============================
   =========== HEADER ============
@@ -672,7 +737,7 @@ map {
 .md-button.md-default-theme.md-fab.party-filter,
 .md-button.md-default-theme.md-fab.party-filter:not([disabled]):hover,
 .md-button.md-default-theme.md-fab.party-filter:not([disabled]):focus {
-  background: #FFE60E; }
+  background: #7423A2; }
 
 .party-filter-icon {
   background: url("../images/filter icons/party-inactive.png") no-repeat 0 0;
@@ -1118,7 +1183,8 @@ md-option {
   height: 83px;
   position: relative; }
   .address label {
-    display: none; }
+    display: block;
+    opacity: 0; }
 
 .modal-dialog .mdi-map-marker {
   position: absolute;
@@ -1158,6 +1224,9 @@ md-option {
 .date-header {
   width: 100%;
   text-align: center; }
+
+.time-date {
+  margin: 20px auto; }
 
 .datetime-pickers {
   overflow: hidden; }
@@ -1313,7 +1382,7 @@ md-option {
 .md-button.md-default-theme.md-fab.party-filter,
 .md-button.md-default-theme.md-fab.party-filter:not([disabled]):hover,
 .md-button.md-default-theme.md-fab.party-filter:not([disabled]):focus {
-  background: #FFE60E; }
+  background: #7423A2; }
 
 .party-filter-icon {
   background: url("../images/filter icons/party-inactive.png") no-repeat 0 0;

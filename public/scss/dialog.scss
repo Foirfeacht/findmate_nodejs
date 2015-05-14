@@ -111,7 +111,8 @@ md-option {
   position: relative;
 
   label {
-    display: none;
+    display: block;
+    opacity: 0;
   }
 }
 
@@ -163,6 +164,10 @@ md-option {
 .date-header {
   width: 100%;
   text-align: center;
+}
+
+.time-date {
+  margin: 20px auto;
 }
 
 .datetime-pickers {
@@ -355,7 +360,7 @@ md-option {
 .md-button.md-default-theme.md-fab.party-filter,
 .md-button.md-default-theme.md-fab.party-filter:not([disabled]):hover,
 .md-button.md-default-theme.md-fab.party-filter:not([disabled]):focus {
-  background: #FFE60E;
+  background: #7423A2;
 }
 
 .party-filter-icon {
