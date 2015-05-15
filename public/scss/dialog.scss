@@ -106,8 +106,7 @@ md-option {
   z-index: 1000;
 }
 
-.address {
-  height: 83px;
+.address{
   position: relative;
 
   label {
@@ -116,11 +115,40 @@ md-option {
   }
 }
 
-.modal-dialog .mdi-map-marker {
-  position: absolute;
-  top: 28px;
-  left: 30px;
+.date-input {
+  position: relative;
+}
+
+.modal-dialog .mdi-map-marker,
+.modal-dialog .mdi-calendar{
+
   font-size: 2em;
+}
+
+.dialog-title {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.dialog-description,
+.dialog-location {
+  width: 50%;
+}
+
+.date-picker {
+  width: 50%;
+  
+  md-input-container {
+    overflow: visible;
+  }
+
+  .dropdown-menu {
+    width: 270px;
+  }
+
+  .btn-default {
+    border: none;
+  }
 }
 
 .dialog-categories-section {

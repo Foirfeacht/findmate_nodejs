@@ -81,16 +81,17 @@ a:hover {
   line-height: 28px;
   font-size: 18px;
   text-align: center; }
-  .btn-social i {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 38px;
-    line-height: 38px;
-    font-size: 1.5em;
-    text-align: center;
-    border-right: 1px solid rgba(0, 0, 0, 0.2); }
+
+.btn-social > :first-child {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 38px;
+  line-height: 38px;
+  font-size: 1.5em;
+  text-align: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.2); }
 
 /*============================
   =========== HEADER ============
@@ -908,16 +909,6 @@ map {
   top: 30%;
   left: 30%; }
 
-.datepicker-wrapper {
-  margin-top: 35px; }
-
-.input-group .form-control {
-  width: 100%; }
-
-.input-group-btn > .btn {
-  position: absolute;
-  top: 10px; }
-
 /* =============================
    =========== NOTIFICATIONS ============
    ============================= */
@@ -1181,17 +1172,34 @@ md-option {
   z-index: 1000; }
 
 .address {
-  height: 83px;
   position: relative; }
   .address label {
     display: block;
     opacity: 0; }
 
-.modal-dialog .mdi-map-marker {
-  position: absolute;
-  top: 28px;
-  left: 30px;
+.date-input {
+  position: relative; }
+
+.modal-dialog .mdi-map-marker,
+.modal-dialog .mdi-calendar {
   font-size: 2em; }
+
+.dialog-title {
+  width: 50%;
+  margin: 0 auto; }
+
+.dialog-description,
+.dialog-location {
+  width: 50%; }
+
+.date-picker {
+  width: 50%; }
+  .date-picker md-input-container {
+    overflow: visible; }
+  .date-picker .dropdown-menu {
+    width: 270px; }
+  .date-picker .btn-default {
+    border: none; }
 
 .dialog-categories-section {
   width: 100%; }

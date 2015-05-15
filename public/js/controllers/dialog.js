@@ -347,9 +347,20 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 		//datepicker
 		$scope.formData.startTime = new Date();
 
+        $scope.openDate = false
+
+        $scope.openCalendar = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            $scope.openDate = true;
+        };
+
 		$scope.dateOptions = {
 			startingDay: 1,
 			showWeeks: false,
+            showMeridian: false,
+            mstep: 15
 		};
 
 		$scope.hstep = 1;

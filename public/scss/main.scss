@@ -82,18 +82,18 @@ a:hover {
   line-height: 28px;
   font-size: 18px;
   text-align: center;
+}
 
-  i {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 38px;
-    line-height: 38px;
-    font-size: 1.5em;
-    text-align: center;
-    border-right: 1px solid rgba(0,0,0,0.2);
-  }
+.btn-social>:first-child {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 38px;
+  line-height: 38px;
+  font-size: 1.5em;
+  text-align: center;
+  border-right: 1px solid rgba(0,0,0,0.2);
 }
 
 

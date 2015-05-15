@@ -10,28 +10,36 @@
 
     <div class="modal-screen-one" ng-show="screenOne">
 
-        <section layout="row" layout-align="center center">
-
-            <md-input-container>
+        <section layout-align="center center">
+            <md-input-container class="dialog-title">
                 <label>Название встречи</label>
                 <input type="text" ng-model="formData.title" ng-required>
             </md-input-container>
-
-            <md-input-container md-no-float class="address" >
-                <label>Адрес</label>
-                <md-icon class="mdi mdi-map-marker" style="display:inline-block;"></md-icon>
-                <input type="text" ng-model="formData.location" ng-required ng-disabled="">
-            </md-input-container>
-
-
-
         </section>
 
-        <section>
-            <md-input-container>
-                <label>Описание встречи</label>
-                <textarea ng-model="formData.description"></textarea>
-            </md-input-container>
+        <section layout="row" layout-align="center center">
+
+                <md-input-container>
+                    <label>Описание встречи</label>
+                    <textarea ng-model="formData.description"></textarea>
+                </md-input-container>
+        </section>
+
+        <section layout="row">
+
+            <div class="dialog-location">
+                <md-input-container md-no-float class="address" >
+
+                    <md-icon class="mdi mdi-map-marker"></md-icon>
+                    <input type="text" ng-model="formData.location" ng-required ng-disabled="">
+                </md-input-container>
+            </div>
+            <div class="date-picker">
+                <md-input-container md-no-float class="date-input">
+                    <md-icon class="mdi mdi-calendar"></md-icon>
+                    <input type="text" ng-focus="openCalendar($event)" datetime-picker="dd MMM yyyy HH:mm" minute-step="mstep" datepicker-options="dateOptions" ng-model="formData.startDate" is-open="openDate" />
+                </md-input-container>
+            </div>
         </section>
 
         <section layout="column" layout-align="center center" class="dialog-categories-section">
@@ -82,26 +90,20 @@
         </section>
 
        <!-- <div class="date-header">Время и день</div>-->
-        <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
-          <!--  <div>
+        <!-- <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
+         <div>
                 <datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hstep" minute-step="mstep"
                                 ng-model="formData.startDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy"
                                 date-options="dateOptions" date-disabled="disabled(date, mode)"
                                 readonly-time="false"></datetimepicker>
-            </div>-->
-            <time-date-picker ng-model="formData.startDate"></time-date-picker>
+            </div>
+            <!--<time-date-picker ng-model="formData.startDate"></time-date-picker>
 
-           <!-- <div>
 
-                <md-input-container>
-                    <label>Адрес</label>
-                    <input type="text" ng-model="formData.location" ng-required ng-disabled="">
-                </md-input-container>
-            </div>-->
-
+        </section>-->
+        <section>
 
         </section>
-
 
     </div><!-- end screen one -->
 
@@ -136,7 +138,7 @@
 <div class="modal-footer">
     <section layout-align="center center" class="buttons" ng-show="screenOne">
         <div>
-            <md-button class="md-raised md-primary" ng-click="changeScreen()" >Далее</md-button>
+            <md-button class="md-raised md-primary" ng-click="changeScreen()" >Пригласите участников</md-button>
         </div>
     </section>
     <section layout-align="center center" class="buttons" ng-show="!screenOne">
