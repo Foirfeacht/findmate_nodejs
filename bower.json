@@ -47,6 +47,6 @@
     "bootstrap-ui-datetime-picker": "~1.0.19",
     "bootstrap-material-design": "~0.3.0",
     "angular-google-places-autocomplete": "~0.2.5",
-    "sweetalert": "~0.5.0"
+    "angular-sweetalert": "~1.1.0"
   }
 }

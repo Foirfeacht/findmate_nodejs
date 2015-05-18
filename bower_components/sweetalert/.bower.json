@@ -26,7 +26,6 @@
     "commit": "f289160c8b4e8540757a828d56acc9a6877203e9"
   },
   "_source": "git://github.com/t4t5/sweetalert.git",
-  "_target": "~0.5.0",
-  "_originalSource": "sweetalert",
-  "_direct": true
+  "_target": ">=0.3.0",
+  "_originalSource": "sweetalert"
 }

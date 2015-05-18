@@ -213,17 +213,25 @@ module.exports = function (app) {
             }
         };
 
-		log.info();
-        Meeting.findByIdAndUpdate(id, update, function (err, meeting) {
-			log.info('procesing');
-            if (!meeting) {
-                res.statusCode = 404;
-                return res.send({error: 'Not found'});
-            }
-            if (err) {
+        log.info(req.body);
+        log.info(id);
+        log.info(req.params.id);
+
+      /*  Meeting.find({_id: req.params.id}, function(err, meeting){
+            if(err){
                 res.send(err);
+            }
+            log.info(meeting);
+            res.json(meeting);
+        });*/
+
+        Meeting.findByIdAndUpdate(id, update, function (err, meeting) {
+            if (err){
+                res.send(err)
             };
-            log.info("meeting updated");
+            log.info(meeting);
+
+            log.info("meeting relocated");
             Meeting.find({})
                 .populate('owner')
                 .populate({path: 'comments.owner', model: 'User'})

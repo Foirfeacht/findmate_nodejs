@@ -10,6 +10,7 @@ var findMate = angular.module('findMate', ['ui.bootstrap',
 	'toastr',
     'mdDateTime',
     'google.places',
+    'oitozero.ngSweetAlert',
 	'ui.utils'
 ]);
 

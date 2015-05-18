@@ -1,8 +1,8 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr', '$sce',
-	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce) {
+findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr', '$sce', 'SweetAlert',
+	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce, SweetAlert) {
 
 
 		$scope.friendUsers = [];
@@ -205,13 +205,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
         $scope.getPosition = function(meeting, marker){
             //!!!somehow marker = meeting and meeting = marker in this case
-            var id = marker._id;
-            console.log(id);
-            console.log(marker);
+            $scope.relocatedId = marker._id;
             $scope.changeData = {
                 lat: meeting.latLng.lat(),
                 lng: meeting.latLng.lng(),
-                position: meeting.latLng.lat() + ', ' + meeting.latLng.lng()
+                position: meeting.latLng.lat() + ', ' + meeting.latLng.lng(),
+
             };
             var geocoder = new google.maps.Geocoder();
             geocoder.geocode({'latLng': meeting.latLng}, function (results, status) {
@@ -219,16 +218,39 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
                     if (results[0]) {
                         $scope.changeData.location = results[0].formatted_address;
                         console.log($scope.changeData.location);
+                        SweetAlert.swal({
+                                title: "Изменить адрес встречи?",
+                                text: "Новый адрес: " + $scope.changeData.location,
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Да, изменить",
+                                cancelButtonText: "Нет, не нужно",
+                                closeOnConfirm: false},
+                            function(isConfirm){
+                                if (isConfirm) {
+                                    console.log($scope.changeData);
+                                    $scope.changeLocation($scope.relocatedId, $scope.changeData)
+                                    SweetAlert.swal("Адрес успешно изменен", "success");
+                                } else {
+                                    $http.get('../api/meetings')
+                                        .success(function (data) {
+                                            $scope.meetings = data;
+                                            console.log(data);
+                                            $scope.getUserAndFriends();
+                                        })
+                                        .error(function (data) {
+                                            console.log('Error: ' + data);
+                                        });
+                                }
+                            });
                     } else {
-                        console.log('No results found');
+                        SweetAlert.swal("Упс... Что-то пошло не так", "Нам не удалось установить новый адрес встречи. Пожалуйста, попробуйте еще раз", "warning");
                     }
                 } else {
                     console.log('Geocoder failed due to: ' + status);
                 }
             });
-
-            console.log($scope.changeData);
-            $scope.changeLocation(id, $scope.changeData)
 
         }
 
