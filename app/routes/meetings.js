@@ -203,7 +203,7 @@ module.exports = function (app) {
 
     //update meeting location
     app.put('/changeLocation/meetings/:id', isLoggedIn, function (req, res) {
-        var id = req.params.id;
+		var id = mongoose.Types.ObjectId(req.params.id);
         var update = {
             $set: {
                 latitude: req.body.lat,
@@ -213,7 +213,9 @@ module.exports = function (app) {
             }
         };
 
+		log.info();
         Meeting.findByIdAndUpdate(id, update, function (err, meeting) {
+			log.info('procesing');
             if (!meeting) {
                 res.statusCode = 404;
                 return res.send({error: 'Not found'});
