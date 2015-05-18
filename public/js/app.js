@@ -9,6 +9,7 @@ var findMate = angular.module('findMate', ['ui.bootstrap',
 	'ngAnimate',
 	'toastr',
     'mdDateTime',
+    'google.places',
 	'ui.utils'
 ]);
 

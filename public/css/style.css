@@ -252,14 +252,18 @@ a:hover {
   margin-bottom: 30px; }
 
 .notifications {
-  padding: 5px;
-  border-radius: 50%;
+  border-radius: 50px;
   background: #D74040;
   font-size: 0.6em;
   color: #fff;
   margin-left: 3px;
   position: relative;
-  top: -2px; }
+  top: -2px;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center; }
 
 .menu-mobile {
   display: none; }
@@ -1190,7 +1194,7 @@ md-option {
 
 .dialog-description,
 .dialog-location {
-  width: 50%; }
+  width: 40%; }
 
 .date-picker {
   width: 50%; }
@@ -1236,6 +1240,11 @@ md-option {
 
 .time-date {
   margin: 20px auto; }
+
+.btn-default.active {
+  border-radius: 50%;
+  width: 34px !important;
+  height: 34px; }
 
 .datetime-pickers {
   overflow: hidden; }

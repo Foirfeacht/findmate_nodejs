@@ -21,11 +21,7 @@ var userSchema = new Schema({
 		token: String,
 		email: String,
 		name: String,
-		image: String,
-		image2: String,
-		image3: String,
-		image1: String,
-		image4: String
+		image: String
 	},
 
 	firstName: {type: String, trim: true},

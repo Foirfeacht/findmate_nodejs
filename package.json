@@ -1,6 +1,6 @@
 {
-  "name": "findmate",
-  "version": "0.5.2",
+  "name": "Citybeats",
+  "version": "0.5.7",
   "author": "Vitaly Maltsev",
   "license": "MIT",
   "main": "server.js",

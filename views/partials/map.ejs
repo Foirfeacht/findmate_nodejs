@@ -15,7 +15,10 @@
              map-type-id="ROADMAP">
             <marker position="{{meeting.position}}"
                     ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive | filter: filterByCategory | filter: search "
-                    icon="../public/images/{{meeting.category.icon}}.png" on-click="openInfoBox(event, meeting)"></marker>
+                    icon="../public/images/{{meeting.category.icon}}.png"
+                    on-click="openInfoBox(event, meeting)"
+                    draggable="{{checkDraggable(meeting)}}"
+                    on-dragend="getPosition(meeting, marker)"></marker>
             <!-- on-click="showInfoWindow(event, meeting)" -->
 
         </map>

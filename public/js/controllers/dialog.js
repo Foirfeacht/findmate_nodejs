@@ -310,6 +310,39 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 
 		codeLatLng();
 
+        $scope.codeAddress = function() {
+            var sAddress = document.getElementById("location").value;
+            geocoder.geocode( { 'address': sAddress}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    $scope.formData.location = results[0].formatted_address;
+                    $scope.formData.latitude = results[0].geometry.location.lat();
+                    $scope.latitude = results[0].geometry.location.lat();
+                    $scope.formData.longitude = results[0].geometry.location.lng();
+                    $scope.longitude = results[0].geometry.location.lng();
+                    $scope.formData.position = $scope.formData.latitude + ', ' + $scope.formData.longitude;
+                    console.log($scope.formData.position, $scope.longitude);
+                }
+                else{
+                    alert("Geocode was not successful for the following reason: " + status);
+                }
+            });
+        };
+
+        // autocomplete options
+        $scope.options = null;
+        $scope.details = '';
+
+      /*  $scope.locationInput = document.getElementById("location");
+        $scope.autocomplete = new google.maps.places.Autocomplete($scope.locationInput);
+        $scope.autocomplete.bindTo('bounds', $scope.map);
+
+        google.maps.event.addListener($scope.autocomplete, 'place_changed', function() {
+            console.log('aut triggererd');
+            var place = autocomplete.getPlace();
+            console.log(place)
+
+        });*/
+
 
 // working with api
 
@@ -335,8 +368,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 			$scope.defineCategory($scope.category);
 			$http.post('../api/meetings', $scope.formData)
 				.success(function (data) {
-					$scope.formData = {}; // clear the form so our user is ready to enter another
-					console.log(data);
+                    console.log($scope.formData);
 					$scope.ok();
 				})
 				.error(function (data) {

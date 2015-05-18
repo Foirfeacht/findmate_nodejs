@@ -98,7 +98,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 					$scope.pos = new google.maps.LatLng(position.coords.latitude,
 						position.coords.longitude);
 					$scope.map.setCenter($scope.pos);
-					console.log('positioned at ' + $scope.pos)
+					console.log('positioned at ' + $scope.pos);
 				}, function () {
 					handleNoGeolocation(true);
 				});
@@ -131,24 +131,21 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 				$scope.latLng = new google.maps.LatLng($scope.latitude, $scope.longitude);
 
-				$scope.codeLatLng = function () {
-					console.log($scope.latLng);
-					$scope.geocoder.geocode({'latLng': $scope.latLng}, function (results, status) {
-						if (status == google.maps.GeocoderStatus.OK) {
-							if (results[0]) {
-								$scope.location = results[0].formatted_address;
-								console.log(results[0].formatted_address);
-								console.log(results);
-							} else {
-								console.log('No results found');
-							}
-						} else {
-							console.log('Geocoder failed due to: ' + status);
-						}
-					});
-				};
+                $scope.codeLatLng = function (latlng) {
+                    $scope.geocoder.geocode({'latLng': latlng}, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            if (results[0]) {
+                                $scope.location = results[0].formatted_address;
+                            } else {
+                                console.log('No results found');
+                            }
+                        } else {
+                            console.log('Geocoder failed due to: ' + status);
+                        }
+                    });
+                };
 
-				$scope.codeLatLng();
+				$scope.codeLatLng($scope.latLng);
 			}); //end addListener
 
             var infoboxOptions = {
@@ -187,6 +184,52 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
             var position = new google.maps.LatLng(meeting.latitude, meeting.longitude);
             var distance = google.maps.geometry.spherical.computeDistanceBetween($scope.pos, position);
             return (distance / 1000).toFixed(2);
+        };
+
+        $scope.checkDraggable = function (meeting) {
+            if (meeting.owner._id = $scope.currentUser._id){
+                return true;
+            };
+            return false;
+        };
+        
+        $scope.changeLocation = function (id, data) {
+            $http.put('/changeLocation/meetings/' + id, data)
+                .success(function (data) {
+
+                })
+                .error(function (data) {
+                    console.log('Error: ', data);
+                })
+        }
+
+        $scope.getPosition = function(meeting, marker){
+            //!!!somehow marker = meeting and meeting = marker in this case
+            var id = marker._id;
+            console.log(id);
+            console.log(marker);
+            $scope.changeData = {
+                lat: meeting.latLng.lat(),
+                lng: meeting.latLng.lng(),
+                position: meeting.latLng.lat() + ', ' + meeting.latLng.lng()
+            };
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({'latLng': meeting.latLng}, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        $scope.changeData.location = results[0].formatted_address;
+                        console.log($scope.changeData.location);
+                    } else {
+                        console.log('No results found');
+                    }
+                } else {
+                    console.log('Geocoder failed due to: ' + status);
+                }
+            });
+
+            console.log($scope.changeData);
+            $scope.changeLocation(id, $scope.changeData)
+
         }
 
 		$scope.zoom = 15;
@@ -346,9 +389,11 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
                 size: size,
                 scope: $scope
             });
-            $scope.$modalInstance.result.then(function (selectedItem) {
+            $scope.$modalInstance.result.then(function (){
                 $scope.toggleCreate = false;
                 $scope.cursor = 'pointer';
+                $scope.meetingPos = new google.maps.LatLng($scope.latitude, $scope.longitude);
+                $scope.map.setCenter($scope.meetingPos);
             }, function () {
                 console.log('Modal dismissed at: ' + new Date());
             })
@@ -361,7 +406,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
         };
 
 		$scope.ok = function () {
-			$scope.$modalInstance.close();
+			$scope.$modalInstance.close($scope.formData);
 		};
 
 		$scope.cancel = function () {

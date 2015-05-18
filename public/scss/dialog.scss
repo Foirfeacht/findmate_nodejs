@@ -132,7 +132,7 @@ md-option {
 
 .dialog-description,
 .dialog-location {
-  width: 50%;
+  width: 40%;
 }
 
 .date-picker {
@@ -196,6 +196,12 @@ md-option {
 
 .time-date {
   margin: 20px auto;
+}
+
+.btn-default.active {
+  border-radius: 50%;
+  width: 34px!important;
+  height: 34px;
 }
 
 .datetime-pickers {

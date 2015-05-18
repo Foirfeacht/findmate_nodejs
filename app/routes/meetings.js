@@ -201,6 +201,39 @@ module.exports = function (app) {
 		});
 	});
 
+    //update meeting location
+    app.put('/changeLocation/meetings/:id', isLoggedIn, function (req, res) {
+        var id = req.params.id;
+        var update = {
+            $set: {
+                latitude: req.body.lat,
+                longitude: req.body.lng,
+                position: req.body.position,
+                location: req.body.location
+            }
+        };
+
+        Meeting.findByIdAndUpdate(id, update, function (err, meeting) {
+            if (!meeting) {
+                res.statusCode = 404;
+                return res.send({error: 'Not found'});
+            }
+            if (err) {
+                res.send(err);
+            };
+            log.info("meeting updated");
+            Meeting.find({})
+                .populate('owner')
+                .populate({path: 'comments.owner', model: 'User'})
+                .exec(function (err, meetings) {
+                    if (err) {
+                        res.send(err);
+                    };
+                    app.io.broadcast('meetings changed', {msg: meetings});
+                });
+        });
+    });
+
 
 	// get single meeting
 

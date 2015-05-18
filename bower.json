@@ -1,11 +1,11 @@
 {
-  "name": "findmate",
-  "version": "0.5.2",
+  "name": "Citybeats",
+  "version": "0.5.7",
   "homepage": "https://github.com/Foirfeacht/findmate_nodejs",
   "authors": [
-    "foirfeacht <vitaliy.maltsev@gmail.com>"
+    "Vitaly Maltsev <vitaliy.maltsev@gmail.com>"
   ],
-  "description": "New way to find get all friends together",
+  "description": "New way to get all friends together",
   "main": "server.js",
   "moduleType": [
     "globals",
@@ -45,6 +45,7 @@
     "angular-ui-utils": "bower",
     "md-date-time": "~0.0.14",
     "bootstrap-ui-datetime-picker": "~1.0.19",
-    "bootstrap-material-design": "~0.3.0"
+    "bootstrap-material-design": "~0.3.0",
+    "angular-google-places-autocomplete": "~0.2.5"
   }
 }

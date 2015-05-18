@@ -198,14 +198,18 @@
 }
 
 .notifications {
-    padding: 5px;
-    border-radius: 50%;
-    background: #D74040;
-    font-size: 0.6em;
-    color: #fff;
-    margin-left: 3px;
-    position: relative;
-    top: -2px;
+  border-radius: 50px;
+  background: #D74040;
+  font-size: 0.6em;
+  color: #fff;
+  margin-left: 3px;
+  position: relative;
+  top: -2px;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
 }
 
 .menu-mobile {
