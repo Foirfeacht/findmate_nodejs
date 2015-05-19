@@ -106,12 +106,26 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 		};
 
 		$scope.showConfirm = function (size) {
-			var modalInstance = $modal.open({
-				templateUrl: './public/partials/confirmRemove.tmpl.ejs',
-				controller: 'confirmRemoveController',
-				size: size,
-				scope: $scope
-			});
+			SweetAlert.swal({
+					title: "Вы уверены, что хотите удалить аккаунт",
+					text: "Все созданные вами встречи будут удалены",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Да, удалить",
+					cancelButtonText: "Нет",
+					closeOnConfirm: false},
+				function(){
+						$http.delete('../api/meetings/' + id)
+							.success(function (data) {
+								$scope.meetings = data;
+								console.log(data);
+							})
+							.error(function (data) {
+								console.log('Error: ' + data);
+							});
+
+				});
 		};
 
 		socket.on('push notification added', function (data) {
@@ -131,6 +145,21 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 			}
 		});
 
+		socket.on('push notification about update', function (data) {
+			console.log(data.msg);
+
+			if(data.msg._id === $scope.currentUser._id){
+				$http.get('/current_user')
+					.success(function (data) {
+						$scope.currentUser = data;
+						$scope.showUpdateNotification();
+					})
+					.error(function (data) {
+						console.log('Error: ' + data);
+					});
+			}
+		});
+
 		//notification
 		$scope.showNotification = function() {
 			$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
@@ -143,6 +172,18 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 			 });*/
 			toastr.info('{{$scope.addedNotification.meeting.title}}',
 				'Приглашение от {{$scope.addedNotification.owner.name}}!', {
+					allowHtml: true
+					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
+				});
+		};
+
+		//updated notification
+		$scope.showUpdateNotification = function() {
+			$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+			console.log($scope.addedNotification);
+			$scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml('<h1>' + $scope.addedNotification.meeting.title + '</h1>');
+			toastr.info( 'Встреча изменена!',
+				'<div ng-bind-html="thisCanBeusedInsideNgBindHtml"></div>', {
 					allowHtml: true
 					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
 				});

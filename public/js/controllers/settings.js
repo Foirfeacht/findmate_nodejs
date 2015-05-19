@@ -69,6 +69,21 @@ findMate.controller('settingsController', ['$scope', '$http', '$mdSidenav', '$mo
 			}
 		});
 
+		socket.on('push notification about update', function (data) {
+			console.log(data.msg);
+
+			if(data.msg._id === $scope.currentUser._id){
+				$http.get('/current_user')
+					.success(function (data) {
+						$scope.currentUser = data;
+						$scope.showUpdateNotification();
+					})
+					.error(function (data) {
+						console.log('Error: ' + data);
+					});
+			}
+		});
+
 		//notification
 		$scope.showNotification = function() {
 			$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
@@ -81,6 +96,18 @@ findMate.controller('settingsController', ['$scope', '$http', '$mdSidenav', '$mo
 			 });*/
 			toastr.info('{{$scope.addedNotification.meeting.title}}',
 				'Приглашение от {{$scope.addedNotification.owner.name}}!', {
+					allowHtml: true
+					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
+				});
+		};
+
+		//updated notification
+		$scope.showUpdateNotification = function() {
+			$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+			console.log($scope.addedNotification);
+			$scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml('<h1>' + $scope.addedNotification.meeting.title + '</h1>');
+			toastr.info( 'Встреча изменена!',
+				'<div ng-bind-html="thisCanBeusedInsideNgBindHtml"></div>', {
 					allowHtml: true
 					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
 				});

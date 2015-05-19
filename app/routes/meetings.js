@@ -213,23 +213,11 @@ module.exports = function (app) {
             }
         };
 
-        log.info(req.body);
-        log.info(id);
-        log.info(req.params.id);
-
-      /*  Meeting.find({_id: req.params.id}, function(err, meeting){
-            if(err){
-                res.send(err);
-            }
-            log.info(meeting);
-            res.json(meeting);
-        });*/
 
         Meeting.findByIdAndUpdate(id, update, function (err, meeting) {
             if (err){
                 res.send(err)
             };
-            log.info(meeting);
 
             log.info("meeting relocated");
             Meeting.find({})

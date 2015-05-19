@@ -60,17 +60,19 @@ module.exports = function (app) {
 
 	// delete a user
 	app.delete('/delete/:user_id', isLoggedIn, function (req, res) {
-		User.remove({
-			_id: req.params.user_id
-		}, function (err, user) {
-			if (err)
-				res.send(err);
-			Meeting.find({'_owner._id': req.params.user_id}).remove(function (err, meetings) {
+		//Meeting.find({'_owner._id': req.params.user_id}).remove(function (err, meetings) {
+		//	if (err)
+		//		res.send(err);
+			User.remove({
+				_id: req.params.user_id
+			}, function (err, user) {
 				if (err)
 					res.send(err);
 				res.redirect('/logout');
 			});
-		});
+
+		//});
+
 	});
 
 	//update user image
@@ -116,7 +118,49 @@ module.exports = function (app) {
 	});
 
 	//send a ntoification to user
+	// notification about new meeting
 	app.put('/pushNotification/users/', isLoggedIn, function (req, res) {
+
+		var meeting = req.body;
+		var update = {
+			$addToSet: {
+				notifications: {
+					_id: mongoose.Types.ObjectId(),
+					owner: req.user._id,
+					created_at: new Date(),
+					status: 'Unread',
+					ifNew: true,
+					meeting: meeting._id,
+					type: 'Notification'
+				}
+			}
+		};
+		var invited = meeting.invitedUsers;
+		async.each(invited, function(user, callback){
+			log.info(user._id);
+			User.findByIdAndUpdate(user._id, update, {safe: true, upsert: true})
+				.populate('notifications.owner')
+				.populate({path: 'notifications.meeting', model: 'Meeting' })
+				.exec(function (err, user) {
+					if (!user) {
+						res.statusCode = 404;
+						return res.send({error: 'Not found'});
+					};
+					log.info("invite sent");
+					app.io.broadcast('push notification added', {msg: user});
+					callback();
+				});
+		}, function(err){
+			// All tasks are done now
+				if(err){
+				res.send(err)
+				};
+			res.send('notification sent');
+		});
+	});
+
+	// notification about new meeting
+	app.put('/pushUpdateNotification/users/', isLoggedIn, function (req, res) {
 
 		var meeting = req.body;
 		var update = {
@@ -145,14 +189,14 @@ module.exports = function (app) {
 						return res.send({error: 'Not found'});
 					};
 					log.info("invite sent");
-					app.io.broadcast('push notification added', {msg: user});
+					app.io.broadcast('push notification about update', {msg: user});
 					callback();
 				});
 		}, function(err){
 			// All tasks are done now
-				if(err){
+			if(err){
 				res.send(err)
-				};
+			};
 			res.send('notification sent');
 		});
 	});

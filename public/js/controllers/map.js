@@ -1,8 +1,8 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr', '$sce', 'SweetAlert',
-	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce, SweetAlert) {
+findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr', '$sce', 'SweetAlert', 'editService',
+	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce, SweetAlert, editService) {
 
 
 		$scope.friendUsers = [];
@@ -231,7 +231,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
                                 if (isConfirm) {
                                     console.log($scope.changeData);
                                     $scope.changeLocation($scope.relocatedId, $scope.changeData)
-                                    SweetAlert.swal("Адрес успешно изменен", "success");
+                                    SweetAlert.swal("Адрес успешно изменен", "Мы предупредим участников", "success");
                                 } else {
                                     $http.get('../api/meetings')
                                         .success(function (data) {
@@ -316,6 +316,21 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			}
 		});
 
+		socket.on('push notification about update', function (data) {
+			console.log(data.msg);
+
+			if(data.msg._id === $scope.currentUser._id){
+				$http.get('/current_user')
+					.success(function (data) {
+						$scope.currentUser = data;
+						$scope.showUpdateNotification();
+					})
+					.error(function (data) {
+						console.log('Error: ' + data);
+					});
+			}
+		});
+
 		$scope.redirectToMeeting = function (location) {
 			window.location.href = "meetings/" + location;
 		};
@@ -327,6 +342,18 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			$scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml('<h1>' + $scope.addedNotification.meeting.title + '</h1>');
 			toastr.info( 'У вас новое приглашение!',
 					'<div ng-bind-html="thisCanBeusedInsideNgBindHtml"></div>', {
+					allowHtml: true
+					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
+				});
+		};
+
+		//updated notification
+		$scope.showUpdateNotification = function() {
+			$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+			console.log($scope.addedNotification);
+			$scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml('<h1>' + $scope.addedNotification.meeting.title + '</h1>');
+			toastr.info( 'Встреча изменена!',
+				'<div ng-bind-html="thisCanBeusedInsideNgBindHtml"></div>', {
 					allowHtml: true
 					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
 				});
@@ -367,16 +394,38 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 				return false;
 		};
 
-		// delete a todo after checking it
+		$scope.checkOwner = function (id) {
+			var userId = $scope.currentUser._id;
+			if(id === userId){
+				return true;
+			};
+			return false;
+		};
+
+		// delete a meeting
 		$scope.deleteMeeting = function (id) {
-			$http.delete('../api/meetings/' + id)
-				.success(function (data) {
-					$scope.meetings = data;
-					console.log(data);
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
+			SweetAlert.swal({
+					title: "Вы уверены?",
+					text: "Участники будут оповещены, что мероприятие не состоится!",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Да",
+					cancelButtonText: "Нет",
+					closeOnConfirm: false},
+				function(){
+					$http.delete('../api/meetings/' + id)
+						.success(function (data) {
+							$scope.meetings = data;
+							console.log(data);
+						})
+						.error(function (data) {
+							console.log('Error: ' + data);
+						});
+					SweetAlert.swal("Мероприятие удалено!");
 				});
+
+
 		};
 
 		//send notification
@@ -420,6 +469,31 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
                 console.log('Modal dismissed at: ' + new Date());
             })
         };
+
+		//edit service update
+
+		$scope.$watch('meetingId', function () {
+			editService.getId($scope.meetingId, $scope.currentUser);
+		});
+
+		$scope.$on('valuesUpdated', function () {
+			$scope.meetingId = editService.meetingId;
+			$scope.currentUser = editService.user;
+		});
+
+		// edit meeting dialog
+		$scope.editMeeting = function (id) {
+			$scope.meetingId = id;
+			$scope.showEditDialog('lg');
+		};
+
+		$scope.showEditDialog = function (size) {
+			var modalInstance = $modal.open({
+				templateUrl: './public/partials/editMeeting.tmpl.ejs',
+				controller: 'EditMeetingController',
+				size: size
+			});
+		};
 
         $scope.createMeeting = function(){
             if($scope.toggleCreate === true){
