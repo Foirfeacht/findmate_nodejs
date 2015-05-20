@@ -1,8 +1,8 @@
 // map controller
 // public/map.js
 
-findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$modal', 'toastr', '$animate',
-	function ($scope, $http, $mdSidenav, $modal, toastr, $animate) {
+findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$modal', 'toastr', '$animate', 'SweetAlert',
+	function ($scope, $http, $mdSidenav, $modal, toastr, $animate, SweetAlert) {
 		// side nav
 		$scope.toggleNav = function () {
 			$mdSidenav('nav').toggle();
@@ -105,7 +105,7 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 			};
 		};
 
-		$scope.showConfirm = function (size) {
+		$scope.showConfirm = function () {
 			SweetAlert.swal({
 					title: "Вы уверены, что хотите удалить аккаунт",
 					text: "Все созданные вами встречи будут удалены",
@@ -115,16 +115,17 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
 					confirmButtonText: "Да, удалить",
 					cancelButtonText: "Нет",
 					closeOnConfirm: false},
-				function(){
-						$http.delete('../api/meetings/' + id)
-							.success(function (data) {
-								$scope.meetings = data;
-								console.log(data);
-							})
-							.error(function (data) {
-								console.log('Error: ' + data);
-							});
-
+				function(isConfirm){
+                    if(isConfirm){
+                        $http.delete('/users/delete/' + $scope.currentUser._id)
+                            .success(function (data) {
+                                console.log(data);
+                            })
+                            .error(function (data) {
+                                console.log('Error: ' + data);
+                            });
+                        //window.location.href = "/logout"
+                    };
 				});
 		};
 

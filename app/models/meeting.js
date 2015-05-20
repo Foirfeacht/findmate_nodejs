@@ -26,7 +26,6 @@ var meetingsSchema = new Schema({
 	latitude: String,
 	position: String,
 	location: String,
-	icon: String,
 	visibility: {type: String, default: 'all'},
 	comments: [commentsSchema]
 });

@@ -332,18 +332,6 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
         $scope.options = null;
         $scope.details = '';
 
-      /*  $scope.locationInput = document.getElementById("location");
-        $scope.autocomplete = new google.maps.places.Autocomplete($scope.locationInput);
-        $scope.autocomplete.bindTo('bounds', $scope.map);
-
-        google.maps.event.addListener($scope.autocomplete, 'place_changed', function() {
-            console.log('aut triggererd');
-            var place = autocomplete.getPlace();
-            console.log(place)
-
-        });*/
-
-
 // working with api
 
 		$http.get('../api/meetings')

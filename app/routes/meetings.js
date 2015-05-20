@@ -17,7 +17,7 @@ module.exports = function (app) {
 
 
 // get all meetings
-	app.get('/api/meetings', isLoggedIn, function (req, res) {
+	app.get('/api/meetings', function (req, res) {
 		Meeting.find({})
 			.populate('owner')
 			.populate({path: 'comments.owner', model: 'User'})
@@ -29,7 +29,7 @@ module.exports = function (app) {
 		});
 	});
 
-	app.post('/api/meetings', isLoggedIn, function (req, res) {
+	app.post('/api/meetings', function (req, res) {
 
 		Meeting.create({
 			title: req.body.title,
@@ -90,7 +90,7 @@ module.exports = function (app) {
 	// decline invitation
 
 
-	app.put('/decline/meetings/:id', isLoggedIn, function (req, res) {
+	app.put('/decline/meetings/:id', function (req, res) {
 
 		var userid = req.user.id.toString();
 		var update = {$pull: {invitedUsers: {_id: userid}}};
@@ -116,7 +116,7 @@ module.exports = function (app) {
 
 
 	// store user in meetings.joined
-	app.put('/join/meetings/:id', isLoggedIn, function (req, res) {
+	app.put('/join/meetings/:id', function (req, res) {
 
 		var userid = req.user.id.toString();
 		var update = {$addToSet: {joinedUsers: req.user}, $pull: {invitedUsers: {_id: userid}}};
@@ -140,7 +140,7 @@ module.exports = function (app) {
 	});
 
 	// and delete user from meetings.joined
-	app.put('/unjoin/meetings/:id', isLoggedIn, function (req, res) {
+	app.put('/unjoin/meetings/:id', function (req, res) {
 
 		var update = {$pull: {joinedUsers: {_id: req.user._id}}};
 
@@ -163,7 +163,7 @@ module.exports = function (app) {
 	});
 
 	//update a meeting
-	app.put('/api/meetings/:id', isLoggedIn, function (req, res) {
+	app.put('/api/meetings/:id', function (req, res) {
 		var meeting = req.meeting;
 		var id = req.params.id;
 		var update = {
@@ -202,7 +202,7 @@ module.exports = function (app) {
 	});
 
     //update meeting location
-    app.put('/changeLocation/meetings/:id', isLoggedIn, function (req, res) {
+    app.put('/changeLocation/meetings/:id', function (req, res) {
 		var id = mongoose.Types.ObjectId(req.params.id);
         var update = {
             $set: {
@@ -235,13 +235,13 @@ module.exports = function (app) {
 
 	// get single meeting
 
-	app.get('/api/meetings/:meetingId', isLoggedIn, function (req, res) {
+	app.get('/api/meetings/:meetingId', function (req, res) {
 		res.json(req.meeting);
 	});
 
 	//route to single meeting
 
-	app.get('/meetings/:meetingId', isLoggedIn, function (req, res) {
+	app.get('/meetings/:meetingId', function (req, res) {
 		res.render('meeting.ejs', {
 			meeting: req.meeting,
 			user: req.user,
@@ -251,7 +251,7 @@ module.exports = function (app) {
 	});
 
 	// delete a meeting
-	app.delete('/api/meetings/:meeting_id', isLoggedIn, function (req, res) {
+	app.delete('/api/meetings/:meeting_id', function (req, res) {
 		Meeting.remove({
 			_id: req.params.meeting_id
 		}, function (err, meeting) {
@@ -273,7 +273,7 @@ module.exports = function (app) {
 	});
 
 	// delete a meeting from single meeting page
-	app.delete('/remove/meetings/:meeting_id', isLoggedIn, function (req, res) {
+	app.delete('/remove/meetings/:meeting_id', function (req, res) {
 		Meeting.remove({
 			_id: req.params.meeting_id
 		}, function (err, meeting) {
@@ -288,7 +288,7 @@ module.exports = function (app) {
 	// =============================================================================
 
 	// add message to meetings
-	app.put('/addComment/meetings/:id', isLoggedIn, function (req, res) {
+	app.put('/addComment/meetings/:id', function (req, res) {
 
 		var update = {
 			$push: {
@@ -321,7 +321,7 @@ module.exports = function (app) {
 	});
 
 	// delete a comment
-	app.put('/delete/meetings/:id/comments/:commentId', isLoggedIn, function (req, res) {
+	app.put('/delete/meetings/:id/comments/:commentId', function (req, res) {
 		var update = {$pull: {comments: {_id: mongoose.Types.ObjectId(req.params.commentId)}}};
 		Meeting.findByIdAndUpdate(req.params.id, update, {safe: true, upsert: true}, function (err, meeting) {
 			if (!meeting) {

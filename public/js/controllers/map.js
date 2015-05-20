@@ -413,16 +413,18 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 					confirmButtonText: "Да",
 					cancelButtonText: "Нет",
 					closeOnConfirm: false},
-				function(){
-					$http.delete('../api/meetings/' + id)
-						.success(function (data) {
-							$scope.meetings = data;
-							console.log(data);
-						})
-						.error(function (data) {
-							console.log('Error: ' + data);
-						});
-					SweetAlert.swal("Мероприятие удалено!");
+				function(isConfirm){
+                    if(isConfirm){
+                        $http.delete('../api/meetings/' + id)
+                            .success(function (data) {
+                                $scope.meetings = data;
+                                console.log(data);
+                            })
+                            .error(function (data) {
+                                console.log('Error: ' + data);
+                            });
+                        SweetAlert.swal("Мероприятие удалено!");
+                    };
 				});
 
 
@@ -491,7 +493,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			var modalInstance = $modal.open({
 				templateUrl: './public/partials/editMeeting.tmpl.ejs',
 				controller: 'EditMeetingController',
-				size: size
+				size: size,
+                scope: $scope
 			});
 		};
 

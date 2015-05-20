@@ -59,16 +59,29 @@ module.exports = function (app) {
 	});
 
 	// delete a user
-	app.delete('/delete/:user_id', isLoggedIn, function (req, res) {
-		//Meeting.find({'_owner._id': req.params.user_id}).remove(function (err, meetings) {
-		//	if (err)
-		//		res.send(err);
+	app.delete('/users/delete/:id', isLoggedIn, function (req, res) {
+		//Meeting.find({'owner': req.params.user_id}).remove(function (err, meetings) {
+		//	if (err){
+        //        res.send(err);
+        //    };
+        //    log.info(meetings);
+
 			User.remove({
 				_id: req.params.user_id
 			}, function (err, user) {
-				if (err)
-					res.send(err);
-				res.redirect('/logout');
+				if (err){
+                    res.send(err);
+                };
+                log.info('User deleted');
+				//res.send('removed');
+                User.find({})
+                    .populate('notifications.owner')
+                    .populate({path: 'notifications.meeting', model: 'Meeting' })
+                    .exec(function (err, users) {
+                        if (err)
+                            res.send(err)
+                        res.json(users);
+                    });
 			});
 
 		//});
