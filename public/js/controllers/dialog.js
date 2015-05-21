@@ -129,9 +129,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
                 $scope.category = cat;
             };
             console.log($scope.category);
-        }
-
-		//$scope.initCategory = "entertainment";
+        };
 
 		$scope.defineCategory = function (category) {
 			if (category === 'Outdoor') {

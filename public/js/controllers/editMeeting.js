@@ -99,9 +99,14 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
             $scope.screenOne = ($scope.screenOne === true) ? false : true;
         };
 
-		// init necessary data
+        //geocoder
 
-		$scope.formData = {}
+        var geocoder = new google.maps.Geocoder();
+
+
+        // init necessary data
+
+		$scope.formData = {};
 
 		//get single meeting
 		$http.get('../api/meetings/' + $scope.meetingId)
@@ -114,17 +119,17 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 				//init formdata
 
 				$scope.formData = {
-					invitedUsers: meeting.invitedUsers,
                     joinedUsers: meeting.joinedUsers,
 					title: meeting.title,
 					description: meeting.description,
 					startDate: new Date(meeting.startDate),
 					updated_at: new Date(),
 					visibility: meeting.visibility,
-                    category: meeting.category,
                     location: meeting.location
-				}
+				};
 
+                $scope.category = meeting.category.value.en;
+                $scope.invitedUsers = meeting.invitedUsers;
 			})
 			.error(function (data) {
 				console.log('Error: ' + data);
@@ -191,6 +196,15 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
         $scope.minDate = new Date();
         $scope.showMeridian = false;
         $scope.format = 'yyyy/MM/dd';
+
+         $scope.selectCategory = function(cat){
+            if ($scope.category === cat){
+                $scope.category = null;
+            } else {
+                $scope.category = cat;
+            };
+            console.log($scope.category);
+        };
 
         $scope.defineCategory = function (category) {
             if (category === 'Outdoor') {
@@ -343,27 +357,6 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
             }
         };
 
-        //geocoder
-
-        var geocoder = new google.maps.Geocoder();
-
-        function codeLatLng() {
-            geocoder.geocode({'latLng': $scope.latLng}, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[0]) {
-                        $scope.formData.location = results[0].formatted_address;
-                        console.log(results);
-                    } else {
-                        console.log('No results found');
-                    }
-                } else {
-                    console.log('Geocoder failed due to: ' + status);
-                }
-            });
-        };
-
-        codeLatLng();
-
         $scope.codeAddress = function() {
             var sAddress = document.getElementById("location").value;
             geocoder.geocode( { 'address': sAddress}, function(results, status) {
@@ -386,7 +379,16 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
         $scope.options = null;
         $scope.details = '';
 
-		$scope.saveMeeting = function (id) {
+        $scope.okEdit = function () {
+            $scope.$modalInstance.close();
+        };
+
+        $scope.cancelEdit = function () {
+            $scope.$modalInstance.dismiss('cancel');
+        };
+
+		$scope.saveMeeting = function () {
+            console.log($scope.meetingId);
             // send invites if necessary
             if($scope.invitedUsers.length > 0 && $scope.formData.visibility === 'invite'){
                 $scope.formData.invitedUsers = $scope.invitedUsers;
@@ -396,11 +398,12 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
             };
 
             $scope.defineCategory($scope.category);
-			$http.put('../api/meetings/' + id, $scope.formData)
+			$http.put('../api/meetings/' + $scope.meetingId, $scope.formData)
 				.success(function (data) {
 					console.log($scope.formData);
 					$scope.meetings = data;
 					console.log(data);
+                    $scope.ok();
 				})
 				.error(function (data) {
 					console.log('Error: ', data);

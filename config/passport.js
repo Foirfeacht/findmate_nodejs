@@ -79,6 +79,7 @@ module.exports = function (passport) {
 							newUser.facebook.token = token;
 							newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
 							newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
+							newUser.facebook.gender = profile.gender;
 							newUser.facebook.image = 'https://graph.facebook.com/' + newUser.facebook.id + '/picture?height=350&width=250';
 							newUser.email = (profile.emails[0].value || '').toLowerCase();
 							newUser.name = profile.name.givenName + ' ' + profile.name.familyName;

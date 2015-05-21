@@ -90,7 +90,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			console.log($scope.meetings);
 		});
 
-		//map
+		//map 
 		$scope.$on('mapInitialized', function (event, map) {
 			$scope.defaultPos = new google.maps.LatLng(53.902407, 27.561621);
 			if (navigator.geolocation) {
@@ -474,14 +474,14 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		//edit service update
 
-		$scope.$watch('meetingId', function () {
+		/*$scope.$watch('meetingId', function () {
 			editService.getId($scope.meetingId, $scope.currentUser);
 		});
 
 		$scope.$on('valuesUpdated', function () {
 			$scope.meetingId = editService.meetingId;
 			$scope.currentUser = editService.user;
-		});
+		});*/
 
 		// edit meeting dialog
 		$scope.editMeeting = function (id) {
@@ -505,7 +505,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
         };
 
 		$scope.ok = function () {
-			$scope.$modalInstance.close($scope.formData);
+			$scope.$modalInstance.close();
 		};
 
 		$scope.cancel = function () {

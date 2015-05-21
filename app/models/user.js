@@ -13,7 +13,10 @@ var userSchema = new Schema({
 		token: String,
 		email: String,
 		name: String,
-		image: String
+		image: String,
+		gender: String,
+		locale: String
+		//user_likes: 
 	},
 
 	vkontakte: {
