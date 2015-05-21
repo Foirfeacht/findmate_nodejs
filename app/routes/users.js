@@ -60,11 +60,11 @@ module.exports = function (app) {
 
 	// delete a user
 	app.delete('/users/delete/:id', isLoggedIn, function (req, res) {
-		//Meeting.find({'owner': req.params.user_id}).remove(function (err, meetings) {
-		//	if (err){
-        //        res.send(err);
-        //    };
-        //    log.info(meetings);
+		Meeting.find({'owner': req.params.user_id}).remove(function (err, meetings) {
+			if (err){
+                res.send(err);
+            };
+            log.info(meetings);
 
 			User.remove({
 				_id: req.params.user_id
@@ -73,7 +73,7 @@ module.exports = function (app) {
                     res.send(err);
                 };
                 log.info('User deleted');
-				//res.send('removed');
+				res.send('removed');
                 User.find({})
                     .populate('notifications.owner')
                     .populate({path: 'notifications.meeting', model: 'Meeting' })
@@ -84,7 +84,7 @@ module.exports = function (app) {
                     });
 			});
 
-		//});
+		});
 
 	});
 

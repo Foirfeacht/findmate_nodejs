@@ -1,3 +1,4 @@
+<div class="messages-backdrop" ng-show="showMessageBox" ng-click="showMessageBox = !showMessageBox"></div>
 <md-toolbar class="md-default-theme header" sticky>
     <div class="menu-right-area">
         <md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i class="mdi mdi-menu"></i></md-button>
@@ -8,41 +9,47 @@
     </div>
     <div class="inbox-button">
             <i class="mdi mdi-email " ng-click="showMessageBox = !showMessageBox" ng-mouseover="showMessageBox"></i>
-            <div class="message-alert md-warn">
+            <div class="message-alert md-warn"  ng-show="( currentUser.notifications | filter:myFilter).length > 0">
                 <span>{{(currentUser.notifications | filter: invited).length}}</span>
             </div>
-            <div class="message-box" ng-show="showMessageBox">
-               <!-- <div><span class="mark-as-read">Пометить как прочитанное</a></div>-->
-                <div class="messagebox-message" ng-repeat="notification in currentUser.notifications | filter: invited | orderBy: '-created_at' | limitTo: 3">
-                    <div class="messagebox-icon">
-                        <img src="./public/images/{{notification.meeting.category.icon}}.png">
-                    </div><!-- end icon -->
-                    <div class="messagebox-content">
-                        <div>{{ notification.created_at | date: 'yyyy-MM-dd,
-                            HH:mm'}}</div>
-                        <div>Ваш друг {{ notification.owner.name }} приглашает вас принять участие в {{notification.meeting.title}}</div>
-                        <div><a href="meetings/{{notification.meeting._id}}">Показать на карте</a></div>
-                        <div>
-                            <md-button class="md-raised join-button" ng-click="declineInvitation(notification.meeting._id)"
-                                   ng-show="showButton(notification.meeting.invitedUsers)">Отклонить приглашение
-                            </md-button>
-                            <md-button class="md-raised join-button" ng-click="joinMeeting(notification.meeting._id)"
-                                       ng-show="!showButton(notification.meeting.joinedUsers)">Учавствовать
-                            </md-button>
-                            <md-button class="md-raised join-button" ng-click="unjoinMeeting(notification.meeting._id)"
-                                       ng-show="showButton(notification.meeting.joinedUsers)">Не учавствовать
-                            </md-button>
-                        </div>
-                        <div class="messagebox-delete" ng-click="deleteNotification(notification._id)">
-                            <span>X</span>
-                        </div>
-                    </div><!-- end messagebox content -->
-
-                </div><!-- end message -->
-                <div><a href="/messages">Показать все</a></div>
-            </div>
-
     </div>
 
 
 </md-toolbar>
+
+<div class="message-box" ng-show="showMessageBox">
+    <!-- <div><span class="mark-as-read">Пометить как прочитанное</a></div>-->
+    <span class="close-message-box">X</span>
+    <div class="alert alert-danger messagebox-empty" role="alert" ng-show="( currentUser.notifications | filter:myFilter).length > 0">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only"></span>
+        Новых уведомлений нет
+    </div>
+
+    <div class="messagebox-message" ng-repeat="notification in currentUser.notifications | filter: invited | orderBy: '-created_at' | limitTo: 3">
+        <div class="messagebox-icon">
+            <img src="./public/images/{{notification.meeting.category.icon}}.png">
+        </div><!-- end icon -->
+        <div class="messagebox-content">
+            <div>{{ notification.created_at | date: 'yyyy-MM-dd, HH:mm'}}</div>
+            <div>Ваш друг {{ notification.owner.name }} приглашает вас принять участие в {{notification.meeting.title}}</div>
+            <div><a href="meetings/{{notification.meeting._id}}">Показать на карте</a></div>
+            <div>
+                <md-button class="md-raised join-button" ng-click="declineInvitation(notification.meeting._id)"
+                           ng-show="showButton(notification.meeting.invitedUsers)">Отклонить приглашение
+                </md-button>
+                <md-button class="md-raised join-button" ng-click="joinMeeting(notification.meeting._id)"
+                           ng-show="!showButton(notification.meeting.joinedUsers)">Учавствовать
+                </md-button>
+                <md-button class="md-raised join-button" ng-click="unjoinMeeting(notification.meeting._id)"
+                           ng-show="showButton(notification.meeting.joinedUsers)">Не учавствовать
+                </md-button>
+            </div>
+            <div class="messagebox-delete" ng-click="deleteNotification(notification._id)">
+                <span>X</span>
+            </div>
+        </div><!-- end messagebox content -->
+
+    </div><!-- end message -->
+    <div ng-show="( currentUser.notifications | filter:myFilter).length > 0"><a href="/messages">Показать все</a></div>
+</div><!-- end message-box -->

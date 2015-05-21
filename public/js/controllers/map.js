@@ -490,7 +490,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		};
 
 		$scope.showEditDialog = function (size) {
-			var modalInstance = $modal.open({
+			$scope.modalInstance = $modal.open({
 				templateUrl: './public/partials/editMeeting.tmpl.ejs',
 				controller: 'EditMeetingController',
 				size: size,
