@@ -10,6 +10,25 @@
     width: 80%;
     margin: 0 auto;
     min-width: 400px;
+    position: relative;
+
+  .meeting-header {
+    width: 100%;
+  }
+
+  .meeting-icon {
+    top: 10px;
+    right: 60px;
+  }
+
+  .md-button.md-fab.edit-button {
+    right: 10px;
+    top: 10px;
+  }
+}
+
+.single-meeting-content {
+  margin-top: 20px;
 }
 
 .comments {

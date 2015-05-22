@@ -153,6 +153,8 @@ a:hover {
   text-align: right;
   width: 100%;
   margin-right: 25px; }
+  .close-message-box:hover {
+    cursor: pointer; }
 
 .inbox-button:hover .message-box {
   display: block; }
@@ -772,13 +774,65 @@ map {
 .md-button.md-default-theme.md-fab.party-filter:not([disabled]):focus .party-filter-icon {
   background: url("../images/filter icons/party.png") no-repeat 0 0; }
 
+/** date filters **/
+.date-filters {
+  position: absolute;
+  left: 50%;
+  z-index: 1000;
+  width: 392px;
+  margin-left: -196px;
+  overflow: hidden;
+  border: 1px solid #7e57c2;
+  border-radius: 5px; }
+
+.date-filter {
+  border-right: 1px solid #7e57c2;
+  color: #7e57c2;
+  padding: 5px 0;
+  float: left;
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: 700;
+  width: 130px; }
+  .date-filter:last-child {
+    border: none; }
+  .date-filter:hover {
+    background: #7e57c2;
+    color: #fff;
+    cursor: pointer; }
+
+.date-filter-active {
+  background: #7e57c2;
+  color: #fff; }
+
+.date-filters-fixed {
+  position: fixed; }
+
+.date-filters-slider-closed {
+  top: 100px;
+  -webkit-transition: ease-in-out .5s all;
+  transition: ease-in-out .5s all; }
+
+.date-filters-slider-open {
+  top: 240px;
+  -webkit-transition: ease-in-out .5s all;
+  transition: ease-in-out .5s all; }
+
 /* =============================
    ========== MEETING ==========
    ============================= */
-.meeting-display {
+.meetings-display {
   width: 95%;
   overflow: hidden;
-  padding: 0 20px; }
+  padding: 0 20px;
+  margin-top: 50px;
+  -webkit-transition: ease-in-out .5s all;
+  transition: ease-in-out .5s all; }
+
+.meeting-display-filter-open {
+  margin-top: 150px;
+  -webkit-transition: ease-in-out .5s all;
+  transition: ease-in-out .5s all; }
 
 .meeting {
   width: 30%;
@@ -1053,7 +1107,19 @@ map {
 .single-meeting {
   width: 80%;
   margin: 0 auto;
-  min-width: 400px; }
+  min-width: 400px;
+  position: relative; }
+  .single-meeting .meeting-header {
+    width: 100%; }
+  .single-meeting .meeting-icon {
+    top: 10px;
+    right: 60px; }
+  .single-meeting .md-button.md-fab.edit-button {
+    right: 10px;
+    top: 10px; }
+
+.single-meeting-content {
+  margin-top: 20px; }
 
 .comments {
   width: 50%; }

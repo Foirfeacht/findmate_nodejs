@@ -2,10 +2,19 @@
    ========== MEETING ==========
    ============================= */
 
-.meeting-display {
+.meetings-display {
   width: 95%;
   overflow: hidden;
   padding: 0 20px;
+  margin-top: 50px;
+  -webkit-transition: ease-in-out .5s all;
+  transition: ease-in-out .5s all;
+}
+
+.meeting-display-filter-open {
+  margin-top: 150px;
+  -webkit-transition: ease-in-out .5s all;
+  transition: ease-in-out .5s all;
 }
 
 .meeting {

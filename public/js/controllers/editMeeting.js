@@ -25,10 +25,10 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                                     if (id === friend.id) {
                                         fbUser.friend = "Facebook"
                                         $scope.friendUsers.push(fbUser);
-                                    };
-                                };
-                            };
-                        };
+                                    }
+                                }
+                            }
+                        }
                     })
                     .error(function (data) {
                         console.log('Error: ' + data);
@@ -56,10 +56,10 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                                     if (friend == id) {
                                         vkUser.friend = "Вконтакте";
                                         $scope.friendUsers.push(vkUser);
-                                    };
-                                };
-                            };
-                        };
+                                    }
+                                }
+                            }
+                        }
                     })
                     .error(function (data) {
                         console.log('Error: ' + data);
@@ -150,7 +150,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 				.error(function (data) {
 					console.log('Error: ' + data);
 				});
-		}
+		};
 
 
 		$scope.friendUsers = [];
@@ -202,7 +202,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                 $scope.category = null;
             } else {
                 $scope.category = cat;
-            };
+            }
             console.log($scope.category);
         };
 
@@ -215,7 +215,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                     },
                     icon: 'outdoor'
                 };
-            };
+            }
             if (category === 'Sport') {
                 $scope.formData.category = {
                     value: {
@@ -224,7 +224,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                     },
                     icon: 'sport'
                 };
-            };
+            }
             if (category === 'Party') {
                 $scope.formData.category = {
                     value: {
@@ -233,7 +233,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                     },
                     icon: 'party'
                 };
-            };
+            }
             if (category === 'Movies') {
                 $scope.formData.category = {
                     value: {
@@ -242,7 +242,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                     },
                     icon: 'cinema'
                 };
-            };
+            }
             if (category === 'Exhibition') {
                 $scope.formData.category = {
                     value: {
@@ -251,7 +251,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                     },
                     icon: 'exhibition'
                 };
-            };
+            }
             if (category === 'Music') {
                 $scope.formData.category = {
                     value: {
@@ -260,7 +260,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                     },
                     icon: 'music'
                 };
-            };
+            }
             if (category === 'Theater') {
                 $scope.formData.category = {
                     value: {
@@ -269,7 +269,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                     },
                     icon: 'theater'
                 };
-            };
+            }
             if (category === 'Open Air Activity') {
                 $scope.formData.category = {
                     value: {
@@ -278,7 +278,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                     },
                     icon: 'openair'
                 };
-            };
+            }
             if (category === 'Restaurant/Cafe') {
                 $scope.formData.category = {
                     value: {
@@ -287,7 +287,7 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                     },
                     icon: 'food'
                 };
-            };
+            }
         };
 
 
@@ -392,10 +392,13 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
             // send invites if necessary
             if($scope.invitedUsers.length > 0 && $scope.formData.visibility === 'invite'){
                 $scope.formData.invitedUsers = $scope.invitedUsers;
-            };
+            }
             if($scope.formData.visibility === 'friends'){
                 $scope.formData.invitedUsers = $scope.friendUsers;
-            };
+            }
+			if($scope.formData.visibility === 'all'){
+				$scope.formData.invitedUsers = [];
+			}
 
             $scope.defineCategory($scope.category);
 			$http.put('../api/meetings/' + $scope.meetingId, $scope.formData)

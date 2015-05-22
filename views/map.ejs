@@ -100,6 +100,18 @@
         </div>
     </div>
 
+    <div class="date-filters" ng-class="{'date-filters-fixed' : viewMode === 'map', 'date-filters-slider-open' : showFilterArea, 'date-filters-slider-closed' : !showFilterArea}">
+        <div class="date-filter" ng-click="selectDateFilter('today')" ng-class="{'date-filter-active': selectedDateFilter === 'today'}">
+            Сегодня
+        </div>
+        <div class="date-filter" ng-click="selectDateFilter('tomorrow')" ng-class="{'date-filter-active': selectedDateFilter === 'tomorrow'}">
+            Завтра
+        </div>
+        <div class="date-filter" ng-click="selectDateFilter('all')" ng-class="{'date-filter-active': selectedDateFilter === 'all'}">
+            Любое время
+        </div>
+    </div>
+
     <% include partials/map %>
     <% include partials/list %>
 

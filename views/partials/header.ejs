@@ -2,7 +2,7 @@
 <md-toolbar class="md-default-theme header" sticky>
     <div class="menu-right-area">
         <md-button class="menu-button md-fab md-primary" id="menu-button" ng-click="toggleNav()"><i class="mdi mdi-menu"></i></md-button>
-        <i class="mdi mdi-menu menu-mobile"></i>
+        <i class="mdi mdi-menu menu-mobile" ng-click="toggleNav()"></i>
     </div>
     <div class="logo">
         <h1>City<i class="mdi mdi-map-marker"></i>ibe</h1>
@@ -19,7 +19,7 @@
 
 <div class="message-box" ng-show="showMessageBox">
     <!-- <div><span class="mark-as-read">Пометить как прочитанное</a></div>-->
-    <span class="close-message-box">X</span>
+    <span class="close-message-box" ng-click="showMessageBox  = !showMessageBox">X</span>
     <div class="alert alert-danger messagebox-empty" role="alert" ng-show="( currentUser.notifications | filter:myFilter).length > 0">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only"></span>

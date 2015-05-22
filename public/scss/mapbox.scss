@@ -562,3 +562,56 @@ map {
   background: url("../images/filter icons/party.png") no-repeat 0 0;
 }
 
+/** date filters **/
+.date-filters {
+  position: absolute;
+  left: 50%;
+  z-index: 1000;
+  width: 392px;
+  margin-left: -196px;
+  overflow: hidden;
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+
+}
+
+.date-filter {
+  border-right: 1px solid $primary-color;
+  color: $primary-color;
+  padding: 5px 0;
+  float: left;
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: 700;
+  width: 130px;
+
+  &:last-child {
+    border: none;
+  }
+  &:hover {
+    background: $primary-color;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+.date-filter-active {
+  background: $primary-color;
+  color: #fff;
+}
+
+.date-filters-fixed {
+  position: fixed;
+}
+
+.date-filters-slider-closed {
+  top: 100px;
+  -webkit-transition: ease-in-out .5s all;
+  transition: ease-in-out .5s all;
+}
+
+.date-filters-slider-open {
+  top: 240px;
+  -webkit-transition: ease-in-out .5s all;
+  transition: ease-in-out .5s all;
+}

@@ -1,4 +1,4 @@
-<div class="meetings-display animate-show" ng-show='viewMode ==="list"'>
+<div class="meetings-display animate-show" ng-show='viewMode ==="list"' ng-class="{'meeting-display-filter-open': showFilterArea}">
 
 
     <div class="meeting"
@@ -32,16 +32,6 @@
             </div>
 
         </div>
-            <!--
-<div layout="row" class="meeting-title"><strong>Название: &nbsp;</strong> <a
-        href="meetings/{{meeting._id}}"> {{ meeting.title}}</a></div>
-<div layout="row"><strong>Описание:&nbsp; </strong> {{ meeting.description }}</div>
-<div layout="row"><strong>Организатор: </strong>&nbsp;<a href="users/{{meeting.owner._id}}">{{ meeting.owner.name }}</a></div>
-<div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
-<div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong>
-    {{meeting.updated}}
-</div>-->
-
         <div class="meeting-userlist" ng-if="meeting.joinedUsers.length > 0">
 
             <h6>Участники</h6>

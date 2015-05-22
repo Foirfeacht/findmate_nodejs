@@ -293,6 +293,64 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 			return false;
 		}
 
+		socket.on('push notification added', function (data) {
+			console.log(data.msg);
+
+			if(data.msg._id === $scope.currentUser._id){
+				$http.get('/current_user')
+					.success(function (data) {
+						$scope.currentUser = data;
+						$scope.showNotification();
+					})
+					.error(function (data) {
+						console.log('Error: ' + data);
+					});
+			}
+		});
+
+		socket.on('push notification about update', function (data) {
+			console.log(data.msg);
+
+			if(data.msg._id === $scope.currentUser._id){
+				$http.get('/current_user')
+					.success(function (data) {
+						$scope.currentUser = data;
+						$scope.showUpdateNotification();
+					})
+					.error(function (data) {
+						console.log('Error: ' + data);
+					});
+			}
+		});
+
+		$scope.redirectToMeeting = function (location) {
+			window.location.href = "meetings/" + location;
+		};
+
+		//notification
+		$scope.showNotification = function() {
+			$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+			console.log($scope.addedNotification);
+			$scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml('<h1>' + $scope.addedNotification.meeting.title + '</h1>');
+			toastr.info( 'У вас новое приглашение!',
+				'<div ng-bind-html="thisCanBeusedInsideNgBindHtml"></div>', {
+					allowHtml: true
+					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
+				});
+		};
+
+		//updated notification
+		$scope.showUpdateNotification = function() {
+			$scope.addedNotification = $scope.currentUser.notifications[$scope.currentUser.notifications.length - 1];
+			console.log($scope.addedNotification);
+			$scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml('<h1>' + $scope.addedNotification.meeting.title + '</h1>');
+			toastr.info( 'Встреча изменена!',
+				'<div ng-bind-html="thisCanBeusedInsideNgBindHtml"></div>', {
+					allowHtml: true
+					//onclick: $scope.redirectToMeeting($scope.addedNotification.meeting._id)
+				});
+		};
+
 		$scope.deleteNotification = function(id){
 			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
 				.success(function (data) {
@@ -301,19 +359,6 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 					console.log('Error: ' + data);
 				});
 		};
-
-		$scope.declineNotification = function(id, meetingId){
-			$http.put('/declineNotification/users/' + $scope.currentUser._id + '/notifications/' + id + '/' + meetingId)
-				.success(function (data) {
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
-		};
-
-		socket.on('push notification removed', function (data) {
-			$scope.currentUser = data.msg;
-		});
 
 		//notification service update
 		$scope.$watch('addedNotification', function () {
@@ -324,5 +369,13 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 		$scope.$on('notificationUpdated', function () {
 			$scope.addedNotification = editService.notification;
 		});
+
+		$scope.checkOwner = function (id) {
+			var userId = $scope.currentUser._id;
+			if(id === userId){
+				return true;
+			};
+			return false;
+		};
 
 	}]);

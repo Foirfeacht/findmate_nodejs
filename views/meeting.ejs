@@ -6,25 +6,27 @@
 
 <!--=============================== main content ===============================-->
 <div class="content" layout="row">
+
     <div class="singlemeeting-display">
 
         <div class="single-meeting">
-            <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{
-                    meeting.title}}</a></div>
-            <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
-            <div layout="row"><strong>Категория: </strong> {{ meeting.category.value.ru }}</div>
-            <div layout="row"><a href="users/{{meeting.owner._id}}">{{ meeting.owner.name }}</a></div>
-            <div layout="row"><strong>Дата и время: &nbsp;</strong> {{ meeting.startDate | date: 'yyyy-MM-dd, HH:mm'}}
-            </div>
-            <div layout="row"><strong>Создано: </strong> {{meeting.created}}</div>
-            <div layout="row" ng-if="meeting.updated_at !== null"><strong>Изменено: </strong> {{meeting.updated}}</div>
-
-            <h6>Приглашенные</h6>
-
-            <div layout="row" class="userlist">
-                <div ng-repeat="user in meeting.invitedUsers | limitTo: 5">
-                    <img src="{{user.image}}" alt="{{user.name }}">
+            <div class="meeting-header">
+                <div class="meeting-date-container">
+                    <div class="meeting-date"><i class="mdi mdi-calendar-text"></i> {{ meeting.startDate | date: 'd MMMM yyyy'}}</div>
+                    <div class="meeting-time"><i class="mdi mdi-clock"></i> {{ meeting.startDate | date: 'HH:mm'}}</div>
                 </div>
+
+                <div class="meeting-icon">
+                    <img src="../public/images/{{meeting.category.icon}}.png" alt="{{meeting.category.value.ru }}">
+                </div>
+            </div>
+
+            <div class="single-meeting-content">
+
+                <div layout="row" class="meeting-title"><strong>Название: </strong> <a href="meetings/{{meeting._id}}"> {{
+                        meeting.title}}</a></div>
+                <div layout="row"><strong>Описание: </strong> {{ meeting.description }}</div>
+            <div layout="row"><a href="users/{{meeting.owner._id}}">{{ meeting.owner.name }}</a></div>
             </div>
 
             <h6>Участники</h6>
@@ -36,13 +38,13 @@
             </div>
             <div layout="row">
                 <md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)"
-                           ng-if="currentUser._id === meeting.owner._id">Удалить
+                           ng-show="checkOwner(meeting.owner._id)">Удалить
                 </md-button>
                 <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)"
                            ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение
                 </md-button>
                 <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)"
-                           ng-show="!showButton(meeting.joinedUsers)">Учавствовать
+                           ng-show="!showButton(meeting.joinedUsers)" ng-if="meeting.owner._id != currentUser._id">Учавствовать
                 </md-button>
                 <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)"
                            ng-show="showButton(meeting.joinedUsers)">Не учавствовать

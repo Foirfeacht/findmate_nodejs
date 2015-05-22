@@ -19,12 +19,12 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 								for (var u = 0; u < friendsLength; u++) {
 									var friend = friends[u];
 									if (id === friend.id) {
-										fbUser.friend = "Facebook"
+										fbUser.friend = "Facebook";
 										$scope.friendUsers.push(fbUser);
-									};
-								};
-							};
-						};
+									}
+								}
+							}
+						}
 					})
 					.error(function (data) {
 						console.log('Error: ' + data);
@@ -52,10 +52,10 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 									if (friend == id) {
 										vkUser.friend = "Вконтакте";
 										$scope.friendUsers.push(vkUser);
-									};
-								};
-							};
-						};
+									}
+								}
+							}
+						}
 					})
 					.error(function (data) {
 						console.log('Error: ' + data);
@@ -82,7 +82,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
         $scope.screenOne = true;
 
         $scope.changeScreen = function(){
-            $scope.screenOne = ($scope.screenOne === true) ? false : true;
+            $scope.screenOne = $scope.screenOne !== true;
         };
 
 
@@ -100,7 +100,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					return 'Facebook';
 				} else {
 					return 'Вконтакте';
-				};
+				}
 			}
 		};
 
@@ -140,7 +140,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					},
 					icon: 'outdoor'
 				};
-			};
+			}
 			if (category === 'Sport') {
 				$scope.formData.category = {
 					value: {
@@ -149,7 +149,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					},
 					icon: 'sport'
 				};
-			};
+			}
 			if (category === 'Party') {
 				$scope.formData.category = {
 					value: {
@@ -158,7 +158,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					},
 					icon: 'party'
 				};
-			};
+			}
 			if (category === 'Movies') {
 				$scope.formData.category = {
 					value: {
@@ -167,7 +167,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					},
 					icon: 'cinema'
 				};
-			};
+			}
 			if (category === 'Exhibition') {
 				$scope.formData.category = {
 					value: {
@@ -176,7 +176,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					},
 					icon: 'exhibition'
 				};
-			};
+			}
 			if (category === 'Music') {
 				$scope.formData.category = {
 					value: {
@@ -185,7 +185,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					},
 					icon: 'music'
 				};
-			};
+			}
 			if (category === 'Theater') {
 				$scope.formData.category = {
 					value: {
@@ -194,7 +194,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					},
 					icon: 'theater'
 				};
-			};
+			}
 			if (category === 'Open Air Activity') {
 				$scope.formData.category = {
 					value: {
@@ -203,7 +203,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					},
 					icon: 'openair'
 				};
-			};
+			}
 			if (category === 'Restaurant/Cafe') {
 				$scope.formData.category = {
 					value: {
@@ -212,7 +212,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 					},
 					icon: 'food'
 				};
-			};
+			}
 		};
 
 
@@ -346,10 +346,13 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
             // send invites if necessary
             if($scope.invitedUsers.length > 0 && $scope.formData.visibility === 'invite'){
                 $scope.formData.invitedUsers = $scope.invitedUsers;
-            };
+            }
             if($scope.formData.visibility === 'friends'){
                 $scope.formData.invitedUsers = $scope.friendUsers;
-            };
+            }
+			if($scope.formData.visibility === 'all'){
+				$scope.formData.invitedUsers = [];
+			}
 
 			$scope.defineCategory($scope.category);
 			$http.post('../api/meetings', $scope.formData)
@@ -365,7 +368,7 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 		//datepicker
 		$scope.formData.startTime = new Date();
 
-        $scope.openDate = false
+        $scope.openDate = false;
 
         $scope.openCalendar = function(e) {
             e.preventDefault();

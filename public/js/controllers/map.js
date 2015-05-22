@@ -1,8 +1,8 @@
 // map controller
 // public/map.js
 
-findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr', '$sce', 'SweetAlert', 'editService',
-	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce, SweetAlert, editService) {
+findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal', '$mdToast', '$animate', 'notificationService', 'toastr', '$sce', 'SweetAlert', 'editService', 'moment',
+	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce, SweetAlert, editService, moment) {
 
 
 		$scope.friendUsers = [];
@@ -406,7 +406,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		$scope.deleteMeeting = function (id) {
 			SweetAlert.swal({
 					title: "Вы уверены?",
-					text: "Участники будут оповещены, что мероприятие не состоится!",
+					text: "Участники будут оповещены, что мероприятие не состоится",
 					type: "warning",
 					showCancelButton: true,
 					confirmButtonColor: "#DD6B55",
@@ -423,7 +423,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
                             .error(function (data) {
                                 console.log('Error: ' + data);
                             });
-                        SweetAlert.swal("Мероприятие удалено!");
+                        SweetAlert.swal("Мероприятие удалено");
                     };
 				});
 
@@ -490,7 +490,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		};
 
 		$scope.showEditDialog = function (size) {
-			$scope.modalInstance = $modal.open({
+			$scope.$modalInstance = $modal.open({
 				templateUrl: './public/partials/editMeeting.tmpl.ejs',
 				controller: 'EditMeetingController',
 				size: size,
@@ -552,8 +552,10 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			} else {
 				var distance = google.maps.geometry.spherical.computeDistanceBetween($scope.defaultPos, position);
 			};
-			if (distance < $scope.currentUser.settings.distance){
-				return true
+			if($scope.currentUser){
+				if (distance < $scope.currentUser.settings.distance){
+					return true
+				};
 			};
 			return false;
 		};
@@ -708,6 +710,38 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			};
 			return true;
 		};
+
+		//date filters
+		$scope.selectedDateFilter = 'all';
+
+		$scope.selectDateFilter = function(filter){
+			$scope.selectedDateFilter = filter;
+			console.log($scope.selectedDateFilter);
+		};
+
+		$scope.filterByDate = function (meeting) {
+			var dateNow = moment();
+			var tomorrow = dateNow.add(1, 'days');
+			var day = moment(meeting.startDate);
+			if ($scope.selectedDateFilter === 'today'){
+				//if (day.getDay === dayNow && day.getMonth() === monthNow && day.getFullYear() === yearNow && meeting.startDate > dateNow){
+				if(day.isSame(dateNow, 'day')){
+					console.log(day.diff(dateNow, 'days'));
+					return true;
+				}
+				return false;
+			}
+			if ($scope.selectedDateFilter === 'tomorrow'){
+				if(day.isSame(tomorrow, 'day')){
+					console.log(day.diff(tomorrow, 'days'));
+					return true;
+				}
+				return false;
+			}
+			return true;
+
+		};
+
 
 
 		$scope.mapStyles = {
