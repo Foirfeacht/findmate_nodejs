@@ -17,6 +17,28 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
 
 		$scope.getCurrentUser();
 
+        //follow user
+        $scope.followUser = function (id) {
+            $http.put('/follow/users/' + id)
+                .success(function (data) {
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+            $scope.getCurrentUser();
+        };
+
+        //follow user
+        $scope.unfollowUser = function (id) {
+            $http.put('/unfollow/users/' + id)
+                .success(function (data) {
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+            $scope.getCurrentUser();
+        };
+
 		// decline invitation
 		$scope.declineInvitation = function (id) {
 			$http.put('/decline/meetings/' + id)
@@ -37,7 +59,6 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
 					console.log('Error: ' + data);
 				});
 			$scope.getCurrentUser();
-
 		};
 
 		// unjoin meeting

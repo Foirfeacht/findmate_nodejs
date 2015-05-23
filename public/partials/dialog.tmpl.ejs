@@ -13,7 +13,7 @@
         <section layout-align="center center">
             <md-input-container class="dialog-title">
                 <label>Название встречи</label>
-                <input type="text" ng-model="formData.title" ng-required>
+                <input type="text" ng-model="formData.title" ng-required  ng-required ng-maxlength="30">
             </md-input-container>
         </section>
 
@@ -21,7 +21,7 @@
 
                 <md-input-container>
                     <label>Описание встречи</label>
-                    <textarea ng-model="formData.description"></textarea>
+                    <textarea ng-model="formData.description" ng-maxlength="180"></textarea>
                 </md-input-container>
         </section>
 
@@ -31,13 +31,28 @@
                 <md-input-container md-no-float class="address" >
 
                     <md-icon class="mdi mdi-map-marker"></md-icon>
-                    <input type="text" ng-model="formData.location" ng-required id="location" ng-blur="codeAddress()" g-places-autocomplete>
+                    <input type="text" ng-model="formData.location"
+                           ng-required id="location"
+                           ng-blur="codeAddress()"
+                           g-places-autocomplete
+                           ng-required>
                 </md-input-container>
             </div>
             <div class="date-picker">
                 <md-input-container md-no-float class="date-input">
                     <md-icon class="mdi mdi-calendar"></md-icon>
-                    <input type="text" ng-focus="openCalendar($event)" datetime-picker="dd MMM yyyy HH:mm" minute-step="mstep" datepicker-options="dateOptions" ng-model="formData.startDate" is-open="openDate" />
+                    <input type="text"
+                           ng-focus="openCalendar($event)"
+                           datetime-picker="dd MMM yyyy HH:mm"
+                           minute-step=15
+                           min-date="minDate"
+                           datepicker-options="dateOptions"
+                           ng-model="formData.startDate"
+                           is-open="openDate"
+                           close-text="Закрыть"
+                           init-date="initDate"
+                           show-meridian=false
+                           ng-required />
                 </md-input-container>
             </div>
         </section>
@@ -75,34 +90,6 @@
                 </div>
 
             </div>
-
-            <!--<div class="dropdown-wrap">
-                <span class="caret"></span>
-                <select class="form-control" placeholder="Выберите категорию" ng-model="formData.category">
-                    <option value="{{category.value.en}}" ng-repeat="category in categories">
-                        <span class="list-icon"><img src="../public/images/{{category.icon}}.png"/></span>
-                        {{category.value.ru}}
-                    </option>
-                </select>
-
-            </div>-->
-
-        </section>
-
-       <!-- <div class="date-header">Время и день</div>-->
-        <!-- <section class="datetime-pickers" layout="row" layout-sm="column" layout-align="center center">
-         <div>
-                <datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="hstep" minute-step="mstep"
-                                ng-model="formData.startDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy"
-                                date-options="dateOptions" date-disabled="disabled(date, mode)"
-                                readonly-time="false"></datetimepicker>
-            </div>
-            <time-date-picker ng-model="formData.startDate"></time-date-picker>
-
-
-        </section>-->
-        <section>
-
         </section>
 
     </div><!-- end screen one -->

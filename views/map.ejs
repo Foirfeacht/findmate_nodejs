@@ -15,7 +15,35 @@
 </div>
 
 <div class="search-button">
-    <i class="mdi mdi-magnify " ng-click="showSearchPanel = !showSearchPanel" ng-mouseover="showSearchPanel"></i>
+    <i class="mdi mdi-magnify " ng-click="showSearchPanel = !showSearchPanel" ng-mouseover="showSearchPanel" aria-label="Search"></i>
+</div>
+
+<div class="options-box" ng-show="showOptions">
+    <div class="option-box-option">
+        <md-checkbox ng-model="featuredFilter" aria-label="Рекомендованные">
+            Рекомендованные
+        </md-checkbox>
+    </div>
+    <div class="option-box-option">
+        <md-checkbox ng-model="toggleCurrentUserFilter" aria-label="Мои">
+            Мои
+        </md-checkbox>
+    </div>
+    <div class="option-box-option">
+        <md-checkbox ng-model="toggleFriendsFilter" aria-label="Друзья">
+            Друзья
+        </md-checkbox>
+    </div>
+    <div class="option-box-option">
+        <md-checkbox ng-model="toggleInvited" aria-label="Приглашения">
+            Приглашения
+        </md-checkbox>
+    </div>
+    <div class="option-box-option">
+        <md-checkbox ng-model="toggleJoined" aria-label="Учавствую" ng-checked="toggleJoined">
+            Учавствую
+        </md-checkbox>
+    </div>
 </div>
 
 <div class="content" >
@@ -33,23 +61,47 @@
         </div>-->
         <div class="map-filters">
             <div class="map-filter">
-                <md-button class="md-fab featured-filter" ng-click="toggleFeatured = !toggleFeatured" ng-class="{ 'md-raised' : !toggleFeatured }"><i class="mdi mdi-star"></i></md-button>
+                <md-button class="md-fab featured-filter"
+                           ng-click="toggleFeatured = !toggleFeatured"
+                           ng-class="{ 'md-raised' : !toggleFeatured }"
+                           aria-label="Featured">
+                    <i class="mdi mdi-star"></i>
+                </md-button>
                 <div class="filter-title">Featured</div>
             </div>
             <div class="map-filter">
-                <md-button class="md-fab currentuser-filter" ng-click="toggleCurrentUserFilter = !toggleCurrentUserFilter" ng-class="{ 'md-raised' : !toggleCurrentUserFilter }"><i class="mdi mdi-account"></i></md-button>
+                <md-button class="md-fab currentuser-filter"
+                           ng-click="toggleCurrentUserFilter = !toggleCurrentUserFilter"
+                           ng-class="{ 'md-raised' : !toggleCurrentUserFilter }"
+                           aria-label="Мои">
+                    <i class="mdi mdi-account"></i>
+                </md-button>
                 <div class="filter-title">Мои</div>
             </div>
             <div class="map-filter">
-                <md-button class="md-fab friends-filter" ng-click="toggleFriendsFilter = !toggleFriendsFilter" ng-class="{ 'md-raised' : !toggleFriendsFilter }"><i class="mdi mdi-account-multiple"></i></md-button>
+                <md-button class="md-fab friends-filter"
+                           ng-click="toggleFriendsFilter = !toggleFriendsFilter"
+                           ng-class="{ 'md-raised' : !toggleFriendsFilter }"
+                           aria-label="Друзья">
+                    <i class="mdi mdi-account-multiple"></i>
+                </md-button>
                 <div class="filter-title">Друзья</div>
             </div>
             <div class="map-filter">
-                <md-button class="md-fab invited-filter" ng-click="toggleInvited = !toggleInvited" ng-class="{ 'md-raised' : !toggleInvited}"><i class="mdi mdi-account-plus"></i></md-button>
+                <md-button class="md-fab invited-filter"
+                           ng-click="toggleInvited = !toggleInvited"
+                           ng-class="{ 'md-raised' : !toggleInvited}"
+                           aria-label="Приглашения">
+                    <i class="mdi mdi-account-plus"></i></md-button>
                 <div class="filter-title">Приглашения</div>
             </div>
             <div class="map-filter">
-                <md-button class="md-fab joined-filter" ng-click="toggleJoined = !toggleJoined" ng-class="{ 'md-raised' : !toggleJoined}"><i class="mdi mdi-account-check"></i></md-button>
+                <md-button class="md-fab joined-filter"
+                           ng-click="toggleJoined = !toggleJoined"
+                           ng-class="{ 'md-raised' : !toggleJoined}"
+                           aria-label="Участвую">
+                    <i class="mdi mdi-account-check"></i>
+                </md-button>
                 <div class="filter-title">Учавствую</div>
             </div>
         </div>
@@ -72,31 +124,31 @@
 
     <div class="category-filters" ng-class="{'search-active' : showSearchPanel}">
         <div class="category-filter">
-            <md-button class="md-fab" ng-click="toggleSports = !toggleSports" ng-class="{ 'md-raised' : !toggleSports, 'sports-filter': toggleSports }"><span class="sports-filter-icon"></span></md-button>
+            <md-button class="md-fab" ng-click="toggleSports = !toggleSports" ng-class="{ 'md-raised' : !toggleSports, 'sports-filter': toggleSports }" aria-label="Sports"><span class="sports-filter-icon"></span></md-button>
         </div>
         <div class="category-filter">
-            <md-button class="md-fab" ng-click="toggleOutdoor = !toggleOutdoor" ng-class="{ 'md-raised' : !toggleOutdoor, 'outdoor-filter': toggleOutdoor }"><span class="outdoor-filter-icon"></span></md-button>
+            <md-button class="md-fab" ng-click="toggleOutdoor = !toggleOutdoor" ng-class="{ 'md-raised' : !toggleOutdoor, 'outdoor-filter': toggleOutdoor }" aria-label="Outdoor"><span class="outdoor-filter-icon"></span></md-button>
         </div>
         <div class="category-filter">
-            <md-button class="md-fab" ng-click="toggleOpenair = !toggleOpenair" ng-class="{ 'md-raised' : !toggleOpenair, 'openair-filter': toggleOpenair }"><span class="openair-filter-icon"></span></md-button>
+            <md-button class="md-fab" ng-click="toggleOpenair = !toggleOpenair" ng-class="{ 'md-raised' : !toggleOpenair, 'openair-filter': toggleOpenair }" aria-label="Open Air"><span class="openair-filter-icon"></span></md-button>
         </div>
         <div class="category-filter">
-            <md-button class="md-fab" ng-click="toggleMovies = !toggleMovies" ng-class="{ 'md-raised' : !toggleMovies, 'cinema-filter': toggleMovies }"><span class="cinema-filter-icon"></span></md-button>
+            <md-button class="md-fab" ng-click="toggleMovies = !toggleMovies" ng-class="{ 'md-raised' : !toggleMovies, 'cinema-filter': toggleMovies }" aria-label="Movies"><span class="cinema-filter-icon"></span></md-button>
         </div>
         <div class="category-filter">
-            <md-button class="md-fab" ng-click="toggleExhibition = !toggleExhibition" ng-class="{ 'md-raised' : !toggleExhibition, 'exhibition-filter': toggleExhibition }"><span class="exhibition-filter-icon"></span></md-button>
+            <md-button class="md-fab" ng-click="toggleExhibition = !toggleExhibition" ng-class="{ 'md-raised' : !toggleExhibition, 'exhibition-filter': toggleExhibition }" aria-label="Exhibition"><span class="exhibition-filter-icon"></span></md-button>
         </div>
         <div class="category-filter">
-            <md-button class="md-fab" ng-click="toggleTheater = !toggleTheater" ng-class="{ 'md-raised' : !toggleTheater, 'theater-filter': toggleTheater }"><span class="theater-filter-icon"></span></md-button>
+            <md-button class="md-fab" ng-click="toggleTheater = !toggleTheater" ng-class="{ 'md-raised' : !toggleTheater, 'theater-filter': toggleTheater }" aria-label="Theater"><span class="theater-filter-icon"></span></md-button>
         </div>
         <div class="category-filter">
-            <md-button class="md-fab" ng-click="toggleMusic = !toggleMusic" ng-class="{ 'md-raised' : !toggleMusic, 'music-filter': toggleMusic }"><span class="music-filter-icon"></span></md-button>
+            <md-button class="md-fab" ng-click="toggleMusic = !toggleMusic" ng-class="{ 'md-raised' : !toggleMusic, 'music-filter': toggleMusic }" aria-label="Music"><span class="music-filter-icon"></span></md-button>
         </div>
         <div class="category-filter">
-            <md-button class="md-fab" ng-click="toggleFood = !toggleFood" ng-class="{ 'md-raised' : !toggleFood, 'food-filter': toggleFood }"><span class="food-filter-icon"></span></md-button>
+            <md-button class="md-fab" ng-click="toggleFood = !toggleFood" ng-class="{ 'md-raised' : !toggleFood, 'food-filter': toggleFood }" aria-label="Food"><span class="food-filter-icon"></span></md-button>
         </div>
         <div class="category-filter">
-            <md-button class="md-fab" ng-click="toggleParty = !toggleParty" ng-class="{ 'md-raised' : !toggleParty, 'party-filter': toggleParty }"><span class="party-filter-icon"></span></md-button>
+            <md-button class="md-fab" ng-click="toggleParty = !toggleParty" ng-class="{ 'md-raised' : !toggleParty, 'party-filter': toggleParty }" aria-label="Party"><span class="party-filter-icon"></span></md-button>
         </div>
     </div>
 

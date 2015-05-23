@@ -8,6 +8,7 @@
 @font-face {
   font-family: orator;
   src: url(../fonts/OratorStd.otf); }
+
 /* =============================
    ========== GENERAL ==========
    ============================= */
@@ -109,7 +110,7 @@ a:hover {
   margin: 0 auto;
   position: fixed;
   top: 15px;
-  right: 40px; }
+  right: 70px; }
   .inbox-button:hover {
     cursor: pointer; }
   .inbox-button i {
@@ -187,6 +188,35 @@ a:hover {
   right: 5px; }
   .messagebox-delete:hover {
     cursor: pointer; }
+
+/* =============================
+   =========== OPTIONS BOX ============
+   ============================= */
+.options-button {
+  display: block;
+  margin: 0 auto;
+  position: fixed;
+  top: 15px;
+  right: 25px; }
+  .options-button:hover {
+    cursor: pointer; }
+  .options-button i {
+    font-size: 2em;
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    height: auto; }
+
+.options-box {
+  position: absolute;
+  width: auto;
+  background: #fff;
+  top: 75px;
+  right: 40px;
+  padding: 10px;
+  font-size: 1em;
+  z-index: 1100;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
 
 /* =============================
    =========== MENU ============
@@ -278,14 +308,16 @@ a:hover {
   display: none; }
 
 /*** BACKDROP **/
-.messages-backdrop {
+.messages-backdrop,
+.options-backdrop {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1050; }
-  .messages-backdrop:hover {
+  .messages-backdrop:hover,
+  .options-backdrop:hover {
     cursor: default; }
 
 .display {
@@ -588,7 +620,7 @@ map {
 .search-button {
   position: fixed;
   top: 18px;
-  right: 110px;
+  right: 125px;
   z-index: 1000; }
   .search-button:hover {
     cursor: pointer; }
@@ -817,6 +849,27 @@ map {
   top: 240px;
   -webkit-transition: ease-in-out .5s all;
   transition: ease-in-out .5s all; }
+
+/* options box */
+.message-box {
+  position: absolute;
+  width: 500px;
+  min-height: 250px;
+  background: #fff;
+  top: 75px;
+  right: 40px;
+  padding: 10px;
+  font-size: 1em;
+  z-index: 1100;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+
+.close-message-box {
+  display: block;
+  text-align: right;
+  width: 100%;
+  margin-right: 25px; }
+  .close-message-box:hover {
+    cursor: pointer; }
 
 /* =============================
    ========== MEETING ==========

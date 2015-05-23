@@ -47,16 +47,16 @@
 
         <div layout="row">
             <md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)"
-                       ng-show="checkOwner(meeting.owner._id)">Удалить
+                       ng-show="checkOwner(meeting.owner._id)" aria-label="Удалить">Удалить
             </md-button>
             <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)"
-                       ng-show="showButton(meeting.invitedUsers)">Отклонить приглашение
+                       ng-show="showButton(meeting.invitedUsers)" aria-label="Отклонить приглашение">Отклонить приглашение
             </md-button>
             <md-button class="md-raised join-button" ng-click="joinMeeting(meeting._id)"
-                       ng-show="!showButton(meeting.joinedUsers)" ng-if="meeting.owner._id != currentUser._id">Учавствовать
+                       ng-show="!showButton(meeting.joinedUsers)" ng-if="meeting.owner._id != currentUser._id" aria-label="Учавствовать">Учавствовать
             </md-button>
             <md-button class="md-raised join-button" ng-click="unjoinMeeting(meeting._id)"
-                       ng-show="showButton(meeting.joinedUsers)">Не учавствовать
+                       ng-show="showButton(meeting.joinedUsers)" aria-label="Не учавствовать">Не учавствовать
             </md-button>
         </div>
 
@@ -71,7 +71,7 @@
         </div>
 
         <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)"
-                   ng-show="checkOwner(meeting.owner._id)">
+                   ng-show="checkOwner(meeting.owner._id)" aria-label="Редактировать">
             <i class="mdi mdi-pencil"></i>
         </md-button>
     </div>

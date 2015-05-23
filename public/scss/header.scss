@@ -18,7 +18,7 @@
      margin: 0 auto;
      position: fixed;
      top: 15px;
-     right: 40px;
+     right: 70px;
 
    &:hover {
      cursor: pointer;
@@ -53,7 +53,7 @@
  }
 
  .message-box {
-     position: absolute;
+     position: fixed;
      width: 500px;
      min-height: 250px;
      background: #fff;
@@ -115,6 +115,43 @@
    &:hover {
      cursor: pointer;
    }
+ }
+
+ /* =============================
+    =========== OPTIONS BOX ============
+    ============================= */
+
+
+ .options-button {
+   display: block;
+   margin: 0 auto;
+   position: fixed;
+   top: 15px;
+   right: 25px;
+
+   &:hover {
+     cursor: pointer;
+   }
+
+   i {
+     font-size: 2em;
+     display: block;
+     margin: 0 auto;
+     width: auto;
+     height: auto;
+   }
+ }
+
+ .options-box {
+   position: fixed;
+   width: auto;
+   background: #fff;
+   top: 75px;
+   right: 40px;
+   padding: 10px;
+   font-size: 1em;
+   z-index: 1100;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
  }
 
 
@@ -230,7 +267,8 @@
 }
 
 /*** BACKDROP **/
- .messages-backdrop {
+ .messages-backdrop,
+ .options-backdrop {
    position: absolute;
    top: 0;
    left: 0;

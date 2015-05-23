@@ -389,7 +389,8 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 		$scope.minDate = new Date();
 		$scope.showMeridian = false;
 		$scope.format = 'yyyy/MM/dd';
-
+        $scope.initDate = moment().add(1, 'days');
+        $scope.ismeridian = false;
 
 	}]);
 

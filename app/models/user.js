@@ -50,7 +50,8 @@ var userSchema = new Schema({
 		distance: {type: Number, default: 20000},
 		sendEmailNotifications: {type: Boolean, default: false}
 	},
-	notifications: [notificationSchema]
+	notifications: [notificationSchema],
+    followers: {type: Array, default: []},
 
 });
 

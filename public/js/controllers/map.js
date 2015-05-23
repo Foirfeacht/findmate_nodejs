@@ -519,6 +519,7 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		//top message box
 		$scope.showMessageBox = false;
+        $scope.showOptions = false;
 
         // filter area
         $scope.showFilterArea = false;

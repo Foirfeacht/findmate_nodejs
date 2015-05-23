@@ -83,10 +83,55 @@ module.exports = function (app) {
                         res.json(users);
                     });
 			});
-
 		});
-
 	});
+
+    // follow user
+    app.put('/follow/users/:id', function (req, res) {
+
+        var update = {$addToSet: {followers: req.user}};
+
+        User.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, user) {
+            if (err) {
+                res.send(err);
+            };
+
+            log.info("new follower");
+            User.findById(req.params.id)
+                .populate('notifications.owner')
+                .populate({path: 'notifications.meeting', model: 'Meeting' })
+                .exec(function (err, user) {
+                    if(err){
+                        res.send(err);
+                    };
+                    app.io.broadcast('new follower', {msg: user});
+                });
+        });
+    });
+
+    // follow user
+    app.put('/unfollow/users/:id', function (req, res) {
+
+        var userid = req.user.id.toString();
+        var update = {$pull: {followers: {_id: userid}}};
+
+        User.findByIdAndUpdate(req.params.id, update, function (err, user) {
+            if (err) {
+                res.send(err);
+            };
+
+            log.info("new follower");
+            User.findById(req.params.id)
+                .populate('notifications.owner')
+                .populate({path: 'notifications.meeting', model: 'Meeting' })
+                .exec(function (err, user) {
+                    if(err){
+                        res.send(err);
+                    };
+                    app.io.broadcast('new follower', {msg: user});
+                });
+        });
+    });
 
 	//update user image
 	app.put('/update_userimage/users/:id', isLoggedIn, function (req, res) {
@@ -189,7 +234,6 @@ module.exports = function (app) {
 				}
 			}
 		};
-		log.info(meeting._id);
 		var invited = meeting.invitedUsers;
 		async.each(invited, function(user, callback){
 			log.info(user._id);

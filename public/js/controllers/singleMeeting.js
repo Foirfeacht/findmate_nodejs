@@ -1,7 +1,7 @@
 // map controller
 // public/map.js
 
-findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$location', '$mdSidenav', '$modal', 'editService', 'moment', 'notificationService', '$mdToast', '$animate', 'toastr',
+findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams', '$location', '$mdSidenav', '$modal', 'editService', 'moment', 'notificationService', '$animate', 'toastr',
 	function ($scope,
 			  $http,
 			  $routeParams,
@@ -11,20 +11,19 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 			  editService,
 			  notificationService,
 			  moment,
-			  $mdToast,
 			  $animate,
 			  toastr) {
 
-		$scope.getCurrentUser = function () {
-			$http.get('/current_user')
-				.success(function (data) {
-					$scope.currentUser = data;
-					console.log($scope.currentUser);
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				});
-		};
+        $scope.getCurrentUser = function() {
+            $http.get('/current_user')
+                .success(function (data) {
+                    $scope.currentUser = data;
+                    console.log($scope.currentUser);
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+        };
 
 		$scope.getCurrentUser();
 
@@ -97,15 +96,16 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 
 		//button show filter
 		$scope.showButton = function (array) {
-			var id = $scope.currentUser._id;
-			var i, obj;
-			for (i = 0; i < array.length; ++i) {
-				obj = array[i];
-				if (obj._id == id) {
-					return true;
-				}
-			}
-			;
+            if($scope.currentUser){
+                var id = $scope.currentUser._id;
+                var i, obj;
+                for (i = 0; i < array.length; ++i) {
+                    obj = array[i];
+                    if (obj._id == id) {
+                        return true;
+                    }
+                }
+            }
 			return false;
 		};
 
@@ -371,11 +371,13 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 		});
 
 		$scope.checkOwner = function (id) {
-			var userId = $scope.currentUser._id;
-			if(id === userId){
-				return true;
-			};
-			return false;
+            if($scope.currentUser){
+                var userId = $scope.currentUser._id;
+                if(id === userId){
+                    return true;
+                }
+                return false;
+            }
 		};
 
 	}]);

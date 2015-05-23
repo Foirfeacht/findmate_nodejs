@@ -319,7 +319,7 @@ map {
 .search-button {
   position: fixed;
   top: 18px;
-  right: 110px;
+  right: 125px;
   z-index: 1000;
 
   &:hover {
@@ -614,4 +614,29 @@ map {
   top: 240px;
   -webkit-transition: ease-in-out .5s all;
   transition: ease-in-out .5s all;
+}
+
+/* options box */
+.message-box {
+  position: absolute;
+  width: 500px;
+  min-height: 250px;
+  background: #fff;
+  top: 75px;
+  right: 40px;
+  padding: 10px;
+  font-size: 1em;
+  z-index: 1100;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.close-message-box {
+  display: block;
+  text-align: right;
+  width: 100%;
+  margin-right: 25px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
