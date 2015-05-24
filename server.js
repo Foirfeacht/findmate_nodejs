@@ -1,10 +1,10 @@
 // server.js
-if(process.env.NODETIME_ACCOUNT_KEY) {
+//if(process.env.NODETIME_ACCOUNT_KEY) {
     require('nodetime').profile({
-        accountKey: process.env.NODETIME_ACCOUNT_KEY || '8f7d7c9281c31e110fc0525b1f3a959fd93130cf',
+        accountKey: '8f7d7c9281c31e110fc0525b1f3a959fd93130cf' || '8f7d7c9281c31e110fc0525b1f3a959fd93130cf',
         appName: 'Cityvibe' // optional
     });
-}
+//}
 
 // set up ======================================================================
 var express = require('express.io');
