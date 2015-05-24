@@ -72,7 +72,7 @@
                 </span>
             </div>
             <div class="comment-content">{{ comment.content}}</div>
-            <div class="comment-createdat">{{comment.created_at}}</div>
+            <div class="comment-createdat">{{comment.created_at | date: 'd MMMM yyyy'}}</div>
         </div>
 
         <div class="alert alert-danger" role="alert" ng-if="!meeting.comments.length">
