@@ -4,6 +4,19 @@
 findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSidenav', 'toastr', '$animate',
 	function ($scope, $http, $routeParams, $mdSidenav, toastr, $animate) {
 
+        var pathArray = window.location.pathname.split( '/' );
+        var userId = pathArray[2];
+        console.log(userId);
+
+        $http.get('../api/users/' + userId)
+            .success(function (data) {
+                $scope.user = data;
+                console.log($scope.user);
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
+
 		$scope.getCurrentUser = function () {
 			$http.get('/current_user')
 				.success(function (data) {

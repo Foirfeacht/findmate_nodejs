@@ -1,5 +1,5 @@
 <% include partials/head %>
-<body ng-cloak ng-controller="userController" ng-init="profile = <%= JSON.stringify(profile) %>">
+<body ng-cloak ng-controller="userController">
 <% include partials/header %>
 <% include partials/menu %>
 
@@ -15,9 +15,9 @@
         <!-- FACEBOOK INFORMATION -->
         <div class="col-sm-6">
             <div class="well">
-                <div><img src="{{profile.image}}" alt="{{profile.name}}"></div>
+                <div><img src="{{user.image}}" alt="{{user.name}}"></div>
                 <p>
-                    <strong>name</strong>: {{profile.name}}<br>
+                    <strong>name</strong>: {{user.name}}<br>
                 </p>
 
 

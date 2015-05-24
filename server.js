@@ -1,10 +1,11 @@
 // server.js
-//if(process.env.NODETIME_ACCOUNT_KEY) {
+
+//node time performance tracker
     require('nodetime').profile({
         accountKey: '451ff297568021cee4044ee387d6c39113df901f',
         appName: 'Cityvibe' // optional
     });
-//}
+
 
 // set up ======================================================================
 var express = require('express.io');

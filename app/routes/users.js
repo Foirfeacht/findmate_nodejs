@@ -46,6 +46,18 @@ module.exports = function (app) {
 		});
 	});
 
+    app.get('/api/users/:id', isLoggedIn, function (req, res) {
+        User.findById(req.params.id)
+            .populate('notifications.owner')
+            .populate({path: 'notifications.meeting', model: 'Meeting' })
+            .exec(function (err, user) {
+                if(err){
+                    res.send(err);
+                }
+                res.json(user);
+            });
+    });
+
 	app.get('/current_user', isLoggedIn, function (req, res) {
 		User.findById(req.user.id)
 			.populate('notifications.owner')
@@ -53,7 +65,7 @@ module.exports = function (app) {
 			.exec(function (err, user) {
 				if(err){
 					res.send(err);
-				};
+				}
 				res.json(user);
 			});
 	});
@@ -63,7 +75,7 @@ module.exports = function (app) {
 		Meeting.find({'owner': req.params.user_id}).remove(function (err, meetings) {
 			if (err){
                 res.send(err);
-            };
+            }
             log.info(meetings);
 
 			User.remove({
@@ -71,7 +83,7 @@ module.exports = function (app) {
 			}, function (err, user) {
 				if (err){
                     res.send(err);
-                };
+                }
                 log.info('User deleted');
 				res.send('removed');
                 User.find({})
@@ -79,7 +91,7 @@ module.exports = function (app) {
                     .populate({path: 'notifications.meeting', model: 'Meeting' })
                     .exec(function (err, users) {
                         if (err)
-                            res.send(err)
+                            res.send(err);
                         res.json(users);
                     });
 			});
@@ -94,7 +106,7 @@ module.exports = function (app) {
         User.findByIdAndUpdate(req.params.id, update, {upsert: true}, function (err, user) {
             if (err) {
                 res.send(err);
-            };
+            }
 
             log.info("new follower");
             User.findById(req.params.id)
@@ -103,7 +115,7 @@ module.exports = function (app) {
                 .exec(function (err, user) {
                     if(err){
                         res.send(err);
-                    };
+                    }
                     app.io.broadcast('new follower', {msg: user});
                 });
         });
@@ -118,7 +130,7 @@ module.exports = function (app) {
         User.findByIdAndUpdate(req.params.id, update, function (err, user) {
             if (err) {
                 res.send(err);
-            };
+            }
 
             log.info("new follower");
             User.findById(req.params.id)
@@ -127,7 +139,7 @@ module.exports = function (app) {
                 .exec(function (err, user) {
                     if(err){
                         res.send(err);
-                    };
+                    }
                     app.io.broadcast('new follower', {msg: user});
                 });
         });
@@ -138,9 +150,9 @@ module.exports = function (app) {
 		var update = {settings: req.body.image};
 
 		User.findByIdAndUpdate(req.params.id, update, function (err, user) {
-			if (err)
-				res.send(err)
-
+			if (err){
+                res.send(err);
+            }
 			console.log("image updated");
 			User.findById(req.user.id)
 			.populate('notifications.owner')
@@ -148,7 +160,7 @@ module.exports = function (app) {
 			.exec(function (err, user) {
 				if(err){
 					res.send(err);
-				};
+				}
 				res.json(user);
 			});
 		});
@@ -159,8 +171,9 @@ module.exports = function (app) {
 		var update = {settings: {distance: req.body.distance}};
 
 		User.findByIdAndUpdate(req.params.id, update, function (err, user) {
-			if (err)
-				res.send(err)
+			if (err){
+                res.send(err);
+            }
 
 			console.log("settings updated");
 			User.findById(req.user.id)
@@ -169,7 +182,7 @@ module.exports = function (app) {
 			.exec(function (err, user) {
 				if(err){
 					res.send(err);
-				};
+				}
 				res.json(user);
 			});
 		});
@@ -203,7 +216,7 @@ module.exports = function (app) {
 					if (!user) {
 						res.statusCode = 404;
 						return res.send({error: 'Not found'});
-					};
+					}
 					log.info("invite sent");
 					app.io.broadcast('push notification added', {msg: user});
 					callback();
@@ -212,7 +225,7 @@ module.exports = function (app) {
 			// All tasks are done now
 				if(err){
 				res.send(err)
-				};
+				}
 			res.send('notification sent');
 		});
 	});
@@ -244,7 +257,7 @@ module.exports = function (app) {
 					if (!user) {
 						res.statusCode = 404;
 						return res.send({error: 'Not found'});
-					};
+					}
 					log.info("invite sent");
 					app.io.broadcast('push notification about update', {msg: user});
 					callback();
@@ -253,7 +266,7 @@ module.exports = function (app) {
 			// All tasks are done now
 			if(err){
 				res.send(err)
-			};
+			}
 			res.send('notification sent');
 		});
 	});
@@ -274,7 +287,7 @@ module.exports = function (app) {
 				.exec(function (err, user) {
 					if (err) {
 						res.send(err);
-					};
+					}
 					app.io.broadcast('push notification removed', {msg: user});
 					res.send('notification removed');
 				});
