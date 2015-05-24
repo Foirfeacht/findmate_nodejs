@@ -1,43 +1,95 @@
 <% include partials/head %>
-<body ng-cloak ng-controller="userController">
+
+<body ng-controller="profileController">
 <% include partials/header %>
 <% include partials/menu %>
-
 <!--=============================== main content ===============================-->
-<div class="content">
+<div class="container">
+
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Профиль </h1>
+        <h1><span class="fa fa-anchor"></span> Профиль</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Выйти</a>
     </div>
 
-    <div class="row">
+    <div class="profile-container">
 
+        <!--==== image ====-->
 
-        <!-- FACEBOOK INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <div><img src="{{user.image}}" alt="{{user.name}}"></div>
-                <p>
-                    <strong>name</strong>: {{user.name}}<br>
-                </p>
+        <div class="image-container">
+            <div class="image">
+                <img src="{{user.image}}" alt="{{user.name}}">
 
+                <div class="switch-image" ng-show="toggleSelectorButton" ng-click="toggleImageSelector()" ng-show="checkOwner(user._id)">
+                    <md-button class="md-fab md-primary"><i class="mdi mdi-pencil"></i></md-button>
+                </div>
+            </div>
+            <!-- end image -->
+            <div class="image-selector" layout="column">
+
+                <div class="image-selector-container" ng-show="facebookImage"
+                     ng-click="selectImage(user.facebook.image)">
+                    <img src="{{user.facebook.image}}" alt="{{user.facebook.name}}"
+                         ng-class="{'image-selected' : facebookSelected}" }>
+                </div>
+
+                <div class="image-selector-container" ng-show="vkontakteImage"
+                     ng-click="selectImage(user.vkontakte.image, vk)">
+                    <img src="{{user.vkontakte.image}}" alt="{{user.vkontakte.name}}"
+                         ng-class="{'image-selected': vkSelected}">
+                </div>
+
+                <md-button class="md-fab md-primary select-image-button" ng-show="selectImageButton"
+                           ng-click="changeProfileImage()">
+                    <i class="mdi mdi-check"></i>
+                </md-button>
 
             </div>
+            <!-- end selector -->
+
         </div>
+        <!-- end image contaner -->
+
+        <div class="user-container">
+            <!--==== name ====-->
+            <div class="name-container container">{{user.name}}</div>
+            <div class="description container">
+                {{user.about}}
+            </div>
+            <div class="join-accounts container" layout="row">
+                <div>
+                    <md-button class="md-raised md-primary" ng-if="user.facebook.token" href="/unlink/facebook" ng-show="checkOwner(user._id)">
+                        Отключить Facebook
+                    </md-button>
+                    <md-button class="md-raised md-primary" ng-if="!user.facebook.token" ng-show="checkOwner(user._id)"
+                               href="/connect/facebook">Подключить Facebook
+                    </md-button>
+                </div>
+                <div>
+                    <md-button class="md-raised md-warn" ng-if="user.vkontakte.token" href="/unlink/vk" ng-show="checkOwner(user._id)">Отключить
+                        Vkontakte
+                    </md-button>
+                    <md-button class="md-raised md-warn" ng-if="!user.vkontakte.token" href="/connect/vk" ng-show="checkOwner(user._id)">
+                        Подключить Vkontakte
+                    </md-button>
+                </div>
+            </div>
+            <div class="delete-account container">
+                <md-button class="md-raised md-warn" ng-click="showConfirm()" ng-show="checkOwner(user._id)">Удалить аккаунт</md-button>
+            </div>
+        </div>
+        <!-- end user contaner -->
+
 
     </div>
-    <!-- end row -->
+    <!-- end profile contaner -->
 
     <md-button class="md-fab md-primary create-button" href="/map" target="_blank"><i class="fa fa-plus"></i>
     </md-button>
-
 </div>
-<!-- end content -->
-
+<!-- end container -->
 <% include partials/footer %>
-
-<script src="../../public/js/app.js"></script>
-<script src="../../public/js/services/mapService.js"></script>
-<script src="../../public/js/controllers/dialog.js"></script>
 <script src="../../public/js/controllers/userprofile.js"></script>
+<script src="../../public/js/controllers/confirmRemove.js"></script>
+
 </body>
 </html>

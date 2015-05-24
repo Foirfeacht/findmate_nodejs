@@ -124,7 +124,7 @@ findMate.controller('profileController', ['$scope', '$http', '$mdSidenav', '$mod
                             .error(function (data) {
                                 console.log('Error: ' + data);
                             });
-                        //window.location.href = "/logout"
+                        window.location.href = "/logout"
                     };
 				});
 		};

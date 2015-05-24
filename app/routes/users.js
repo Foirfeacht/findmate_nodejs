@@ -38,12 +38,20 @@ module.exports = function (app) {
 
 	app.param('userId', userByID);
 
-	app.get('/users/:userId', isLoggedIn, function (req, res) {
-		res.render('userprofile.ejs', {
-			profile: req.profile,
-			user: req.user,
-			title: "Профиль" + req.user.profile
-		});
+	app.get('/users/:id', isLoggedIn, function (req, res) {
+		User.findById(req.params.id)
+			.populate('notifications.owner')
+			.populate({path: 'notifications.meeting', model: 'Meeting' })
+			.exec(function (err, user) {
+				if(err){
+					res.send(err);
+				}
+				res.render('userprofile.ejs', {
+					profile: req.profile,
+					user: req.user,
+					title: "Профиль" + req.user.profile
+				});
+			});
 	});
 
     app.get('/api/users/:id', isLoggedIn, function (req, res) {
@@ -72,18 +80,19 @@ module.exports = function (app) {
 
 	// delete a user
 	app.delete('/users/delete/:id', isLoggedIn, function (req, res) {
-		Meeting.find({'owner': req.params.user_id}).remove(function (err, meetings) {
+		Meeting.find({'owner': req.params.id}).remove(function (err, meetings) {
 			if (err){
                 res.send(err);
             }
             log.info(meetings);
 
 			User.remove({
-				_id: req.params.user_id
+				_id: req.params.id
 			}, function (err, user) {
 				if (err){
                     res.send(err);
                 }
+				log.info(user);
                 log.info('User deleted');
 				res.send('removed');
                 User.find({})
