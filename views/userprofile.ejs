@@ -6,12 +6,8 @@
 <!--=============================== main content ===============================-->
 <div class="container">
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Профиль</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Выйти</a>
-    </div>
-
     <div class="profile-container">
+        <h2>{{user.name}}</h2>
 
         <!--==== image ====-->
 
@@ -23,7 +19,7 @@
                      ng-show="toggleSelectorButton"
                      ng-click="toggleImageSelector()"
                      ng-show="checkOwner(user._id)"
-                     ng-if="user.vkontakte && user.facebbok">
+                     ng-if="user.vkontakte && user.facebok">
                     <md-button class="md-fab md-primary"><i class="mdi mdi-pencil"></i></md-button>
                 </div>
             </div>
@@ -52,15 +48,6 @@
 
         </div>
         <!-- end image contaner -->
-
-        <div class="user-container">
-            <!--==== name ====-->
-            <div class="name-container container">{{user.name}}</div>
-            <div class="description container">
-                {{user.about}}
-            </div>
-        </div>
-        <!-- end user contaner -->
 
 
     </div>
