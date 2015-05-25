@@ -19,6 +19,14 @@ a:hover {
   padding: 100px 100px;
 }
 
+::-webkit-scrollbar-track{
+  background-color: #BE71CB;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $primary-color;
+}
+
 /* =============================
    ========== MAIN PAGE ==========
    ============================= */

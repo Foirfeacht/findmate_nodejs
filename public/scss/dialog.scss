@@ -126,17 +126,19 @@ md-option {
 }
 
 .dialog-title {
-  width: 50%;
+  width: 40%;
   margin: 0 auto;
 }
 
 .dialog-description,
 .dialog-location {
   width: 40%;
+  margin: 0 auto;
 }
 
 .date-picker {
   width: 50%;
+  margin: 0 auto;
   
   md-input-container {
     overflow: visible;
@@ -196,6 +198,28 @@ md-option {
 
 .time-date {
   margin: 20px auto;
+}
+
+.time-date > .display, .time-date > .control,
+.time-date > .control > .slider > .date-control, .time-date > .control > .slider > .time-control, .time-date > .control > .slider > .switch-control {
+  height: 23rem;
+}
+
+.time-date > .control > .slider > .date-control > .days .day-cell.selected {
+  background: $primary-color;
+}
+
+.time-date > .display > .content {
+  top: 1rem;
+  padding: 5.5rem 0;
+}
+
+.time-date > .display {
+  width: 45%;
+}
+
+.time-date > .control {
+  width: 55%;
 }
 
 .btn-default.active {

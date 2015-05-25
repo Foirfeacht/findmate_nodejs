@@ -6,8 +6,21 @@
     width: 50%;
 }
 
+.single-meeting-display {
+  width: 40%;
+  position: fixed;
+  height: 100%;
+  top: 64px;
+  right: 0;
+  overflow-y: scroll;
+  padding: 0 20px 120px;
+  margin-top: 50px;
+  margin-left: 50%;
+  z-index: 1000;
+}
+
 .single-meeting {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     min-width: 400px;
     position: relative;
@@ -31,8 +44,26 @@
   margin-top: 20px;
 }
 
-.comments {
-    width: 50%;
+.single-meeting-card-header {
+  overflow: hidden;
+  background: $primary-color;
+}
+
+.single-meeting-step-back {
+  float: left;
+}
+
+.edit-single-meeting-button,
+.delete-single-meeting-button {
+  float: right;
+}
+
+.single-meeting-step-back,
+.edit-single-meeting-button,
+.delete-single-meeting-button {
+  color: #fff;
+  font-size: 2em;
+  padding: 3px 8px;
 }
 
 /* =============================
@@ -47,20 +78,32 @@
     min-width: 50%;
 }
 
+.single-meeting-display .comments {
+  width: 100%;
+}
+
 .comment {
-    margin: 5px auto;
+    margin: 5px auto 5px 10px;
+  padding: 10px 15px;
+  background: #d9ddf0;
+  width: 70%;
+  position: relative;
 }
 
 .delete-comment {
-    margin-left: 20px;
-    padding: 4px 5px;
-    border-radius: 50%;
-    background: #BBC7D3;
-    font-size: 0.7em;
-    color: #fff;
-    font-weight: 700;
-    display: none;
-    text-align: center;
+  border-radius: 50%;
+  background: #BBC7D3;
+  color: #fff;
+  font-weight: 700;
+  display: none;
+  text-align: center;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 1.1em;
 
     &:hover {
         cursor: pointer;

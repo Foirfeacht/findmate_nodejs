@@ -1,8 +1,21 @@
-<div class="meetings-display animate-show" ng-show='viewMode ==="list"' ng-class="{'meeting-display-filter-open': showFilterArea}">
+<div class="meetings-display" ng-show='viewMode ==="list"' ng-class="{'meeting-display-filter-open': showFilterArea}">
 
 
     <div class="meeting"
-         ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive | filter: filterByCategory | orderBy: 'startDate'">
+         ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive | filter: filterByCategory | orderBy: 'startDate'"
+            ng-hide="singleMeeting"
+            ng-click="showSingle(meeting)">
+
+        <div class="meeting-card-header">
+            <div class="edit-meeting-button" ng-click="editMeeting(meeting._id)"
+                 ng-show="checkOwner(meeting.owner._id)">
+                <i class="mdi mdi-pencil"></i>
+            </div>
+            <div class="delete-meeting-button" ng-click="deleteMeeting(meeting._id)"
+                 ng-show="checkOwner(meeting.owner._id)">
+                <i class="mdi mdi-delete"></i>
+            </div>
+        </div><!-- end card header -->
 
         <div class="meeting-header">
             <div class="meeting-date-container">
@@ -46,9 +59,6 @@
         </div>
 
         <div layout="row">
-            <md-button class="md-raised delete-button md-warn" ng-click="deleteMeeting(meeting._id)"
-                       ng-show="checkOwner(meeting.owner._id)" aria-label="Удалить">Удалить
-            </md-button>
             <md-button class="md-raised join-button" ng-click="declineInvitation(meeting._id)"
                        ng-show="showButton(meeting.invitedUsers)" aria-label="Отклонить приглашение">Отклонить приглашение
             </md-button>
@@ -70,10 +80,6 @@
             </div>
         </div>
 
-        <md-button class="md-fab md-primary edit-button" ng-click="editMeeting(meeting._id)"
-                   ng-show="checkOwner(meeting.owner._id)" aria-label="Редактировать">
-            <i class="mdi mdi-pencil"></i>
-        </md-button>
     </div>
     <!-- end meeting -->
 

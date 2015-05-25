@@ -34,9 +34,10 @@
   }
 }
 
-.animate-show {
-    -webkit-transition: 1s linear all; /* Chrome */
-    transition: 1s linear all;
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
 }
 
 .content {
@@ -66,12 +67,20 @@
     top: -64px;
 }
 
+
+
 map {
     width: 100%;
     height: 100%;
     position: fixed;
     top: 0;
     left: 0;
+}
+
+.map.list-visible
+.list-visible .map-container,
+.list-visible map {
+  width: 60%;
 }
 
 .infobox-wrapper {
@@ -564,7 +573,7 @@ map {
 
 /** date filters **/
 .date-filters {
-  position: absolute;
+  position: fixed;
   left: 50%;
   z-index: 1000;
   width: 392px;
@@ -614,6 +623,10 @@ map {
   top: 240px;
   -webkit-transition: ease-in-out .5s all;
   transition: ease-in-out .5s all;
+}
+
+.date-filters-list-open {
+  left: 30%;
 }
 
 /* options box */

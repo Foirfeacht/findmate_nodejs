@@ -307,14 +307,14 @@ module.exports = function (app) {
 				return res.send({error: 'Not found'});
 			}
 			//log.info("comment updated");
-			Meeting.find({})
+			Meeting.find({_id: req.params.id})
 				.populate('owner')
 				.populate({path: 'comments.owner', model: 'User'})
-				.exec(function (err, meetings) {
+				.exec(function (err, meeting) {
 				if (err) {
 					res.send(err);
 				};
-				app.io.broadcast('comment added', {msg: meetings});
+				app.io.broadcast('comment added', {msg: meeting});
 				res.send('comment added');
 			});
 		});

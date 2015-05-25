@@ -3,12 +3,16 @@
    ============================= */
 
 .meetings-display {
-  width: 95%;
-  overflow: hidden;
-  padding: 0 20px;
+  width: 40%;
+  position: fixed;
+  height: 100%;
+  top: 64px;
+  right: 0;
+  overflow-y: scroll;
+  padding: 0 20px 120px;
   margin-top: 50px;
-  -webkit-transition: ease-in-out .5s all;
-  transition: ease-in-out .5s all;
+  margin-left: 50%;
+  z-index: 1000;
 }
 
 .meeting-display-filter-open {
@@ -18,17 +22,20 @@
 }
 
 .meeting {
-  width: 30%;
+  width: 85%;
   margin: 30px 15px;
   border: 1px thin rgba(0, 0, 0, 0.8);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   height: 390px;
   position: relative;
-  float: left;
 
   h6 {
     margin: 8px;
     text-align: center;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(126, 87, 194, .5);
   }
 }
 
@@ -46,7 +53,7 @@
 
 .meeting-icon {
   position: absolute;
-  top: 10px;
+  top: 55px;
   right: 10px;
 }
 
@@ -202,3 +209,22 @@
   top: 30%;
   left: 30%;
 }
+
+.create-button-show-list {
+  right: 42%;
+}
+
+.meeting-card-header {
+  overflow: hidden;
+  background: $primary-color;
+}
+
+.edit-meeting-button,
+.delete-meeting-button {
+  float: right;
+  color: #fff;
+  font-size: 2em;
+  padding: 3px 8px;
+}
+
+

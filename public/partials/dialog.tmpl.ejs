@@ -10,11 +10,25 @@
 
     <div class="modal-screen-one" ng-show="screenOne">
 
-        <section layout-align="center center">
-            <md-input-container class="dialog-title">
-                <label>Название встречи</label>
-                <input type="text" ng-model="formData.title" ng-required  ng-required ng-maxlength="30">
-            </md-input-container>
+        <section layout="row">
+            <div class="dialog-title">
+                <md-input-container md-no-float>
+                    <label>Название встречи</label>
+                    <input type="text" ng-model="formData.title" ng-required  ng-required ng-maxlength="30">
+                </md-input-container>
+            </div>
+            <div class="dialog-location">
+                <md-input-container md-no-float class="address" >
+
+                    <md-icon class="mdi mdi-map-marker"></md-icon>
+                    <label>Адрес</label>
+                    <input type="text" ng-model="formData.location"
+                           ng-required id="location"
+                           ng-blur="codeAddress()"
+                           g-places-autocomplete
+                           ng-required>
+                </md-input-container>
+            </div>
         </section>
 
         <section layout="row" layout-align="center center">
@@ -27,19 +41,9 @@
 
         <section layout="row">
 
-            <div class="dialog-location">
-                <md-input-container md-no-float class="address" >
 
-                    <md-icon class="mdi mdi-map-marker"></md-icon>
-                    <input type="text" ng-model="formData.location"
-                           ng-required id="location"
-                           ng-blur="codeAddress()"
-                           g-places-autocomplete
-                           ng-required>
-                </md-input-container>
-            </div>
-            <div class="date-picker">
-                <md-input-container md-no-float class="date-input">
+            <div class="date-picker" layout-align="center center">
+               <!-- <md-input-container md-no-float class="date-input">
                     <md-icon class="mdi mdi-calendar"></md-icon>
                     <input type="text"
                            ng-focus="openCalendar($event)"
@@ -53,7 +57,8 @@
                            init-date="initDate"
                            show-meridian=false
                            ng-required />
-                </md-input-container>
+                </md-input-container>-->
+                <time-date-picker ng-model="formData.startDate"></time-date-picker>
             </div>
         </section>
 

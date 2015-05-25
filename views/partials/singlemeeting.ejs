@@ -1,0 +1,107 @@
+<div class="single-meeting-display" ng-show="singleMeeting">
+    <md-card>
+        <div class="single-meeting-card-header">
+            <div class="single-meeting-step-back">
+                <i class="mdi mdi-keyboard-backspace" ng-click="hideSingle()"></i>
+            </div>
+            <div class="edit-single-meeting-button" ng-click="editMeeting(selectedMeeting._id)"
+                       ng-show="checkOwnerSingle(selectedMeeting.owner._id)">
+                <i class="mdi mdi-pencil"></i>
+            </div>
+            <div class="delete-single-meeting-button" ng-click="deleteMeeting(selectedMeeting._id)"
+                       ng-show="checkOwnerSingle(selectedMeeting.owner._id)">
+                <i class="mdi mdi-delete"></i>
+            </div>
+        </div><!-- end card header -->
+        <md-card-content>
+    <div class="single-meeting">
+        <div class="meeting-header">
+            <div class="meeting-date-container">
+                <div class="meeting-date"><i class="mdi mdi-calendar-text"></i> {{ selectedMeeting.startDate | date: 'd MMMM yyyy'}}</div>
+                <div class="meeting-time"><i class="mdi mdi-clock"></i> {{ selectedMeeting.startDate | date: 'HH:mm'}}</div>
+            </div>
+
+            <div class="meeting-icon">
+                <img src="../public/images/{{selectedMeeting.category.icon}}.png" alt="{{selectedMeeting.category.value.ru }}">
+            </div>
+        </div>
+
+        <div class="meeting-content">
+            <div class="meeting-title"><a href="meetings/{{selectedMeeting._id}}"> {{ selectedMeeting.title}}</a></div>
+            <a href="users/{{selectedMeeting.owner._id}}">
+                <div class="meeting-owner">
+                    <div class="meeting-owner_image">
+                        <img src="{{selectedMeeting.owner.image}}" alt="{{selectedMeeting.owner.name }}">
+                    </div>
+                    <div class="meeting-owner_name">
+                        {{selectedMeeting.owner.name }}
+                    </div>
+                </div>
+            </a>
+            <div class="meeting-text">
+                <div class="meeting-description">{{ selectedMeeting.description }}</div>
+            </div>
+
+        </div>
+
+        <h6>Участники</h6>
+
+        <div layout="row" class="userlist">
+            <div ng-repeat="user in selectedMeeting.joinedUsers | limitTo: 5">
+                <img src="{{user.image}}" alt="{{user.name }}">
+            </div>
+        </div>
+        <div layout="row">
+            <md-button class="md-raised join-button" ng-click="declineInvitation(selectedMeeting._id)"
+                       ng-show="showButtonSingle(selectedMeeting.invitedUsers)">Отклонить приглашение
+            </md-button>
+            <md-button class="md-raised join-button" ng-click="joinMeeting(selectedMeeting._id)"
+                       ng-show="!showButtonSingle(selectedMeeting.joinedUsers)" ng-if="selectedMeeting.owner._id != currentUser._id">Учавствовать
+            </md-button>
+            <md-button class="md-raised join-button" ng-click="unjoinMeeting(selectedMeeting._id)"
+                       ng-show="showButtonSingle(selectedMeeting.joinedUsers)">Не учавствовать
+            </md-button>
+        </div>
+
+    </div>
+            <div class="comments">
+                <div layout="column" class="comment" ng-repeat="comment in selectedMeeting.comments | limitTo: commentsViewed">
+                    <div class="comment-owner">
+                        <a href="users/{{comment.owner._id}}">{{ comment.owner.name}}</a>
+                <span class="delete-comment" ng-click="deleteComment(comment._id)">
+                    X
+                </span>
+                    </div>
+                    <div class="comment-content">{{ comment.content}}</div>
+                    <div class="comment-createdat">{{comment.created_at | date: 'd MMMM yyyy, H:mm'}}</div>
+                </div>
+
+                <div class="alert alert-danger" role="alert" ng-if="!selectedMeeting.comments.length">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only"></span>
+                    Комментариев нет
+                </div>
+
+                <div class="comment-form">
+                    <h4></h4>
+
+                    <div>
+                        <md-input-container>
+                    <textarea ng-model="commentData.content"
+                              ng-keyup="$event.keyCode == 13 ? submitComment() : null" placeholder="Оставить комментарий"></textarea>
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-button class="md-raised md-primary" ng-click="submitComment()">Отправить</md-button>
+                    </div>
+                </div>
+            </div>
+            <!-- end comments -->
+            </md-card-content>
+    </md-card>
+
+
+
+
+</div>
+

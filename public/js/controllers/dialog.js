@@ -1,5 +1,5 @@
-findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalInstance',
-	function ($scope, $http, $modalInstance) {
+findMate.controller('DialogController', ['$scope', '$http', '$modalInstance', 'moment',
+	function ($scope, $http, $modalInstance, moment) {
 
 		$scope.loadFbFriends = function () {
 			var user = $scope.currentUser;
@@ -108,17 +108,21 @@ findMate.controller('DialogController', ['$scope', '$http', 'moment', '$modalIns
 			buttonDefaultText: 'Пригласить друзей'
 		};
 
+		$scope.dateNow = moment();
+
 
 		$scope.formData = {
 			latLng: $scope.latLng,
 			visibility: 'all',
-			startDate: new Date(),
-			startTime: new Date(),
+			startDate: $scope.dateNow.add(1, 'days'),
 			latitude: $scope.latLng.lat(),
 			longitude: $scope.latLng.lng(),
 			position: $scope.latLng.lat() + ', ' + $scope.latLng.lng(),
 			location: $scope.location
 		};
+
+
+
 
         $scope.category = 'Sport';
 

@@ -47,10 +47,10 @@
 </div>
 
 <div class="content" >
-    <div class="slider-outer"></div><!-- block to hide dropshadow -->
+    <!--<div class="slider-outer"></div>
 
-    <div class="filter-area-dropdown" ng-show="showFilterArea" duration="0.5" lazy-render>
-        <!--<div class="filter-area-search">
+    <div class="filter-area-dropdown" duration="0.5" lazy-render>
+        <div class="filter-area-search">
             <md-input-container md-no-float>
                 <label>
                     <md-icon class="mdi mdi-magnify search-icon"></md-icon>
@@ -58,7 +58,7 @@
 
                 <input ng-model="searchQuery" type="text">
             </md-input-container>
-        </div>-->
+        </div>
         <div class="map-filters">
            <!-- <div class="map-filter">
                 <md-button class="md-fab featured-filter"
@@ -103,7 +103,7 @@
                     <i class="mdi mdi-account-check"></i>
                 </md-button>
                 <div class="filter-title">Учавствую</div>
-            </div>-->
+            </div>
         </div>
     </div>
 
@@ -111,9 +111,9 @@
         <div class="open-filter-slider">
             <i class="mdi mdi-chevron-down" ng-class="{ 'mdi-chevron-down' : !showFilterArea, 'mdi-chevron-up' : showFilterArea }"></i>
         </div>
-    </div>
+    </div>-->
 
-    <div class="view-switcher">
+    <div class="view-switcher" ng-hide="singleMeeting">
         <div class="view-switch" ng-click="selectMode('map')" ng-class="{'switch-active': viewMode === 'map'}">
             <i class="mdi mdi-google-maps"></i>
         </div>
@@ -152,7 +152,7 @@
         </div>
     </div>
 
-    <div class="date-filters" ng-class="{'date-filters-fixed' : viewMode === 'map', 'date-filters-slider-open' : showFilterArea, 'date-filters-slider-closed' : !showFilterArea}">
+    <div class="date-filters" ng-class="{'date-filters-slider-open' : showFilterArea, 'date-filters-slider-closed' : !showFilterArea, 'date-filters-list-open' : viewMode === 'list'}">
         <div class="date-filter" ng-click="selectDateFilter('today')" ng-class="{'date-filter-active': selectedDateFilter === 'today'}">
             Сегодня
         </div>
@@ -166,6 +166,7 @@
 
     <% include partials/map %>
     <% include partials/list %>
+    <% include partials/singlemeeting %>
 
 
 </div>  
@@ -178,10 +179,11 @@
 </script>
 <script type="text/javascript"
         src="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
-<script src="../../public/js/controllers/map.js"></script>
-<script src="../../public/js/controllers/dialog.js"></script>
-<script src="../../public/js/services/editService.js"></script>
-<script src="../../public/js/controllers/editMeeting.js"></script>
+<script src="../public/js/controllers/map.js"></script>
+<script src="../public/js/controllers/dialog.js"></script>
+<script src="../public/js/services/editService.js"></script>
+<script src="../public/js/controllers/editMeeting.js"></script>
+<script src="../public/js/controllers/singleMeeting.js"></script>
 
 </body>
 </html>

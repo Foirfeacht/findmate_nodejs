@@ -298,6 +298,61 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			$scope.viewMode = mode;
 		};
 
+		$scope.selectedMeeting = null;
+
+		$scope.singleMeeting = false;
+		$scope.commentsViewed = 0;
+
+		$scope.showSingle = function(meeting){
+			$scope.singleMeeting = true;
+			$scope.selectedMeeting = meeting;
+			$scope.commentsViewed = 3;
+		};
+
+		$scope.hideSingle = function(){
+			$scope.singleMeeting = false;
+			$scope.commentsViewed = 0;
+		}
+
+		$scope.commentData = {
+			content: ''
+		};
+
+		$scope.submitComment = function () {
+			$http.put('/addComment/meetings/' + $scope.selectedMeeting._id, $scope.commentData)
+				.success(function (data) {
+					$scope.commentData = {}; // clear the form so our user is ready to enter another
+				})
+				.error(function (data) {
+					console.log('Error: ', data);
+				})
+		};
+
+		//delete comments
+		// delete a meeting
+		$scope.deleteComment = function (id) {
+			$http.put('/delete/meetings/' + $scope.selectedMeeting._id + '/comments/' + id)
+				.success(function (data) {
+
+				})
+				.error(function (data) {
+					console.log('Error: ' + data);
+				});
+		};
+
+		//listen for socket changes
+		socket.on('comment added', function (data) {
+			var meeting = data.msg;
+			console.log(meeting);
+			if(meeting._id === $scope.selectedMeeting._id){
+				$scope.$apply(function(){
+					$scope.selectedMeeting = data.msg;
+					console.log($scope.selectedMeeting);
+				});
+			}
+		});
+
+
 		//toggle add marker button
 		$scope.toggleCreate = false;
 
@@ -389,8 +444,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 					obj = array[i];
 					if (obj._id == id) {
 						return true;
-					};
-				};
+					}
+				}
 				return false;
 		};
 
@@ -398,7 +453,32 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			var userId = $scope.currentUser._id;
 			if(id === userId){
 				return true;
-			};
+			}
+			return false;
+		};
+
+		// ng show for buttons
+		$scope.showButtonSingle = function (array) {
+			if($scope.selectedMeeting){
+				var id = $scope.currentUser._id;
+				var i, obj;
+				for (i = 0; i < array.length; ++i) {
+					obj = array[i];
+					if (obj._id == id) {
+						return true;
+					}
+				}
+			}
+			return false;
+		};
+
+		$scope.checkOwnerSingle = function (id) {
+			if($scope.selectedMeeting){
+				var userId = $scope.currentUser._id;
+				if(id === userId){
+					return true;
+				}
+			}
 			return false;
 		};
 
@@ -424,10 +504,9 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
                                 console.log('Error: ' + data);
                             });
                         SweetAlert.swal("Мероприятие удалено");
-                    };
+						$scope.singleMeeting = false;
+                    }
 				});
-
-
 		};
 
 		//send notification
@@ -616,10 +695,10 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 					console.log(obj);
 					if (obj._id === id) {
 						return true;
-					};
-				};
+					}
+				}
 				return false;
-			};
+			}
 			return true;
 		};
 
@@ -632,10 +711,10 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 					var obj = meeting.joinedUsers[i];
 					if (obj._id === id) {
 						return true;
-					};
-				};
+					}
+				}
 				return false;
-			};
+			}
 			return true;
 		};
 
@@ -676,39 +755,39 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 			var categories = [];
 			if($scope.toggleSports === true){
 				categories.push('Sport');
-			};
+			}
 			if($scope.toggleOutdoor === true){
 				categories.push('Outdoor');
-			};
+			}
 			if($scope.toggleOpenair === true){
 				categories.push('Open Air Activity');
-			};
+			}
 			if($scope.toggleMovies === true){
 				categories.push('Movies');
-			};
+			}
 			if($scope.toggleExhibition === true){
 				categories.push('Exhibition');
-			};
+			}
 			if($scope.toggleTheater === true){
 				categories.push('Theater');
-			};
+			}
 			if($scope.toggleMusic === true){
 				categories.push('Music');
-			};
+			}
 			if($scope.toggleParty === true){
 				categories.push('Party');
-			};
+			}
 			if($scope.toggleFood === true){
 				categories.push('Restaurant/Cafe');
-			};
+			}
 			if(categories.length > 0){
 				for(var i = 0; i < categories.length; i++){
 					if(categories[i] === meeting.category.value.en){
 						return true;
-					};
-				};
+					}
+				}
 				return false;
-			};
+			}
 			return true;
 		};
 

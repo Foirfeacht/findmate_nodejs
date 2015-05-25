@@ -1,4 +1,4 @@
-<div class="map animate-show" ui-keydown="{esc: 'disableCreateMode($event)'}" ng-show='viewMode ==="map"'>
+<div class="map animate-show" ui-keydown="{esc: 'disableCreateMode($event)'}" ng-class="{'list-visible': viewMode ==='list'}">
 
     
 
@@ -36,6 +36,6 @@
         </div>
     </div>
 
-    <md-button class="md-fab md-primary create-button" ng-click="toggleCreateEvent()"><i class="fa fa-plus"></i></md-button>
+    <md-button class="md-fab md-primary create-button" ng-click="toggleCreateEvent()" ng-class="{'create-button-show-list' : viewMode === 'list'}"><i class="fa fa-plus"></i></md-button>
 </div>
 
