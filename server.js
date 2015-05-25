@@ -39,12 +39,12 @@ app.use('/public', express.static(__dirname + '/public'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
 //session options
-var sessionOpts = {
+/*var sessionOpts = {
     saveUninitialized: true, // saved new sessions
     resave: false, // do not automatically write to the session store
     secret: config.secret,
     cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
-}
+};*/
 
 app.use(cors());
 app.use(cookieParser()); // read cookies (needed for auth)
@@ -55,7 +55,9 @@ app.use(bodyParser.urlencoded({extended: true, limit: '50mb'}));
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
-app.use(session(sessionOpts)); // session secret
+app.use(session({
+    secret: config.secret
+})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
