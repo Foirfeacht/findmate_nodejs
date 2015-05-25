@@ -4,13 +4,13 @@
 <% include partials/menu %>
 <!--=============================== main content ===============================-->
 <div class="content">
-	
+
 	<div class="settings">
 		<h1>Настройки пользователя</h1>
 
 		<p>Область видимости</p>
 		<div class="distance-slider" layout="row">
-			<div flex="10" layout layout-align="center center">m</div>
+			<div flex="10" layout layout-align="center center">Км</div>
 		    <div flex>
 		    	<md-slider flex ng-model="settingsData.distance" min="0" max="40" aria-label="distance" id="distance-slider" class="md-accent"></md-slider>
 		    </div>
@@ -18,6 +18,32 @@
 		    	<input type="number" ng-model="settingsData.distance" aria-label="distance" aria-controls="distance-slider">
 		    </div>
 		</div>
+
+        <div class="join-accounts container" layout="column">
+            <div>
+                <a class="btn btn-block btn-social btn-facebook" ng-if="currentUser.facebook.token" href="/unlink/facebook">
+                    <i class="fa fa-facebook"></i>
+                    Отключить Facebook
+                </a>
+                <a class="btn btn-block btn-social btn-facebook" ng-if="!currentUser.facebook.token" href="/connect/facebook">
+                    <i class="fa fa-facebook"></i>
+                    Подключить Facebook
+                </a>
+            </div>
+            <div>
+                <a class="btn btn-block btn-social btn-vk" ng-if="currentUser.vkontakte.token" href="/unlink/vk">
+                    <i class="fa fa-vk"></i>
+                    Отключить Vkontakte
+                </a>
+                <a class="btn btn-block btn-social btn-vk" ng-if="!currentUser.vkontakte.token" href="/connect/vk">
+                    <i class="fa fa-vk"></i>
+                    Подключить Vkontakte
+                </a>
+            </div>
+        </div>
+        <div class="delete-account container">
+            <md-button class="md-raised md-warn" ng-click="showConfirm()">Удалить аккаунт</md-button>
+        </div>
 
 	    <div class="settings-save">
 	    	<md-button class="md-primary savesettings-button" ng-click="saveSettings()">Сохранить изменения</md-button>

@@ -1,6 +1,6 @@
 <% include partials/head %>
 
-<body ng-controller="profileController">
+<body ng-controller="userController">
 <% include partials/header %>
 <% include partials/menu %>
 <!--=============================== main content ===============================-->
@@ -19,7 +19,11 @@
             <div class="image">
                 <img src="{{user.image}}" alt="{{user.name}}">
 
-                <div class="switch-image" ng-show="toggleSelectorButton" ng-click="toggleImageSelector()" ng-show="checkOwner(user._id)">
+                <div class="switch-image"
+                     ng-show="toggleSelectorButton"
+                     ng-click="toggleImageSelector()"
+                     ng-show="checkOwner(user._id)"
+                     ng-if="user.vkontakte && user.facebbok">
                     <md-button class="md-fab md-primary"><i class="mdi mdi-pencil"></i></md-button>
                 </div>
             </div>
@@ -54,27 +58,6 @@
             <div class="name-container container">{{user.name}}</div>
             <div class="description container">
                 {{user.about}}
-            </div>
-            <div class="join-accounts container" layout="row">
-                <div>
-                    <md-button class="md-raised md-primary" ng-if="user.facebook.token" href="/unlink/facebook" ng-show="checkOwner(user._id)">
-                        Отключить Facebook
-                    </md-button>
-                    <md-button class="md-raised md-primary" ng-if="!user.facebook.token" ng-show="checkOwner(user._id)"
-                               href="/connect/facebook">Подключить Facebook
-                    </md-button>
-                </div>
-                <div>
-                    <md-button class="md-raised md-warn" ng-if="user.vkontakte.token" href="/unlink/vk" ng-show="checkOwner(user._id)">Отключить
-                        Vkontakte
-                    </md-button>
-                    <md-button class="md-raised md-warn" ng-if="!user.vkontakte.token" href="/connect/vk" ng-show="checkOwner(user._id)">
-                        Подключить Vkontakte
-                    </md-button>
-                </div>
-            </div>
-            <div class="delete-account container">
-                <md-button class="md-raised md-warn" ng-click="showConfirm()" ng-show="checkOwner(user._id)">Удалить аккаунт</md-button>
             </div>
         </div>
         <!-- end user contaner -->

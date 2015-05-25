@@ -42,14 +42,15 @@ module.exports = function (app) {
 		User.findById(req.params.id)
 			.populate('notifications.owner')
 			.populate({path: 'notifications.meeting', model: 'Meeting' })
-			.exec(function (err, user) {
+			.exec(function (err, profile) {
 				if(err){
 					res.send(err);
 				}
+
 				res.render('userprofile.ejs', {
-					profile: req.profile,
 					user: req.user,
-					title: "Профиль" + req.user.profile
+                    profile: profile,
+					title: "Профиль"
 				});
 			});
 	});
@@ -84,7 +85,6 @@ module.exports = function (app) {
 			if (err){
                 res.send(err);
             }
-            log.info(meetings);
 
 			User.remove({
 				_id: req.params.id
@@ -92,17 +92,7 @@ module.exports = function (app) {
 				if (err){
                     res.send(err);
                 }
-				log.info(user);
-                log.info('User deleted');
-				res.send('removed');
-                User.find({})
-                    .populate('notifications.owner')
-                    .populate({path: 'notifications.meeting', model: 'Meeting' })
-                    .exec(function (err, users) {
-                        if (err)
-                            res.send(err);
-                        res.json(users);
-                    });
+				res.redirect('/logout');
 			});
 		});
 	});

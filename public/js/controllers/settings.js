@@ -1,5 +1,5 @@
-findMate.controller('settingsController', ['$scope', '$http', '$mdSidenav', '$modal', 'toastr', '$animate',
-	function ($scope, $http, $mdSidenav, $modal, $animate, toastr) {
+findMate.controller('settingsController', ['$scope', '$http', '$mdSidenav', '$modal', 'toastr', '$animate', 'SweetAlert',
+	function ($scope, $http, $mdSidenav, $modal, $animate, toastr, SweetAlert) {
 		// side nav
 		$scope.toggleNav = function () {
 			$mdSidenav('nav').toggle();
@@ -28,6 +28,75 @@ findMate.controller('settingsController', ['$scope', '$http', '$mdSidenav', '$mo
 				});
 			$scope.getCurrentUser();
 		};
+
+
+        $scope.showConfirm = function () {
+            SweetAlert.swal({
+                    title: "Вы уверены, что хотите удалить аккаунт",
+                    text: "Все созданные вами встречи будут удалены",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Да, удалить",
+                    cancelButtonText: "Нет",
+                    closeOnConfirm: false},
+                function(isConfirm){
+                    if(isConfirm){
+                        $http.delete('/users/delete/' + $scope.currentUser._id)
+                            .success(function (data) {
+                                console.log(data);
+                            })
+                            .error(function (data) {
+                                console.log('Error: ' + data);
+                            });
+                        window.location.href = "/logout"
+                    };
+                });
+        };
+
+        $scope.connectFacebook = function(){
+          if($scope.facebook === false){
+              $http.get('/connect/facebook')
+                  .success(function (data) {
+                      $scope.facebook = true;
+                      console.log($scope.facebook);
+                  })
+                  .error(function (data) {
+                      console.log('Error: ' + data);
+                  });
+          } else {
+              $http.get('/unlink/facebook')
+                  .success(function (data) {
+                      $scope.facebook = false;
+                      console.log($scope.facebook);
+                  })
+                  .error(function (data) {
+                      console.log('Error: ' + data);
+                  });
+          }
+        };
+
+        $scope.connectVk = function(){
+            if($scope.vkontakte === false){
+                $http.get('/connect/vk')
+                    .success(function (data) {
+                        $scope.vkontakte = true;
+                        console.log($scope.vkontakte);
+                    })
+                    .error(function (data) {
+                        console.log('Error: ' + data);
+                    });
+            } else {
+                $http.get('/unlink/vk')
+                    .success(function (data) {
+                        $scope.vkontakte = false;
+                        console.log($scope.vkontakte);
+                    })
+                    .error(function (data) {
+                        console.log('Error: ' + data);
+                    });
+            }
+        };
 
 		// join meeting
 		$scope.joinMeeting = function (id) {

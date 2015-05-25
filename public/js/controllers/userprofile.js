@@ -8,20 +8,23 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
         var userId = pathArray[2];
         console.log(userId);
 
-        $http.get('../api/users/' + userId)
-            .success(function (data) {
-                $scope.user = data;
-                console.log($scope.user);
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
-
 		$scope.getCurrentUser = function () {
 			$http.get('/current_user')
 				.success(function (data) {
 					$scope.currentUser = data;
 					console.log($scope.currentUser);
+                    if($scope.currentUser._id === userId) {
+                        $scope.user = $scope.currentUser;
+                    } else {
+                        $http.get('../api/users/' + userId)
+                            .success(function (data) {
+                                $scope.user = data;
+                                console.log($scope.user);
+                            })
+                            .error(function (data) {
+                                console.log('Error: ' + data);
+                            });
+                    }
 				})
 				.error(function (data) {
 					console.log('Error: ' + data);
@@ -53,10 +56,12 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
         };
 
 		$scope.checkOwner = function (id) {
-			var userId = $scope.currentUser._id;
-			if(id === userId){
-				return true;
-			}
+            if ($scope.user){
+                var userId = $scope.currentUser._id;
+                if(id === userId){
+                    return true;
+                }
+            }
 			return false;
 		};
 
@@ -82,10 +87,10 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
 			console.log($scope.selectedImage);
 			if (user.facebook && image === user.facebook.image) {
 				$scope.facebookSelected = true;
-			};
+			}
 			if (user.vk && image === user.vk.image) {
 				$scope.vkSelected = true;
-			};
+			}
 		};
 
 		$scope.changeProfileImage = function () {
@@ -105,31 +110,7 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
 					.error(function (data) {
 						console.log('Error: ' + data);
 					});
-			};
-		};
-
-		$scope.showConfirm = function () {
-			SweetAlert.swal({
-					title: "Вы уверены, что хотите удалить аккаунт",
-					text: "Все созданные вами встречи будут удалены",
-					type: "warning",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "Да, удалить",
-					cancelButtonText: "Нет",
-					closeOnConfirm: false},
-				function(isConfirm){
-					if(isConfirm){
-						$http.delete('/users/delete/' + $scope.currentUser._id)
-							.success(function (data) {
-								console.log(data);
-							})
-							.error(function (data) {
-								console.log('Error: ' + data);
-							});
-						window.location.href = "/logout"
-					};
-				});
+			}
 		};
 
 		// decline invitation
@@ -243,10 +224,10 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
 				obj = array[i];
 				if (obj._id == id) {
 					return true;
-				};
-			};
+				}
+			}
 			return false;
-		}
+		};
 
 		$scope.deleteNotification = function(id){
 			$http.put('/deleteNotification/users/' + $scope.currentUser._id + '/notifications/' + id)
@@ -278,8 +259,8 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
 				obj = array[i];
 				if (obj._id == id) {
 					return true;
-				};
-			};
+				}
+			}
 			return false;
 		};
 	}]);
