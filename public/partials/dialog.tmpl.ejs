@@ -1,3 +1,4 @@
+<form name="meetingData" novalidate>
 <div class="modal-header">
     <div class="modal-step-back">
         <i class="mdi mdi-keyboard-backspace" ng-click="changeScreen()" ng-show="!screenOne"></i>
@@ -8,28 +9,62 @@
 </div>
 <div class="modal-body">
 
-    <div class="modal-screen-one" ng-show="screenOne">
+    <div class="modal-screen" ng-show="screenOne">
+
 
         <section layout="row">
             <div class="dialog-title">
                 <md-input-container md-no-float>
                     <label>Название встречи</label>
-                    <input type="text" ng-model="formData.title" ng-required  ng-required ng-maxlength="30">
+                    <input type="text"
+                           ng-model="formData.title"
+                           ng-required="true"
+                           ng-maxlength="60"
+                           ng-minlength="3"
+                           name="title">
                 </md-input-container>
             </div>
             <div class="dialog-location">
                 <md-input-container md-no-float class="address" >
 
-                    <md-icon class="mdi mdi-map-marker"></md-icon>
+                    <!--<md-icon class="mdi mdi-map-marker"></md-icon>-->
                     <label>Адрес</label>
                     <input type="text" ng-model="formData.location"
-                           ng-required id="location"
+                           ng-required="true"
+                           id="location"
                            ng-blur="codeAddress()"
                            g-places-autocomplete
-                           ng-required>
+                           name="address">
                 </md-input-container>
             </div>
         </section>
+        <div class="form-errors">
+            <div class="error-container left">
+                <div class="error"
+                     ng-show="meetingData.title.$dirty && meetingData.title.$error.maxlength">
+                    Название не должно быть слишком длинным, постарайтесь уложиться в 60 символов.
+                </div>
+                <div class="error"
+                     ng-show="meetingData.title.$touched && meetingData.title.$error.required">
+                    Пожалуйста, придумайте хоть какое-нибудь название.
+                </div>
+                <div class="error"
+                     ng-show="meetingData.title.$touched && meetingData.title.$error.minlength">
+                    Пожалуйста, придумайте название подлиннее.
+                </div>
+            </div>
+            <div class="error-container right">
+                <div class="error"  ng-show="meetingData.address.$touched && meetingData.address.$error.required">
+                    Не забудьте указать адрес
+                </div>
+                <div class="error"  ng-show="invalidAdress">
+                    Упс! Что-то явно пошло не так. Попробуйте выбрать адрес еще раз.
+                </div>
+            </div>
+        </div>
+
+
+
 
         <section layout="row" layout-align="center center">
 
@@ -58,7 +93,7 @@
                            show-meridian=false
                            ng-required />
                 </md-input-container>-->
-                <time-date-picker ng-model="formData.startDate"></time-date-picker>
+                <time-date-picker ng-model="formData.startDate" ng-required="true"></time-date-picker>
             </div>
         </section>
 
@@ -99,10 +134,10 @@
 
     </div><!-- end screen one -->
 
-    <div class="modal-screen-one" ng-show="!screenOne">
+    <div class="modal-screen" ng-show="!screenOne">
 
-        <section layout="row" class="visibility">
-            <div>
+        <section layout="column">
+            <div class="visibility">
                 <div class="dropdown-wrap">
                     <span class="caret"></span>
                     <select class="form-control" placeholder="Эту встречу увидят..." ng-model="formData.visibility">
@@ -113,14 +148,84 @@
                         <option value="invite">По приглашению</option>
                     </select>
                 </div>
-                </div>
 
             </div>
-            <div ng-if="formData.visibility === 'invite' ">
+          <!--  <div ng-if="formData.visibility === 'invite' ">
                 <div ng-dropdown-multiselect="" options="friendUsers" selected-model="invitedUsers"
                      extra-settings="invitedUsersSettings" translation-texts="invitedUsersText" class="inviteDropdown"
-                     group-by="friend"></div>
+                     group-by="provider"></div>
+            </div>-->
+            <div class="friends-invite" ng-if="formData.visibility === 'invite' ">
+                <div class="friends-invite-header" layout="row">
+                    <div class="friends-search-container">
+                        <md-input-container md-no-float>
+                            <label>
+                                <md-icon class="mdi mdi-magnify search-icon"></md-icon> Поиск
+                            </label>
+
+                            <input ng-model="friendsQuery" type="text">
+                        </md-input-container>
+                    </div>
+
+                        <md-button class="friends-select-all" ng-class="{ 'md-raised' : !allSelected, 'md-primary' : allSelected}" ng-click="selectAll()"><i class="mdi mdi-check-all"></i>Выбрать всех</md-button>
+
+                </div>
+
+                <div class="friends-invite-list">
+                    <div class="friends-invite-list-facebook invite-list">
+                        <h3>Facebook</h3>
+                        <div class="facebook-friend friend"
+                             ng-repeat="friend in friendUsers | filter: {provider: 'Facebook' } | filter: friendsQuery "
+                             ng-click="selectFriend(friend)"
+                             ng-class="{'friend-selected' : friend.selected}">
+                            <div class="friend-image">
+                                <img src="{{friend.image}}" alt="{{friend.name}}"  width="48" height="48"/>
+                            </div>
+                            <div class="friend-name">
+                                {{friend.name}}
+                            </div>
+                            <div class="friend-check" ng-if="friend.selected">
+                                <i class="mdi mdi-check"></i>
+                            </div>
+                        </div>
+
+                        <!-- if no facebook -->
+                        <div class="friends-connect" ng-if="!currentUser.facebook.token">
+                            <a class="btn btn-block btn-social btn-facebook" href="/connect/facebook">
+                                <i class="fa fa-facebook"></i>
+                                Подключить Facebook
+                            </a>
+                        </div>
+                    </div>
+                    <div class="friends-invite-list-vkontakte invite-list">
+                        <h3>Вконтакте</h3>
+                        <div class="vk-friend friend"
+                             ng-repeat="friend in friendUsers | filter: {provider: 'Вконтакте' } | filter: friendsQuery"
+                             ng-click="selectFriend(friend)"
+                             ng-class="{'friend-selected' : friend.selected}">
+                            <div class="friend-image">
+                                <img src="friend.image" alt="{{friend.name}}" width="48" height="48"/>
+                            </div>
+                            <div class="friend-name">
+                                {{friend.name}}
+                            </div>
+                            <div class="friend-check" ng-if="friend.selected">
+                                <i class="mdi mdi-check"></i>
+                            </div>
+                        </div>
+
+                        <!-- if no vk -->
+                        <div class="friends-connect" ng-if="!currentUser.vkontakte.token">
+                            <a class="btn btn-block btn-social btn-vk" href="/connect/vk">
+                                <i class="fa fa-vk"></i>
+                                Подключить Вконтакте
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
         </section>
 
     </div><!-- end screen two -->
@@ -130,12 +235,15 @@
 <div class="modal-footer">
     <section layout-align="center center" class="buttons" ng-show="screenOne">
         <div>
-            <md-button class="md-raised md-primary" ng-click="changeScreen()" >Пригласите участников</md-button>
+            <md-button class="md-raised md-primary" ng-click="changeScreen()"
+                       ng-disabled="meetingData.$invalid || !formData.title.length || geocoderFailed || invalidAdress">Пригласите участников</md-button>
         </div>
     </section>
     <section layout-align="center center" class="buttons" ng-show="!screenOne">
         <div>
-            <md-button class="md-raised md-primary" ng-click="createMeeting()">Создать</md-button>
+            <md-button class="md-raised md-primary" ng-click="createMeeting(meetingData)">Создать</md-button>
         </div>
     </section>
 </div>
+
+</form>

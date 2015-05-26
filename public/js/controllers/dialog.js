@@ -19,7 +19,7 @@ findMate.controller('DialogController', ['$scope', '$http', '$modalInstance', 'm
 								for (var u = 0; u < friendsLength; u++) {
 									var friend = friends[u];
 									if (id === friend.id) {
-										fbUser.friend = "Facebook";
+										fbUser.provider = "Facebook";
 										$scope.friendUsers.push(fbUser);
 									}
 								}
@@ -50,7 +50,7 @@ findMate.controller('DialogController', ['$scope', '$http', '$modalInstance', 'm
 								for (var u = 0; u < friendsLength; u++) {
 									var friend = friends[u];
 									if (friend == id) {
-										vkUser.friend = "Вконтакте";
+										vkUser.provider = "Вконтакте";
 										$scope.friendUsers.push(vkUser);
 									}
 								}
@@ -108,6 +108,40 @@ findMate.controller('DialogController', ['$scope', '$http', '$modalInstance', 'm
 			buttonDefaultText: 'Пригласить друзей'
 		};
 
+		$scope.selectFriend = function(friend){
+			if(!friend.selected){
+				friend.selected = true;
+				$scope.invitedUsers.push(friend);
+			} else {
+				var index = $scope.invitedUsers.indexOf(friend);
+				if (index > -1) {
+					$scope.invitedUsers.splice(index, 1);
+					friend.selected = false;
+				}
+			}
+		};
+
+		$scope.allSelected = false;
+		$scope.selectAll = function(){
+			var l = $scope.friendUsers.length;
+			if(!$scope.allSelected){
+
+				for (var i = 0; i < l; i++){
+					var friend = $scope.friendUsers[i];
+					friend.selected = true;
+				}
+				$scope.invitedUsers = $scope.friendUsers;
+				$scope.allSelected = true;
+			} else {
+				for (var i = 0; i < l; i++){
+					var friend = $scope.friendUsers[i];
+					friend.selected = false;
+				}
+				$scope.allSelected = false;
+				$scope.invitedUsers = [];
+			}
+		};
+
 		$scope.dateNow = moment();
 
 
@@ -121,8 +155,7 @@ findMate.controller('DialogController', ['$scope', '$http', '$modalInstance', 'm
 			location: $scope.location
 		};
 
-
-
+		$scope.invalidAdress = false;
 
         $scope.category = 'Sport';
 
@@ -303,9 +336,11 @@ findMate.controller('DialogController', ['$scope', '$http', '$modalInstance', 'm
 						console.log(results);
 					} else {
 						console.log('No results found');
+						$scope.invalidAdress = true;
 					}
 				} else {
 					console.log('Geocoder failed due to: ' + status);
+					$scope.geocoderFailed = true;
 				}
 			});
 		};
@@ -322,10 +357,10 @@ findMate.controller('DialogController', ['$scope', '$http', '$modalInstance', 'm
                     $scope.formData.longitude = results[0].geometry.location.lng();
                     $scope.longitude = results[0].geometry.location.lng();
                     $scope.formData.position = $scope.formData.latitude + ', ' + $scope.formData.longitude;
-                    console.log($scope.formData.position, $scope.longitude);
+					$scope.geocoderFailed = false;
                 }
                 else{
-                    alert("Geocode was not successful for the following reason: " + status);
+					$scope.geocoderFailed = true;
                 }
             });
         };
@@ -346,7 +381,7 @@ findMate.controller('DialogController', ['$scope', '$http', '$modalInstance', 'm
 				console.log('Error: ' + data);
 			});
 
-		$scope.createMeeting = function () {
+		$scope.createMeeting = function (form) {
             // send invites if necessary
             if($scope.invitedUsers.length > 0 && $scope.formData.visibility === 'invite'){
                 $scope.formData.invitedUsers = $scope.invitedUsers;
@@ -359,14 +394,17 @@ findMate.controller('DialogController', ['$scope', '$http', '$modalInstance', 'm
 			}
 
 			$scope.defineCategory($scope.category);
-			$http.post('../api/meetings', $scope.formData)
-				.success(function (data) {
-                    console.log($scope.formData);
-					$scope.ok();
-				})
-				.error(function (data) {
-					console.log('Error: ' + data);
-				})
+
+			if(form.$valid){
+				$http.post('../api/meetings', $scope.formData)
+					.success(function (data) {
+						console.log($scope.formData);
+						$scope.ok();
+					})
+					.error(function (data) {
+						console.log('Error: ' + data);
+					})
+			}
 		};
 
 		//datepicker

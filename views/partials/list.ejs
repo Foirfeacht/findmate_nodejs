@@ -4,11 +4,12 @@
     <div class="meeting"
          ng-repeat="meeting in meetings | filter: filterCurrentUser | filter: filterByFriends | filter: filterInvited | filter: filterJoined | filter: filterByDistance | filter: filterByActive | filter: filterByCategory | orderBy: 'startDate'"
             ng-hide="singleMeeting"
-            ng-click="showSingle(meeting)">
+            ng-click="showSingle(meeting, item)">
 
         <div class="meeting-card-header">
             <div class="edit-meeting-button" ng-click="editMeeting(meeting._id)"
-                 ng-show="checkOwner(meeting.owner._id)">
+                 ng-show="checkOwner(meeting.owner._id)"
+                 ng-disabled="true">
                 <i class="mdi mdi-pencil"></i>
             </div>
             <div class="delete-meeting-button" ng-click="deleteMeeting(meeting._id)"

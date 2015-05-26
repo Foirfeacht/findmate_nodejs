@@ -8,7 +8,6 @@
 @font-face {
   font-family: orator;
   src: url(../fonts/OratorStd.otf); }
-
 /* =============================
    ========== GENERAL ==========
    ============================= */
@@ -1485,7 +1484,7 @@ md-option {
   float: left; }
 
 /******* bOotstrap dropdown *******/
-.visibility > div {
+.visibility {
   width: 50%; }
 
 .inviteDropdown,
@@ -1505,6 +1504,24 @@ md-option {
 .form select {
   margin: 10px auto;
   width: 100%; }
+
+/*** form validation */
+.form-errors {
+  overflow: hidden;
+  width: 100%; }
+
+.error-container {
+  width: 50%; }
+  .error-container .left {
+    float: left; }
+  .error-container .right {
+    float: right; }
+
+.error {
+  width: 80%;
+  margin: 0 auto;
+  color: #F44336;
+  text-align: center; }
 
 /* icons */
 /* SPORT */
@@ -1656,6 +1673,67 @@ md-option {
 .time-date button,
 .time-date .button {
   color: #7e57c2; }
+
+/** friends picker */
+.friends-invite {
+  width: 100%;
+  padding: 10px 15px; }
+
+.friends-invite-list {
+  overflow: hidden;
+  max-height: 500px;
+  overflow-y: scroll; }
+
+.invite-list {
+  width: 50%;
+  float: left; }
+  .invite-list .friend {
+    width: 100%;
+    padding: 8px 5px;
+    overflow: hidden;
+    height: 80px;
+    position: relative; }
+  .invite-list h3 {
+    text-align: center; }
+
+.friends-search-container {
+  width: 300px;
+  max-width: 50%; }
+
+.friends-select-all {
+  height: 40px;
+  margin: 20px 150px;
+  padding: 0 20px; }
+
+.friend-image {
+  height: 80px;
+  width: 80px;
+  float: left; }
+  .friend-image img {
+    height: 48px;
+    width: 48px;
+    border-radius: 5px;
+    display: block;
+    margin: 8px auto; }
+
+.friend-name {
+  float: left;
+  line-height: 65px;
+  padding-left: 15px; }
+
+.friend-selected {
+  background: #D1C4E9; }
+
+.friend-check {
+  font-size: 3em;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #7e57c2; }
+
+.friends-connect .btn-social {
+  display: block;
+  margin: 0 auto; }
 
 @media screen and (max-width: 1320px) {
   .logo h1 {

@@ -166,6 +166,40 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 			buttonDefaultText: 'Пригласить друзей'
 		};
 
+		$scope.selectFriend = function(friend){
+			if(!friend.selected){
+				friend.selected = true;
+				$scope.invitedUsers.push(friend);
+			} else {
+				var index = $scope.invitedUsers.indexOf(friend);
+				if (index > -1) {
+					$scope.invitedUsers.splice(index, 1);
+					friend.selected = false;
+				}
+			}
+		};
+
+		$scope.allSelected = false;
+		$scope.selectAll = function(){
+			var l = $scope.friendUsers.length;
+			if(!$scope.allSelected){
+
+				for (var i = 0; i < l; i++){
+					var friend = $scope.friendUsers[i];
+					friend.selected = true;
+				}
+				$scope.invitedUsers = $scope.friendUsers;
+				$scope.allSelected = true;
+			} else {
+				for (var i = 0; i < l; i++){
+					var friend = $scope.friendUsers[i];
+					friend.selected = false;
+				}
+				$scope.allSelected = false;
+				$scope.invitedUsers = [];
+			}
+		};
+
 
 		Date.prototype.timeNow = function () {
 			return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
@@ -368,9 +402,10 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
                     $scope.longitude = results[0].geometry.location.lng();
                     $scope.formData.position = $scope.formData.latitude + ', ' + $scope.formData.longitude;
                     console.log($scope.formData.position, $scope.longitude);
+					$scope.geocoderFailed = false;
                 }
                 else{
-                    alert("Geocode was not successful for the following reason: " + status);
+					$scope.geocoderFailed = true;
                 }
             });
         };
@@ -379,15 +414,8 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
         $scope.options = null;
         $scope.details = '';
 
-        $scope.okEdit = function () {
-            $scope.$modalInstance.close();
-        };
 
-        $scope.cancelEdit = function () {
-            $scope.$modalInstance.dismiss('cancel');
-        };
-
-		$scope.saveMeeting = function () {
+		$scope.saveMeeting = function (form) {
             console.log($scope.meetingId);
             // send invites if necessary
             if($scope.invitedUsers.length > 0 && $scope.formData.visibility === 'invite'){
@@ -401,15 +429,18 @@ findMate.controller('EditMeetingController', ['$scope', '$http', 'editService', 
 			}
 
             $scope.defineCategory($scope.category);
-			$http.put('../api/meetings/' + $scope.meetingId, $scope.formData)
-				.success(function (data) {
-					console.log($scope.formData);
-					$scope.meetings = data;
-					console.log(data);
-                    $scope.ok();
-				})
-				.error(function (data) {
-					console.log('Error: ', data);
-				})
+
+			if(form.$valid){
+				$http.put('../api/meetings/' + $scope.meetingId, $scope.formData)
+					.success(function (data) {
+						console.log($scope.formData);
+						$scope.meetings = data;
+						console.log(data);
+						$scope.ok();
+					})
+					.error(function (data) {
+						console.log('Error: ', data);
+					})
+			}
 		};
 	}]);

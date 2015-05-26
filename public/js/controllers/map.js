@@ -304,9 +304,9 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 		$scope.commentsViewed = 0;
 
 		$scope.showSingle = function(meeting){
-			$scope.singleMeeting = true;
-			$scope.selectedMeeting = meeting;
-			$scope.commentsViewed = 3;
+				$scope.singleMeeting = true;
+				$scope.selectedMeeting = meeting;
+				$scope.commentsViewed = 3;
 		};
 
 		$scope.hideSingle = function(){
@@ -564,9 +564,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 
 		// edit meeting dialog
 		$scope.editMeeting = function (id) {
+			$scope.singleMeeting = false;
+			$scope.commentsViewed = 0;
 			$scope.meetingId = id;
 			$scope.showEditDialog('lg');
 		};
+
 
 		$scope.showEditDialog = function (size) {
 			$scope.$modalInstance = $modal.open({
