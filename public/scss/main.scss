@@ -28,6 +28,43 @@ a:hover {
 }
 
 /* =============================
+   ========== PRELOADER ==========
+   ============================= */
+
+.preloader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2000;
+  background: $primary-color;
+}
+
+.preloader-logo {
+  position: fixed;
+  top: 30%;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  font-size: 5em;
+  color: #fff;
+}
+
+.preloader-gif {
+  margin: 40px auto;
+  width: 50%;
+  height: 64px;
+
+  img {
+    width: 64px;
+    height: 64px;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+/* =============================
    ========== MAIN PAGE ==========
    ============================= */
 

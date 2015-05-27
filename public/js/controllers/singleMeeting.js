@@ -14,6 +14,8 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 			  $animate,
 			  toastr) {
 
+        $scope.contenLoaded = false;
+
         $scope.getCurrentUser = function() {
             $http.get('/current_user')
                 .success(function (data) {
@@ -64,6 +66,7 @@ findMate.controller('singleMeetingController', ['$scope', '$http', '$routeParams
 		$scope.$watch('currentMeeting', function () {
 			$scope.currentMeetingId = $scope.currentMeeting._id;
 			$scope.refresh();
+            $scope.contenLoaded = true;
 		});
 		//listen for socket changes
 		socket.on('meetings changed', function (data) {

@@ -5,11 +5,14 @@ findMate.controller('settingsController', ['$scope', '$http', '$mdSidenav', '$mo
 			$mdSidenav('nav').toggle();
 		};
 
+        $scope.contenLoaded = false;
+
 		$scope.getCurrentUser = function () {
 			$http.get('/current_user')
 				.success(function (data) {
 					$scope.currentUser = data;
 					console.log($scope.currentUser);
+                    $scope.contenLoaded = true;
 				})
 				.error(function (data) {
 					console.log('Error: ' + data);

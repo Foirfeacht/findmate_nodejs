@@ -1,6 +1,9 @@
 
 findMate.controller('messageController', ['$scope', '$http', '$mdSidenav', '$modal', 'toastr', '$animate',
 	function ($scope, $http, $mdSidenav, $modal, $animate, toastr) {
+
+        $scope.contenLoaded = false;
+
 		// side nav
 		$scope.toggleNav = function () {
 			$mdSidenav('nav').toggle();
@@ -11,6 +14,7 @@ findMate.controller('messageController', ['$scope', '$http', '$mdSidenav', '$mod
 				.success(function (data) {
 					$scope.currentUser = data;
 					console.log($scope.currentUser);
+                    $scope.contenLoaded = true;
 				})
 				.error(function (data) {
 					console.log('Error: ' + data);

@@ -5,7 +5,12 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 	function ($scope, $http, $mdSidenav, $modal, $mdToast, $animate, notificationService, toastr, $sce, SweetAlert, editService, moment) {
 
 
-		$scope.friendUsers = [];
+		//init data before content is loaded
+        $scope.contenLoaded = false;
+        //$scope.currentUser = {};
+        //$scope.meetings = {};
+        $scope.friendUsers = [];
+
 
 		// get userfriends
 		$scope.loadFbFriends = function () {
@@ -66,6 +71,8 @@ findMate.controller('mapController', ['$scope', '$http', '$mdSidenav', '$modal',
 					$scope.loadVkFriends();
 					$scope.loadFbFriends();
 					$scope.userLoaded = true;
+                    $scope.contentLoaded = true;
+                    console.log($scope.contentLoaded)
 				})
 				.error(function (data) {
 					console.log('Error: ' + data);

@@ -6,7 +6,7 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
 
         var pathArray = window.location.pathname.split( '/' );
         var userId = pathArray[2];
-        console.log(userId);
+        $scope.contenLoaded = false;
 
 		$scope.getCurrentUser = function () {
 			$http.get('/current_user')
@@ -15,11 +15,13 @@ findMate.controller('userController', ['$scope', '$http', '$routeParams', '$mdSi
 					console.log($scope.currentUser);
                     if($scope.currentUser._id === userId) {
                         $scope.user = $scope.currentUser;
+                        $scope.contenLoaded = true;
                     } else {
                         $http.get('../api/users/' + userId)
                             .success(function (data) {
                                 $scope.user = data;
                                 console.log($scope.user);
+                                $scope.contenLoaded = true
                             })
                             .error(function (data) {
                                 console.log('Error: ' + data);
